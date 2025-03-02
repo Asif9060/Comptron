@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Vertical Timeline</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e3f2fd; /* Light blue background */
+      color: #1e3a8a; /* Dark blue text */
+    }
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px 0;
+    }
+    
+    
+    .timeline-item {
+      display: flex;
+      justify-content: center; /* Center alignment for better symmetry */
+      align-items: center;
+      margin-bottom: 50px;
+      position: relative;
+      opacity: 0; /* Initially hidden for animation */
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+    }
+    .timeline-item.active {
+      opacity: 1; /* Visible when active */
+      transform: translateY(0);
+    }
+    .timeline-item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+    .timeline-item-content {
+      width: 45%;
+      padding: 20px;
+      border-radius: 8px;
+      background: linear-gradient(to right, #ffffff, #f0f9ff); /* Subtle gradient background */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+      position: relative;
+      z-index: 1; /* Ensures content is above the line */
+    }
+    .timeline-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 20px;
+      position: relative;
+      z-index: 1; /* Ensures image is above the line */
+      border: 3px solid #4299e1; /* Blue border around images */
+    }
+    .timeline-item:nth-child(odd) img {
+      margin: 0 20px 0 0;
+    }
+    .timeline-item-date {
+      font-size: 0.9em;
+      color: #2b6cb0; /* Darker blue for dates */
+      margin-bottom: 10px;
+    }
+    .timeline-item-title {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #1a202c; /* Slightly darker text for titles */
+    }
+    .timeline-item-description {
+      line-height: 1.5;
+      color: #4299e1; /* Light blue for descriptions */
+    }
+    @media (max-width: 768px) {
+      .timeline::after {
+        left: 20px;
+      }
+      .timeline-item {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the start on smaller screens */
+      }
+      .timeline-item:nth-child(odd) {
+        flex-direction: column;
+      }
+      .timeline-item-content {
+        width: 90%;
+        margin-left: 50px;
+      }
+      .timeline-item img {
+        margin: 0 0 20px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="timeline">
+    <div class="timeline-item">
+      <img src="/pooto/fardin.jpg" alt="Profile Picture">
+      <div class="timeline-item-content">
+        <div class="timeline-item-date">PRESIDENT</div>
+        <div class="timeline-item-title">Tanzil Parvez Fardin</div>
+        <div class="timeline-item-description">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque velit nec lorem tincidunt, at malesuada nisi consequat.
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <img src="/pooto/alamin.jpg" alt="Profile Picture">
+      <div class="timeline-item-content">
+        <div class="timeline-item-date">VICE-PRESIDENT</div>
+        <div class="timeline-item-title">Md. Al-Amin Saikh</div>
+        <div class="timeline-item-description">
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <img src="/pooto/Ahir.jpg" alt="Profile Picture">
+      <div class="timeline-item-content">
+        <div class="timeline-item-date">GENERAL SECRETARY</div>
+        <div class="timeline-item-title">Sourov Hasan Ahir</div>
+        <div class="timeline-item-description">
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <img src="/pooto/ridoy.jpg" alt="Profile Picture">
+      <div class="timeline-item-content">
+        <div class="timeline-item-date">JOINT SECRETARY</div>
+        <div class="timeline-item-title">Md. Tanvir Jahan Redoy</div>
+        <div class="timeline-item-description">
+          Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <img src="/pooto/wale.jpg" alt="Profile Picture">
+      <div class="timeline-item-content">
+        <div class="timeline-item-date">TREASURER</div>
+        <div class="timeline-item-title">Md. Waleullah</div>
+        <div class="timeline-item-description">
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const timelineItems = document.querySelectorAll(".timeline-item");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+            }
+          });
+        },
+        { threshold: 0.5 } // Trigger when 50% of the item is visible
+      );
+
+      timelineItems.forEach((item) => {
+        observer.observe(item);
+      });
+    });
+  </script>
+</body>
+</html>
