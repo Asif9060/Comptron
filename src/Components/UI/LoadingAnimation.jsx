@@ -9,7 +9,7 @@ const LoadingAnimation = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 500); // Simulate a 3-second loading time
+    }, 5500); // Simulate a 3-second loading time
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
