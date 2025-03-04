@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";// Optional: For styling the animation
-import App from "../../App";
+import { useState, useEffect } from "react";
 import Another from "./Another";
+import App from "../../App";
 
 const LoadingAnimation = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate loading with a timeout
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 5500); // Simulate a 3-second loading time
+    }, 500); 
 
-    return () => clearTimeout(timer); // Cleanup the timer
+    return () => clearTimeout(timer);
   }, []);
 
   return (
