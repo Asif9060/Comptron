@@ -16,7 +16,7 @@ const ScalingLogo = () => {
 
   return (
     <div
-  className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-hidden"
+  className="fixed scaleres top-0 left-0 w-full h-full flex items-center justify-center overflow-hidden"
   style={{ zIndex: -1 }}
 >
   <img

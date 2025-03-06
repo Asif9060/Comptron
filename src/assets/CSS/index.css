@@ -6,3 +6,10 @@
         font-size: 35px;
     }
 }
+
+@media (max-width: 768px){
+    .scaleres{
+        display: none;
+    }
+    
+}
