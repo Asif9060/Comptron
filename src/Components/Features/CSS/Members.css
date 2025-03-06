@@ -78,6 +78,16 @@
     .timeline-item img {
       transform: translateX(93%);
     }
+    .timeline-item-title{
+      text-align: center;
+    }
+    .timeline-item-description{
+      text-align: justify;
+    }
+    .timeline-item-date{
+      text-align: center;
+    }
+
   }
 
   
