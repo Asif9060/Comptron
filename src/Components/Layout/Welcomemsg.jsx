@@ -1,13 +1,12 @@
-
-
+import './CSS/Welcomemsg.css';
 const Welcomemsg = () => {
     return (
-        <div className="bg-[#2f3542] space-y-2 h-[300px]">
+        <div className="bg-[#2f3542] space-y-2 h-[300px] ">
             <div className="welcomemsg">Welcome To Comptron</div>
             <div className="animated-text text-white text-center">It's a <span></span></div>
             <p className="text-center text-white">We are a group of passionate students who are always looking to learn and grow. <br />We are a community of developers, designers, and tech enthusiasts who are always looking to innovate and create.</p>
              
-            <div className="flex justify-center mt-5">
+            <div className="flex justify-center mt-5 Abtn">
                 <a href="/About">
                     <button className="button">
                     About Us

@@ -4,6 +4,7 @@ import alaminImage from "../../assets/images/pooto/alamin.jpg";
 import fardinImage from "../../assets/images/pooto/fardin.jpg";
 import ridoyImage from "../../assets/images/pooto/ridoy.jpg";
 import waleImage from "../../assets/images/pooto/wale.jpg";
+import './CSS/Members.css';
 
 const timelineData = [
   {

@@ -1,4 +1,4 @@
-
+import './CSS/TextSlide.css';
 const TextSlide = () => {
     return (
         <div>

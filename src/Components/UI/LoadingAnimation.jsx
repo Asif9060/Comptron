@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Another from "./Another";
 import App from "../../App";
+import './CSS/LoadingAnimation.css';
 
 const LoadingAnimation = () => {
   const [isLoading, setIsLoading] = useState(true);

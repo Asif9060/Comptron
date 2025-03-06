@@ -16,24 +16,23 @@ const ScalingLogo = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-hidden"
-      style={{
-        zIndex: -1,
-      }}
-    >
-      <img
-        src={logo}
-        alt="Logo"
-        className="absolute"
-        style={{
-          transform: `scale(${scale})`,
-          transition: "transform 0.1s ease-out",
-          maxWidth: "100%",
-          maxHeight: "100%",
-          opacity: 0.1,
-        }}
-      />
-    </div>
+  className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-hidden"
+  style={{ zIndex: -1 }}
+>
+  <img
+    src={logo}
+    alt="Logo"
+    className="absolute object-cover w-auto h-auto max-w-full max-h-full"
+    style={{
+      transform: `scale(${scale})`,
+      transition: "transform 0.1s ease-out",
+      minWidth: "300px",
+      minHeight: "300px",
+      opacity: 0.1, // Reduced opacity for better readability
+    }}
+  />
+</div>
+
   );
 };
 

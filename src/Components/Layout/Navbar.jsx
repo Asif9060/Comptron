@@ -1,7 +1,7 @@
 const Navbar = () => {
     return (
         <div>
-           <div className="cont-nav">
+            <div className="cont-nav">
             <div className="nav">
                 <div className="navbar">
                     <ul className="flex transition-all justify-center gap-[50px] mt-5 border border-gray-600 border-l-0 border-r-0 p-3">

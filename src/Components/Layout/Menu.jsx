@@ -1,8 +1,7 @@
-
-
+import './CSS/Menu.css';
 const Menu = () => {
     return (
-        <div className="translate-y-32 ml-1 fixed">
+        <div className="translate-y-32 ml-1 fixed res">
            
             <input className="checkbox" type="checkbox" />
             <span className="button-menu -translate-x-0.5 -translate-y-0.5"></span>

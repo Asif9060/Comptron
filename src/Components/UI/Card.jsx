@@ -1,3 +1,4 @@
+import './CSS/Card.css';
 const Card = () => {
     return (
         <div className="flex justify-center gap-12 mt-36">
