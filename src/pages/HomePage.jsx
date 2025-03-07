@@ -13,6 +13,7 @@ import Imageslide from '../Components/Features/Imageslide';
 import Welcomemsg from '../Components/Layout/Welcomemsg';
 import ScalingLogo from '../Components/UI/ScalingLogo';
 import Navbar2 from '../Components/Layout/Navbar2';
+import Footer from '../Components/Layout/Footer';
 
 
 const HomePage = () => {
@@ -40,6 +41,7 @@ const HomePage = () => {
                 <Members></Members>
                 <Button></Button>
                 <ScalingLogo></ScalingLogo>
+                <Footer></Footer>
             </Theme>
         </div>
     );
