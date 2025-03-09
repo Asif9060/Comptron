@@ -1,0 +1,16 @@
+@media (max-width: 768px) {
+    .text{
+        display: none;
+    }
+    .text2{
+        font-size: 25px;
+        position: relative;
+        right: 10px;
+        top: -8px;
+    }
+
+    .logo{
+        position: relative;
+        left: 10px;
+    }
+}

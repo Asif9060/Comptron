@@ -1,6 +1,6 @@
 import logo from "../../assets/images/Comptron Logo.png"
 import { useState, useEffect } from 'react';
-
+import './CSS/Header.css';
 const Header = () => {
     const [time, setTime] = useState(new Date());
     
@@ -30,22 +30,22 @@ const Header = () => {
       };
     return (
         <div className="w-full px-4">
-            <div className="flex flex-wrap items-center justify-center md:justify-around gap-4">
+            <div className="flex flex-wrap items-center justify-center translate-x-12 md:justify-around gap-4">
    
                 <img 
-                className="w-16 sm:w-20 md:w-24 transform md:translate-x-[-50px] md:translate-y-[10px]" 
-                src={logo} 
+                className="w-16 sm:w-20 md:w-24 logo transform md:translate-x-[-50px] md:translate-y-[10px]" 
+                src={logo}
                 alt="Logo" 
                 />
 
                 
-                <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl translate-x-12 text-center md:text-left">
-                <span className="text-[#15A6E1]">Comptron</span>
-                <span className="text-[#483d68]"> - Creativity Assembled</span>
+                <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-center  md:text-left">
+                <span className="text-[#15A6E1] text">Comptron</span>
+                <span className="text-[#483d68] text2"> - Creativity Assembled</span>
                 </p>
 
     
-                <div className="text-[#00ACF2] text-xl sm:text-2xl md:text-3xl lg:text-4xl md:translate-x-0 md:translate-y-0"  style={{ fontFamily: 'Arial, sans-serif', fontSize: '2rem', textAlign: 'center' }}>
+                <div className="text-[#00ACF2] text text-xl sm:text-2xl md:text-3xl lg:text-4xl md:translate-x-0 md:translate-y-0"  style={{ fontFamily: 'Arial, sans-serif', fontSize: '2rem', textAlign: 'center' }}>
                 {formatTime(time)}
                 </div>
             </div>
