@@ -39,7 +39,7 @@ const Header = () => {
                 />
 
                 
-                <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-center md:text-left">
+                <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl translate-x-12 text-center md:text-left">
                 <span className="text-[#15A6E1]">Comptron</span>
                 <span className="text-[#483d68]"> - Creativity Assembled</span>
                 </p>
