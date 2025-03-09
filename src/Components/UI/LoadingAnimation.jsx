@@ -10,7 +10,7 @@ const LoadingAnimation = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 500); 
+    },500); 
 
     return () => clearTimeout(timer);
   }, []);

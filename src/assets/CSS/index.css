@@ -8,8 +8,7 @@
 }
 
 @media (max-width: 768px){
-    .scaleres{
-        display: none;
+    .teacher{
+        display: block;
     }
-    
-}
+  }

@@ -19,6 +19,7 @@
     "@schedule-x/theme-default": "^2.20.0",
     "@tailwindcss/vite": "^4.0.6",
     "date-fns": "^4.1.0",
+    "gsap": "^3.12.7",
     "lucide-react": "^0.477.0",
     "mobiscroll-react": "^4.0.0",
     "moment": "^2.30.1",

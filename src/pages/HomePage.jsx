@@ -9,11 +9,17 @@ import Members from '../Components/Features/Members';
 import Button from '../Components/UI/MemberButton';
 import TextEffect from '../Components/UI/TextEffect';
 import Menu from '../Components/Layout/Menu';
-import Imageslide from '../Components/Features/Imageslide';
 import Welcomemsg from '../Components/Layout/Welcomemsg';
 import ScalingLogo from '../Components/UI/ScalingLogo';
 import Navbar2 from '../Components/Layout/Navbar2';
 import Footer from '../Components/Layout/Footer';
+import EventSlider from '../Components/Features/EventSlider';
+import TeacherCard from './../Components/UI/TeacherCard';
+import ImageSlide from '../Components/Features/Imageslide';
+import RaihanSir from '../assets/images/pooto/M. Raihan.jpg';
+import InzamamSir from '../assets/images/pooto/Md. Inzamam-Ul-Hossain.jpg';
+import PeyaMaam from '../assets/images/pooto/Zahrul Jannat Peya.jpg';
+
 
 
 const HomePage = () => {
@@ -23,6 +29,37 @@ const HomePage = () => {
     const updateClassName = (newClass) => {
       setClassName(newClass);
     };
+
+     const contents = [
+            {
+                img : [RaihanSir],
+                name : 'M. Raihan',
+                position : 'Advisor',
+                url :{
+                    facebook: 'https://www.facebook.com/memraihan',
+                }
+            },
+            
+            {
+                img : [InzamamSir],
+                name : 'Md. Inzamam-Ul-Hossain',
+                position : 'Moderator',
+                url :{
+                    facebook: '',
+                }
+            },
+    
+            {
+                img : [PeyaMaam],
+                name : 'Zahrul Jannat Peya',
+                position : 'Moderator',
+                url :{
+                    facebook: '',
+                }
+            }
+    
+        ]
+
     return (
         <div>
             <Theme appearance={className}>
@@ -36,9 +73,15 @@ const HomePage = () => {
                 <TextEffect></TextEffect>
                 <Welcomemsg></Welcomemsg>
                 <h1 className=' recent text-5xl text-pink-700' >Recent Activity</h1>
-                <Imageslide></Imageslide>
+                <EventSlider></EventSlider>
+                <ImageSlide></ImageSlide>
                 <h2 className='flex justify-center text-3xl text-[#15A6E1] underline underline-offset-6'>Our Core Members</h2>
                 <Members></Members>
+                <div className='flex teacher justify-center gap-7 '>
+                    <TeacherCard cont = {contents[0]}></TeacherCard>
+                    <TeacherCard cont = {contents[1]}></TeacherCard>
+                    <TeacherCard cont = {contents[2]}></TeacherCard>
+                </div>
                 <Button></Button>
                 <ScalingLogo></ScalingLogo>
                 <Footer></Footer>

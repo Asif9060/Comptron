@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import './CSS/ImageSlide.css';
 import photo from '../../assets/images/exmember.jpg';
 import photo2 from '../../assets/images/member.jpg';
 import photo3 from '../../assets/images/Shohoj.jpg';
@@ -26,7 +27,7 @@ export default function Carousel() {
   }, [autoSlideEnabled]);
 
   return (
-    <div className="relative max-w-3xl mb-10 mx-auto overflow-hidden rounded-lg shadow-lg">
+    <div className="relative max-w-3xl mb-10 mx-auto overflow-hidden imgslide rounded-lg shadow-lg">
       <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}

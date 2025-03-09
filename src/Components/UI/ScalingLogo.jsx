@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import logo from '../../assets/images/Untitled-1.png';
+import './CSS/ScalingLogo.css';
 const ScalingLogo = () => {
   const [scale, setScale] = useState(1);
 

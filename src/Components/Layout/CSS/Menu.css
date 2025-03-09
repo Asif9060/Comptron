@@ -101,6 +101,10 @@
     transform: translateX(0px) translateY(100px);
   }
 
+  .res{
+    z-index: 1000;
+  }
+
   @media(max-width:768px){
     .res{
       display: none;
