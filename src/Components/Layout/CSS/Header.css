@@ -6,11 +6,12 @@
         font-size: 25px;
         position: relative;
         right: 10px;
-        top: -8px;
+        top: 5px;
     }
 
     .logo{
         position: relative;
         left: 10px;
+        top: 12px;
     }
 }
