@@ -1,7 +1,7 @@
 import RaihanSir from '../assets/images/pooto/M. Raihan.jpg';
 import InzamamSir from '../assets/images/pooto/Md. Inzamam-Ul-Hossain.jpg';
 import PeyaMaam from '../assets/images/pooto/Zahrul Jannat Peya.jpg';
-
+import Menu from '../Components/Layout/Menu';
 import TeacherCard from "../Components/UI/TeacherCard";
 
 const AboutPage = () => {
@@ -37,7 +37,8 @@ const AboutPage = () => {
     ]
 
     return (
-        <div>
+        <div className='bg-white'>
+
             <h1 className="text-[50px]">Temporary Testing Zone</h1>
 
 
@@ -51,6 +52,8 @@ const AboutPage = () => {
                 <TeacherCard cont = {contents[1]}></TeacherCard>
                 <TeacherCard cont = {contents[2]}></TeacherCard>
             </div>
+
+            <Menu></Menu>
         
         </div>
     );

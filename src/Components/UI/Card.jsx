@@ -1,5 +1,25 @@
+import fardin from '../../assets/images/Commitee/Fardin.jpg';
+import alamin from '../../assets/images/Commitee/Alamin.jpg';
+import ahir from '../../assets/images/Commitee/Ahir.jpg';
+import redoy from '../../assets/images/Commitee/Redoy.jpg';
+import wale from '../../assets/images/Commitee/Wale.jpg';
+import laboni from '../../assets/images/Commitee/Laboni.jpg';
+import naim from '../../assets/images/Commitee/Naim.jpg';
+import asif from '../../assets/images/Commitee/Asif.jpg';
+import shajalal from '../../assets/images/Commitee/Shahjalal.jpg';
+import rabbi from '../../assets/images/Commitee/Rabbi.jpg';
+import mehedi from '../../assets/images/Commitee/Mehedi.jpg';
+import mahmudul from '../../assets/images/Commitee/mahmudul.jpg';
+import tusme from '../../assets/images/Commitee/Tusme.jpg';
+import nadim from '../../assets/images/Commitee/Nadim.jpg';
+import sahed from '../../assets/images/Commitee/Sahed.jpg';
+import shiam from '../../assets/images/Commitee/Shiam.jpg';
+import zayada from '../../assets/images/Commitee/Zayada.jpg';
+import kanchon from '../../assets/images/Commitee/Kanchon.jpg';
+import nur from '../../assets/images/Commitee/Nur.jpg';
+import mithila from '../../assets/images/Commitee/Mithila.jpg';
+import moinul from '../../assets/images/Commitee/Moinul.jpg';
 import './CSS/Card.css';
-import fardin from '../../assets/images/pooto/fardin.jpg';
 const SocialIcons = ({ github, linkedin, instagram }) => (
   <div className="socialDiv">
     {github && (
@@ -44,8 +64,8 @@ const Card = () => {
       id: 1,
       image: fardin,
       profileClass: 'profile1',
-      name: 'Team Member 1',
-      role: 'Project Lead',
+      name: 'Tanzil Parvez Fardin',
+      role: 'President',
       social: {
         github: 'https://github.com/member1',
         linkedin: 'https://linkedin.com/in/member1',
@@ -54,10 +74,10 @@ const Card = () => {
     },
     {
       id: 2,
-      image: '',
+      image: alamin,
       profileClass: 'profile2',
-      name: 'Team Member 2',
-      role: 'Senior Developer',
+      name: 'Md. Al-Amin Saikh',
+      role: 'Vice-President',
       social: {
         github: 'https://github.com/member2',
         linkedin: 'https://linkedin.com/in/member2',
@@ -66,10 +86,10 @@ const Card = () => {
     },
     {
       id: 3,
-      image: '',
+      image: ahir,
       profileClass: 'profile3',
-      name: 'Team Member 3',
-      role: 'UI/UX Designer',
+      name: 'Sourov Hasan Ahir',
+      role: 'General Secretary',
       social: {
         github: 'https://github.com/member3',
         linkedin: 'https://linkedin.com/in/member3',
@@ -78,10 +98,10 @@ const Card = () => {
     },
     {
       id: 4,
-      image: '',
+      image: redoy,
       profileClass: 'profile4',
-      name: 'Team Member 4',
-      role: 'Data Scientist',
+      name: 'Md. Tanvir Jahan Redoy',
+      role: 'Joint Secretary',
       social: {
         github: 'https://github.com/member4',
         linkedin: 'https://linkedin.com/in/member4',
@@ -90,10 +110,10 @@ const Card = () => {
     },
     {
       id: 5,
-      image: '',
+      image: wale,
       profileClass: 'profile5',
-      name: 'Team Member 5',
-      role: 'DevOps Engineer',
+      name: 'Md. Waleullah',
+      role: 'Treasurer',
       social: {
         github: 'https://github.com/member5',
         linkedin: 'https://linkedin.com/in/member5',
@@ -102,10 +122,10 @@ const Card = () => {
     },
     {
       id: 6,
-      image: '',
+      image: laboni,
       profileClass: 'profile6',
-      name: 'Team Member 6',
-      role: 'Product Manager',
+      name: 'Farjana Akter Laboni',
+      role: 'Publicity and Public Relation Secretary',
       social: {
         github: 'https://github.com/member6',
         linkedin: 'https://linkedin.com/in/member6',
@@ -114,10 +134,10 @@ const Card = () => {
     },
     {
       id: 7,
-      image: '',
+      image: naim,
       profileClass: 'profile7',
-      name: 'Team Member 7',
-      role: 'Frontend Developer',
+      name: 'Sheikh Naim Hossain',
+      role: 'Assistant Publicity and Public Relation Secretary',
       social: {
         github: 'https://github.com/member7',
         linkedin: 'https://linkedin.com/in/member7',
@@ -126,10 +146,10 @@ const Card = () => {
     },
     {
       id: 8,
-      image: '',
+      image: asif,
       profileClass: 'profile8',
-      name: 'Team Member 8',
-      role: 'Backend Developer',
+      name: 'Md Asif Al Fattah Shohag',
+      role: 'IT Secretary',
       social: {
         github: 'https://github.com/member8',
         linkedin: 'https://linkedin.com/in/member8',
@@ -138,10 +158,10 @@ const Card = () => {
     },
     {
       id: 9,
-      image: '',
+      image: shajalal,
       profileClass: 'profile9',
-      name: 'Team Member 9',
-      role: 'QA Engineer',
+      name: 'Mullah Mohammad Shajalal',
+      role: 'Assistant IT Secretary',
       social: {
         github: 'https://github.com/member9',
         linkedin: 'https://linkedin.com/in/member9',
@@ -150,10 +170,10 @@ const Card = () => {
     },
     {
       id: 10,
-      image: '',
+      image: rabbi,
       profileClass: 'profile10',
-      name: 'Team Member 10',
-      role: 'Technical Writer',
+      name: 'Ratul Hasan Rabbi',
+      role: 'Publication Secretary',
       social: {
         github: 'https://github.com/member10',
         linkedin: 'https://linkedin.com/in/member10',
@@ -162,10 +182,10 @@ const Card = () => {
     },
     {
       id: 11,
-      image: '',
+      image: mehedi,
       profileClass: 'profile11',
-      name: 'Team Member 11',
-      role: 'Security Specialist',
+      name: 'Howlader Mehedi Hasan',
+      role: 'Assistant Publication Secretary',
       social: {
         github: 'https://github.com/member11',
         linkedin: 'https://linkedin.com/in/member11',
@@ -174,10 +194,10 @@ const Card = () => {
     },
     {
       id: 12,
-      image: '',
+      image: mahmudul,
       profileClass: 'profile12',
-      name: 'Team Member 12',
-      role: 'Cloud Architect',
+      name: 'Md. Mahmudul Haque',
+      role: 'Librarian Secretary',
       social: {
         github: 'https://github.com/member12',
         linkedin: 'https://linkedin.com/in/member12',
@@ -186,10 +206,10 @@ const Card = () => {
     },
     {
       id: 13,
-      image: '',
+      image: tusme,
       profileClass: 'profile13',
-      name: 'Team Member 13',
-      role: 'Mobile Developer',
+      name: 'Tasnuva Sultana Tusme',
+      role: 'Executive Member',
       social: {
         github: 'https://github.com/member13',
         linkedin: 'https://linkedin.com/in/member13',
@@ -198,10 +218,10 @@ const Card = () => {
     },
     {
       id: 14,
-      image: '',
+      image: nadim,
       profileClass: 'profile14',
-      name: 'Team Member 14',
-      role: 'AI Engineer',
+      name: 'Nadim Hasan Emon',
+      role: 'Executive Member',
       social: {
         github: 'https://github.com/member14',
         linkedin: 'https://linkedin.com/in/member14',
@@ -210,10 +230,10 @@ const Card = () => {
     },
     {
       id: 15,
-      image: '',
+      image: sahed,
       profileClass: 'profile15',
-      name: 'Team Member 15',
-      role: 'Database Administrator',
+      name: 'Md. Sahed Hossain',
+      role: 'Executive Member',
       social: {
         github: 'https://github.com/member15',
         linkedin: 'https://linkedin.com/in/member15',
@@ -222,10 +242,10 @@ const Card = () => {
     },
     {
       id: 16,
-      image: '',
+      image: shiam,
       profileClass: 'profile16',
-      name: 'Team Member 16',
-      role: 'Full Stack Developer',
+      name: 'Sk. Md. Shiam',
+      role: 'Executive Member',
       social: {
         github: 'https://github.com/member16',
         linkedin: 'https://linkedin.com/in/member16',
@@ -234,10 +254,10 @@ const Card = () => {
     },
     {
       id: 17,
-      image: '',
+      image: zayada,
       profileClass: 'profile17',
-      name: 'Team Member 17',
-      role: 'Systems Analyst',
+      name: 'Zayada Akter',
+      role: 'Executive Member',
       social: {
         github: 'https://github.com/member17',
         linkedin: 'https://linkedin.com/in/member17',
@@ -246,10 +266,10 @@ const Card = () => {
     },
     {
       id: 18,
-      image: '',
+      image: kanchon,
       profileClass: 'profile18',
-      name: 'Team Member 18',
-      role: 'Network Engineer',
+      name: 'Rafsanul Islam Kanchon',
+      role: 'Executive Member',
       social: {
         github: 'https://github.com/member18',
         linkedin: 'https://linkedin.com/in/member18',
@@ -258,10 +278,10 @@ const Card = () => {
     },
     {
       id: 19,
-      image: '',
+      image: nur,
       profileClass: 'profile19',
-      name: 'Team Member 19',
-      role: 'IT Support Specialist',
+      name: 'Nur Hamim',
+      role: 'Executive Member',
       social: {
         github: 'https://github.com/member19',
         linkedin: 'https://linkedin.com/in/member19',
@@ -270,10 +290,10 @@ const Card = () => {
     },
     {
       id: 20,
-      image: '',
+      image: mithila,
       profileClass: 'profile20',
-      name: 'Team Member 20',
-      role: 'Business Analyst',
+      name: 'Mithila Mondol',
+      role: 'Executive Member',
       social: {
         github: 'https://github.com/member20',
         linkedin: 'https://linkedin.com/in/member20',
@@ -282,10 +302,10 @@ const Card = () => {
     },
     {
       id: 21,
-      image: '',
+      image: moinul,
       profileClass: 'profile21',
-      name: 'Team Member 21',
-      role: 'Marketing Specialist',
+      name: 'Moinul Islam',
+      role: 'Executive Member',
       social: {
         github: 'https://github.com/member21',
         linkedin: 'https://linkedin.com/in/member21',
@@ -297,7 +317,7 @@ const Card = () => {
   return (
     <div>
         <h1 className='mt-5 text-[40px] underline underline-offset-10 text-[#16A6E1]'> Comptron Executive Committee</h1>
-        <div className=" flex justify-center flex-wrap gap-12 mt-3">  
+        <div className=" flex justify-center flex-wrap gap-60 mt-3">  
             {teamMembers.map(member => (
                 <MemberCard key={member.id} {...member} />
             ))}

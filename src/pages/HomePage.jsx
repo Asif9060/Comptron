@@ -19,6 +19,7 @@ import ImageSlide from '../Components/Features/Imageslide';
 import RaihanSir from '../assets/images/pooto/M. Raihan.jpg';
 import InzamamSir from '../assets/images/pooto/Md. Inzamam-Ul-Hossain.jpg';
 import PeyaMaam from '../assets/images/pooto/Zahrul Jannat Peya.jpg';
+import GradientBackground from '../Components/UI/GradientBackground';
 
 
 
@@ -61,9 +62,8 @@ const HomePage = () => {
         ]
 
     return (
-        <div>
+        <div className='bg-gray-800'>
             <Theme appearance={className}>
-                
                 <Header></Header>
                 {/* <Navbar></Navbar> */}
                 <Navbar2></Navbar2>
@@ -84,7 +84,10 @@ const HomePage = () => {
                 </div>
                 <Button></Button>
                 <ScalingLogo></ScalingLogo>
+                <GradientBackground></GradientBackground>
+
                 <Footer></Footer>
+                
             </Theme>
         </div>
     );

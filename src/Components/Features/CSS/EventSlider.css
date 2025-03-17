@@ -67,6 +67,7 @@
     border: 2px solid #fff;
     border-radius: 10px;
     transition: 0.3s;
+    display: none;
 }
 
 .content .btn button:hover{
@@ -196,24 +197,7 @@
 }
 
 
-/* time running */
-/* .carousel .timeRunning{
-    position: absolute;
-    z-index: 1000;
-    width: 0%;
-    height: 4px;
-    background-color: #15A6E1;
-    left: 0;
-    top: 0;
-    animation: runningTime 7s linear 1 forwards;
-}
 
-@keyframes runningTime {
-    
-    from{width: 0%;}
-    to{width: 100%;}
-
-} */
 
 
 /* Responsive Design */

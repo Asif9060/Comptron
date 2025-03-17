@@ -1,10 +1,10 @@
 
 import './CSS/EventSlider.css';
 import { useRef, useEffect } from 'react';
-import img1 from '../../assets/images/img1.jpg';
-import img2 from '../../assets/images/img2.jpg';
-import img3 from '../../assets/images/img3.jpg';
-import img4 from '../../assets/images/img4.jpg';
+import img1 from '../../assets/images/exmember.jpg';
+import img2 from '../../assets/images/gang.jpg';
+import img3 from '../../assets/images/member.jpg';
+import img4 from '../../assets/images/Shohoj.jpg';
 import img5 from '../../assets/images/img5.jpg';
 import img6 from '../../assets/images/img6.jpg';
 import img7 from '../../assets/images/img7.jpg';
@@ -12,7 +12,7 @@ import img8 from '../../assets/images/img8.jpg';
 import img9 from '../../assets/images/img9.jpg';
 import img10 from '../../assets/images/img10.jpeg';
 import img11 from '../../assets/images/img11.jpg';
-const EventSlider = () => {
+const Event = () => {
 
     const nextBtn = useRef(null);
     const prevBtn = useRef(null);
@@ -28,8 +28,8 @@ const EventSlider = () => {
 
     useEffect(() => {
         // Add event listeners after the component mounts
-        nextBtn.current.onclick = () => showSlider('next');
-        prevBtn.current.onclick = () => showSlider('prev');
+        nextBtn.current.onclick = () => show('next');
+        prevBtn.current.onclick = () => show('prev');
 
         // Start the auto-slide functionality
         runNextAuto.current = setTimeout(() => {
@@ -50,14 +50,14 @@ const EventSlider = () => {
         runningTime.current.style.animation = 'runningTime 7s linear 1 forwards';
     };
 
-    const showSlider = (type) => {
-        const sliderItemsDom = list.current.querySelectorAll('.item');
+    const show = (type) => {
+        const ItemsDom = list.current.querySelectorAll('.item');
 
         if (type === 'next') {
-            list.current.appendChild(sliderItemsDom[0]);
+            list.current.appendChild(ItemsDom[0]);
             carousel.current.classNameList.add('next');
         } else {
-            list.current.prepend(sliderItemsDom[sliderItemsDom.length - 1]);
+            list.current.prepend(ItemsDom[ItemsDom.length - 1]);
             carousel.current.classNameList.add('prev');
         }
 
@@ -83,131 +83,153 @@ const EventSlider = () => {
 
                 <div style={{ backgroundImage: `url(${img1})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img2})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                         
-                        <button>Details</button>
+                        <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img3})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                         
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img4})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                         
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img5})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                        
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img6})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                         
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img7})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                         
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img8})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                         
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img9})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                         
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img10})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                         
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
 
                 <div style={{ backgroundImage: `url(${img11})` }} className="item">
                 <div className="content">
-                    <div className="title">SLIDER</div>
-                    <div className="name">EAGLE</div>
-                    <div className="des">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis culpa similique consequuntur, reprehenderit dicta repudiandae.</div>
+                    <div className="title"></div>
+                    <div className="name"></div>
+                    <div className="des"></div>
                     <div className="btn">
                         
-                        <button>Details</button>
+                    <a href="/Events">
+                            <button>Details</button>
+                        </a>
                     </div>
                 </div>
                 </div>
@@ -231,4 +253,4 @@ const EventSlider = () => {
     );
 };
 
-export default EventSlider;
+export default Event;

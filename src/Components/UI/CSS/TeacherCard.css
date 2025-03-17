@@ -18,7 +18,7 @@
   }
   
   .card .mail svg {
-    stroke: #fbb9b6;
+    stroke: #15A6E1;
     stroke-width: 3px;
   }
   
@@ -34,7 +34,7 @@
     left: 3px;
     border-radius: 29px;
     z-index: 1;
-    border: 0px solid #fbb9b6;
+    border: 0px solid #15A6E1;
     overflow: hidden;
     transition: all 0.5s ease-in-out 0.2s, z-index 0.5s ease-in-out 0.2s;
   }
@@ -65,7 +65,7 @@
     bottom: 3px;
     left: 3px;
     right: 3px;
-    background: #fbb9b6;
+    background: #3D3455;
     top: 80%;
     border-radius: 29px;
     z-index: 2;
@@ -118,13 +118,13 @@
   }
   
   .card .bottom .bottom-bottom .social-links-container svg:hover {
-    fill: #f55d56;
+    fill: #15A6E1;
     transform: scale(1.2);
   }
   
   .card .bottom .bottom-bottom .button {
     background: white;
-    color: #fbb9b6;
+    color: #15A6E1;
     border: none;
     border-radius: 20px;
     font-size: 0.6rem;
@@ -133,7 +133,7 @@
   }
   
   .card .bottom .bottom-bottom .button:hover {
-    background: #f55d56;
+    background: #15A6E1;
     color: white;
   }
   
@@ -155,7 +155,7 @@
     left: 10px;
     border-radius: 50%;
     z-index: 3;
-    border: 7px solid #fbb9b6;
+    border: 7px solid #15A6E1;
     box-shadow: rgba(96, 75, 74, 0.1882352941) 0px 5px 5px 0px;
     transition: all 0.5s ease-in-out, z-index 0.5s ease-in-out 0.1s;
   }

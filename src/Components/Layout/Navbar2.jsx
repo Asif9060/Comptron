@@ -3,7 +3,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
-  { name: 'Members', href: '/Members', current: false },
+  { name: 'Committee', href: '/Members', current: false },
   { name: 'Events', href: '/Events', current: false },
   { name: 'The Daily NWU', href: '/News', current: false },
   { name: 'About Us', href: '/About', current: false },
@@ -15,7 +15,7 @@ function classNames(...classes) {
 
 export default function Example() {
   return (
-    <Disclosure as="nav" className="bg-[#483D68] border border-l-0 border-r-0 mt-8">
+    <Disclosure as="nav" className="bg-[#483D68] border border-l-0 border-r-0 mt-8 ">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-center">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -37,7 +37,7 @@ export default function Example() {
                     href={item.href}
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
-                      item.current ? 'bg-[#15A6E1] text-white' : 'text-white hover:bg-[#15A6E1] hover:text-white',
+                      item.current ? 'bg-[#15A6E1] text-white ' : 'text-white transition duration-300 ease-in-out hover:bg-[#15A6E1] hover:text-white',
                       'rounded-md px-3 py-2 text-sm font-medium',
                     )}
                   >
@@ -59,7 +59,7 @@ export default function Example() {
               href={item.href}
               aria-current={item.current ? 'page' : undefined}
               className={classNames(
-                item.current ? 'bg-[#15A6E1] text-white' : 'text-white hover:bg-[#15A6E1] hover:text-white',
+                item.current ? 'bg-[#15A6E1] text-white' : 'text-white transition duration-250 ease-in-out hover:bg-[#15A6E1] hover:text-white',
                 'block rounded-md px-3 py-2 text-base font-medium',
               )}
             >

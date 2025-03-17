@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Another from "./Another";
 import App from "../../App";
 import './CSS/LoadingAnimation.css';
+import HomePage from "../../pages/HomePage";
+// import HomePage from "../../pages/HomePage";
 
 const LoadingAnimation = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,7 +12,7 @@ const LoadingAnimation = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    },500); 
+    },5500); 
 
     return () => clearTimeout(timer);
   }, []);

@@ -1,12 +1,26 @@
 
-import EventSlider from './../Components/Features/EventSlider';
+
+
+import Menu from "../Components/Layout/Menu";
+import EventCountdown from "../Components/UI/EventCountdown";
+// import Events from "../Components/UI/Events";
+
 
 const EventPage = () => {
     
     return (
         <div >
              
-            <EventSlider></EventSlider> 
+            
+            <Menu></Menu>
+            {/* <Events></Events> */}
+
+            <EventCountdown></EventCountdown>
+
+            
+            
+
+            
              
         </div>
     );

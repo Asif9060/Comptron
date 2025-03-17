@@ -30,6 +30,7 @@
   }
   
   .option {
+    font-size: small              ;
     position: absolute;
     background-color: #1e1e1e;
     border: 2px solid #15A6E1;
@@ -99,6 +100,10 @@
   .checkbox:checked ~ .option-e {
     transition-delay: 0.3s;
     transform: translateX(0px) translateY(100px);
+  }
+
+  .option-b{
+    font-size: 10px;
   }
 
   .res{

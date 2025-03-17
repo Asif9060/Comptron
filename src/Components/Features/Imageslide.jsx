@@ -5,10 +5,10 @@ import photo2 from '../../assets/images/member.jpg';
 import photo3 from '../../assets/images/Shohoj.jpg';
 import photo4 from '../../assets/images/gang.jpg';
 const images = [
-  { src: [photo], alt: "Forza Horizon 5" },
-  { src: [photo2], alt: "Ghost of Tsushima" },
-  { src: [photo3], alt: "Spider-Man PS4" },
-  { src: [photo4], alt: "God of War 4" },
+  { src: [photo], alt: "" },
+  { src: [photo2], alt: "" },
+  { src: [photo3], alt: "" },
+  { src: [photo4], alt: "" },
 ];
 
 export default function Carousel() {

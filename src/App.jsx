@@ -4,6 +4,7 @@ import MembersPage from "./pages/MembersPage";
 import AboutPage from "./pages/AboutPage";
 import EventPage from "./pages/EventPage";
 import NewsPage from "./pages/NewsPage";
+// import LoadingAnimation from "./Components/UI/LoadingAnimation";
 
 const App = () => {
 
