@@ -5,70 +5,70 @@ const TextSlide = () => {
             <div className="stock-ticker">
                 <ul>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">যে নিজেকে নিয়ন্ত্রণ করতে পারে, সে-ই প্রকৃত বিজয়ী।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Alphabet's Acquisition of Wiz for $32 Billion to Enhance Cloud Security</a></span>
                     
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">ভালোবাসা কখনো দাবি করে না, শুধু প্রদান করে।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Nvidia to Unveil Details of Latest AI Chip</a></span>
                     
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">সফলতার জন্য স্বপ্ন দেখা যতটা জরুরি, পরিশ্রম ততটাই অপরিহার্য।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Adobe Introduces AI Video Tool to Compete with OpenAI</a></span>
                     
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">তুমি যদি আলো হতে চাও, তবে নিজেই জ্বলো।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Apple Faces Increased Scrutiny After Losing German Antitrust Fight</a></span>
                     
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">মানুষ তার স্বপ্নের সমান বড়।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Jack Ma's AI-Driven Comeback with Alibaba</a></span>
                     
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">সবচেয়ে অন্ধকার রাতের পরেই সূর্য উঠে।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Rise of the 'Palantir Mafia' in Tech Startups</a></span>
                     
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">জীবনে কখনো হেরে যাওয়া নয়, হয় তুমি জিতবে, নয়তো কিছু শিখবে।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">AI Tools Highlighted at Mobile World Congress</a></span>
                     
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">জীবন একবারই পাওয়া যায়, তবে যদি ঠিকভাবে বাঁচতে পারো, একটাই যথেষ্ট।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Big Tech Competing with Sleep for User Attention</a></span>
                     
                     </li>
                 </ul>
 
                 <ul aria-hidden="true">
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">যে নিজেকে নিয়ন্ত্রণ করতে পারে, সে-ই প্রকৃত বিজয়ী।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Alphabet's Acquisition of Wiz for $32 Billion to Enhance Cloud Security</a></span>
                     
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">ভালোবাসা কখনো দাবি করে না, শুধু প্রদান করে।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Nvidia to Unveil Details of Latest AI Chip</a></span>
                    
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">সফলতার জন্য স্বপ্ন দেখা যতটা জরুরি, পরিশ্রম ততটাই অপরিহার্য।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Adobe Introduces AI Video Tool to Compete with OpenAI</a></span>
                     
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">তুমি যদি আলো হতে চাও, তবে নিজেই জ্বলো।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Apple Faces Increased Scrutiny After Losing German Antitrust Fight</a></span>
                    
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">মানুষ তার স্বপ্নের সমান বড়।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Jack Ma's AI-Driven Comeback with Alibaba</a></span>
                    
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">সবচেয়ে অন্ধকার রাতের পরেই সূর্য উঠে।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Rise of the 'Palantir Mafia' in Tech Startups</a></span>
                    
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">জীবনে কখনো হেরে যাওয়া নয়, হয় তুমি জিতবে, নয়তো কিছু শিখবে।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">AI Tools Highlighted at Mobile World Congress</a></span>
                    
                     </li>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">জীবন একবারই পাওয়া যায়, তবে যদি ঠিকভাবে বাঁচতে পারো, একটাই যথেষ্ট।</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Big Tech Competing with Sleep for User Attention</a></span>
                    
                     </li>
                 </ul>
