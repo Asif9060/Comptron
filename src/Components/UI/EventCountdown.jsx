@@ -3,7 +3,7 @@ import "./CSS/EventCoundown.css"
 
 const EventCountdown = () => {
   // Simulate admin status (true for admin, false for regular users)
-  const isAdmin = true; // Change this to `true` to test admin visibility
+  const isAdmin = false; // Change this to `true` to test admin visibility
 
   // Retrieve the target event date from localStorage or calculate a new one
   const now = new Date().getTime();
