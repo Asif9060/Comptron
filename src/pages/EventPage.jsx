@@ -3,6 +3,7 @@
 
 import Menu from "../Components/Layout/Menu";
 import EventCountdown from "../Components/UI/EventCountdown";
+import EventShowcase from "../Components/UI/EventShowcase";
 // import Events from "../Components/UI/Events";
 
 
@@ -16,7 +17,7 @@ const EventPage = () => {
             {/* <Events></Events> */}
 
             <EventCountdown></EventCountdown>
-
+            <EventShowcase></EventShowcase>
             
             
 
