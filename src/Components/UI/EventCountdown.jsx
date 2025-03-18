@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./CSS/EventCoundown.css";
 
 const EventCountdown = () => {
-  const isAdmin = false; // Change this to true to test admin visibility
+  const isAdmin = true; // Change this to true to test admin visibility
 
   // Retrieve the event date from localStorage or set a new one
   const storedEventDate = localStorage.getItem("eventDate");
