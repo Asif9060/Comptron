@@ -53,6 +53,8 @@ const AboutPage = () => {
                 <TeacherCard cont = {contents[2]}></TeacherCard>
             </div>
 
+            
+
             <Menu></Menu>
         
         </div>
