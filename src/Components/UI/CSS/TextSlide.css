@@ -2,11 +2,15 @@ h1 {
     text-align: center;
     margin-block-end: 2.5rem;
   }
+
+  .company{
+    color: #fff;
+  }
   
   .stock-ticker {
     font-size: 15px;
     padding-block: 8px;
-    border-block: 1px solid;
+    border-block: 1px solid white;
     box-shadow: 0 0 .2rem #fff,
             0 0 .2rem #fff,
             0 0 0px #10A5E0,

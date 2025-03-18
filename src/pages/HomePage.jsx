@@ -1,11 +1,11 @@
 import { Theme } from '@radix-ui/themes';
 import '../assets/CSS/index.css';
-import DarkMode from '../Components/Features/DarkMode';
+// import DarkMode from '../Components/Features/DarkMode';
 import { useState } from 'react';
 // import Navbar from '../Components/Layout/Navbar';
 import Header from '../Components/Layout/Header';
 import TextSlide from '../Components/UI/TextSlide';
-import Members from '../Components/Features/Members';
+// import Members from '../Components/Features/Members';
 import Button from '../Components/UI/MemberButton';
 import TextEffect from '../Components/UI/TextEffect';
 import Menu from '../Components/Layout/Menu';
@@ -20,6 +20,10 @@ import RaihanSir from '../assets/images/pooto/M. Raihan.jpg';
 import InzamamSir from '../assets/images/pooto/Md. Inzamam-Ul-Hossain.jpg';
 import PeyaMaam from '../assets/images/pooto/Zahrul Jannat Peya.jpg';
 import GradientBackground from '../Components/UI/GradientBackground';
+import AnimatedBG from '../Components/UI/AnimatedBG';
+import CoreMembers from '../Components/Features/CoreMembers';
+// import { Divide } from 'lucide-react';
+import {Divider} from "@heroui/divider";
 
 
 
@@ -64,10 +68,11 @@ const HomePage = () => {
     return (
         <div className='bg-gray-800'>
             <Theme appearance={className}>
+
                 <Header></Header>
                 {/* <Navbar></Navbar> */}
                 <Navbar2></Navbar2>
-                <DarkMode updateClassName={updateClassName}></DarkMode>
+                {/* <DarkMode updateClassName={updateClassName}></DarkMode> */}
                 <TextSlide></TextSlide>
                 <Menu></Menu>
                 <TextEffect></TextEffect>
@@ -75,17 +80,31 @@ const HomePage = () => {
                 <h1 className=' recent text-5xl text-pink-700' >Recent Activity</h1>
                 <EventSlider></EventSlider>
                 <ImageSlide></ImageSlide>
+                <div className='flex justify-center'>
+                    <hr className="my-12 w-[1525px] h-[0.3px] border-t-0 bg-neutral-100 opacity-100 dark:opacity-50"/>
+
+                </div>
                 <h2 className='flex justify-center text-3xl text-[#15A6E1] underline underline-offset-6'>Our Core Members</h2>
-                <Members></Members>
+                {/* <Members></Members> */}
+                <CoreMembers></CoreMembers>
+                <Button></Button>
+                <div className='flex justify-center'>
+                    <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-neutral-100 opacity-100 dark:opacity-50"/>
+
+                </div>
+                <h1 className='flex justify-center text-3xl text-[#15A6E1] underline underline-offset-6'>Advisor & Moderators</h1>
                 <div className='flex teacher justify-center gap-7 '>
                     <TeacherCard cont = {contents[0]}></TeacherCard>
                     <TeacherCard cont = {contents[1]}></TeacherCard>
                     <TeacherCard cont = {contents[2]}></TeacherCard>
                 </div>
-                <Button></Button>
+                <div className='flex justify-center'>
+                    <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-neutral-100 opacity-100 dark:opacity-50"/>
+
+                </div>
                 <ScalingLogo></ScalingLogo>
                 <GradientBackground></GradientBackground>
-
+                <AnimatedBG></AnimatedBG>
                 <Footer></Footer>
                 
             </Theme>

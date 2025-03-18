@@ -12,6 +12,9 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@heroui/divider": "^2.2.11",
+    "@heroui/system": "^2.4.12",
+    "@heroui/theme": "^2.4.12",
     "@heroui/use-theme": "^2.1.2",
     "@radix-ui/themes": "^3.2.0",
     "@schedule-x/events-service": "^2.20.0",

@@ -5,7 +5,7 @@ const TextSlide = () => {
             <div className="stock-ticker">
                 <ul>
                     <li className="">
-                    <span className="company"><a className="hover:text-[#10A5E0]" href="">Alphabet's Acquisition of Wiz for $32 Billion to Enhance Cloud Security</a></span>
+                    <span className="company"><a className="hover:text-[#10A5E0] text-white" href="">Alphabet's Acquisition of Wiz for $32 Billion to Enhance Cloud Security</a></span>
                     
                     </li>
                     <li className="">
