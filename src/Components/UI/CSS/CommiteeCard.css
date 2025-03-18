@@ -1,30 +1,24 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
-
 :root {
-  
   --first-color: hsl(82, 60%, 28%);
   --title-color: hsl(0, 0%, 15%);
   --text-color: hsl(0, 0%, 35%);
   --body-color: #1E2939;
   --container-color: hsl(0, 0%, 100%);
 
-  
- 
   --body-font: "Poppins", sans-serif;
   --h2-font-size: 1.25rem;
-  --small-font-size: .813rem;
+  --small-font-size: 0.813rem;
 }
-
 
 @media screen and (min-width: 1120px) {
   :root {
     --h2-font-size: 1.15rem;
-    --small-font-size: .875rem;
+    --small-font-size: 0.875rem;
   }
 }
-
 
 body {
   font-family: var(--body-font);
@@ -35,9 +29,8 @@ body {
 img {
   display: block;
   max-width: 100%;
-  height: 100%;
+  height: auto;
 }
-
 
 .container {
   display: grid;
@@ -54,7 +47,6 @@ img {
 .card__article {
   position: relative;
   overflow: hidden;
-
 }
 
 .card__img {
@@ -67,7 +59,7 @@ img {
 .card__data {
   background-color: var(--container-color);
   padding: 1.5rem 2rem;
-  box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.15);
   border-radius: 1rem;
   position: absolute;
   bottom: -9rem;
@@ -76,21 +68,19 @@ img {
   margin-inline: auto;
   opacity: 0;
   transition: opacity 1s 1s;
-  /* width: 343px;
-  padding-inline: 2.5rem; */
 }
 
 .card__description {
   display: block;
   font-size: var(--small-font-size);
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .card__title {
   font-size: var(--h2-font-size);
   font-weight: 500;
   color: var(--title-color);
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
 }
 
 .card__button {
@@ -108,7 +98,7 @@ img {
 .card__article:hover .card__data {
   animation: show-data 1s forwards;
   opacity: 1;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .card__article:hover {
@@ -147,7 +137,7 @@ img {
     transform: translateY(-10rem);
   }
   100% {
-    transform: translateY(.5rem);
+    transform: translateY(0.5rem);
   }
 }
 
@@ -161,40 +151,69 @@ img {
   }
 }
 
-@media screen and (min-width: 340px) {
-    .container {
-      margin-inline: 1rem;
-    }
-  
-    .card__data {
-      width: 250px;
-      padding: 1rem;
-    }
-  }
-  
-  /* For medium devices */
-  @media screen and (min-width: 768px) {
-    .card__container {
-      grid-template-columns: repeat(2, 1fr);
-      column-gap: 1.5rem;
-    }
-  }
-  
-  /* For large devices */
-  @media screen and (min-width: 1120px) {
-    .container {
-      height: 100vh;
-    }
-  
-    .card__container {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .card__img {
-      height: 500px;
-    }
-    .card__data {
-      width: 316px;
-      padding-inline: 2.5rem;
-    }
+/* Responsive design for small screens */
+@media screen and (max-width: 768px) {
+  .container {
+    transform: translateX(-66%);
+    margin-inline: 1rem;
+    padding-block: 3rem;
   }
 
+  .card__img {
+    width: 100%;
+    height: 350px;
+  }
+
+  .card__data {
+    width: 70%;
+    left: 30%;
+    padding: 1rem;
+    bottom: -7rem;
+  }
+
+  .card__title {
+    font-size: 1rem;
+  }
+
+  .card__description {
+    font-size: 0.75rem;
+  }
+}
+
+/* Responsive design for medium screens (tablets) */
+@media screen and (min-width: 768px) and (max-width: 1119px) {
+  .card__container {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1.5rem;
+  }
+
+  .card__img {
+    height: 250px;
+  }
+
+  .card__data {
+    width: 250px;
+    padding: 1rem;
+  }
+}
+
+/* Responsive design for large screens (laptops/desktops) */
+@media screen and (min-width: 1120px) {
+  .container {
+    height: 100vh;
+  }
+
+  .card__container {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+  }
+
+  .card__img {
+    height: 500px;
+  }
+
+  .card__data {
+    width: 316px;
+    padding-inline: 2.5rem;
+  }
+}

@@ -44,14 +44,14 @@ const CommiteeCard = () => {
   const cardsData = [
     {
       imgSrc: fardin,
-      alt: "Assassin's Creed IV - Black Flag Cover",
+      alt: "",
       name: "Tanzil Parvez Fardin",
       role: "President",
       facebook:"https://www.facebook.com/itzfardinhere",
     },
     {
       imgSrc: alamin,
-      alt: "Assassin's Creed Origins Cover Art",
+      alt: "",
       name: "Md. Al-Amin Saikh",
       role: "Vice-President",
       facebook:"https://www.facebook.com/alaminshaikh1703",
