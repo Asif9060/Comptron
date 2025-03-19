@@ -154,7 +154,7 @@ img {
 /* Responsive design for small screens */
 @media screen and (max-width: 768px) {
   .container {
-    transform: translateX(-60%);
+    transform: translateX(-61%);
     margin-inline: 1rem;
     padding-block: 3rem;
   }
