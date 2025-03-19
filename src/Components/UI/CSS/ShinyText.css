@@ -23,8 +23,9 @@
 
   @media (max-width: 768px) {
     .shiny-text {
-      font-size: 1rem;
+      display: inline-block;
+      font-size:1rem;
       position: relative;
-      left: 22%;
+      left: 15%
     }
   }

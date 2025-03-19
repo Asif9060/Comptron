@@ -154,7 +154,7 @@ img {
 /* Responsive design for small screens */
 @media screen and (max-width: 768px) {
   .container {
-    transform: translateX(-66%);
+    transform: translateX(-56.5%);
     margin-inline: 1rem;
     padding-block: 3rem;
   }
@@ -165,8 +165,8 @@ img {
   }
 
   .card__data {
-    width: 70%;
-    left: 30%;
+    width: 80%;
+    left: 24%;
     padding: 1rem;
     bottom: -7rem;
   }
