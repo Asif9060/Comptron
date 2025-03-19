@@ -92,7 +92,7 @@ const HomePage = () => {
                     <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50"/>
 
                 </div>
-                <h1 className='flex justify-center text-3xl text-[#15A6E1] underline underline-offset-6'>Advisor & Moderators</h1>
+                <h1 className='flex justify-center text-3xl text-[#15A6E1] underline underline-offset-7'>Advisory Board</h1>
                 <div className='flex teacher justify-center gap-7 '>
                     <TeacherCard cont = {contents[0]}></TeacherCard>
                     <TeacherCard cont = {contents[1]}></TeacherCard>

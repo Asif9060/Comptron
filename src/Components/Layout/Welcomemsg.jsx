@@ -1,14 +1,17 @@
 import './CSS/Welcomemsg.css';
 const Welcomemsg = () => {
     return (
-        <div className="bg-[#2f3542] space-y-2 h-[300px] ">
+        <div className="bg-[#2f3542] space-y-2 h-[350px] cont ">
             <div className="welcomemsg">Welcome To Comptron</div>
             <div className="animated-text text-white text-center">It's a <span></span></div>
-            <p className="text-center text-white">We are a group of passionate students who are always looking to learn and grow. <br />We are a community of developers, designers, and tech enthusiasts who are always looking to innovate and create.</p>
+            <div className='flex justify-center'>
+
+            <p className="text-center w-[70rem] text-white">Founded in 2018, Comptron is the official computer club of the Computer Science and Engineering (CSE) department at North Western University, Khulna. Dedicated to fostering innovation, technical expertise, and collaborative growth among students, Comptron provides a dynamic platform for aspiring tech enthusiasts to develop their skills and engage in meaningful projects.Comptron has become a cornerstone of technical excellence within the university</p>
+            </div>
              
             <div className="flex justify-center mt-5 Abtn">
                 <a href="/About">
-                    <button className="button">
+                    <button className="button5">
                     About Us
                     <svg fill="currentColor" viewBox="0 0 24 24" className="icon">
                         <path
