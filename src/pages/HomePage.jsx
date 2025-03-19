@@ -81,7 +81,7 @@ const HomePage = () => {
                 <EventSlider></EventSlider>
                 <ImageSlide></ImageSlide>
                 <div className='flex justify-center'>
-                    <hr className="my-12 w-[1525px] h-[0.3px] border-t-0 bg-neutral-100 opacity-100 dark:opacity-50"/>
+                    <hr className="my-12 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50"/>
 
                 </div>
                 <h2 className='flex justify-center text-3xl text-[#15A6E1] underline underline-offset-6'>Our Core Members</h2>
@@ -89,7 +89,7 @@ const HomePage = () => {
                 <CoreMembers></CoreMembers>
                 <Button></Button>
                 <div className='flex justify-center'>
-                    <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-neutral-100 opacity-100 dark:opacity-50"/>
+                    <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50"/>
 
                 </div>
                 <h1 className='flex justify-center text-3xl text-[#15A6E1] underline underline-offset-6'>Advisor & Moderators</h1>
@@ -99,7 +99,7 @@ const HomePage = () => {
                     <TeacherCard cont = {contents[2]}></TeacherCard>
                 </div>
                 <div className='flex justify-center'>
-                    <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-neutral-100 opacity-100 dark:opacity-50"/>
+                    <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50"/>
 
                 </div>
                 <ScalingLogo></ScalingLogo>

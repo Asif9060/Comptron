@@ -4,13 +4,13 @@ h1 {
   }
 
   .company{
-    color: #fff;
+    color: #000000;
   }
   
   .stock-ticker {
     font-size: 15px;
     padding-block: 8px;
-    border-block: 1px solid white;
+    border-block: 1px solid rgb(0, 0, 0);
     box-shadow: 0 0 .2rem #fff,
             0 0 .2rem #fff,
             0 0 0px #10A5E0,

@@ -1,10 +1,10 @@
 .container2 {
-    position: fixed; /* Cover the entire viewport */
+    position: fixed; 
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%; /* Cover the full viewport height */
-    background-color: #1E2939; /* Solid background color */
+      height: 100%; 
+    background-color: white;  /* #1E2939 */
     display: flex;
     justify-content: center;
     align-items: center;
