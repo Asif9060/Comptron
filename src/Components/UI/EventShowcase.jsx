@@ -1,5 +1,6 @@
 import "./CSS/EventShowcase.css";// External CSS file for styling
 import eventimg from '../../assets/images/Events.jpg';
+import UpcomingEvents from './UpcomingEvents';
 const EventShowcase = () => {
   const events = [
     {
@@ -22,42 +23,6 @@ const EventShowcase = () => {
     },
     {
       id: 3,
-      title: 'Title',
-      date: 'Date',
-      time: 'Time',
-      location: 'Location',
-      description: '',
-      image: eventimg,
-    },
-    {
-      id: 4,
-      title: 'Title',
-      date: 'Date',
-      time: 'Time',
-      location: 'Location',
-      description: '',
-      image: eventimg,
-    },
-    {
-      id: 5,
-      title: 'Title',
-      date: 'Date',
-      time: 'Time',
-      location: 'Location',
-      description: '',
-      image: eventimg,
-    },
-    {
-      id: 6,
-      title: 'Title',
-      date: 'Date',
-      time: 'TIme',
-      location: 'Location',
-      description: '',
-      image: eventimg,
-    },
-    {
-      id: 7,
       title: 'Title',
       date: 'Date',
       time: 'Time',
@@ -98,6 +63,7 @@ const EventShowcase = () => {
       </section>
 
       {/* Event Listings */}
+      <div className="text-center text-[30px] text-white mt-5">Latest & Ongoing Events</div>
       <section className="event-listings">
         {events.map((event) => (
           <div key={event.id} className="event-card">
@@ -108,12 +74,14 @@ const EventShowcase = () => {
               <p className="event-time"><i className="fa fa-clock"></i> {event.time}</p>
               <p className="event-location"><i className="fa fa-map-marker"></i> {event.location}</p>
               <p className="event-description">{event.description}</p>
-              <button className="register-btn">Register Now</button>
+              <button className="register-btn">Details</button>
             </div>
           </div>
         ))}
+        
+          <UpcomingEvents></UpcomingEvents>
+        
       </section>
-
       {/* Pagination */}
       <section className="pagination">
         <button>Previous</button>
