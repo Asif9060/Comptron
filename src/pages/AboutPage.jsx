@@ -1,7 +1,8 @@
 import MessageFromAdvisor from "../Components/UI/MessageFromAdvisor";
 import Objectives from "../Components/UI/Objectives";
 import { motion } from "framer-motion";
-
+import "../Components/UI/CSS/VisionAndMission.css";
+import msgForMobile from "../assets/images/pooto/msgFormobile.php.png"
 const AboutPage = () => {
   return (
     <div className=" w-full h-screen">
@@ -24,7 +25,7 @@ const AboutPage = () => {
         ))}
       </div>
       <div className="flex translate-y-[5rem] flex-col mb-[5rem] items-center justify-center">
-        <p className="flex-wrap text-center text-white  w-[70rem]">
+        <p className=" flex vision text-center text-white  w-[70rem]">
           To be a pioneering hub for technological innovation, research, and
           problem-solving, empowering students across all disciplines to harness
           the power of computing, artificial intelligence, and advanced
@@ -33,7 +34,7 @@ const AboutPage = () => {
         </p>
         <br />
         <br />
-        <p className="flex-wrap text-center text-white w-[70rem]">
+        <p className="flex mission text-center text-white w-[70rem]">
           Comptron is committed to fostering an intellectually stimulating
           environment where students develop problem-solving skills,
           computational expertise, and research-driven innovation. Through
@@ -65,7 +66,13 @@ const AboutPage = () => {
       <div className="translate-y-[10rem]">
         <Objectives></Objectives>
       </div>
-      <MessageFromAdvisor></MessageFromAdvisor>
+      <div className="msgadv">
+        <MessageFromAdvisor></MessageFromAdvisor>
+      </div>
+      <div className="msgForMobile hidden">
+        <div className="text-[25px]  text-slate-300 text-center mb-6 font-bold">Message From Advisor</div>
+        <img src={msgForMobile} alt="" />
+      </div>
     </div>
   );
 };

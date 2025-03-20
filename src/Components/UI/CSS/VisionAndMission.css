@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+  .vision{
+    width: 23rem;
+    text-align: justify;
+  }
+
+  .mission{
+    width: 23rem;
+    text-align: justify;
+  }
+  .msgadv{
+    display: none;
+  }
+  .msgForMobile{
+    display: block;
+    position: relative;
+    top: 12rem;
+  }
+}
