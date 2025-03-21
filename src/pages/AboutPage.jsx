@@ -2,7 +2,9 @@ import MessageFromAdvisor from "../Components/UI/MessageFromAdvisor";
 import Objectives from "../Components/UI/Objectives";
 import { motion } from "framer-motion";
 import "../Components/UI/CSS/VisionAndMission.css";
-import msgForMobile from "../assets/images/pooto/msgFormobile.php.png"
+import msgForMobile from "../assets/images/pooto/msgFormobile.php.png";
+import Footer from "../Components/Layout/Footer";
+import SideMenu from "../Components/Features/SideMenu";
 const AboutPage = () => {
   return (
     <div className=" w-full h-screen">
@@ -70,9 +72,19 @@ const AboutPage = () => {
         <MessageFromAdvisor></MessageFromAdvisor>
       </div>
       <div className="msgForMobile hidden">
-        <div className="text-[25px]  text-slate-300 text-center mb-6 font-bold">Message From Advisor</div>
+        <div className="text-[25px]  text-slate-300 text-center mb-6 font-bold">
+          Message From Advisor
+        </div>
         <img src={msgForMobile} alt="" />
       </div>
+      <div className="foot">
+        <Footer></Footer>
+      </div>
+
+        <div className="-translate-y-[210rem] sidemenu fixed">
+          <SideMenu></SideMenu>
+        </div>
+
     </div>
   );
 };
