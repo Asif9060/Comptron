@@ -1,4 +1,6 @@
-import Menu from "../Components/Layout/Menu";
+import { AdminProvider } from "../AdminPanel/ToggleAdmin/AdminContext";
+// import AdminToggle from "../AdminPanel/ToggleAdmin/AdminToggle";
+// import Menu from "../Components/Layout/Menu";
 import EventCountdown from "../Components/UI/EventCountdown";
 import EventShowcase from "../Components/UI/EventShowcase";
 // import Events from "../Components/UI/Events";
@@ -9,8 +11,9 @@ const EventPage = () => {
     <div>
       {/* <Menu></Menu> */}
       {/* <Events></Events> */}
-
-      <EventCountdown></EventCountdown>
+      <AdminProvider>
+        <EventCountdown></EventCountdown>
+      </AdminProvider>
       <div className="absolute fixed -translate-y-6">
         <SideMenu></SideMenu>
       </div>

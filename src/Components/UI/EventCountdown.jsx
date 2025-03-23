@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
-import "./CSS/EventCoundown.css"
+import "./CSS/EventCoundown.css";
+import { useContext } from "react";
+import { AdminContext } from "../../AdminPanel/ToggleAdmin/AdminContext";
+import './CSS/Reset.css';
 
 const EventCountdown = () => {
-  // Simulate admin status (true for admin, false for regular users)
-  const isAdmin = false; // Change this to `true` to test admin visibility
-
-  // Retrieve the target event date from localStorage or calculate a new one
+  const { isAdmin } = useContext(AdminContext);
+  
   const now = new Date().getTime();
   const durationInMilliseconds =
     4 * 24 * 60 * 60 * 1000 + // 1 day
-    2 * 60 * 60 * 1000 +   // 12 hours
-    0 * 60 * 1000 +        // 56 minutes
-    2 * 1000;              // 59 seconds
+    2 * 60 * 60 * 1000 + // 12 hours
+    0 * 60 * 1000 + // 56 minutes
+    2 * 1000; // 59 seconds
 
   const storedEventDate = localStorage.getItem("eventDate");
   const initialEventDate = storedEventDate
@@ -38,7 +39,9 @@ const EventCountdown = () => {
       const hours = Math.floor(
         (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
-      const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+      const minutes = Math.floor(
+        (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
+      );
       const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
 
       // Update state with padded values
@@ -76,7 +79,7 @@ const EventCountdown = () => {
   };
 
   return (
-    <div>
+    <div className="countdown-wrapper">
       <div className="countdown-container">
         <h1 className="eventTitle">Event Countdown</h1>
         <p id="event-name">Colab With Programming Hero</p>
@@ -101,8 +104,24 @@ const EventCountdown = () => {
 
         {/* Render the reset button only for admins */}
         {isAdmin && (
-          <button onClick={resetCountdown} className="reset-button">
-            Reset Countdown
+          <button onClick={resetCountdown} className="button0 translate-y-[1rem]">
+            <div className="border-line top-line"></div>
+            <div className="border-line bottom-line"></div>
+            <div className="border-line left-line"></div>
+            <div className="border-line right-line"></div>
+            <div className="inner1">
+              Reset Countdown
+              <div className="tl tri"></div>
+              <div className="tr tri"></div>
+              <div className="bl tri"></div>
+              <div className="br tri"></div>
+            </div>
+            <div className="tl tri"></div>
+            <div className="tr tri"></div>
+            <div className="bl tri"></div>
+            <div className="br tri"></div>
+            <div className="dot dl"></div>
+            <div className="dot dr"></div>
           </button>
         )}
       </div>

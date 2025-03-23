@@ -1,24 +1,24 @@
-import fardin from '../../assets/images/Commitee/Fardin.jpg';
-import alamin from '../../assets/images/Commitee/Alamin.jpg';
-import ahir from '../../assets/images/Commitee/Ahir.jpg';
-import redoy from '../../assets/images/Commitee/Redoy.jpg';
-import wale from '../../assets/images/Commitee/Wale.jpg';
-import laboni from '../../assets/images/Commitee/Laboni.jpg';
-import naim from '../../assets/images/Commitee/Naim.jpg';
-import asif from '../../assets/images/Commitee/Asif.jpg';
-import shajalal from '../../assets/images/Commitee/Shahjalal.jpg';
-import rabbi from '../../assets/images/Commitee/Rabbi.jpg';
-import mehedi from '../../assets/images/Commitee/Mehedi.jpg';
-import mahmudul from '../../assets/images/Commitee/mahmudul.jpg';
-import tusme from '../../assets/images/Commitee/Tusme.jpg';
-import nadim from '../../assets/images/Commitee/Nadim.jpg';
-import sahed from '../../assets/images/Commitee/Sahed.jpg';
-import shiam from '../../assets/images/Commitee/Shiam.jpg';
-import zayada from '../../assets/images/Commitee/Zayada.jpg';
-import kanchon from '../../assets/images/Commitee/Kanchon.jpg';
-import nur from '../../assets/images/Commitee/Nur.jpg';
-import mithila from '../../assets/images/Commitee/Mithila.jpg';
-import moinul from '../../assets/images/Commitee/Moinul.jpg';
+// import fardin from '../../assets/images/Commitee/Fardin.jpg'
+// import alamin from '../../assets/images/Commitee/Alamin.jpg';
+// import ahir from '../../assets/images/Commitee/Ahir.jpg';
+// import redoy from '../../assets/images/Commitee/Redoy.jpg';
+// import wale from '../../assets/images/Commitee/Wale.jpg';
+// import laboni from '../../assets/images/Commitee/Laboni.jpg';
+// import naim from '../../assets/images/Commitee/Naim.jpg';
+// import asif from '../../assets/images/Commitee/Asif.jpg';
+// import shajalal from '../../assets/images/Commitee/Shahjalal.jpg';
+// import rabbi from '../../assets/images/Commitee/Rabbi.jpg';
+// import mehedi from '../../assets/images/Commitee/Mehedi.jpg';
+// import mahmudul from '../../assets/images/Commitee/mahmudul.jpg';
+// import tusme from '../../assets/images/Commitee/Tusme.jpg';
+// import nadim from '../../assets/images/Commitee/Nadim.jpg';
+// import sahed from '../../assets/images/Commitee/Sahed.jpg';
+// import shiam from '../../assets/images/Commitee/Shiam.jpg';
+// import zayada from '../../assets/images/Commitee/Zayada.jpg';
+// import kanchon from '../../assets/images/Commitee/Kanchon.jpg';
+// import nur from '../../assets/images/Commitee/Nur.jpg';
+// import mithila from '../../assets/images/Commitee/Mithila.jpg';
+// import moinul from '../../assets/images/Commitee/Moinul.jpg';
 import './CSS/Card.css';
 const SocialIcons = ({ github, linkedin, instagram }) => (
   <div className="socialDiv">
