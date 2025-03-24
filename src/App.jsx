@@ -9,6 +9,7 @@ import AdminPage from "./AdminPanel/AdminPage";
 // import LoadingAnimation from "./Components/UI/LoadingAnimation";
 import Dorja from './AdminPanel/Dorja';
 import CommitteePanel from "./CommitteePanel/CommitteePanel";
+import CommitteeLogin from "./CommitteePanel/CommitteeLogin";
 
 const App = () => {
 
@@ -26,6 +27,8 @@ const App = () => {
           <Route path="/AdminPage" element={<AdminPage></AdminPage>}></Route>
           <Route path="/Dorja" element={<Dorja></Dorja>}></Route>
           <Route path="/Committee" element={<CommitteePanel></CommitteePanel>}></Route>
+          <Route path="/CommitteeLogin" element={<CommitteeLogin></CommitteeLogin>}></Route>
+
         </Routes>
       </BrowserRouter>
     </div>
