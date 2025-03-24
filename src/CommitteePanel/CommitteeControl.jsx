@@ -52,18 +52,21 @@ const CommitteePanel = () => {
   };
 
   return (
-    <div>
-      <h2>Edit Committee Member</h2>
+    <div className="flex flex-col justify-center items-center">
+      <h2 className="text-4xl text-white font-bold" >Edit Committee Member</h2>
       <div>
         <select
           onChange={(e) => handleMemberSelect(Number(e.target.value))}
           value={selectedMemberIndex ?? ""}
+          className="border text-white p-2 pointer mr-2"
         >
-          <option value="" disabled>
-            Select a member to edit
+          <option>
+            <div >
+              Select a member To modify
+            </div>
           </option>
           {cardsData.map((member, index) => (
-            <option key={index} value={index}>
+            <option className="text-black" key={index} value={index}>
               {member.name}
             </option>
           ))}
@@ -72,6 +75,7 @@ const CommitteePanel = () => {
       {selectedMemberIndex !== null && (
         <div>
           <input
+            className="text-white border p-2 mr-2"
             type="text"
             name="name"
             placeholder="Name"
@@ -79,6 +83,7 @@ const CommitteePanel = () => {
             onChange={handleInputChange}
           />
           <input
+          className="text-white border p-2 mr-2"
             type="text"
             name="role"
             placeholder="Role"
@@ -86,14 +91,15 @@ const CommitteePanel = () => {
             onChange={handleInputChange}
           />
           <input
+          className="text-white border p-2 mr-2"
             type="text"
             name="facebook"
             placeholder="Facebook Link"
             value={editedMember.facebook}
             onChange={handleInputChange}
           />
-          <input type="file" accept="image/*" onChange={handleFileChange} />
-          <button onClick={handleSave}>Save</button>
+          <input className="text-white border p-2 mr-2 pointer" type="file" accept="image/*" onChange={handleFileChange} />
+          <button className="button0 pointer" onClick={handleSave}>Save</button>
         </div>
       )}
     </div>

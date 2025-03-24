@@ -9,8 +9,6 @@ const App = () => {
     <CardsProvider>
         <CommitteePanel></CommitteePanel>
         <CommiteeCard></CommiteeCard>
-      
-      
     </CardsProvider>
   );
 };

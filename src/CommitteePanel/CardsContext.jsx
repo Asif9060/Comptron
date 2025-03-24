@@ -6,20 +6,20 @@ import redoy from "../assets/images/Committee/Redoy.jpg";
 import wale from "../assets/images/Committee/Wale.jpg";
 import laboni from "../assets/images/Committee/Laboni.jpg";
 import naim from "../assets/images/Committee/Naim.jpg";
-// import asif from "../assets/images/Committee/Asif.jpg";
-// import shajalal from "../assets/images/Committee/Shahjalal.jpg";
-// import rabbi from "../assets/images/Committee/Rabbi.jpg";
-// import mehedi from "../assets/images/Committee/Mehedi.jpg";
-// import mahmudul from "../assets/images/Committee/mahmudul.jpg";
-// import tusme from "../assets/images/Committee/Tusme.jpg";
-// import nadim from "../assets/images/Committee/Nadim.jpg";
-// import sahed from "../assets/images/Committee/Sahed.jpg";
-// import shiam from "../assets/images/Committee/Shiam.jpg";
-// import zayada from "../assets/images/Committee/Zayada.jpg";
-// import kanchon from "../assets/images/Committee/Kanchon.jpg";
-// import nur from "../assets/images/Committee/Nur.jpg";
-// import mithila from "../assets/images/Committee/Mithila.jpg";
-// import moinul from "../assets/images/Committee/Moinul.jpg";
+import asif from "../assets/images/Committee/Asif.jpg";
+import shajalal from "../assets/images/Committee/Shahjalal.jpg";
+import rabbi from "../assets/images/Committee/Rabbi.jpg";
+import mehedi from "../assets/images/Committee/Mehedi.jpg";
+import mahmudul from "../assets/images/Committee/mahmudul.jpg";
+import tusme from "../assets/images/Committee/Tusme.jpg";
+import nadim from "../assets/images/Committee/Nadim.jpg";
+import sahed from "../assets/images/Committee/Sahed.jpg";
+import shiam from "../assets/images/Committee/Shiam.jpg";
+import zayada from "../assets/images/Committee/Zayada.jpg";
+import kanchon from "../assets/images/Committee/Kanchon.jpg";
+import nur from "../assets/images/Committee/Nur.jpg";
+import mithila from "../assets/images/Committee/Mithila.jpg";
+import moinul from "../assets/images/Committee/Moinul.jpg";
 
 export const CardsContext = createContext();
 
@@ -77,6 +77,104 @@ export const CardsProvider = ({ children }) => {
         name: "Sheikh Naim Hossain",
         role: "Assistant Publicity and Public Relation Secretary",
         facebook: "https://www.facebook.com/naim001.official",
+      },
+      {
+        imgSrc: asif,
+        alt: "",
+        name: "Md Asif Al Fattah Shohag",
+        role: "IT Secretary",
+        facebook: "https://www.facebook.com/asif.alfattah",
+      },
+      {
+        imgSrc: shajalal,
+        alt: "",
+        name: "Mullah Mohammad Shajalal",
+        role: "Assistant IT Secretary",
+        facebook: "https://www.facebook.com/shahjalal2075",
+      },
+      {
+        imgSrc: rabbi,
+        alt: "",
+        name: "Ratul Hasan Rabbi",
+        role: "Publication Secretary",
+        facebook: "https://www.facebook.com/rhr18818",
+      },
+      {
+        imgSrc: mehedi,
+        alt: "",
+        name: "Howlader Mehedi Hasan",
+        role: "Assistant Publication Secretary",
+        facebook: "https://www.facebook.com/hmh2003",
+      },
+      {
+        imgSrc: mahmudul,
+        alt: "",
+        name: "Md. Mahmudul Haque",
+        role: "Librarian Secretary",
+        facebook: "https://www.facebook.com/cse.joy.nwu",
+      },
+      {
+        imgSrc: tusme,
+        alt: "",
+        name: "Tasnuva Sultana Tusme",
+        role: "Executive Member",
+        facebook: "https://www.facebook.com/tasnuva3221",
+      },
+      {
+        imgSrc: nadim,
+        alt: "",
+        name: "Nadim Hasan Emon",
+        role: "Executive Member",
+        facebook: "https://www.facebook.com/nadim.hasanemon.7",
+      },
+      {
+        imgSrc: sahed,
+        alt: "",
+        name: "Md. Sahed Hossain",
+        role: "Executive Member",
+        facebook: "https://www.facebook.com/itsRafsanSahad",
+      },
+      {
+        imgSrc: shiam,
+        alt: "",
+        name: "Sk. Md. Shiam",
+        role: "Executive Member",
+        facebook: "https://www.facebook.com/skshiam.rahan",
+      },
+      {
+        imgSrc: zayada,
+        alt: "",
+        name: "Zayada Akter",
+        role: "Executive Member",
+        facebook: "https://www.facebook.com/zayada.akter.611174",
+      },
+      {
+        imgSrc: kanchon,
+        alt: "",
+        name: "Rafsanul Islam Kanchon",
+        role: "Executive Member",
+        facebook: "https://www.facebook.com/rafsanul.kanchon",
+      },
+      {
+        imgSrc: nur,
+        alt: "",
+        name: "Nur Hamim",
+        role: "Executive Member",
+        facebook: "https://www.facebook.com/link.diye.ki.hobe.bro",
+      },
+      {
+        imgSrc: mithila,
+        alt: "",
+        name: "Mithila Mondol",
+        role: "Executive Member",
+        facebook: "https://www.facebook.com/profile.php?id=100094599941522",
+      },
+      {
+        imgSrc: moinul,
+        alt: "",
+        name: "Moinul Islam",
+        role: "Executive Member",
+        facebook: "https://www.facebook.com/moinulislam07",
       },
     ]
   );
