@@ -1,15 +1,19 @@
 // App.js
+import { useState } from "react";
+import AddMemberForm from "../Components/AddMemberForm";
+import MemberList from "../Components/MemberList";
 import CommiteeCard from "../Components/UI/CommitteeCard";
-import { CardsProvider } from "./CardsContext";
-import CommitteePanel from "./CommitteeControl";
-
 
 const App = () => {
+  const [refresh, setRefresh] = useState(false);
+  const [selectedMember, setSelectedMember] = useState(null);
+
   return (
-    <CardsProvider>
-        <CommitteePanel></CommitteePanel>
-        <CommiteeCard></CommiteeCard>
-    </CardsProvider>
+    <div>
+      <AddMemberForm onMemberAdded={() => setRefresh(!refresh)} selectedMember={selectedMember} setSelectedMember={setSelectedMember} />
+      <MemberList key={refresh} onEdit={setSelectedMember} />
+      <CommiteeCard></CommiteeCard>
+    </div>
   );
 };
 
