@@ -5,7 +5,7 @@ const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'Committee', href: '/Members', current: false },
   { name: 'Events', href: '/Events', current: false },
-  { name: 'The Daily NWU', href: '/News', current: false },
+  { name: 'Contact Us', href: '/Contact', current: false },
   { name: 'About Us', href: '/About', current: false },
 ]
 

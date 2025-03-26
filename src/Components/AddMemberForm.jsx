@@ -60,7 +60,7 @@ const AddMemberForm = ({
   };
 
   return (
-    <form className="flex gap-[2rem] justify-center mt-9" onSubmit={handleSubmit}>
+    <form className="flex gap-[2rem] justify-center mt-12" onSubmit={handleSubmit}>
       <input
         className="text-black bg-white"
         type="text"

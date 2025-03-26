@@ -4,7 +4,7 @@ import AddMemberForm from "../Components/AddMemberForm";
 import MemberList from "../Components/MemberList";
 import CommiteeCard from "../Components/UI/CommitteeCard";
 
-const App = () => {
+const CommitteePanel = () => {
   const [refresh, setRefresh] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
 
@@ -17,4 +17,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default CommitteePanel;

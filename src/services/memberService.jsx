@@ -46,6 +46,7 @@ export const deleteMember = async (id) => {
 };
 
 
+
 export const addMember = async (member) => {
     const formData = new FormData();
 
@@ -66,9 +67,6 @@ export const addMember = async (member) => {
             "Content-Type": "multipart/form-data",
         },
     });
-
-    
-
 
     return response.data;
 };

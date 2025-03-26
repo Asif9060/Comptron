@@ -73,7 +73,6 @@ const CommitteeLogin = () => {
       navigate("/CommitteeLogin");
     } catch (error) {
       setError(error.message);
-      
     }
   };
 
@@ -148,6 +147,7 @@ const CommitteeLogin = () => {
   }, []);
   return (
     <div className="bg-white">
+      
       <svg
         className="login__blob"
         viewBox="0 0 566 840"
