@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../Components/UI/CSS/Buttons.css';
 
 const AdminEventControl = () => {
   const [newEventTime, setNewEventTime] = useState("");
@@ -6,7 +7,7 @@ const AdminEventControl = () => {
   const updateEventTime = async () => {
     if (!newEventTime) return;
   
-    const eventDate = new Date(newEventTime).getTime();
+    const eventDate = new Date(newEventTime).getTime() + 6 * 60 * 60 * 1000;
     console.log("Sending eventDate:", eventDate); // Debugging
   
     try {
@@ -30,14 +31,16 @@ const AdminEventControl = () => {
     }
   };
   return (
-    <div>
-      <h2>Set Event Time</h2>
+    <div className="flex flex-col items-center gap-4 justify-center">
+      <h2 className="text-white text-2xl">Set Event Time</h2>
       <input
         type="datetime-local"
+        className="p-2 rounded border border-white bg-white"
         value={newEventTime}
         onChange={(e) => setNewEventTime(e.target.value)}
       />
-      <button onClick={updateEventTime}>Update Event</button>
+      <button className="button6 mb-5 absolute" onClick={updateEventTime}>Update
+      </button>
     </div>
   );
 };

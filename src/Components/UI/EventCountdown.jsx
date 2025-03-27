@@ -28,7 +28,7 @@ const EventCountdown = () => {
         if (!isNaN(parsedEventDate)) {
           setEventDate(parsedEventDate.getTime()); // Store the timestamp in milliseconds
         } else {
-          console.error("Invalid event date:", data.eventDate);
+          console.error("Invalid event date:", parsedEventDate);
         }
       }
     } catch (error) {
@@ -85,6 +85,63 @@ const EventCountdown = () => {
 
     return () => clearInterval(interval);
   }, [eventDate]);
+
+
+  return (
+    <div className="countdown-wrapper">
+      <div className="countdown-container">
+        <h1 className="eventTitle">Eid al-Fitr 2025</h1>
+        <p id="event-name"></p>
+        <div className="countdown">
+          <div className="time-section">
+            <span id="days">{timeRemaining.days}</span>
+            <p>Days</p>
+          </div>
+          <div className="time-section">
+            <span id="hours">{timeRemaining.hours}</span>
+            <p>Hours</p>
+          </div>
+          <div className="time-section">
+            <span id="minutes">{timeRemaining.minutes}</span>
+            <p>Minutes</p>
+          </div>
+          <div className="time-section">
+            <span id="seconds">{timeRemaining.seconds}</span>
+            <p>Seconds</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+export default EventCountdown;
+
+{/* Render the reset button only for admins */}
+{/* {isAdmin && (
+  <button onClick={resetCountdown} className="button0 translate-y-[1rem]">
+    <div className="border-line top-line"></div>
+    <div className="border-line bottom-line"></div>
+    <div className="border-line left-line"></div>
+    <div className="border-line right-line"></div>
+    <div className="inner1">
+      Reset Countdown
+      <div className="tl tri"></div>
+      <div className="tr tri"></div>
+      <div className="bl tri"></div>
+      <div className="br tri"></div>
+    </div>
+    <div className="tl tri"></div>
+    <div className="tr tri"></div>
+    <div className="bl tri"></div>
+    <div className="br tri"></div>
+    <div className="dot dl"></div>
+    <div className="dot dr"></div>
+  </button>
+)} */}
+
+
 
   // const now = new Date().getTime();
   // const durationInMilliseconds =
@@ -156,57 +213,3 @@ const EventCountdown = () => {
   //   setEventDate(newEventDate); // Update the event date in state
   //   localStorage.setItem("eventDate", newEventDate.toString()); // Update in localStorage
   // };
-
-  return (
-    <div className="countdown-wrapper">
-      <div className="countdown-container">
-        <h1 className="eventTitle">Event Countdown</h1>
-        <p id="event-name">Eid al-Fitr 2025</p>
-        <div className="countdown">
-          <div className="time-section">
-            <span id="days">{timeRemaining.days}</span>
-            <p>Days</p>
-          </div>
-          <div className="time-section">
-            <span id="hours">{timeRemaining.hours}</span>
-            <p>Hours</p>
-          </div>
-          <div className="time-section">
-            <span id="minutes">{timeRemaining.minutes}</span>
-            <p>Minutes</p>
-          </div>
-          <div className="time-section">
-            <span id="seconds">{timeRemaining.seconds}</span>
-            <p>Seconds</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  );
-};
-
-export default EventCountdown;
-
-{/* Render the reset button only for admins */}
-{/* {isAdmin && (
-  <button onClick={resetCountdown} className="button0 translate-y-[1rem]">
-    <div className="border-line top-line"></div>
-    <div className="border-line bottom-line"></div>
-    <div className="border-line left-line"></div>
-    <div className="border-line right-line"></div>
-    <div className="inner1">
-      Reset Countdown
-      <div className="tl tri"></div>
-      <div className="tr tri"></div>
-      <div className="bl tri"></div>
-      <div className="br tri"></div>
-    </div>
-    <div className="tl tri"></div>
-    <div className="tr tri"></div>
-    <div className="bl tri"></div>
-    <div className="br tri"></div>
-    <div className="dot dl"></div>
-    <div className="dot dr"></div>
-  </button>
-)} */}

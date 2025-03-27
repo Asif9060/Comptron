@@ -36,7 +36,7 @@ const Dorja = () => {
       if (currentUser) {
         setUser(currentUser);
         localStorage.setItem("userEmail", currentUser.email);
-        navigate("/AdminPage");
+        navigate("");
       }
     });
 

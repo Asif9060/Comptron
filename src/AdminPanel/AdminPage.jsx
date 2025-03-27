@@ -1,7 +1,7 @@
 import SideMenu from "../Components/Features/SideMenu";
 import EventCountdown from "../Components/UI/EventCountdown";
 import { AdminProvider } from "./ToggleAdmin/AdminContext";
-import AdminToggle from "./ToggleAdmin/AdminToggle";
+
 import { useState } from "react";
 import AddMemberForm from "../Components/AddMemberForm";
 import MemberList from "../Components/MemberList";
@@ -22,9 +22,8 @@ const AdminPage = () => {
         <div className="flex flex-col items-center ">
           <AdminEventControl></AdminEventControl>
           <EventCountdown></EventCountdown>
-          <AdminToggle></AdminToggle>
         </div>
-        <div className=" fixed absolute -translate-y-[13rem]">
+        <div className=" fixed absolute -translate-y-[16rem]">
           <SideMenu></SideMenu>
         </div>
   {/* ----------------------------------------------------------------------------------------- */}
