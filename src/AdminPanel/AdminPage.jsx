@@ -2,11 +2,11 @@ import SideMenu from "../Components/Features/SideMenu";
 import EventCountdown from "../Components/UI/EventCountdown";
 import { AdminProvider } from "./ToggleAdmin/AdminContext";
 import AdminToggle from "./ToggleAdmin/AdminToggle";
-import CommitteePanel from "./../CommitteePanel/CommitteeControl";
 import { useState } from "react";
 import AddMemberForm from "../Components/AddMemberForm";
 import MemberList from "../Components/MemberList";
 import CommiteeCard from "../Components/UI/CommitteeCard";
+import AdminEventControl from "./AdminEventControl";
 
 const AdminPage = () => {
   const [refresh, setRefresh] = useState(false);
@@ -20,10 +20,11 @@ const AdminPage = () => {
         {/* Event Countdown Control */}
         
         <div className="flex flex-col items-center ">
+          <AdminEventControl></AdminEventControl>
           <EventCountdown></EventCountdown>
           <AdminToggle></AdminToggle>
         </div>
-        <div className=" absolute fixed -translate-y-[11rem]">
+        <div className=" fixed absolute -translate-y-[13rem]">
           <SideMenu></SideMenu>
         </div>
   {/* ----------------------------------------------------------------------------------------- */}

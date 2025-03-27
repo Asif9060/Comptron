@@ -24,7 +24,7 @@ const MemberList = ({onEdit}) => {
             <ul className="">
                 {members.map(member => (
                     <li className="flex gap-11" key={member._id}>
-                        <img className="w-[5rem] h-[5rem]" src={member.image} alt={member.alt} />
+                        <img className="w-[2rem]" src={`https://comptron-server.onrender.com${member.image}`} alt={member.alt} />
                         <strong className="p-2 bg-white text-black" >{member.name}</strong>
                         <strong className="p-2 bg-white text-black" >{member.role}</strong>
                         <strong className="p-2 bg-white text-black" >{member.socials.linkedin}</strong>
