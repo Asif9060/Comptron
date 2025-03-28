@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../Components/UI/CSS/Inputs.css";
 import Input from "../Components/UI/Input";
 import AdminTextSlideControl from "../AdminPanel/AdminTextSlideControl";
-import EventGallery from "../Components/UI/EventGallery";
+
 const ContactUs = () => {
   
   return (
@@ -12,7 +12,7 @@ const ContactUs = () => {
 
       {/* <AdminTextSlideControl></AdminTextSlideControl> */}
 
-      <EventGallery></EventGallery>
+      
       
     </div>
   );
