@@ -73,7 +73,7 @@ const HomePage = () => {
         <TextSlide></TextSlide>
         {/* <Menu></Menu> */}
         <div className="absolute fixed translate-y-8 z-3">
-          <SideMenu></SideMenu>
+          {/* <SideMenu></SideMenu> */}
         </div>
         <TextEffect></TextEffect>
         <Welcomemsg></Welcomemsg>

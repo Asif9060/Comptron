@@ -7,6 +7,7 @@ import AddMemberForm from "../Components/AddMemberForm";
 import MemberList from "../Components/MemberList";
 import CommiteeCard from "../Components/UI/CommitteeCard";
 import AdminEventControl from "./AdminEventControl";
+import AdminTextSlideControl from "./AdminTextSlideControl";
 
 const AdminPage = () => {
   const [refresh, setRefresh] = useState(false);
@@ -41,6 +42,10 @@ const AdminPage = () => {
           />
           <MemberList key={refresh} onEdit={setSelectedMember} />
           {/* <CommiteeCard></CommiteeCard> */}
+        </div>
+
+        <div className="relative flex flex-col items-center mb-77 translate-y-[10rem]">
+          <AdminTextSlideControl></AdminTextSlideControl>
         </div>
 
 {/* ----------------------------------------------------------------------------------------- */}
