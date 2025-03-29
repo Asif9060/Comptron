@@ -14,17 +14,17 @@ const AdminPage = () => {
   const [selectedMember, setSelectedMember] = useState(null);
   return (
     <div className="">
-      <h1 className="text-3xl text-center text-white">Admin Page</h1>
+      <h1 className="text-3xl text-center translate-y-[4rem] text-white">Admin Page</h1>
 
       <AdminProvider>
   {/* ----------------------------------------------------------------------------------------- */}
         {/* Event Countdown Control */}
         
-        <div className=" relative left-[80rem] gap-4 border rounded-3xl p-4 inline-block items-center ">
+        <div className=" relative left-[73.4rem] gap-4  border translate-y-[-2.5rem] rounded-3xl p-4 inline-block items-center ">
           <AdminEventControl></AdminEventControl>
           <EventCountdown></EventCountdown>
         </div>
-        <div className=" fixed absolute -translate-y-[16rem]">
+        <div className=" fixed absolute -translate-y-[45rem]">
           <SideMenu></SideMenu>
         </div>
   {/* ----------------------------------------------------------------------------------------- */}
@@ -33,8 +33,8 @@ const AdminPage = () => {
 
         {/* Committee Control */}
 
-        <div className="flex flex-col translate-x-[-20rem] border inline-block rounded-3xl p-4 items-center translate-y-[5rem]" >
-          <div className="text-white text-3xl">Committee Panel</div>
+        <div className="flex flex-col translate-x-[-27rem] border inline-block rounded-3xl  p-4 items-center translate-y-[5rem]" >
+          <div className="text-white text-center text-3xl">Committee Panel</div>
           <AddMemberForm
             onMemberAdded={() => setRefresh(!refresh)}
             selectedMember={selectedMember}
@@ -44,7 +44,7 @@ const AdminPage = () => {
           {/* <CommiteeCard></CommiteeCard> */}
         </div>
 
-        <div className="relative flex flex-col items-center mb-77 translate-y-[10rem]">
+        <div className=" ">
           <AdminTextSlideControl></AdminTextSlideControl>
         </div>
 
