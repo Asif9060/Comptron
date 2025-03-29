@@ -20,7 +20,7 @@ const AdminPage = () => {
   {/* ----------------------------------------------------------------------------------------- */}
         {/* Event Countdown Control */}
         
-        <div className="flex flex-col items-center ">
+        <div className=" relative left-[80rem] gap-4 border rounded-3xl p-4 inline-block items-center ">
           <AdminEventControl></AdminEventControl>
           <EventCountdown></EventCountdown>
         </div>
@@ -33,7 +33,7 @@ const AdminPage = () => {
 
         {/* Committee Control */}
 
-        <div className="flex flex-col items-center translate-y-[5rem] " >
+        <div className="flex flex-col translate-x-[-20rem] border inline-block rounded-3xl p-4 items-center translate-y-[5rem]" >
           <div className="text-white text-3xl">Committee Panel</div>
           <AddMemberForm
             onMemberAdded={() => setRefresh(!refresh)}

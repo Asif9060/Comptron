@@ -32,10 +32,10 @@ const AdminEventControl = () => {
   };
   return (
     <div className="flex flex-col items-center gap-4 justify-center">
-      <h2 className="text-white text-2xl">Set Event Time</h2>
+      <h2 className=" text-white text-2xl">Set Event Time</h2>
       <input
         type="datetime-local"
-        className="p-2 rounded border border-white bg-white"
+        className="p-2 rounded border  border-white bg-white"
         value={newEventTime}
         onChange={(e) => setNewEventTime(e.target.value)}
       />

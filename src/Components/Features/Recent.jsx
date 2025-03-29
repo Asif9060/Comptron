@@ -9,9 +9,30 @@ const Recent = () => {
   const runningTime = useRef(null);
 
   const [eventImages, setEventImages] = useState([]);
+  
+  let timeRunning = 3000;
+  let timeAutoNext = 7000;
+
+  let runTimeOut;
+  const runNextAuto = useRef(null);
 
   useEffect(() => {
-    fetchImages(); // Fetch images from the backend
+    fetchImages();
+
+    
+    nextBtn.current.onclick = () => show("next");
+    prevBtn.current.onclick = () => show("prev");
+
+    // Start the auto-slide functionality
+    runNextAuto.current = setTimeout(() => {
+      nextBtn.current.click();
+    }, timeAutoNext);
+
+    // Cleanup on component unmount
+    return () => {
+      clearTimeout(runTimeOut);
+      clearTimeout(runNextAuto);
+    };
   }, []);
 
   const fetchImages = async () => {
@@ -24,8 +45,16 @@ const Recent = () => {
     }
   };
 
+  const resetTimeAnimation = () => {
+    runningTime.current.style.animation = "none";
+    runningTime.current.offsetHeight; // Trigger reflow
+    runningTime.current.style.animation = null;
+    runningTime.current.style.animation = "runningTime 7s linear 1 forwards";
+  };
+
   const show = (type) => {
     const ItemsDom = list.current.querySelectorAll(".item");
+
     if (type === "next") {
       list.current.appendChild(ItemsDom[0]);
       carousel.current.classList.add("next");
@@ -34,71 +63,35 @@ const Recent = () => {
       carousel.current.classList.add("prev");
     }
 
-    setTimeout(() => {
+    clearTimeout(runTimeOut);
+    runTimeOut = setTimeout(() => {
       carousel.current.classList.remove("next");
       carousel.current.classList.remove("prev");
-    }, 3000);
-  };
+    }, timeRunning);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this image?")) return;
+    clearTimeout(runNextAuto.current);
+    runNextAuto.current = setTimeout(() => {
+      nextBtn.current.click();
+    }, timeAutoNext);
 
-    try {
-      await fetch(`https://comptron-server.onrender.com/api/eventImages/${id}`, {
-        method: "DELETE",
-      });
-      alert("Image deleted successfully!");
-      fetchImages(); // Refresh images
-    } catch (error) {
-      console.error("Error deleting image:", error);
-    }
-  };
-
-  const handleUpdate = async (id, newTitle, newDescription) => {
-    try {
-      await fetch(`https://comptron-server.onrender.com/api/eventImages/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: newTitle, description: newDescription }),
-      });
-      alert("Image updated successfully!");
-      fetchImages(); // Refresh images
-    } catch (error) {
-      console.error("Error updating image:", error);
-    }
+    resetTimeAnimation();
   };
 
   return (
     <div>
-      <div ref={carousel} className="carousel bg-black">
+      <div ref={carousel} className="carousel translate-y-[350px] bg-black">
         <div ref={list} className="list">
           {eventImages.map((image, index) => (
             <div
               key={index}
-              style={{ backgroundImage: `url(${image.imageUrl})` }}
+              style={{ backgroundImage: `url(https://comptron-server.onrender.com${image.imageUrl})` }}
               className="item"
             >
               <div className="content">
-                <div className="title">{image.title}</div>
-                <div className="des">{image.description}</div>
+                <div className="title"></div>
+                <div className="name"></div>
+                <div className="des"></div>
                 <div className="btn">
-                  <button onClick={() => handleDelete(image._id)}>
-                    Delete
-                  </button>
-                  <button
-                    onClick={() => {
-                      const newTitle = prompt("Enter new title:", image.title);
-                      const newDescription = prompt(
-                        "Enter new description:",
-                        image.description
-                      );
-                      if (newTitle && newDescription) {
-                        handleUpdate(image._id, newTitle, newDescription);
-                      }
-                    }}
-                  >
-                    Edit
-                  </button>
                   <a href="/Events">
                     <button>Details</button>
                   </a>
@@ -109,13 +102,27 @@ const Recent = () => {
         </div>
 
         <div className="arrows">
-          <button ref={prevBtn} className="prev" onClick={() => show("prev")}>
-            {"<"}
+          <button ref={prevBtn} className="prev">
+            <svg
+              className="w-7 translate-x-3"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </svg>
           </button>
-          <button ref={nextBtn} className="next" onClick={() => show("next")}>
-            {">"}
+          <button ref={nextBtn} className="next">
+            <svg
+              className="w-7 translate-x-3"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+            </svg>
           </button>
         </div>
+
+        <div ref={runningTime} className="timeRunning"></div>
       </div>
     </div>
   );

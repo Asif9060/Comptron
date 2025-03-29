@@ -61,7 +61,7 @@ const AddMemberForm = ({
 
   return (
     <form
-      className="flex gap-[2rem] justify-center mt-12"
+      className=" gap-[2rem] grid place-items-center mt-12"
       onSubmit={handleSubmit}
     >
       <div className="container01">
@@ -188,12 +188,6 @@ const AddMemberForm = ({
         <p className="text">Image</p>
       </label>
 
-      {/* <input
-        className="text-black bg-white"
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-      /> */}
       <div className="">
         <button className="pushable" type="submit">
           <span className="shadow"></span>
@@ -216,20 +210,29 @@ export default AddMemberForm;
 
 {
   /* <input
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <textarea
-        placeholder="Bio"
-        value={bio}
-        onChange={(e) => setBio(e.target.value)}
-      ></textarea>
-      <input
-        type="text"
-        placeholder="GitHub URL"
-        value={socials.github}
-        onChange={(e) => setSocials({ ...socials, github: e.target.value })}
-      /> */
+  type="text"
+  placeholder="Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  />
+  <textarea
+  placeholder="Bio"
+  value={bio}
+  onChange={(e) => setBio(e.target.value)}
+  ></textarea>
+  <input
+  type="text"
+  placeholder="GitHub URL"
+  value={socials.github}
+  onChange={(e) => setSocials({ ...socials, github: e.target.value })}
+  /> */
+}
+
+{
+  /* <input
+  className="text-black bg-white"
+  type="file"
+  accept="image/*"
+  onChange={handleImageChange}
+/> */
 }
