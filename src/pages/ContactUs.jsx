@@ -2,6 +2,8 @@ import { useState } from "react";
 import "../Components/UI/CSS/Inputs.css";
 import Input from "../Components/UI/Input";
 import AdminTextSlideControl from "../AdminPanel/AdminTextSlideControl";
+import Recent from "../Components/Features/Recent";
+import ImageUpload from './../AdminPanel/ImageUpload';
 
 const ContactUs = () => {
   
@@ -11,6 +13,9 @@ const ContactUs = () => {
       {/* <Input></Input> */}
 
       {/* <AdminTextSlideControl></AdminTextSlideControl> */}
+
+      <Recent></Recent>
+      <ImageUpload></ImageUpload>
 
       
       
