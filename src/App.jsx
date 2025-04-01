@@ -9,6 +9,8 @@ import AdminPage from "./AdminPanel/AdminPage";
 // import LoadingAnimation from "./Components/UI/LoadingAnimation";
 import Dorja from "./AdminPanel/Dorja";
 import AdminProtectedRoute from "./AdminPanel/AdminProtectedRoute";
+import EventDetails from "./pages/EventDetails";
+import Events from "./pages/Events";
 
 
 const App = () => {
@@ -22,6 +24,10 @@ const App = () => {
           <Route path="/Events" element={<EventPage></EventPage>}></Route>
           <Route path="/Contact" element={<ContactUs></ContactUs>}></Route>
           <Route path="/Dorja" element={<Dorja></Dorja>}></Route>
+          <Route path="/EventDetails" element={<EventDetails></EventDetails>}></Route>
+          <Route path="/Event" element={<Events></Events>}></Route>
+          <Route path="/EventDetails/:id" element={<EventDetails></EventDetails>}></Route>
+
 
           <Route
             path="/AdminPage"

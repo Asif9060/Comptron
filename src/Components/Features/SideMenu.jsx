@@ -1,7 +1,7 @@
 import './CSS/Smenu.css'
 const SideMenu = () => {
   return (
-    <div>
+    <div className=''>
       <div className="flex smenu flex-col justify-center items-center relative transition-all duration-[450ms] ease-in-out w-16">
         <article className="border border-solid border-gray-700 w-full ease-in-out duration-500 left-0 rounded-2xl inline-block shadow-lg shadow-black/15 bg-white">
           <a href="/"

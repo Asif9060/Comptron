@@ -24,7 +24,7 @@ const AdminPage = () => {
           <AdminEventControl></AdminEventControl>
           <EventCountdown></EventCountdown>
         </div>
-        <div className=" fixed absolute -translate-y-[45rem]">
+        <div className="fixed top-0 left-0 w-16 h-screen flex flex-col justify-center items-center z-10">
           <SideMenu></SideMenu>
         </div>
   {/* ----------------------------------------------------------------------------------------- */}
