@@ -8,31 +8,36 @@ const AdminEventDetailsControl = () => {
 
   const handleImageUpload = (e, setImage) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => setImage(reader.result);
-    reader.readAsDataURL(file);
+    if (file && file.size < 10 * 1024 * 1024) { // Max size: 10MB
+      setImage(file);
+    } else {
+      alert("File is too large! Max size: 5MB.");
+    }
   };
 
   const handleGalleryUpload = (e) => {
-    const files = Array.from(e.target.files);
-    Promise.all(
-      files.map((file) => {
-        return new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result);
-          reader.readAsDataURL(file);
-        });
-      })
-    ).then(setGalleryImages);
+    const files = Array.from(e.target.files).filter(file => file.size < 5 * 1024 * 1024);
+    if (files.length !== e.target.files.length) {
+      alert("Some files were too large (max 5MB each).");
+    }
+    setGalleryImages(files);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    if (mainImage) formData.append("mainImage", mainImage);
+    galleryImages.forEach((file, index) => {
+      formData.append("galleryImages", file);
+    });
+
     const response = await fetch("https://comptron-server.onrender.com/api/eventDetails/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, description, mainImage, galleryImages }),
+      body: formData, 
     });
+
     if (response.ok) {
       alert("Event Created Successfully!");
       setTitle("");
@@ -47,11 +52,11 @@ const AdminEventDetailsControl = () => {
   return (
     <div>
       <h2>Create Event</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <input type="text" placeholder="Event Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
         <textarea placeholder="Event Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
-        <input type="file" onChange={(e) => handleImageUpload(e, setMainImage)} required />
-        <input type="file" multiple onChange={handleGalleryUpload} />
+        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setMainImage)} required />
+        <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} />
         <button type="submit">Create Event</button>
       </form>
     </div>

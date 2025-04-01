@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/Dorja" element={<Dorja></Dorja>}></Route>
           <Route path="/EventDetails" element={<EventDetails></EventDetails>}></Route>
           <Route path="/Event" element={<Events></Events>}></Route>
-          <Route path="/EventDetails/:id" element={<EventDetails></EventDetails>}></Route>
+          <Route path="/event/:id" element={<EventDetails></EventDetails>}></Route>
 
 
           <Route
