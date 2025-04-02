@@ -5,6 +5,8 @@ import AdminTextSlideControl from "../AdminPanel/AdminTextSlideControl";
 import Recent from "../Components/Features/Recent";
 import ImageUpload from "./../AdminPanel/ImageUpload";
 import AdminEventDetailsControl from "../AdminPanel/AdminEventDetailsControl";
+import EventCards from "../Components/UI/EventCards";
+import Events from "./Events";
 
 const ContactUs = () => {
   return (
@@ -22,6 +24,10 @@ const ContactUs = () => {
       </button> */}
 
       <AdminEventDetailsControl></AdminEventDetailsControl>
+
+      <EventCards></EventCards>
+
+      <Events></Events>
 
 
     </div>

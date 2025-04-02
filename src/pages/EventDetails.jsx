@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "../Components/UI/CSS/EventDetails.css";
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -15,78 +16,70 @@ const EventDetails = () => {
   if (!event) return <h2>Loading...</h2>;
 
   return (
-    <div>
-      <h1>{event.title}</h1>
-      <img src={event.mainImage} alt="Event Main" />
-      <p>{event.description}</p>
-      <div>
-        {event.galleryImages.map((img, index) => (
-          <img key={index} src={img} alt={`Gallery ${index}`} />
-        ))}
+    // <div>
+    //   <h1>{event.title}</h1>
+    //   <img src={event.mainImage} alt="Event Main" />
+    //   <p>{event.description}</p>
+    //   <div>
+    //     {event.galleryImages.map((img, index) => (
+    //       <img key={index} src={img} alt={`Gallery ${index}`} />
+    //     ))}
+    //   </div>
+    // </div>
+
+    <div className="flex justify-center items-center">
+      <div className="container06">
+        <h1 className="">
+          <span className="text-[32px]">🔥</span>
+          <span className="event-title">{event.title}</span>
+          <span className="text-[32px]">🔥</span>
+        </h1>
+        <div className="main-content">
+          <img className="event-img" src={event.mainImage} alt="Event Main" />
+          <p className="event-description">
+            🎶 {event.description}
+          </p>
+          <div className="gallery">
+            {event.galleryImages.map((img, index) => (
+              <img key={index} src={img} alt={`Gallery ${index}`} />
+            ))}
+          </div>
+          {/* <div className="add-comment">
+            <input
+              type="text"
+              id="userName"
+              className="comment-input"
+              placeholder="Your Name..."
+            />
+            <input
+              type="text"
+              id="commentInput"
+              className="comment-input"
+              placeholder="Write a comment..."
+            />
+            <button className="submit-btn" onClick="addComment()">
+              Post
+            </button>
+          </div> */}
+          {/* <div className="comments-section">
+            <h3>💬 Audience Feedback</h3>
+            <div className="comment-box">
+              🔥 "OMG! Best concert ever!" - Alex
+            </div>
+            <div className="comment-box">
+              🎤 "The vibes were unreal!" - Sarah
+            </div>
+            <div className="comment-box">
+              ✨ "Next-level lighting & sound!" - John
+            </div>
+          </div> */}
+        </div>
       </div>
     </div>
   );
 };
 
 export default EventDetails;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import "../Components/UI/CSS/EventDetails.css";
 
