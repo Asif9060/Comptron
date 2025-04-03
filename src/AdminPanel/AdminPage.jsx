@@ -8,18 +8,24 @@ import MemberList from "../Components/MemberList";
 import CommiteeCard from "../Components/UI/CommitteeCard";
 import AdminEventControl from "./AdminEventControl";
 import AdminTextSlideControl from "./AdminTextSlideControl";
+import AdminEventDetailsControl from "./AdminEventDetailsControl";
+import LogoutBtn from "./ToggleAdmin/LogoutBtn";
 
 const AdminPage = () => {
   const [refresh, setRefresh] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
   return (
     <div className="">
-      <h1 className="text-3xl text-center translate-y-[4rem] text-white">Admin Page</h1>
+      <h1 className="text-3xl text-center translate-y-[4rem] text-white">
+        Admin Page
+      </h1>
+
+      <LogoutBtn></LogoutBtn>
 
       <AdminProvider>
-  {/* ----------------------------------------------------------------------------------------- */}
+        {/* ----------------------------------------------------------------------------------------- */}
         {/* Event Countdown Control */}
-        
+
         <div className=" relative left-[73.4rem] gap-4  border translate-y-[-2.5rem] rounded-3xl p-4 inline-block items-center ">
           <AdminEventControl></AdminEventControl>
           <EventCountdown></EventCountdown>
@@ -27,13 +33,13 @@ const AdminPage = () => {
         <div className="fixed top-0 left-0 w-16 h-screen flex flex-col justify-center items-center z-10">
           <SideMenu></SideMenu>
         </div>
-  {/* ----------------------------------------------------------------------------------------- */}
+        {/* ----------------------------------------------------------------------------------------- */}
 
-  {/* ----------------------------------------------------------------------------------------- */}
+        {/* ----------------------------------------------------------------------------------------- */}
 
         {/* Committee Control */}
 
-        <div className="flex flex-col translate-x-[-27rem] border inline-block rounded-3xl  p-4 items-center translate-y-[5rem]" >
+        <div className="flex flex-col translate-x-[-27rem] border inline-block rounded-3xl  p-4 items-center translate-y-[5rem]">
           <div className="text-white text-center text-3xl">Committee Panel</div>
           <AddMemberForm
             onMemberAdded={() => setRefresh(!refresh)}
@@ -48,7 +54,10 @@ const AdminPage = () => {
           <AdminTextSlideControl></AdminTextSlideControl>
         </div>
 
-{/* ----------------------------------------------------------------------------------------- */}
+        {/* ----------------------------------------------------------------------------------------- */}
+        {/* ----------------------------------------------------------------------------------------- */}
+        <AdminEventDetailsControl></AdminEventDetailsControl>
+        {/* ----------------------------------------------------------------------------------------- */}
       </AdminProvider>
     </div>
   );

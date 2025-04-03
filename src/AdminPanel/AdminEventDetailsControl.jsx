@@ -50,14 +50,14 @@ const AdminEventDetailsControl = () => {
   };
 
   return (
-    <div>
-      <h2>Create Event</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <input type="text" placeholder="Event Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-        <textarea placeholder="Event Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
-        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setMainImage)} required />
-        <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} />
-        <button type="submit">Create Event</button>
+    <div className="flex text-center flex-col inline-block border border-[#15A6E1] p-4 float-end translate-x-[-13.8rem] translate-y-[43rem] rounded-3xl shadow-md">
+      <h2 className="p-2 text-[2rem] font-bold text-emerald-500">Create Event</h2>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit} encType="multipart/form-data">
+        <input className="text-center bg-white" type="text" placeholder="Event Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+        <textarea className="text-center bg-white" placeholder="Event Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+        <input className="bg-white" type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setMainImage)} required />
+        <input className="bg-white" type="file" accept="image/*" multiple onChange={handleGalleryUpload} />
+        <button className="button0" type="submit">Create Event</button>
       </form>
     </div>
   );

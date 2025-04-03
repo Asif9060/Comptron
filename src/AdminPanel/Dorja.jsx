@@ -5,6 +5,8 @@ import bgImg from "../assets/images/bg-img.jpg";
 import google from '../assets/images/icon-google.svg'
 import { setPersistence, browserLocalPersistence } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { signOut } from "firebase/auth";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -78,6 +80,18 @@ const Dorja = () => {
       setError(error.message);
     }
   };
+
+  // const handleLogout = async () => {
+  //   try {
+  //     await signOut(auth);
+  //     localStorage.removeItem("userEmail"); // Clear stored user email
+  //     setUser(null); // Reset user state
+  //     navigate("/Dorja"); // Redirect to login page
+  //   } catch (error) {
+  //     console.error("Error signing out:", error);
+  //   }
+  // };
+  
 
   useEffect(() => {
     setPersistence(auth, browserLocalPersistence).then(() => {

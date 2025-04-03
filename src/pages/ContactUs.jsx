@@ -7,6 +7,7 @@ import ImageUpload from "./../AdminPanel/ImageUpload";
 import AdminEventDetailsControl from "../AdminPanel/AdminEventDetailsControl";
 import EventCards from "../Components/UI/EventCards";
 import Events from "./Events";
+import CommentSection from "../Components/Features/CommentSection";
 
 const ContactUs = () => {
   return (
@@ -23,11 +24,13 @@ const ContactUs = () => {
         Delete
       </button> */}
 
-      <AdminEventDetailsControl></AdminEventDetailsControl>
+      
 
       <EventCards></EventCards>
 
       <Events></Events>
+
+      <CommentSection></CommentSection>
 
 
     </div>
