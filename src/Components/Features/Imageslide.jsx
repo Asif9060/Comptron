@@ -1,77 +1,85 @@
-import { useEffect, useState, useRef } from "react";
-import './CSS/ImageSlide.css';
-import photo from '../../assets/images/exmember.jpg';
-import photo2 from '../../assets/images/member.jpg';
-import photo3 from '../../assets/images/Shohoj.jpg';
-import photo4 from '../../assets/images/gang.jpg';
-const images = [
-  { src: [photo], alt: "" },
-  { src: [photo2], alt: "" },
-  { src: [photo3], alt: "" },
-  { src: [photo4], alt: "" },
-];
+import "./CSS/ImageSlide.css";
+import { useEffect, useState } from "react";
 
 export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [autoSlideEnabled, setAutoSlideEnabled] = useState(true);
-  const slideRef = useRef(null);
-  
-  useEffect(() => {
-    let autoSlide;
-    if (autoSlideEnabled) {
-      autoSlide = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 5000);
+  const [autoSlide, setAutoSlide] = useState(true);
+  const [images, setImages] = useState([]);
+
+  const fetchImages = async () => {
+    try {
+      const response = await fetch("https://comptron-server-1.onrender.com/api/eventImages");
+      const data = await response.json();
+      setImages(data.filter((item) => item?.imageUrl));
+    } catch (error) {
+      console.error("Error fetching images:", error);
     }
-    return () => clearInterval(autoSlide);
-  }, [autoSlideEnabled]);
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  useEffect(() => {
+    let slideInterval;
+    if (autoSlide && images.length > 0) {
+      slideInterval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 3000);
+    }
+    return () => clearInterval(slideInterval);
+  }, [autoSlide, images.length]);
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const toggleAutoSlide = () => {
+    setAutoSlide(!autoSlide);
+  };
 
   return (
-    <div className="relative max-w-3xl mb-10 mx-auto overflow-hidden imgslide rounded-lg shadow-lg">
-      <div
-        className="flex transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        ref={slideRef}
-      >
-        {images.map((img, index) => (
+    <div className="relative overflow-hidden imgslide w-full">
+      <div className="flex transition-transform ease-out duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+        {images.map((image, idx) => (
           <img
-            key={index}
-            src={img.src}
-            alt={img.alt}
-            className="w-full flex-shrink-0 rounded-lg object-cover hover:scale-105 transition-transform duration-300"
+            key={idx}
+            src={image.imageUrl}
+            alt={`Slide ${idx}`}
+            className="w-full h-80 object-cover flex-shrink-0"
           />
         ))}
       </div>
-      
-      <button
-        onClick={() => setCurrentIndex((currentIndex - 1 + images.length) % images.length)}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-3 rounded-full text-white hover:bg-opacity-75"
-      >
-        &#10094;
-      </button>
-      <button
-        onClick={() => setCurrentIndex((currentIndex + 1) % images.length)}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-3 rounded-full text-white hover:bg-opacity-75"
-      >
-        &#10095;
-      </button>
-      
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? "bg-white scale-125" : "bg-gray-400"}`}
-          ></button>
-        ))}
+
+      {/* Buttons */}
+      <div className="absolute inset-0 flex items-center justify-between p-4">
+        <button onClick={prevSlide} className="p-1 rounded-full bg-white/80 text-gray-800 hover:bg-white">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button onClick={nextSlide} className="p-1 rounded-full bg-white/80 text-gray-800 hover:bg-white">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
-      
-      <button
-        onClick={() => setAutoSlideEnabled(!autoSlideEnabled)}
-        className="absolute bg-transparent bottom-12 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
-      >
-        {autoSlideEnabled ? "Pause Auto Slide" : "Resume Auto Slide"}
-      </button>
+
+      {/* AutoSlide Toggle Button */}
+      <div className="absolute bottom-4 w-full flex justify-center">
+        <button
+          onClick={toggleAutoSlide}
+          className="px-4 py-2 bg-white text-black font-semibold rounded shadow hover:bg-gray-200"
+        >
+          {autoSlide ? "Pause" : "Play"}
+        </button>
+      </div>
     </div>
   );
 }

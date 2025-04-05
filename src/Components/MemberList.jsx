@@ -26,7 +26,7 @@ const MemberList = ({ onEdit }) => {
           <li className="flex gap-5" key={member._id}>
             <img
               className="w-[3rem] translate-y-[-7px]"
-              src={`https://comptron-server.onrender.com${member.image}`}
+              src={member.image}
               alt={member.alt}
             />
             <strong className="p-2 h-[2.5rem] bg-white text-black rounded-sm">

@@ -1,7 +1,7 @@
 import './CSS/Welcomemsg.css';
 const Welcomemsg = () => {
     return (
-        <div className="bg-[#2f3542] space-y-2 h-[350px] cont ">
+        <div className="bg-[#2f3542] space-y-2 h-[350px] cont mt-10 mb-10 ">
             <div className="welcomemsg">Welcome To Comptron</div>
             <div className="animated-text text-white text-center">It's a <span></span></div>
             <div className='flex justify-center'>

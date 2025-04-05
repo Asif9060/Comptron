@@ -12,7 +12,7 @@ const AdminTextSlideControl = () => {
 
   const fetchNews = async () => {
     const response = await fetch(
-      "https://comptron-server.onrender.com/api/news"
+      "https://comptron-server-1.onrender.com/api/news"
     );
     const data = await response.json();
     setNews(data);
@@ -22,8 +22,8 @@ const AdminTextSlideControl = () => {
     e.preventDefault();
     const method = editingId ? "PUT" : "POST";
     const url = editingId
-      ? `https://comptron-server.onrender.com/api/news/${editingId}`
-      : "https://comptron-server.onrender.com/api/news";
+      ? `https://comptron-server-1.onrender.com/api/news/${editingId}`
+      : "https://comptron-server-1.onrender.com/api/news";
 
     await fetch(url, {
       method,
@@ -44,7 +44,7 @@ const AdminTextSlideControl = () => {
   };
 
   const handleDelete = async (id) => {
-    await fetch(`https://comptron-server.onrender.com/api/news/${id}`, {
+    await fetch(`https://comptron-server-1.onrender.com/api/news/${id}`, {
       method: "DELETE",
     });
     fetchNews();

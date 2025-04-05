@@ -235,10 +235,11 @@ const CommiteeCard = () => {
           members.map((member) => (
             <Card
               key={member._id}
-              imgSrc={`${import.meta.env.VITE_API_URL.replace(
-                "/api/members",
-                ""
-              )}${member.image}`}
+              imgSrc={member.image}
+              // imgSrc={`${import.meta.env.VITE_API_URL.replace(
+              //   "/api/members",
+              //   ""
+              // )}${member.image}`}
               alt={member.name}
               role={member.role}
               name={member.name}

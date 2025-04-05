@@ -33,7 +33,7 @@ const AdminEventDetailsControl = () => {
       formData.append("galleryImages", file);
     });
 
-    const response = await fetch("https://comptron-server.onrender.com/api/eventDetails/create", {
+    const response = await fetch("https://comptron-server-1.onrender.com/api/eventDetails/create", {
       method: "POST",
       body: formData, 
     });
@@ -50,7 +50,7 @@ const AdminEventDetailsControl = () => {
   };
 
   return (
-    <div className="flex text-center flex-col inline-block border border-[#15A6E1] p-4 float-end translate-x-[-13.8rem] translate-y-[43rem] rounded-3xl shadow-md">
+    <div className="flex text-center flex-col absolute translate-x-[8rem] mt-[20rem] left-[75rem] border border-[#15A6E1] p-4 float-end translate-y-[52rem] rounded-3xl shadow-md">
       <h2 className="p-2 text-[2rem] font-bold text-emerald-500">Create Event</h2>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit} encType="multipart/form-data">
         <input className="text-center bg-white" type="text" placeholder="Event Title" value={title} onChange={(e) => setTitle(e.target.value)} required />

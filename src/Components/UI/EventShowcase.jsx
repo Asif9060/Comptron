@@ -7,7 +7,7 @@ const EventShowcase = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch("https://comptron-server.onrender.com/api/eventDetails")
+    fetch("https://comptron-server-1.onrender.com/api/eventDetails")
       .then((res) => res.json())
       .then((data) => setEvents(data))
       .catch((err) => console.error("Error fetching events:", err));

@@ -9,9 +9,10 @@ const Recent = () => {
   const runningTime = useRef(null);
 
   const [eventImages, setEventImages] = useState([]);
-  
+  const [isPaused, setIsPaused] = useState(false);
+
   let timeRunning = 3000;
-  let timeAutoNext = 7000;
+  let timeAutoNext = 4000;
 
   let runTimeOut;
   const runNextAuto = useRef(null);
@@ -19,41 +20,55 @@ const Recent = () => {
   useEffect(() => {
     fetchImages();
 
-    
     nextBtn.current.onclick = () => show("next");
     prevBtn.current.onclick = () => show("prev");
 
-    // Start the auto-slide functionality
-    runNextAuto.current = setTimeout(() => {
-      nextBtn.current.click();
-    }, timeAutoNext);
+    startAutoSlide();
 
-    // Cleanup on component unmount
     return () => {
       clearTimeout(runTimeOut);
-      clearTimeout(runNextAuto);
+      clearTimeout(runNextAuto.current);
     };
   }, []);
 
+  const startAutoSlide = () => {
+    if (!isPaused) {
+      runNextAuto.current = setTimeout(() => {
+        nextBtn.current?.click();
+      }, timeAutoNext);
+    }
+  };
+
   const fetchImages = async () => {
     try {
-      const response = await fetch("https://comptron-server.onrender.com/api/eventImages");
+      const response = await fetch("https://comptron-server-1.onrender.com/api/eventImages");
       const data = await response.json();
-      setEventImages(data);
+      setEventImages(data.filter((img) => img?.imageUrl));
     } catch (error) {
       console.error("Error fetching event images:", error);
     }
   };
 
   const resetTimeAnimation = () => {
-    runningTime.current.style.animation = "none";
-    runningTime.current.offsetHeight; // Trigger reflow
-    runningTime.current.style.animation = null;
-    runningTime.current.style.animation = "runningTime 7s linear 1 forwards";
+    if (runningTime.current) {
+      if (isPaused) {
+        runningTime.current.style.animation = "none";
+        runningTime.current.offsetHeight;
+        runningTime.current.style.animation = null;
+        runningTime.current.style.animation = "runningTime 4s linear 1 forwards";
+        runningTime.current.style.animationPlayState = "paused";
+      } else {
+        runningTime.current.style.animation = "none";
+        runningTime.current.offsetHeight;
+        runningTime.current.style.animation = null;
+        runningTime.current.style.animation = "runningTime 4s linear 1 forwards";
+      }
+    }
   };
 
   const show = (type) => {
     const ItemsDom = list.current.querySelectorAll(".item");
+    if (!ItemsDom.length) return;
 
     if (type === "next") {
       list.current.appendChild(ItemsDom[0]);
@@ -70,21 +85,36 @@ const Recent = () => {
     }, timeRunning);
 
     clearTimeout(runNextAuto.current);
-    runNextAuto.current = setTimeout(() => {
-      nextBtn.current.click();
-    }, timeAutoNext);
+    if (!isPaused) {
+      startAutoSlide();
+      resetTimeAnimation();
+    }
+  };
 
-    resetTimeAnimation();
+  const togglePause = () => {
+    setIsPaused((prev) => {
+      const newPaused = !prev;
+      clearTimeout(runNextAuto.current);
+
+      if (!newPaused) {
+        startAutoSlide();
+        resetTimeAnimation();
+      } else if (runningTime.current) {
+        runningTime.current.style.animationPlayState = "paused";
+      }
+
+      return newPaused;
+    });
   };
 
   return (
     <div>
-      <div ref={carousel} className="carousel translate-y-[350px] bg-black">
+      <div ref={carousel} className="carousel translate-y-[350px]">
         <div ref={list} className="list">
           {eventImages.map((image, index) => (
             <div
               key={index}
-              style={{ backgroundImage: `url(https://comptron-server.onrender.com${image.imageUrl})` }}
+              style={{ backgroundImage: `url(${image.imageUrl})` }}
               className="item"
             >
               <div className="content">
@@ -101,22 +131,19 @@ const Recent = () => {
           ))}
         </div>
 
-        <div className="arrows">
+        <div className="arrows flex items-center gap-4">
           <button ref={prevBtn} className="prev">
-            <svg
-              className="w-7 translate-x-3"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-            >
+            <svg className="w-7 translate-x-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
               <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
             </svg>
           </button>
+
+          <button onClick={togglePause} className="pause-play rounded bg-white text-black font-semibold">
+            {isPaused ? "Pause" : "Pause"}
+          </button>
+
           <button ref={nextBtn} className="next">
-            <svg
-              className="w-7 translate-x-3"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-            >
+            <svg className="w-7 translate-x-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
               <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
             </svg>
           </button>

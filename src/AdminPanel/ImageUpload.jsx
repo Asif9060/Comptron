@@ -32,10 +32,10 @@ const ImageUpload = ({ onUploadSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleUpload}>
+    <form className="translate-y-[3rem] translate-x-[10rem]" onSubmit={handleUpload}>
       <input type="file" onChange={(e) => setFile(e.target.files[0])} required />
-      <input type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} required />
-      <input type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)} required />
+      {/* <input type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} /> */}
+      {/* <input type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)} /> */}
       <button type="submit">Upload</button>
     </form>
   );

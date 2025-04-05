@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../Components/UI/CSS/EventDetails.css";
+import CommentSection from "../Components/Features/CommentSection";
 
 const EventDetails = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
-    fetch(`https://comptron-server.onrender.com/api/eventDetails/${id}`)
+    fetch(`https://comptron-server-1.onrender.com/api/eventDetails/${id}`)
       .then((res) => res.json())
       .then((data) => setEvent(data))
       .catch((err) => console.error(err));
@@ -36,9 +37,7 @@ const EventDetails = () => {
         </h1>
         <div className="main-content">
           <img className="event-img" src={event.mainImage} alt="Event Main" />
-          <p className="event-description">
-            🎶 {event.description}
-          </p>
+          <p className="event-description">🎶 {event.description}</p>
           <div className="gallery">
             {event.galleryImages.map((img, index) => (
               <img key={index} src={img} alt={`Gallery ${index}`} />
@@ -73,6 +72,8 @@ const EventDetails = () => {
               ✨ "Next-level lighting & sound!" - John
             </div>
           </div> */}
+
+          <CommentSection></CommentSection>
         </div>
       </div>
     </div>

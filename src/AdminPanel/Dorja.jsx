@@ -247,16 +247,16 @@ const Dorja = () => {
                 </div>
               </div>
 
-              <a href="#" className="login__htmlForgot">
+              {/* <a href="#" className="login__htmlForgot">
                 Forgot your password?
-              </a>
+              </a> */}
 
               <button onClick={handleSignIn} type="submit" className="login__button">
                 Login
               </button>
             </htmlForm>
 
-            <div className="login__social">
+            {/* <div className="login__social">
               <p className="login__social-title">Or login with</p>
 
               <div className="login__social-links">
@@ -267,7 +267,7 @@ const Dorja = () => {
                     className="login__social-img"
                   />
                 </a>
-{/* 
+
                 <a href="#" className="login__social-link">
                   <img
                     src="/photo/icon-facebook.svg"
@@ -282,13 +282,13 @@ const Dorja = () => {
                     alt="image"
                     className="login__social-img"
                   />
-                </a> */}
+                </a>
               </div>
-            </div>
+            </div> */}
 
             <p className="login__switch">
               Don't have an account?
-              <button id="loginButtonRegister">Create Account</button>
+              <button className="ml-2" id="loginButtonRegister">Create Account</button>
             </p>
           </div>
         </div>
@@ -375,7 +375,7 @@ const Dorja = () => {
 
             <p className="login__switch">
               Already have an account?
-              <button id="loginButtonAccess">Log In</button>
+              <button className="ml-2" id="loginButtonAccess">Log In</button>
             </p>
           </div>
         </div>

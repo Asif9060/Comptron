@@ -25,6 +25,7 @@ import CoreMembers from "../Components/Features/CoreMembers";
 // import { Divide } from 'lucide-react';
 import { Divider } from "@heroui/divider";
 import SideMenu from "../Components/Features/SideMenu";
+import Recent from "../Components/Features/Recent";
 
 const HomePage = () => {
   const [className, setClassName] = useState("");
@@ -77,13 +78,14 @@ const HomePage = () => {
         </div>
         <TextEffect></TextEffect>
         <Welcomemsg></Welcomemsg>
-        <h1 className=" recent text-5xl text-pink-700">Recent Activity</h1>
-        <EventSlider></EventSlider>
+        <h1 className=" recent font-bold py-5 text-5xl text-[#15A6E1] ">Recent Activity</h1>
+        {/* <EventSlider></EventSlider> */}
+        <Recent></Recent>
         <ImageSlide></ImageSlide>
         <div className="flex justify-center">
           <hr className="my-12 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
         </div>
-        <h2 className="flex justify-center text-3xl text-[#15A6E1] underline underline-offset-6">
+        <h2 className="flex justify-center text-4xl text-[#15A6E1] font-bold underline underline-offset-6">
           Our Core Members
         </h2>
         {/* <Members></Members> */}
@@ -92,7 +94,7 @@ const HomePage = () => {
         <div className="flex justify-center">
           <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
         </div>
-        <h1 className="flex justify-center text-3xl text-[#15A6E1] underline underline-offset-7">
+        <h1 className="flex justify-center text-4xl font-bold text-[#15A6E1] underline underline-offset-7">
           Advisory Board
         </h1>
         <div className="flex teacher justify-center gap-7 ">

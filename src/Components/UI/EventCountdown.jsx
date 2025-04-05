@@ -18,7 +18,7 @@ const EventCountdown = () => {
   const fetchEventDate = async () => {
     try {
       const response = await fetch(
-        "https://comptron-server.onrender.com/api/event"
+        "https://comptron-server-1.onrender.com/api/event"
       );
       const data = await response.json();
 

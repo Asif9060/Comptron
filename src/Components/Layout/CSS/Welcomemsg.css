@@ -57,12 +57,13 @@
 
   .welcomemsg{
     background: #15A7E2;
-    background: linear-gradient(to right, #15A7E2 0%, #483D68 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
     font-size: 50px;
+    font-weight: 800;
   }
+  
 
   @media (max-width: 768px) {
     .cont{
