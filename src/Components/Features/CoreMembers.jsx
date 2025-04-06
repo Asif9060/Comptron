@@ -12,35 +12,40 @@ const CoreMembers = () => {
       name: "Tanzil Parvez Fardin",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque velit nec lorem tincidunt, at malesuada nisi consequat.",
-      imageUrl: fardin, // Replace with actual image URL
+      imageUrl: fardin,
+      facebook: "https://www.facebook.com/itzfardinhere", // Replace with actual image URL
     },
     {
       role: "VICE-PRESIDENT",
       name: "Md. Al-Amin Saikh",
       description:
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-      imageUrl: alamin, // Replace with actual image URL
+      imageUrl: alamin,
+      facebook: "https://www.facebook.com/alaminshaikh1703",
     },
     {
       role: "GENERAL SECRETARY",
       name: "Sourov Hasan Ahir",
       description:
         "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.",
-      imageUrl: ahir, // Replace with actual image URL
+      imageUrl: ahir,
+      facebook: "https://www.facebook.com/ahir.suvo.2024",
     },
     {
       role: "JOINT SECRETARY",
       name: "Md. Tanvir Jahan Redoy",
       description:
         "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
-      imageUrl: redoy, // Replace with actual image URL
+      imageUrl: redoy,
+      facebook: "https://www.facebook.com/tanvir.redoy.14", 
     },
     {
       role: "TREASURER",
       name: "Md. Waleullah",
       description:
         "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
-      imageUrl: wale, // Replace with actual image URL
+      imageUrl: wale,
+      facebook: "https://www.facebook.com/mdismail.munna.14", 
     },
   ];
 
@@ -57,7 +62,7 @@ const CoreMembers = () => {
           <div className="details">
             <div className="cardHeader">{member.name}</div>
             <div className="cardText">{member.role}</div>
-            <div className="button3">Socials</div>
+            <a href={member.facebook} className="button3">Facebook</a>
           </div>
         </div>
       ))}

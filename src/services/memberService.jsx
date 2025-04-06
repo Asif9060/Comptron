@@ -6,8 +6,8 @@ export const updateMember = async (id, updatedMember) => {
     const formData = new FormData();
     formData.append("name", updatedMember.name);
     formData.append("role", updatedMember.role);
-    formData.append("email", updatedMember.email);
-    formData.append("bio", updatedMember.bio);
+    // formData.append("email", updatedMember.email);
+    // formData.append("bio", updatedMember.bio);
     formData.append("socials", JSON.stringify(updatedMember.socials));
 
     if (updatedMember.image) {
@@ -53,8 +53,8 @@ export const addMember = async (member) => {
     // Append member data to form data
     formData.append("name", member.name);
     formData.append("role", member.role);
-    formData.append("email", member.email);
-    formData.append("bio", member.bio);
+    // formData.append("email", member.email);
+    // formData.append("bio", member.bio);
     formData.append("socials", JSON.stringify(member.socials));
 
     // Append image if exists

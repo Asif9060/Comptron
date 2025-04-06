@@ -1,6 +1,6 @@
 .shiny-text {
     font-family: 'Arial Black', sans-serif;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
     color: #ffffff;
     text-transform: uppercase;
@@ -10,6 +10,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 3s infinite linear;
+    
   }
 
   @keyframes shine {

@@ -8,8 +8,8 @@ const AddMemberForm = ({
 }) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
-  const [email, setEmail] = useState("");
-  const [bio, setBio] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [bio, setBio] = useState("");
   const [socials, setSocials] = useState({ github: "", linkedin: "" });
   const [image, setImage] = useState(null);
 
@@ -17,8 +17,8 @@ const AddMemberForm = ({
     if (selectedMember) {
       setName(selectedMember.name || "");
       setRole(selectedMember.role || "");
-      setEmail(selectedMember.email || "");
-      setBio(selectedMember.bio || "");
+      // setEmail(selectedMember.email || "");
+      // setBio(selectedMember.bio || "");
       setSocials(selectedMember.socials || { github: "", linkedin: "" });
       setImage(null); // Don't pre-fill image field
     }
@@ -31,7 +31,7 @@ const AddMemberForm = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const memberData = { name, role, email, bio, socials, image };
+    const memberData = { name, role, socials, image };
 
     try {
       if (selectedMember) {
@@ -53,8 +53,8 @@ const AddMemberForm = ({
   const resetForm = () => {
     setName("");
     setRole("");
-    setEmail("");
-    setBio("");
+    // setEmail("");
+    // setBio("");
     setSocials({ github: "", linkedin: "" });
     setImage(null);
   };
@@ -125,8 +125,8 @@ const AddMemberForm = ({
                 y2="95.4804"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#a040fd"></stop>
-                <stop offset="1" stop-color="#5f41f3"></stop>
+                <stop stopColor="#a040fd"></stop>
+                <stop offset="1" stopColor="#5f41f3"></stop>
               </linearGradient>
             </defs>
           </svg>
@@ -152,8 +152,8 @@ const AddMemberForm = ({
                 y2="160.5"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="white"></stop>
-                <stop offset="1" stop-color="#686868"></stop>
+                <stop stopColor="white"></stop>
+                <stop offset="1" stopColor="#686868"></stop>
               </linearGradient>
             </defs>
           </svg>
@@ -179,8 +179,8 @@ const AddMemberForm = ({
                 y2="82.8317"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#a040fd"></stop>
-                <stop offset="1" stop-color="#5251f2"></stop>
+                <stop stopColor="#a040fd"></stop>
+                <stop offset="1" stopColor="#5251f2"></stop>
               </linearGradient>
             </defs>
           </svg>

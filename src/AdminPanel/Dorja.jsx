@@ -32,6 +32,8 @@ const Dorja = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -56,6 +58,7 @@ const Dorja = () => {
       );
       setUser(userCredential.user);
       localStorage.setItem("userEmail", userCredential.user.email);
+      setSuccess("Login successful!");
       navigate("/AdminPage");
     } catch (error) {
       setError("Invalid Username or password. Please try again.");
@@ -75,6 +78,7 @@ const Dorja = () => {
       setUser(userCredential.user);
 
       localStorage.setItem("userEmail", userCredential.user.email);
+      setSuccess("Account created successfully! Please log in.");
       navigate("/Dorja");
     } catch (error) {
       setError(error.message);
@@ -207,6 +211,7 @@ const Dorja = () => {
         <div className="login__access">
           <h1 className="login__title">Log in to your account.</h1>
           {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
+          {success && <p className="text-green-600 text-sm mt-2 text-center">{success}</p>}
 
           <div className="login__area ">
             <htmlForm action="" className="login__htmlForm ">
@@ -296,6 +301,7 @@ const Dorja = () => {
         <div className="login__register">
           <h1 className="login__title">Create new account.</h1>
           {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
+          {success && <p className="text-green-600 text-sm mt-2 text-center">{success}</p>}
 
           <div className="login__area">
             <htmlForm action="" className="login__htmlForm">

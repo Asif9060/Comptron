@@ -29,7 +29,7 @@ import "./CSS/CommiteeCard.css";
 const Card = ({ imgSrc, alt, role, name, facebook }) => (
   <article className="card__article">
     <img src={imgSrc} alt={alt} className="card__img" />
-    <div className="card__data -translate-x-12">
+    <div className="card__data -translate-x-10.5">
       <h2 className="card__title">{name}</h2>
       <span className="card__description">{role}</span>
       <div className="flex gap-3">
@@ -229,7 +229,7 @@ const CommiteeCard = () => {
   }, []);
 
   return (
-    <div className="container translate-x-51">
+    <div className="container translate-x-51 translate-y-[-8rem]">
       <div className="card__container">
         {members.length > 0 ? (
           members.map((member) => (

@@ -90,11 +90,11 @@ const Input = () => {
         <p className="text">Drafts</p>
       </label>
 
-      <button className="pushable">
+      {/* <button className="pushable">
         <span className="shadow"></span>
         <span className="edge"></span>
         <span className="front"> Push Me </span>
-      </button>
+      </button> */}
     </div>
   );
 };
