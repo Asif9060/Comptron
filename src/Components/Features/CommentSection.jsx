@@ -31,7 +31,7 @@ const CommentSection = () => {
     }
 
     try {
-      await axios.post("https://comptron-server-1.onrender.com/api/comments/add", { name, email, message });
+      await axios.post("https://comptron-server-2.onrender.com/api/comments/add", { name, email, message });
       setName("");
       setEmail("");
       setMessage("");

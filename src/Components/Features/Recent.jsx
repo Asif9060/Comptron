@@ -41,7 +41,7 @@ const Recent = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await fetch("https://comptron-server-1.onrender.com/api/eventImages");
+      const response = await fetch("https://comptron-server-2.onrender.com/api/eventImages");
       const data = await response.json();
       setEventImages(data.filter((img) => img?.imageUrl));
     } catch (error) {

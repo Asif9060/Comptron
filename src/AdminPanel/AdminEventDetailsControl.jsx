@@ -14,7 +14,7 @@ const AdminEventDetailsControl = () => {
   }, []);
 
   const fetchEvents = async () => {
-    const res = await fetch("https://comptron-server-1.onrender.com/api/eventDetails");
+    const res = await fetch("https://comptron-server-2.onrender.com/api/eventDetails");
     const data = await res.json();
     setEvents(data);
   };
@@ -46,11 +46,11 @@ const AdminEventDetailsControl = () => {
       formData.append("galleryImages", file);
     });
 
-    let url = "https://comptron-server-1.onrender.com/api/eventDetails/create";
+    let url = "https://comptron-server-2.onrender.com/api/eventDetails/create";
     let method = "POST";
 
     if (editingEventId) {
-      url = `https://comptron-server-1.onrender.com/api/eventDetails/${editingEventId}`;
+      url = `https://comptron-server-2.onrender.com/api/eventDetails/${editingEventId}`;
       method = "PUT";
     }
 
@@ -82,7 +82,7 @@ const AdminEventDetailsControl = () => {
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this event?");
     if (confirmDelete) {
-      const res = await fetch(`https://comptron-server-1.onrender.com/api/eventDetails/${id}`, {
+      const res = await fetch(`https://comptron-server-2.onrender.com/api/eventDetails/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

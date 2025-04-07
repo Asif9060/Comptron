@@ -10,6 +10,7 @@ import AdminEventControl from "./AdminEventControl";
 import AdminTextSlideControl from "./AdminTextSlideControl";
 import AdminEventDetailsControl from "./AdminEventDetailsControl";
 import LogoutBtn from "./ToggleAdmin/LogoutBtn";
+import ImageUpload from "./ImageUpload";
 
 const AdminPage = () => {
   const [refresh, setRefresh] = useState(false);
@@ -52,6 +53,10 @@ const AdminPage = () => {
 
         <div className=" ">
           <AdminTextSlideControl></AdminTextSlideControl>
+        </div>
+
+        <div>
+          <ImageUpload></ImageUpload>
         </div>
 
         {/* ----------------------------------------------------------------------------------------- */}

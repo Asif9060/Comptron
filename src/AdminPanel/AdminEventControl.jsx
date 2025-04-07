@@ -11,7 +11,7 @@ const AdminEventControl = () => {
     console.log("Sending eventDate:", eventDate); // Debugging
   
     try {
-      const response = await fetch("https://comptron-server-1.onrender.com/api/event", {
+      const response = await fetch("https://comptron-server-2.onrender.com/api/event", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ eventDate }),

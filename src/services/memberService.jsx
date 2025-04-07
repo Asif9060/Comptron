@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "https://comptron-server-1.onrender.com/api/members";
+const API_URL = import.meta.env.VITE_API_URL || "https://comptron-server-2.onrender.com/api/members";
 
 export const updateMember = async (id, updatedMember) => {
     const formData = new FormData();

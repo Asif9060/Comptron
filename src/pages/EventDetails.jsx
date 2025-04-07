@@ -9,7 +9,7 @@ const EventDetails = () => {
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
-    fetch(`https://comptron-server-1.onrender.com/api/eventDetails/${id}`)
+    fetch(`https://comptron-server-2.onrender.com/api/eventDetails/${id}`)
       .then((res) => res.json())
       .then((data) => setEvent(data))
       .catch((err) => console.error(err));

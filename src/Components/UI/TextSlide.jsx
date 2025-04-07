@@ -9,7 +9,7 @@ const TextSlide = () => {
 
   const fetchNews = async () => {
     const response = await fetch(
-      "https://comptron-server-1.onrender.com/api/news"
+      "https://comptron-server-2.onrender.com/api/news"
     );
     const data = await response.json();
     setNews(data);
