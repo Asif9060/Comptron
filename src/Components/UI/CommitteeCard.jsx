@@ -229,7 +229,7 @@ const CommiteeCard = () => {
   }, []);
 
   return (
-    <div className="container translate-x-51 translate-y-[-8rem]">
+    <div className="container translate-x-51">
       <div className="card__container">
         {members.length > 0 ? (
           members.map((member) => (
