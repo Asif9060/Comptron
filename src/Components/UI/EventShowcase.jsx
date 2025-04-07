@@ -15,20 +15,38 @@ const EventShowcase = () => {
 
   return (
     <div className="event-page">
-
       {/* Event Listings */}
-      <div className="text-center text-[30px] text-white mt-5">Latest & Ongoing Events</div>
+      <div className="text-center text-[30px] text-white mt-5">
+        Latest & Ongoing Events
+      </div>
       <section className="event-listings">
         {events.map((event) => (
           <div key={event._id} className="event-card">
-            <img src={event.mainImage} alt={event.title} className="event-image" />
+            <img
+              src={event.mainImage}
+              alt={event.title}
+              className="event-image"
+            />
             <div className="event-details">
-              <h3 className="event-title">{event.title}</h3>
-              <p className="event-date"><i className="fa fa-calendar"></i> {event.date || "Date not available"}</p>
-              <p className="event-time"><i className="fa fa-clock"></i> {event.time || "Time not available"}</p>
-              <p className="event-location"><i className="fa fa-map-marker"></i> {event.location || "Location not available"}</p>
+              <h3 className="event-title01">{event.title}</h3>
+              <p className="event-date">
+                <i className="fa fa-calendar"></i>{" "}
+                {event.date || "Date not available"}
+              </p>
+              <p className="event-time">
+                <i className="fa fa-clock"></i>{" "}
+                {event.time || "Time not available"}
+              </p>
+              <p className="event-location">
+                <i className="fa fa-map-marker"></i>{" "}
+                {event.location || "Location not available"}
+              </p>
               {/* <p className="event-description">{event.description}</p> */}
-              <Link to={`/event/${event._id}`} className="register-btn">Details</Link>
+              <div className="mt-5 flex">
+                <Link to={`/event/${event._id}`} className="register-btn">
+                  Details
+                </Link>
+              </div>
             </div>
           </div>
         ))}
@@ -57,21 +75,6 @@ const EventShowcase = () => {
 };
 
 export default EventShowcase;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import "./CSS/EventShowcase.css";// External CSS file for styling
 // import eventimg from '../../assets/images/Events.jpg';
@@ -153,9 +156,9 @@ export default EventShowcase;
 //             </div>
 //           </div>
 //         ))}
-        
+
 //           <UpcomingEvents></UpcomingEvents>
-        
+
 //       </section>
 //       {/* Pagination */}
 //       <section className="pagination">

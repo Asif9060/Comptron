@@ -90,7 +90,7 @@ const EventCountdown = () => {
   return (
     <div className="countdown-wrapper">
       <div className="countdown-container">
-        <h1 className="eventTitle">Versity Khulbe</h1>
+        <h1 className="eventTitle">CSE FEST</h1>
         <p id="event-name"></p>
         <div className="countdown">
           <div className="time-section">

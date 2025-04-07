@@ -51,7 +51,7 @@ const AdminTextSlideControl = () => {
   };
 
   return (
-    <div className="grid place-items-center absolute translate-x-[74.5rem] border rounded-3xl p-4">
+    <div className="grid place-items-center absolute translate-x-[74.5rem] translate-y-[-98rem] border rounded-3xl p-4">
       <h2 className="text-center text-white text-3xl">News</h2>
       <form
         className="grid place-items-center gap-[1rem] "

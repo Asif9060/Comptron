@@ -14,9 +14,9 @@ const MembersPage = () => {
       {/* <Menu></Menu> */}
 
       <ShinyText></ShinyText>
-      <div className=" z-1 fixed">
+      {/* <div className=" z-1 fixed">
         <SideMenu></SideMenu>
-      </div>
+      </div> */}
       <CardsProvider>
         <CardsContext></CardsContext>
         <CommitteeCard></CommitteeCard>

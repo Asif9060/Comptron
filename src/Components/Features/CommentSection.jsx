@@ -53,13 +53,13 @@ const CommentSection = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        {/* <input 
-          type="email" 
+        <input 
+          type="email"
           placeholder="Email" 
           className="w-full p-2 comment-input border rounded mb-2"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        /> */}
+        />
         <textarea 
           placeholder="Your feedback" 
           className="w-full p-2 border rounded mb-2"

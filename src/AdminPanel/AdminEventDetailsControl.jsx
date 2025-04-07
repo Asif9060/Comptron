@@ -95,7 +95,7 @@ const AdminEventDetailsControl = () => {
   };
 
   return (
-    <div className="p-8 flex flex-col translate-y-[70rem]  ">
+    <div className="p-8 flex flex-col translate-y-[4rem]  ">
       {/* Event Form */}
       <div className="flex flex-col items-center border border-[#15A6E1] p-4 rounded-3xl shadow-md mb-8">
         <h2 className="p-2 text-[2rem] font-bold text-emerald-500">

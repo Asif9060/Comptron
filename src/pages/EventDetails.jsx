@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../Components/UI/CSS/EventDetails.css";
 import CommentSection from "../Components/Features/CommentSection";
+import SideMenu from "../Components/Features/SideMenu";
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -29,6 +30,9 @@ const EventDetails = () => {
     // </div>
 
     <div className="flex justify-center items-center">
+      <div className="fixed top-0 left-0 w-16 h-screen flex flex-col justify-center items-center z-10">
+        <SideMenu></SideMenu>
+      </div>
       <div className="container06">
         <h1 className="">
           <span className="text-[32px]">🔥</span>

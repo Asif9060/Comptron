@@ -39,7 +39,7 @@ const AdminPage = () => {
 
         {/* Committee Control */}
 
-        <div className="flex flex-col translate-x-[-27rem] border inline-block rounded-3xl mb-4 p-4 items-center translate-y-[5rem]">
+        <div className="flex flex-col translate-x-[-33rem] border inline-block rounded-3xl mb-4 p-4 items-center translate-y-[5rem]">
           <div className="text-white text-center text-3xl">Committee Panel</div>
           <AddMemberForm
             onMemberAdded={() => setRefresh(!refresh)}
