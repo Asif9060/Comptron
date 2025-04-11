@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { AdminContext } from "../../AdminPanel/ToggleAdmin/AdminContext";
 import "./CSS/Reset.css";
 
-const EventCountdown = () => {
+const EventCountdown = ({ setCountdownLoaded }) => {
   const { isAdmin } = useContext(AdminContext);
 
   const [eventDate, setEventDate] = useState(null);
@@ -34,6 +34,9 @@ const EventCountdown = () => {
     } catch (error) {
       console.error("Error fetching event date:", error);
     }
+    finally{
+      setCountdownLoaded(true);
+    }
   };
 
   useEffect(() => {
@@ -43,7 +46,7 @@ const EventCountdown = () => {
     window.addEventListener("eventUpdated", fetchEventDate);
 
     return () => window.removeEventListener("eventUpdated", fetchEventDate);
-  }, []);
+  }, [setCountdownLoaded]);
 
   // Countdown logic
   useEffect(() => {

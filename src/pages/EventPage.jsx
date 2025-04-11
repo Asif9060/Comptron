@@ -1,23 +1,53 @@
+import { useState, useEffect } from "react";
 import { AdminProvider } from "../AdminPanel/ToggleAdmin/AdminContext";
-// import AdminToggle from "../AdminPanel/ToggleAdmin/AdminToggle";
-// import Menu from "../Components/Layout/Menu";
 import EventCountdown from "../Components/UI/EventCountdown";
 import EventShowcase from "../Components/UI/EventShowcase";
-// import Events from "../Components/UI/Events";
-import SideMenu from "./../Components/Features/SideMenu";
+import SideMenu from "../Components/Features/SideMenu";
+import logo from "../assets/images/Comptron Logo.png";
 
 const EventPage = () => {
+  const [loading, setLoading] = useState(true);
+  const [countdownLoaded, setCountdownLoaded] = useState(false);
+  const [showcaseLoaded, setShowcaseLoaded] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    if (countdownLoaded && showcaseLoaded) {
+      setLoading(false);
+    }
+  }, [countdownLoaded, showcaseLoaded]);
+
+  useEffect(() => {
+    if (!loading) {
+      setFadeOut(true); // Trigger fade out when loading is finished
+      const timer = setTimeout(() => {
+        setFadeOut(false); // After animation, hide completely
+      }, 500); // Fade out duration (milliseconds)
+
+      return () => clearTimeout(timer); // Clean up timeout
+    }
+  }, [loading]);
+
   return (
     <div>
-      {/* <Menu></Menu> */}
-      {/* <Events></Events> */}
+      {loading && (
+        <div className="flex justify-center items-center h-screen bg-black z-50 fixed w-full top-0 left-0">
+          <div className="loader-container">
+            <div className="rotating-circle"></div>
+            <img src={logo} alt="Comptron Logo" className="logo1" />
+          </div>
+        </div>
+      )}
+
       <AdminProvider>
-        <EventCountdown></EventCountdown>
+        <EventCountdown setCountdownLoaded={setCountdownLoaded} />
       </AdminProvider>
+
       <div className="absolute fixed -translate-y-6">
-        <SideMenu></SideMenu>
+        <SideMenu />
       </div>
-      <EventShowcase></EventShowcase>
+
+      <EventShowcase setShowcaseLoaded={setShowcaseLoaded} />
     </div>
   );
 };

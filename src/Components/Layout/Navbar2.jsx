@@ -5,7 +5,7 @@ const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'Committee', href: '/Members', current: false },
   { name: 'Events', href: '/Events', current: false },
-  { name: 'Contact Us', href: '/Contact', current: false },
+  { name: 'Members', href: '/GMembers', current: false },
   { name: 'About Us', href: '/About', current: false },
 ]
 

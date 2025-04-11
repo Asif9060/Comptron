@@ -3,23 +3,28 @@ import "../Components/UI/CSS/Inputs.css";
 import Input from "../Components/UI/Input";
 import AdminTextSlideControl from "../AdminPanel/AdminTextSlideControl";
 import Recent from "../Components/Features/Recent";
-import ImageUpload from "./../AdminPanel/ImageUpload";
+import ImageUpload from "../AdminPanel/ImageUpload";
 import AdminEventDetailsControl from "../AdminPanel/AdminEventDetailsControl";
 import EventCards from "../Components/UI/EventCards";
 import Events from "./Events";
 import CommentSection from "../Components/Features/CommentSection";
 import EventDetailsPart from "../Components/UI/EventDetailsPart";
 import TestPage from "./TestPage";
-import SideMenu from './../Components/Features/SideMenu';
+import SideMenu from '../Components/Features/SideMenu';
+import RegisterForm from "../USER/RegisterForm";
+import Search from "./Search";
+import MemberCards from "./MemberCards";
+import Loading from "../Components/UI/Loading";
+import GeneralMemberPage from "./GeneralMemberPage";
 
-const ContactUs = () => {
+
+const Members = () => {
   return (
     <div>
 
       <div className="fixed top-0 left-0 w-16 h-screen flex flex-col justify-center items-center z-10">
         <SideMenu></SideMenu>
       </div>
-      <h1 className="text-3xl font-bold underline">Contact Us</h1>
       {/* <Input></Input> */}
 
       {/* <AdminTextSlideControl></AdminTextSlideControl> */}
@@ -42,8 +47,20 @@ const ContactUs = () => {
       <EventDetailsPart></EventDetailsPart> */}
 
       {/* <TestPage></TestPage> */}
+
+      {/* <RegisterForm></RegisterForm> */}
+
+      {/* <Search></Search> */}
+      <MemberCards></MemberCards>
+
+      {/* <Loading></Loading> */}
+
+      {/* <GeneralMemberPage></GeneralMemberPage> */}
+
+      
+
     </div>
   );
 };
 
-export default ContactUs;
+export default Members;

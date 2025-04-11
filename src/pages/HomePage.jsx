@@ -30,7 +30,7 @@ import Recent from "../Components/Features/Recent";
 const HomePage = () => {
   const [className, setClassName] = useState("");
 
-  // Function to update the class name
+
   const updateClassName = (newClass) => {
     setClassName(newClass);
   };
@@ -85,15 +85,6 @@ const HomePage = () => {
         <div className="flex justify-center">
           <hr className="my-12 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
         </div>
-        <h2 className="flex justify-center text-4xl text-[#15A6E1] font-bold underline underline-offset-6">
-          Our Core Members
-        </h2>
-        {/* <Members></Members> */}
-        <CoreMembers></CoreMembers>
-        <Button></Button>
-        <div className="flex justify-center">
-          <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
-        </div>
         <h1 className="flex justify-center text-4xl font-bold text-[#15A6E1] underline underline-offset-7">
           Advisory Board
         </h1>
@@ -101,6 +92,15 @@ const HomePage = () => {
           <TeacherCard cont={contents[0]}></TeacherCard>
           <TeacherCard cont={contents[1]}></TeacherCard>
           <TeacherCard cont={contents[2]}></TeacherCard>
+        </div>
+        <h2 className="flex mt-[5rem] justify-center text-4xl text-[#15A6E1] font-bold underline underline-offset-6">
+          Our Elected Members
+        </h2>
+        {/* <Members></Members> */}
+        <CoreMembers></CoreMembers>
+        <Button></Button>
+        <div className="flex justify-center">
+          <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
         </div>
         <div className="flex justify-center">
           <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />

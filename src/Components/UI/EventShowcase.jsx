@@ -3,15 +3,31 @@ import { Link } from "react-router-dom";
 import "./CSS/EventShowcase.css"; // External CSS file for styling
 import UpcomingEvents from "./UpcomingEvents";
 
-const EventShowcase = () => {
+const EventShowcase = ({ setShowcaseLoaded }) => {
   const [events, setEvents] = useState([]);
 
+  const fetchEvents = async () => {
+    try {
+      const res = await fetch("https://comptron-server-2.onrender.com/api/eventDetails");
+      const data = await res.json();
+      setEvents(data);
+    } catch (err) {
+      console.error("Error fetching events:", err);
+    } finally {
+      setShowcaseLoaded(true); // Loading done after fetching attempt
+    }
+  };
+
   useEffect(() => {
-    fetch("https://comptron-server-2.onrender.com/api/eventDetails")
-      .then((res) => res.json())
-      .then((data) => setEvents(data))
-      .catch((err) => console.error("Error fetching events:", err));
-  }, []);
+    fetchEvents();
+  }, [setShowcaseLoaded]);
+
+  // useEffect(() => {
+  //   fetch("https://comptron-server-2.onrender.com/api/eventDetails")
+  //     .then((res) => res.json())
+  //     .then((data) => setEvents(data))
+  //     .catch((err) => console.error("Error fetching events:", err));
+  // }, [setLoading]);
 
   return (
     <div className="event-page">

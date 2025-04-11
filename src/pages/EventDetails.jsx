@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "../Components/UI/CSS/EventDetails.css";
 import CommentSection from "../Components/Features/CommentSection";
 import SideMenu from "../Components/Features/SideMenu";
+import logo from "../assets/images/Comptron Logo.png";
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -15,7 +16,15 @@ const EventDetails = () => {
       .catch((err) => console.error(err));
   }, [id]);
 
-  if (!event) return <h2>Loading...</h2>;
+  if (!event)
+    return (
+      <div className="flex justify-center items-center h-screen bg-black z-50 fixed w-full top-0 left-0">
+        <div className="loader-container">
+          <div className="rotating-circle"></div>
+          <img src={logo} alt="Comptron Logo" className="logo1" />
+        </div>
+      </div>
+    );
 
   return (
     // <div>
