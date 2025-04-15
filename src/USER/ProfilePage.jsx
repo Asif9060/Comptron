@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, NavLink } from "react-router-dom";
-
+import logo from "../assets/images/Comptron Logo.png";
 const ProfilePage = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
@@ -28,7 +28,10 @@ const ProfilePage = () => {
   if (!user && !error) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-[#111] text-white text-2xl">
-        Loading Profile...
+        <div className="loader-container">
+                  <div className="rotating-circle"></div>
+                  <img src={logo} alt="Comptron Logo" className="logo1" />
+                </div>
       </div>
     );
   }
@@ -65,7 +68,7 @@ const ProfilePage = () => {
               Profile
             </NavLink>
             <NavLink
-              to={`/AllMembers`}
+              to={`/GMembers`}
               className={({ isActive }) =>
                 `block px-4 py-2 rounded-lg ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
@@ -143,7 +146,7 @@ const ProfilePage = () => {
 
             <div className="flex gap-2 justify-center mb-6">
               <span className="bg-blue-600 px-3 py-1 rounded-full text-sm">
-                Verified
+                Badge
               </span>
               {/* <span className="bg-green-600 px-3 py-1 rounded-full text-sm">
                 Top Skill

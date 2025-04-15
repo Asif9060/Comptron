@@ -22,11 +22,13 @@ const UserLogin = () => {
     try {
       // Firebase login
       await signInWithEmailAndPassword(auth, email, password);
-  
+
       // ✅ Fetch user by email from backend
-      const response = await fetch(`https://comptron-server-2.onrender.com/api/users/getByEmail/${email}`);
+      const response = await fetch(
+        `https://comptron-server-2.onrender.com/api/users/getByEmail/${email}`
+      );
       const data = await response.json();
-  
+
       if (response.ok && data.customId) {
         navigate(`/profile/${data.customId}`);
       } else {
@@ -40,13 +42,16 @@ const UserLogin = () => {
     }
   };
 
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1f1f1f] p-8 flex justify-center items-center">
       <div className="bg-[#1c1c1e] p-8 rounded-2xl shadow-xl w-full max-w-md text-white">
         <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
 
-        {error && <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">{error}</div>}
+        {error && (
+          <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -83,9 +88,16 @@ const UserLogin = () => {
           <div className="flex justify-center mt-4">
             <button
               onClick={() => navigate("/Reset")}
-              className="text-sm text-blue-400 hover:underline"
+              className="text-sm text-blue-400 cursor-pointer hover:underline"
             >
               Forgot Password?
+            </button>
+            <button
+              onClick={() => navigate("/Register")}
+              className="text-sm text-blue-400 ml-5 cursor-pointer hover:underline"
+              type="button"
+            >
+              Create an account
             </button>
           </div>
         </form>

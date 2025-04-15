@@ -17,6 +17,7 @@ import MemberCards from "./MemberCards";
 import Loading from "../Components/UI/Loading";
 import GeneralMemberPage from "./GeneralMemberPage";
 import ValidationControl from "../USER/ValidationControl";
+import AllMembersPage from "../USER/AllMembersPage";
 
 
 const Members = () => {
@@ -58,7 +59,9 @@ const Members = () => {
 
       {/* <GeneralMemberPage></GeneralMemberPage> */}
 
-      <ValidationControl></ValidationControl>
+      {/* <ValidationControl></ValidationControl> */}
+
+      <AllMembersPage></AllMembersPage>
 
     </div>
   );

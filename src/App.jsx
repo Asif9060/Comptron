@@ -39,8 +39,8 @@ const App = () => {
           <Route path="/AllMembers" element={<AllMembersPage></AllMembersPage>}></Route>
           <Route path="/profile/:id" element={<ProfilePage></ProfilePage>}></Route>
           <Route path="/settings/:id" element={<SettingsPage></SettingsPage>}></Route>
-          <Route path="Reset" element={<AdminPasswordResetPage></AdminPasswordResetPage>}></Route>
-          <Route path="UserLogin" element={<UserLogin></UserLogin>}></Route>
+          <Route path="/Reset" element={<AdminPasswordResetPage></AdminPasswordResetPage>}></Route>
+          <Route path="/UserLogin" element={<UserLogin></UserLogin>}></Route>
 
           <Route
             path="/AdminPage"

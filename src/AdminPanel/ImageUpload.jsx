@@ -32,7 +32,7 @@ const ImageUpload = ({ onUploadSuccess }) => {
   };
 
   return (
-    <form className="translate-y-[-17rem] border p-4 inline-block translate-x-[80rem]" onSubmit={handleUpload}>
+    <form className="translate-y-[-27rem] border p-4 inline-block translate-x-[75rem] rounded-3xl" onSubmit={handleUpload}>
       <div className="text-2xl text-white font-bold text-center">Recent Activity Images</div>
       <input className="mt-6" type="file" onChange={(e) => setFile(e.target.files[0])} required />
       {/* <input type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} /> */}

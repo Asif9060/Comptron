@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
-
+import logo from "../assets/images/Comptron Logo.png"; // Import logo image
 const AllMembersPage = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -36,7 +36,10 @@ const AllMembersPage = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen text-white text-xl">
-        Loading...
+        <div className="loader-container">
+          <div className="rotating-circle"></div>
+          <img src={logo} alt="Comptron Logo" className="logo1" />
+        </div>
       </div>
     );
   }
@@ -61,7 +64,7 @@ const AllMembersPage = () => {
         {filteredUsers.map((user) => (
           <div
             key={user._id}
-            className="bg-gradient-to-br from-[#2b2b2b] to-[#1a1a1a] border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-blue-500/40 flex flex-col items-center w-fulltransition duration-300"
+            className="bg-gradient-to-br from-[#2b2b2b] to-[#1a1a1a] border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-blue-500/40 flex flex-col justify-center translate-x-15 items-center w-[32rem] transition duration-300"
           >
             <div className="">
               {user.image && (

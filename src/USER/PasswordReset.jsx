@@ -24,7 +24,7 @@ const AdminPasswordResetPage = () => {
   };
 
   return (
-    <div className="p-8 max-w-md mx-auto bg-[#1C1C1C] rounded-xl shadow-md text-white">
+    <div className="p-8 max-w-md mx-auto bg-[#1C1C1C] rounded-3xl border translate-x-[25rem] translate-y-[-22rem] shadow-md text-white">
       <h2 className="text-3xl font-bold mb-6 text-center">Send Password Reset</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input

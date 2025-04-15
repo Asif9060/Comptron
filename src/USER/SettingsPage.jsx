@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-
+import { useParams, useNavigate, NavLink } from "react-router-dom";
+import logo from "../assets/images/Comptron Logo.png";
 const SettingsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ const SettingsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     fetch(`https://comptron-server-2.onrender.com/api/users/profile/${id}`)
@@ -115,28 +116,47 @@ const SettingsPage = () => {
       )
     ) {
       try {
+        // Step 1: Delete from your own backend/database
         const response = await fetch(
           `https://comptron-server-2.onrender.com/api/users/delete/${id}`,
           {
             method: "DELETE",
           }
         );
-
+  
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(
             errorData.message || `HTTP error! Status: ${response.status}`
           );
         }
-
+  
+        // Step 2: Delete from Firebase Auth by email
+        const firebaseRes = await fetch(
+          `https://comptron-server-2.onrender.com/api/firebase/deleteUserByEmail`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: user.email }),
+          }
+        );
+  
+        if (!firebaseRes.ok) {
+          const errorData = await firebaseRes.json();
+          throw new Error(errorData.message || "Failed to delete from Firebase");
+        }
+  
         setSuccess("Account deleted successfully.");
-        setTimeout(() => navigate("/"), 2000); // Redirect to home after 2 seconds
+        setTimeout(() => navigate("/"), 2000);
       } catch (err) {
         console.error("Delete error:", err);
         setError(err.message || "Failed to delete account");
       }
     }
   };
+  
 
   const handleCancel = () => {
     navigate(`/profile/${id}`);
@@ -145,13 +165,77 @@ const SettingsPage = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-[#111] text-white text-2xl">
-        Loading...
+        <div className="loader-container">
+          <div className="rotating-circle"></div>
+          <img src={logo} alt="Comptron Logo" className="logo1" />
+        </div>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1f1f1f] p-8 flex justify-center">
+      <div
+        className={`fixed inset-y-0 left-0 w-64 bg-[#1c1c1e] text-white transform ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 transition-transform duration-300 ease-in-out z-50`}
+      >
+        <div className="p-4">
+          <h2 className="text-2xl font-bold mb-6">Menu</h2>
+          <nav className="space-y-2">
+            {/* <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg ${isActive ? "bg-blue-600" : "hover:bg-gray-700"}`
+              }
+              onClick={() => setSidebarOpen(false)}
+            >
+              Dashboard
+            </NavLink> */}
+            <NavLink
+              to={`/profile/${id}`}
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg ${
+                  isActive ? "bg-blue-600" : "hover:bg-gray-700"
+                }`
+              }
+              onClick={() => setSidebarOpen(false)}
+            >
+              Profile
+            </NavLink>
+            <NavLink
+              to={`/AllMembers`}
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg ${
+                  isActive ? "bg-blue-600" : "hover:bg-gray-700"
+                }`
+              }
+              onClick={() => setSidebarOpen(false)}
+            >
+              All Members
+            </NavLink>
+            <NavLink
+              to={`/settings/${id}`}
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg ${
+                  isActive ? "bg-blue-600" : "hover:bg-gray-700"
+                }`
+              }
+              onClick={() => setSidebarOpen(false)}
+            >
+              Settings
+            </NavLink>
+          </nav>
+        </div>
+      </div>
+
+      {/* Mobile Sidebar Toggle */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 text-white"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        {sidebarOpen ? "✕" : "☰"}
+      </button>
       <div className="bg-[#1c1c1e] p-8 rounded-2xl shadow-xl w-full max-w-md text-white">
         <h1 className="text-3xl font-bold mb-6 text-center">Settings</h1>
 

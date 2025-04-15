@@ -11,6 +11,8 @@ import AdminTextSlideControl from "./AdminTextSlideControl";
 import AdminEventDetailsControl from "./AdminEventDetailsControl";
 import LogoutBtn from "./ToggleAdmin/LogoutBtn";
 import ImageUpload from "./ImageUpload";
+import ValidationControl from "../USER/ValidationControl";
+import AdminPasswordResetPage from './../USER/PasswordReset';
 
 const AdminPage = () => {
   const [refresh, setRefresh] = useState(false);
@@ -58,6 +60,10 @@ const AdminPage = () => {
         <div>
           <ImageUpload></ImageUpload>
         </div>
+
+        <ValidationControl/>
+        <AdminPasswordResetPage></AdminPasswordResetPage>
+        
 
         {/* ----------------------------------------------------------------------------------------- */}
         {/* ----------------------------------------------------------------------------------------- */}
