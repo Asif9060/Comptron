@@ -16,6 +16,7 @@ import Search from "./Search";
 import MemberCards from "./MemberCards";
 import Loading from "../Components/UI/Loading";
 import GeneralMemberPage from "./GeneralMemberPage";
+import ValidationControl from "../USER/ValidationControl";
 
 
 const Members = () => {
@@ -51,13 +52,13 @@ const Members = () => {
       {/* <RegisterForm></RegisterForm> */}
 
       {/* <Search></Search> */}
-      <MemberCards></MemberCards>
+      {/* <MemberCards></MemberCards> */}
 
       {/* <Loading></Loading> */}
 
       {/* <GeneralMemberPage></GeneralMemberPage> */}
 
-      
+      <ValidationControl></ValidationControl>
 
     </div>
   );

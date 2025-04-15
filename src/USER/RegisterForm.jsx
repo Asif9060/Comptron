@@ -7,7 +7,8 @@ function RegisterForm() {
     name: '',
     email: '',
     phone: '',
-    password: ''
+    password: '',
+    image: '',
   });
   const [message, setMessage] = useState('');
   const [showOTP, setShowOTP] = useState(false);
@@ -37,6 +38,17 @@ function RegisterForm() {
   if (showOTP) {
     return <OTPVerification email={formData.email} onVerified={handleVerified} />;
   }
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({ ...formData, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-12 p-6 bg-white rounded-lg shadow-md">
@@ -97,6 +109,28 @@ function RegisterForm() {
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
           />
+          
+
+        </div>
+        <div className="space-y-2">
+          
+        <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="p-2 rounded bg-[#2a2a2a] text-gray-400"
+            required
+          />
+
+          {formData.image && (
+            <img
+              src={formData.image}
+              alt="Preview"
+              className="rounded-full w-24 h-24 object-cover mx-auto"
+            />
+          )}
+
+
         </div>
         <button
           type="submit"

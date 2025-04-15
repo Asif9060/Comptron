@@ -12,6 +12,12 @@ import EventDetails from "./pages/EventDetails";
 import Events from "./pages/Events";
 import GeneralMemberPage from "./pages/GeneralMemberPage";
 import Members from "./pages/Members";
+import RegistrationForm from "./USER/RegistrationForm";
+import ProfilePage from "./USER/ProfilePage";
+import AllMembersPage from "./USER/AllMembersPage";
+import SettingsPage from "./USER/SettingsPage";
+import AdminPasswordResetPage from "./USER/PasswordReset";
+import UserLogin from "./USER/UserLogin";
 
 
 const App = () => {
@@ -29,6 +35,12 @@ const App = () => {
           <Route path="/Event" element={<Events></Events>}></Route>
           <Route path="/event/:id" element={<EventDetails></EventDetails>}></Route>
           <Route path="/User" element={<GeneralMemberPage></GeneralMemberPage>}></Route>
+          <Route path="/Register" element={<RegistrationForm></RegistrationForm>}></Route>
+          <Route path="/AllMembers" element={<AllMembersPage></AllMembersPage>}></Route>
+          <Route path="/profile/:id" element={<ProfilePage></ProfilePage>}></Route>
+          <Route path="/settings/:id" element={<SettingsPage></SettingsPage>}></Route>
+          <Route path="Reset" element={<AdminPasswordResetPage></AdminPasswordResetPage>}></Route>
+          <Route path="UserLogin" element={<UserLogin></UserLogin>}></Route>
 
           <Route
             path="/AdminPage"
