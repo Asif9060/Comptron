@@ -131,23 +131,6 @@ const SettingsPage = () => {
           );
         }
   
-        // Step 2: Delete from Firebase Auth by email
-        const firebaseRes = await fetch(
-          `https://comptron-server-2.onrender.com/api/firebase/deleteUserByEmail`,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email: user.email }),
-          }
-        );
-  
-        if (!firebaseRes.ok) {
-          const errorData = await firebaseRes.json();
-          throw new Error(errorData.message || "Failed to delete from Firebase");
-        }
-  
         setSuccess("Account deleted successfully.");
         setTimeout(() => navigate("/"), 2000);
       } catch (err) {

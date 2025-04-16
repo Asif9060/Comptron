@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
-import logo from "../assets/images/Comptron Logo.png"; // Import logo image
+import logo from "../assets/images/Comptron Logo.png";
+import male from "../assets/images/male.jpg";
+import female from "../assets/images/female2.jpg"; // Import logo image
 const AllMembersPage = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -45,7 +47,7 @@ const AllMembersPage = () => {
   }
 
   return (
-    <div className="p-8 text-white">
+    <div className="bg-[#1C1C1C] h-screen text-white flex flex-col items-center px-5 py-10">
       <h1 className="text-4xl font-bold mb-8 text-center">
         Registered Members
       </h1>
@@ -54,24 +56,31 @@ const AllMembersPage = () => {
         <input
           type="text"
           placeholder="Search by name, skill, or ID..."
-          className="p-3 w-full max-w-2xl border border-gray-600 rounded-lg bg-[#222] text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-[40rem] p-4 rounded-lg text-lg text-white bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#15A6E1] transition duration-300"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
-      <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-8 justify-center">
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-7xl">
         {filteredUsers.map((user) => (
           <div
             key={user._id}
-            className="bg-gradient-to-br from-[#2b2b2b] to-[#1a1a1a] border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-blue-500/40 flex flex-col justify-center translate-x-15 items-center w-[32rem] transition duration-300"
+            className="bg-gray-900 rounded-2xl p-6 text-center shadow-lg hover:-translate-y-2 transition duration-300 hover:shadow-cyan-500/50"
           >
             <div className="">
-              {user.image && (
+              {user.image ? (
                 <img
                   src={user.image}
-                  alt={user.name}
-                  className="w-24 h-24 rounded-full object-cover mb-4"
+                  alt="Profile"
+                  className="w-28 h-28 aspect-square rounded-full mx-auto mb-4 object-cover border-4 border-blue-500"
+                  onError={(e) => (e.target.src = "/fallback-image.png")}
+                />
+              ) : (
+                <img
+                  src={user.gender?.toLowerCase() === "female" ? female : male}
+                  alt="Default Avatar"
+                  className="w-28 h-28 aspect-square rounded-full mx-auto mb-4 object-cover border-4 border-gray-500"
                 />
               )}
             </div>
