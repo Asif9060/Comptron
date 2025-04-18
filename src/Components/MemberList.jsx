@@ -13,8 +13,8 @@ const MemberList = ({ onEdit }) => {
     setMembers(data);
   };
 
-  const handleDelete = async (id) => {
-    await deleteMember(id);
+  const handleDelete = async (customId) => {
+    await deleteMember(customId);
     fetchMembers();
   };
 
@@ -23,11 +23,11 @@ const MemberList = ({ onEdit }) => {
       <h2 className="text-2xl font-bold mb-4">Committee Members</h2>
       <ul className="space-y-5">
         {members.map((member) => (
-          <li className="flex gap-5" key={member._id}>
+          <li className="flex gap-5" key={member.customId}> {/* Use customId here */}
             <img
               className="w-[3rem] translate-y-[-7px]"
               src={member.image}
-              alt={member.alt}
+              alt={member.name}
             />
             <strong className="p-2 h-[2.5rem] bg-white text-black rounded-sm">
               {member.name}
@@ -35,12 +35,9 @@ const MemberList = ({ onEdit }) => {
             <strong className="p-2 bg-white h-[2.5rem] text-black rounded-sm">
               {member.role}
             </strong>
-            {/* <strong className="p-2 bg-white text-black">
-              {member.socials.linkedin}
-            </strong> */}
             <a
               href={member.socials.linkedin}
-              className="cursor-pointer w-[2.3rem]  inline-block"
+              className="cursor-pointer w-[2.3rem] inline-block"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path
@@ -61,7 +58,7 @@ const MemberList = ({ onEdit }) => {
             </button>
             <button
               className="button04"
-              onClick={() => handleDelete(member._id)}
+              onClick={() => handleDelete(member.customId)}
             >
               <div className="button-top">Delete</div>
               <div className="button-bottom"></div>

@@ -2,9 +2,11 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { getAuth, signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../USER/firebase';
+import { userAuth } from '../../USER/FirebaseUser';
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import male from '../../assets/images/male.jpg';
+import female from '../../assets/images/female.jpg';
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
@@ -19,7 +21,7 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const [user] = useAuthState(auth);
+  const [user] = useAuthState(userAuth);
   const [customUser, setCustomUser] = useState(null);
 
   useEffect(() => {
@@ -76,7 +78,7 @@ export default function Example() {
                 <Menu as="div" className="relative">
                   <div>
                     <MenuButton className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-white">
-                      <img
+                      {/* <img
                         className="h-10 w-10 aspect-square rounded-full object-cover border-2 border-[#15A6E1]"
                         src={
                           customUser?.image ||
@@ -84,7 +86,21 @@ export default function Example() {
                           `https://ui-avatars.com/api/?name=${user.displayName || 'User'}&background=15A6E1&color=fff`
                         }
                         alt="User profile"
-                      />
+                      /> */}
+                      {user.photoURL ? (
+                                      <img
+                                        src={user.image}
+                                        alt="Profile"
+                                        className="h-10 w-10 aspect-square rounded-full object-cover border-2 border-[#15A6E1]"
+                                        onError={(e) => (e.target.src = "/fallback-image.png")}
+                                      />
+                                    ) : (
+                                      <img
+                                        src={user.gender?.toLowerCase() === "female" ? female : male}
+                                        alt="Default Avatar"
+                                        className="h-10 w-10 aspect-square rounded-full object-cover border-2 border-[#15A6E1]"
+                                      />
+                                    )}
                     </MenuButton>
                   </div>
                   <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
@@ -101,7 +117,7 @@ export default function Example() {
                     <MenuItem>
                       {({ active }) => (
                         <button
-                          onClick={() => signOut(auth)}
+                          onClick={() => signOut(userAuth)}
                           className={classNames(
                             active ? 'bg-gray-100' : '',
                             'block w-full text-left px-4 py-2 text-sm text-gray-700'

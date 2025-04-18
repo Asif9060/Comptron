@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
+import { userAuth } from "./FirebaseUser";
 import { useParams } from "react-router-dom"; // Your Firebase initialization file
 
 const UserLogin = () => {
@@ -21,7 +21,7 @@ const UserLogin = () => {
 
     try {
       // Firebase login
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(userAuth, email, password);
 
       // ✅ Fetch user by email from backend
       const response = await fetch(
@@ -30,6 +30,7 @@ const UserLogin = () => {
       const data = await response.json();
 
       if (response.ok && data.customId) {
+        localStorage.setItem("customId", data.customId);
         navigate(`/profile/${data.customId}`);
       } else {
         setError("User not found or missing ID.");

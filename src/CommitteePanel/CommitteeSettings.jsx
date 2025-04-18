@@ -10,6 +10,12 @@ const SettingsPage = () => {
     skills: "",
     email: "",
     phone: "",
+    socials: {
+        linkedIn: "",
+        github: "",
+        portfolio: "",
+        cv: "",
+      },
   });
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,7 +25,7 @@ const SettingsPage = () => {
   
 
   useEffect(() => {
-    fetch(`https://comptron-server-2.onrender.com/api/users/profile/${id}`)
+    fetch(`https://comptron-server-2.onrender.com/api/members/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to fetch profile: ${res.status}`);
         return res.json();
@@ -30,6 +36,12 @@ const SettingsPage = () => {
           skills: data.skills || "",
           email: data.email || "",
           phone: data.phone || "",
+          socials: {
+            linkedIn: data.socials?.linkedIn || "",
+            github: data.socials?.github || "",
+            portfolio: data.socials?.portfolio || "",
+            cv: data.socials?.cv || "",
+          },
         });
         setImage(data.image || null);
         setLoading(false);
@@ -61,29 +73,25 @@ const SettingsPage = () => {
     setError("");
     setSuccess("");
 
-    const payload = {
-      name: user.name,
-      skills: user.skills,
-      email: user.email,
-      phone: user.phone,
-      image: image || "",
-      linkedIn: user.linkedIn,
-      github: user.github,
-      portfolio: user.portfolio,
-      cv: user.cv,
-    };
+    const formData = new FormData();
+  formData.append("name", user.name);
+  formData.append("skills", user.skills);
+  formData.append("email", user.email);
+  formData.append("phone", user.phone);
+  formData.append("socials", JSON.stringify(user.socials)); // this will now be parsed correctly
+  if (image && image.startsWith("data:image")) {
+    const blob = await (await fetch(image)).blob(); // convert base64 to blob
+    formData.append("image", blob, "profile.jpg");
+  }
 
-    try {
-      const response = await fetch(
-        `https://comptron-server-2.onrender.com/api/users/profile/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+  try {
+    const response = await fetch(
+      `https://comptron-server-2.onrender.com/api/members/${id}`,
+      {
+        method: "PUT",
+        body: formData,
+      }
+    );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -114,36 +122,6 @@ const SettingsPage = () => {
 
 // Compare with the route param
 
-const handleDelete = async () => {
-  if (
-      window.confirm(
-        "Are you sure you want to delete your account? This action cannot be undone."
-      )
-    ) {
-      try {
-        // Step 1: Delete from your own backend/database
-        const response = await fetch(
-          `https://comptron-server-2.onrender.com/api/users/delete/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
-        
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(
-            errorData.message || `HTTP error! Status: ${response.status}`
-          );
-        }
-  
-        setSuccess("Account deleted successfully.");
-        setTimeout(() => navigate("/"), 2000);
-      } catch (err) {
-        console.error("Delete error:", err);
-        setError(err.message || "Failed to delete account");
-      }
-    }
-  };
   
   
   const handleCancel = () => {
@@ -160,13 +138,13 @@ const handleDelete = async () => {
       </div>
     );
   }
-  if (customId !== id) {
-    return (
-      <div className="flex justify-center items-center min-h-screen text-white bg-[#111]">
-        <p className="text-xl font-semibold">Unauthorized access</p>
-      </div>
-    );
-  }
+//   if (customId !== id) {
+//     return (
+//       <div className="flex justify-center items-center min-h-screen text-white bg-[#111]">
+//         <p className="text-xl font-semibold">Unauthorized access</p>
+//       </div>
+//     );
+//   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1f1f1f] p-8 flex justify-center">
@@ -188,7 +166,7 @@ const handleDelete = async () => {
               Dashboard
             </NavLink> */}
             <NavLink
-              to={`/profile/${id}`}
+              to={`/members/CommitteeProfile/${id}`}
               className={({ isActive }) =>
                 `block px-4 py-2 rounded-lg ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
@@ -210,7 +188,7 @@ const handleDelete = async () => {
               All Members
             </NavLink>
             <NavLink
-              to={`/settings/${id}`}
+              to={`/CommitteeSettings/${id}`}
               className={({ isActive }) =>
                 `block px-4 py-2 rounded-lg ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
@@ -286,24 +264,24 @@ const handleDelete = async () => {
               placeholder="Enter your phone"
             />
           </div>
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium mb-1">
               LinkedIn URL
             </label>
             <input
               type="url"
-              value={user.socials.linkedIn || ""}
-              onChange={(e) => setUser({ ...user, linkedIn: e.target.value })}
+              value={user.socials?.linkedIn || ""}
+              onChange={(e) => setUser({ ...user, socials: { ...user.socials, linkedIn: e.target.value } })}
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://linkedin.com/in/yourname"
             />
-          </div>
+          </div> */}
           <div>
             <label className="block text-sm font-medium mb-1">GitHub URL</label>
             <input
               type="url"
-              value={user.socials.github || ""}
-              onChange={(e) => setUser({ ...user, github: e.target.value })}
+              value={user.socials?.github || ""}
+              onChange={(e) => setUser({ ...user, socials: { ...user.socials, github: e.target.value } })}
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://github.com/yourusername"
             />
@@ -314,22 +292,22 @@ const handleDelete = async () => {
             </label>
             <input
               type="url"
-              value={user.socials.portfolio || ""}
-              onChange={(e) => setUser({ ...user, portfolio: e.target.value })}
+              value={user.socials?.portfolio || ""}
+              onChange={(e) => setUser({ ...user, socials: { ...user.socials, portfolio: e.target.value } })}
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://yourportfolio.com"
             />
           </div>
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium mb-1">CV URL</label>
             <input
               type="url"
-              value={user.socials.cv || ""}
-              onChange={(e) => setUser({ ...user, cv: e.target.value })}
+              value={user.socials?.cv || ""}
+              onChange={(e) => setUser({ ...user, socials: { ...user.socials, cv: e.target.value } })}
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://drive.google.com/..."
             />
-          </div>
+          </div> */}
           <div>
             <label className="block text-sm font-medium mb-1">
               Profile Image
@@ -366,14 +344,14 @@ const handleDelete = async () => {
         </form>
 
         {/* Delete Account Button */}
-        <div className="mt-6 text-center">
+        {/* <div className="mt-6 text-center">
           <button
             onClick={handleDelete}
             className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg"
           >
             Delete Account
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

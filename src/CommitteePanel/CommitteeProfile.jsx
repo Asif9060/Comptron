@@ -3,8 +3,7 @@ import { useParams, NavLink } from "react-router-dom";
 import logo from "../assets/images/Comptron Logo.png";
 import male from "../assets/images/male.jpg";
 import female from "../assets/images/female.jpg";
-import SideMenu from "../Components/Features/SideMenu";
-const ProfilePage = () => {
+const CommitteeProfile = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [editOpen, setEditOpen] = useState(false);
@@ -13,7 +12,7 @@ const ProfilePage = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`https://comptron-server-2.onrender.com/api/users/profile/${id}`)
+    fetch(`https://comptron-server-2.onrender.com/api/members/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to fetch profile: ${res.status}`);
         return res.json();
@@ -71,7 +70,7 @@ const ProfilePage = () => {
               Home
             </NavLink>
             <NavLink
-              to={`/profile/${id}`}
+              to={`/members/CommitteeProfile/${id}`}
               className={({ isActive }) =>
                 `block px-4 py-2 rounded-lg ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
@@ -93,7 +92,7 @@ const ProfilePage = () => {
               All Members
             </NavLink>
             <NavLink
-              to={`/settings/${id}`}
+              to={`/CommitteeSettings/${id}`}
               className={({ isActive }) =>
                 `block px-4 py-2 rounded-lg ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
@@ -215,10 +214,10 @@ const ProfilePage = () => {
                   External Links
                 </h2>
                 <div className="grid grid-cols-2 gap-4 text-center text-sm text-gray-200">
-                  {user.linkedIn && (
+                  {/* {user.socials?.linkedIn && (
                     <p>
                       <a
-                        href={user.linkedIn}
+                        href={user.socials.linkedIn}
                         target="_blank"
                         className="hover:text-cyan-400 transition-all space-y-1"
                       >
@@ -236,8 +235,8 @@ const ProfilePage = () => {
                         LinkedIn
                       </a>
                     </p>
-                  )}
-                  {user.github && (
+                  )} */}
+                  {user.socials?.github && (
                     <p>
                       <a
                         href={user.github}
@@ -259,10 +258,10 @@ const ProfilePage = () => {
                       </a>
                     </p>
                   )}
-                  {user.portfolio && (
+                  {user.socials?.portfolio && (
                     <p>
                       <a
-                        href={user.portfolio}
+                        href={user.socials.portfolio}
                         target="_blank"
                         className="hover:text-cyan-400 transition-all space-y-1"
                       >
@@ -281,10 +280,10 @@ const ProfilePage = () => {
                       </a>
                     </p>
                   )}
-                  {user.cv && (
+                  {/* {user.socials?.cv && (
                     <p>
                       <a
-                        href={user.cv}
+                        href={user.socials.cv}
                         target="_blank"
                         className="hover:text-cyan-400 transition-all space-y-1"
                       >
@@ -302,7 +301,7 @@ const ProfilePage = () => {
                         CV / Resume
                       </a>
                     </p>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>
@@ -351,4 +350,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default CommitteeProfile;

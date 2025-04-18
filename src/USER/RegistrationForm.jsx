@@ -1,6 +1,6 @@
 // RegistrationForm.jsx
 import React, { useState } from "react";
-import { auth, createUserWithEmailAndPassword } from "./firebase"; // adjust path if needed
+import { userAuth, createUserWithEmailAndPassword } from "./FirebaseUser"; // adjust path if needed
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -92,7 +92,7 @@ const RegistrationForm = () => {
     // 2. Create Firebase user
     try {
       const userCredential = await createUserWithEmailAndPassword(
-        auth,
+        userAuth,
         formData.email,
         formData.password
       );
@@ -112,7 +112,9 @@ const RegistrationForm = () => {
       );
       if (response.ok) {
         const userData = await response.json();
-        setSuccessMessage(`Registration successful! Your ID: ${userData.customId}`);
+        setSuccessMessage(
+          `Registration successful! Your ID: ${userData.customId}`
+        );
         setOtpVerified(true);
         // reset form
         setFormData({

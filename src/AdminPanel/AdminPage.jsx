@@ -13,36 +13,38 @@ import LogoutBtn from "./ToggleAdmin/LogoutBtn";
 import ImageUpload from "./ImageUpload";
 import ValidationControl from "../USER/ValidationControl";
 import AdminPasswordResetPage from './../USER/PasswordReset';
+import AdminUsersPage from "./AdminUsersPage";
+import AdminDashboardPage from "./AdminDashboardPage";
 
 const AdminPage = () => {
   const [refresh, setRefresh] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
   return (
     <div className="">
-      <h1 className="text-3xl text-center translate-y-[4rem] text-white">
+      {/* <h1 className="text-3xl text-center translate-y-[4rem] text-white">
         Admin Page
-      </h1>
+      </h1> */}
 
       <LogoutBtn></LogoutBtn>
 
-      <AdminProvider>
+      {/* <AdminProvider> */}
         {/* ----------------------------------------------------------------------------------------- */}
         {/* Event Countdown Control */}
 
-        <div className=" relative left-[73.4rem] gap-4  border translate-y-[-2.5rem] rounded-3xl p-4 inline-block items-center ">
+        {/* <div className=" relative left-[73.4rem] gap-4  border translate-y-[-2.5rem] rounded-3xl p-4 inline-block items-center ">
           <AdminEventControl></AdminEventControl>
           <EventCountdown></EventCountdown>
         </div>
         <div className="fixed top-0 left-0 w-16 h-screen flex flex-col justify-center items-center z-10">
           <SideMenu></SideMenu>
-        </div>
+        </div> */}
         {/* ----------------------------------------------------------------------------------------- */}
 
         {/* ----------------------------------------------------------------------------------------- */}
 
         {/* Committee Control */}
 
-        <div className="flex flex-col translate-x-[-33rem] border inline-block rounded-3xl mb-4 p-4 items-center translate-y-[5rem]">
+        {/* <div className="flex flex-col translate-x-[-33rem] border inline-block rounded-3xl mb-4 p-4 items-center translate-y-[5rem]">
           <div className="text-white text-center text-3xl">Committee Panel</div>
           <AddMemberForm
             onMemberAdded={() => setRefresh(!refresh)}
@@ -50,10 +52,10 @@ const AdminPage = () => {
             setSelectedMember={setSelectedMember}
           />
           <MemberList key={refresh} onEdit={setSelectedMember} />
-          {/* <CommiteeCard></CommiteeCard> */}
-        </div>
+          
+        </div> */}
 
-        <div className=" ">
+        {/* <div className=" ">
           <AdminTextSlideControl></AdminTextSlideControl>
         </div>
 
@@ -62,14 +64,20 @@ const AdminPage = () => {
         </div>
 
         <ValidationControl/>
-        <AdminPasswordResetPage></AdminPasswordResetPage>
+        <AdminPasswordResetPage></AdminPasswordResetPage> */}
         
 
         {/* ----------------------------------------------------------------------------------------- */}
         {/* ----------------------------------------------------------------------------------------- */}
-        <AdminEventDetailsControl></AdminEventDetailsControl>
+        {/* <AdminEventDetailsControl></AdminEventDetailsControl> */}
         {/* ----------------------------------------------------------------------------------------- */}
-      </AdminProvider>
+
+        {/* <AdminUsersPage></AdminUsersPage> */}
+
+
+
+      {/* </AdminProvider> */}
+        <AdminDashboardPage></AdminDashboardPage>
     </div>
   );
 };

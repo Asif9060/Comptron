@@ -12,7 +12,12 @@ const ValidationControl = () => {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage(`✅ ${data.user.name} validated until ${new Date(data.user.validityDate).toLocaleDateString()}`);
+        setMessage(
+          `✅ ${data.user.name} validated until ${new Date(
+            data.user.validityDate
+          ).toLocaleDateString()}.\n🆔 New ID: ${data.user.customId}`
+        );
+        setId(data.user.customId); // update input box with new ID
       } else {
         setMessage(`❌ ${data.message}`);
       }
@@ -22,7 +27,7 @@ const ValidationControl = () => {
   };
 
   return (
-    <div className="p-10 text-white  max-w-lg translate-x-[25rem] translate-y-[-25rem] text-center border rounded-3xl mx-auto">
+    <div className="p-10 text-white max-w-lg translate-x-[25rem] translate-y-[-25rem] text-center border rounded-3xl mx-auto">
       <h1 className="text-3xl font-bold mb-4">Member Validation Control</h1>
       <input
         type="text"
@@ -37,7 +42,9 @@ const ValidationControl = () => {
       >
         Validate for 1 Year
       </button>
-      {message && <p className="mt-4">{message}</p>}
+      {message && (
+        <p className="mt-4 whitespace-pre-line text-green-400">{message}</p>
+      )}
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
-import logo from "../assets/images/Comptron Logo.png";
+import { Link } from "react-router-dom"; 
 import male from "../assets/images/male.jpg";
-import female from "../assets/images/female2.jpg"; // Import logo image
+import female from "../assets/images/female.jpg";
+import logo from "../assets/images/Comptron Logo.png";
 const AllMembersPage = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -66,7 +66,7 @@ const AllMembersPage = () => {
         {filteredUsers.map((user) => (
           <div
             key={user._id}
-            className="bg-gray-900 rounded-2xl p-6 text-center shadow-lg hover:-translate-y-2 transition duration-300 hover:shadow-cyan-500/50"
+            className="bg-gray-900 rounded-2xl p-6 text-center shadow-lg hover:-translate-y-2 transition duration-300  hover:shadow-[cyan_0px_0px_10px_2px]"
           >
             <div className="">
               {user.image ? (

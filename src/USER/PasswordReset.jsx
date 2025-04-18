@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { sendPasswordResetEmail, auth } from "./firebase"; // Import the function and auth object
+import { sendPasswordResetEmail, userAuth } from "./FirebaseUser"; // Import the function and auth object
 
 const AdminPasswordResetPage = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const AdminPasswordResetPage = () => {
     setErrorMessage("");
 
     try {
-      await sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(userAuth, email);
       setSuccessMessage("Password reset email sent successfully.");
     } catch (error) {
       setErrorMessage(error.message || "Failed to send password reset email.");
@@ -25,7 +25,9 @@ const AdminPasswordResetPage = () => {
 
   return (
     <div className="p-8 max-w-md mx-auto bg-[#1C1C1C] rounded-3xl border translate-x-[25rem] translate-y-[-22rem] shadow-md text-white">
-      <h2 className="text-3xl font-bold mb-6 text-center">Send Password Reset</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">
+        Send Password Reset
+      </h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="email"
@@ -45,8 +47,12 @@ const AdminPasswordResetPage = () => {
         </button>
 
         {/* Success or Error Messages */}
-        {successMessage && <div className="text-green-400 text-center">{successMessage}</div>}
-        {errorMessage && <div className="text-red-400 text-center">{errorMessage}</div>}
+        {successMessage && (
+          <div className="text-green-400 text-center">{successMessage}</div>
+        )}
+        {errorMessage && (
+          <div className="text-red-400 text-center">{errorMessage}</div>
+        )}
       </form>
     </div>
   );

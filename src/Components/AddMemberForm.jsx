@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { addMember, updateMember } from "../services/memberService"; // Import API functions
+import MemberList from "./MemberList";
 
 const AddMemberForm = ({
   onMemberAdded,
@@ -27,6 +28,8 @@ const AddMemberForm = ({
   const handleImageChange = (e) => {
     setImage(e.target.files[0]); // Set selected image file
   };
+
+  const [refresh, setRefresh] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,7 +74,7 @@ const AddMemberForm = ({
           placeholder=" Full Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          required
+          
         />
       </div>
 
@@ -82,11 +85,11 @@ const AddMemberForm = ({
           placeholder="Role"
           value={role}
           onChange={(e) => setRole(e.target.value)}
-          required
+          
         />
       </div>
 
-      <div className="container01">
+      {/* <div className="container01">
         <input
           type="text"
           className="input01"
@@ -94,7 +97,7 @@ const AddMemberForm = ({
           value={socials.linkedin}
           onChange={(e) => setSocials({ ...socials, linkedin: e.target.value })}
         />
-      </div>
+      </div> */}
 
       <label className="Documents-btn">
         <input
@@ -202,6 +205,7 @@ const AddMemberForm = ({
           Cancel Edit
         </button>
       )}
+      <MemberList key={refresh} onEdit={setSelectedMember} />
     </form>
   );
 };

@@ -22,7 +22,7 @@ const MembersPage = () => {
         <CommitteeCard></CommitteeCard>
       </CardsProvider>
       <div className="translate-y-[200rem]">
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
 
       </div>
     </div>
