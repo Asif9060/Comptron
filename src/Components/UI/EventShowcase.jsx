@@ -1,86 +1,119 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./CSS/EventShowcase.css"; // External CSS file for styling
-import UpcomingEvents from "./UpcomingEvents";
+import "./CSS/EventShowcase.css";
+import moment from "moment-timezone";
 
 const EventShowcase = ({ setShowcaseLoaded }) => {
   const [events, setEvents] = useState([]);
-
-  const fetchEvents = async () => {
-    try {
-      const res = await fetch("https://comptron-server-2.onrender.com/api/eventDetails");
-      const data = await res.json();
-      setEvents(data);
-    } catch (err) {
-      console.error("Error fetching events:", err);
-    } finally {
-      setShowcaseLoaded(true); // Loading done after fetching attempt
-    }
-  };
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const [ongoingEvents, setOngoingEvents] = useState([]);
 
   useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch(
+          "https://comptron-server-2.onrender.com/api/eventDetails"
+        );
+        const data = await res.json();
+        setEvents(data);
+        categorizeEvents(data); // initial setup
+      } catch (err) {
+        console.error("Error fetching events:", err);
+      } finally {
+        setShowcaseLoaded(true);
+      }
+    };
+
     fetchEvents();
   }, [setShowcaseLoaded]);
 
-  // useEffect(() => {
-  //   fetch("https://comptron-server-2.onrender.com/api/eventDetails")
-  //     .then((res) => res.json())
-  //     .then((data) => setEvents(data))
-  //     .catch((err) => console.error("Error fetching events:", err));
-  // }, [setLoading]);
+  // ⏱️ Auto-update every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      categorizeEvents(events);
+    }, 20 * 1000); // 1 minute
+
+    return () => clearInterval(interval); // cleanup
+  }, [events]);
+
+  // 🔍 Categorize function
+  const categorizeEvents = (data) => {
+    const now = new Date();
+    const upcoming = data.filter((event) => {
+      const eventDateTime = new Date(`${event.date}T${event.time}`);
+      return eventDateTime > now;
+    });
+
+    const ongoing = data.filter((event) => {
+      const eventDateTime = new Date(`${event.date}T${event.time}`);
+      return eventDateTime <= now;
+    });
+
+    setUpcomingEvents(upcoming);
+    setOngoingEvents(ongoing);
+  };
+
+  const renderEventCard = (event) => {
+    const formattedTime = moment(`${event.date}T${event.time}`)
+      .tz("Asia/Dhaka")
+      .format("hh:mm A");
+
+    const formattedDate = moment(`${event.date}T${event.time}`)
+      .tz("Asia/Dhaka")
+      .format("MMMM D, YYYY");
+
+    return (
+      <div key={event._id} className="event-card">
+        <img src={event.mainImage} alt={event.title} className="event-image" />
+        <div className="event-details">
+          <h3 className="event-title01">{event.title}</h3>
+          <p className="event-date">
+            <i className="fa fa-calendar"></i> {formattedDate}
+          </p>
+          <p className="event-time">
+            <i className="fa fa-clock"></i> {formattedTime}
+          </p>
+          <div className="mt-5 flex">
+            <Link to={`/event/${event._id}`} className="register-btn">
+              Details
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="event-page">
-      {/* Event Listings */}
-      <div className="text-center text-[30px] text-white mt-5">
-        Latest & Ongoing Events
-      </div>
-      <section className="event-listings">
-        {events.map((event) => (
-          <div key={event._id} className="event-card">
-            <img
-              src={event.mainImage}
-              alt={event.title}
-              className="event-image"
-            />
-            <div className="event-details">
-              <h3 className="event-title01">{event.title}</h3>
-              <p className="event-date">
-                <i className="fa fa-calendar"></i>{" "}
-                {event.date || "Date not available"}
-              </p>
-              <p className="event-time">
-                <i className="fa fa-clock"></i>{" "}
-                {event.time || "Time not available"}
-              </p>
-              <p className="event-location">
-                <i className="fa fa-map-marker"></i>{" "}
-                {event.location || "Location not available"}
-              </p>
-              {/* <p className="event-description">{event.description}</p> */}
-              <div className="mt-5 flex">
-                <Link to={`/event/${event._id}`} className="register-btn">
-                  Details
-                </Link>
-              </div>
-            </div>
+      {ongoingEvents.length > 0 && (
+        <>
+          <div className="text-center text-[30px] text-white mt-5">
+            Ongoing Events
           </div>
-        ))}
+          <section className="event-listings">
+            {ongoingEvents.map(renderEventCard)}
+          </section>
+        </>
+      )}
 
-        {/* <UpcomingEvents /> */}
-      </section>
+      {upcomingEvents.length > 0 && (
+        <>
+          <div className="text-center text-[30px] text-white mt-10">
+            Upcoming Events
+          </div>
+          <section className="event-listings">
+            {upcomingEvents.map(renderEventCard)}
+          </section>
+        </>
+      )}
 
-      {/* Pagination */}
-      <section className="pagination">
-        <button>Previous</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>Next</button>
-      </section>
+      {events.length === 0 && (
+        <div className="text-center text-white mt-10 text-lg">
+          No events found.
+        </div>
+      )}
 
-      {/* Footer */}
-      <footer>
+      <footer className="mt-12">
         <p>&copy; 2025 Comptron. All rights reserved.</p>
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -91,109 +124,3 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
 };
 
 export default EventShowcase;
-
-// import "./CSS/EventShowcase.css";// External CSS file for styling
-// import eventimg from '../../assets/images/Events.jpg';
-// import UpcomingEvents from './UpcomingEvents';
-// const EventShowcase = () => {
-//   const events = [
-//     {
-//       id: 1,
-//       title: 'Title',
-//       date: 'Date',
-//       time: 'Time',
-//       location: 'Location',
-//       description: '',
-//       image: eventimg,
-//     },
-//     {
-//       id: 2,
-//       title: 'Title',
-//       date: 'Date',
-//       time: 'Time',
-//       location: 'LOcation',
-//       description: '',
-//       image: eventimg,
-//     },
-//     {
-//       id: 3,
-//       title: 'Title',
-//       date: 'Date',
-//       time: 'Time',
-//       location: 'Location',
-//       description: '',
-//       image: eventimg,
-//     },
-//   ];
-
-//   return (
-//     <div className="event-page">
-//       {/* Filter & Sort Section */}
-//       <section className="filter-sort">
-//         <select>
-//           <option>Date</option>
-//           <option>Today</option>
-//           <option>Tomorrow</option>
-//           <option>This Week</option>
-//         </select>
-//         <select>
-//           <option>Category</option>
-//           <option>Music</option>
-//           <option>Sports</option>
-//           <option>Workshops</option>
-//         </select>
-//         <select>
-//           <option>Location</option>
-//           <option>New York</option>
-//           <option>Los Angeles</option>
-//           <option>Online</option>
-//         </select>
-//         <select>
-//           <option>Sort By</option>
-//           <option>Popularity</option>
-//           <option>Date</option>
-//           <option>Price</option>
-//         </select>
-//       </section>
-
-//       {/* Event Listings */}
-//       <div className="text-center text-[30px] text-white mt-5">Latest & Ongoing Events</div>
-//       <section className="event-listings">
-//         {events.map((event) => (
-//           <div key={event.id} className="event-card">
-//             <img src={event.image} alt={`${event.title} Thumbnail`} className="event-image" />
-//             <div className="event-details">
-//               <h3 className="event-title">{event.title}</h3>
-//               <p className="event-date"><i className="fa fa-calendar"></i> {event.date}</p>
-//               <p className="event-time"><i className="fa fa-clock"></i> {event.time}</p>
-//               <p className="event-location"><i className="fa fa-map-marker"></i> {event.location}</p>
-//               <p className="event-description">{event.description}</p>
-//               <button className="register-btn">Details</button>
-//             </div>
-//           </div>
-//         ))}
-
-//           <UpcomingEvents></UpcomingEvents>
-
-//       </section>
-//       {/* Pagination */}
-//       <section className="pagination">
-//         <button>Previous</button>
-//         <button>1</button>
-//         <button>2</button>
-//         <button>3</button>
-//         <button>Next</button>
-//       </section>
-
-//       {/* Footer */}
-//       <footer>
-//         <p>&copy; 2025 Comptron. All rights reserved.</p>
-//         <a href="#">Privacy Policy</a>
-//         <a href="#">Terms of Service</a>
-//         <a href="#">Contact Us</a>
-//       </footer>
-//     </div>
-//   );
-// };
-
-// export default EventShowcase;

@@ -39,7 +39,7 @@ const AddMemberForm = ({
     try {
       if (selectedMember) {
         // ✅ Update an existing member instead of adding a new one
-        await updateMember(selectedMember._id, memberData);
+        await updateMember(selectedMember.customId, memberData);
         setSelectedMember(null); // Reset form after updating
       } else {
         // ✅ Add a new member if no selectedMember
@@ -205,7 +205,7 @@ const AddMemberForm = ({
           Cancel Edit
         </button>
       )}
-      <MemberList key={refresh} onEdit={setSelectedMember} />
+      <MemberList onEdit={setSelectedMember} refresh={refresh}/>
     </form>
   );
 };

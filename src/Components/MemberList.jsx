@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { getMembers, deleteMember } from "../services/memberService";
 
-const MemberList = ({ onEdit }) => {
+const MemberList = ({ onEdit, refresh  }) => {
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
     fetchMembers();
-  }, []);
+  }, [refresh]);
 
   const fetchMembers = async () => {
     const data = await getMembers();

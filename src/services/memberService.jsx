@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL || "https://comptron-server-2.onrender.com/api/members";
 
-export const updateMember = async (id, updatedMember) => {
+export const updateMember = async (customId, updatedMember) => {
     const formData = new FormData();
     formData.append("name", updatedMember.name);
     formData.append("role", updatedMember.role);
@@ -14,7 +14,7 @@ export const updateMember = async (id, updatedMember) => {
         formData.append("image", updatedMember.image);
     }
 
-    const response = await axios.put(`${API_URL}/${id}`, formData, {
+    const response = await axios.put(`${API_URL}/${customId}`, formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
@@ -35,9 +35,9 @@ export const getMembers = async () => {
 };
 
 // Delete member by ID
-export const deleteMember = async (id) => {
+export const deleteMember = async (customId) => {
     try {
-        const response = await axios.delete(`${API_URL}/${id}`);
+        const response = await axios.delete(`${API_URL}/${customId}`);
         return response.data;
     } catch (error) {
         console.error("Error deleting member:", error);

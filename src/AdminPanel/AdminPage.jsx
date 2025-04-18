@@ -15,6 +15,7 @@ import ValidationControl from "../USER/ValidationControl";
 import AdminPasswordResetPage from './../USER/PasswordReset';
 import AdminUsersPage from "./AdminUsersPage";
 import AdminDashboardPage from "./AdminDashboardPage";
+import CommitteeValidation from "../CommitteePanel/CommitteeValidation";
 
 const AdminPage = () => {
   const [refresh, setRefresh] = useState(false);
@@ -69,7 +70,7 @@ const AdminPage = () => {
 
         {/* ----------------------------------------------------------------------------------------- */}
         {/* ----------------------------------------------------------------------------------------- */}
-        {/* <AdminEventDetailsControl></AdminEventDetailsControl> */}
+        <AdminEventDetailsControl></AdminEventDetailsControl>
         {/* ----------------------------------------------------------------------------------------- */}
 
         {/* <AdminUsersPage></AdminUsersPage> */}
@@ -78,6 +79,8 @@ const AdminPage = () => {
 
       {/* </AdminProvider> */}
         <AdminDashboardPage></AdminDashboardPage>
+
+        <CommitteeValidation></CommitteeValidation>
     </div>
   );
 };
