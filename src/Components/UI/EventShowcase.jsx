@@ -7,7 +7,7 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
   const [events, setEvents] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [ongoingEvents, setOngoingEvents] = useState([]);
-
+  const [pastEvents, setPastEvents] = useState([]);
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -38,19 +38,30 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
 
   // 🔍 Categorize function
   const categorizeEvents = (data) => {
-    const now = new Date();
-    const upcoming = data.filter((event) => {
-      const eventDateTime = new Date(`${event.date}T${event.time}`);
-      return eventDateTime > now;
+    const now = moment().tz("Asia/Dhaka");
+  
+    const upcoming = [];
+    const ongoing = [];
+    const past = [];
+  
+    data.forEach((event) => {
+      const eventStart = moment.tz(`${event.date} ${event.time}`, "YYYY-MM-DD hh:mm A", "Asia/Dhaka");
+      const duration = parseInt(event.durationDays) || 1;
+  
+      const eventEnd = moment(eventStart).add(duration, "days");
+  
+      if (eventStart.isAfter(now)) {
+        upcoming.push(event);
+      } else if (eventStart.isSameOrBefore(now) && eventEnd.isAfter(now)) {
+        ongoing.push(event);
+      } else {
+        past.push(event);
+      }
     });
-
-    const ongoing = data.filter((event) => {
-      const eventDateTime = new Date(`${event.date}T${event.time}`);
-      return eventDateTime <= now;
-    });
-
+  
     setUpcomingEvents(upcoming);
     setOngoingEvents(ongoing);
+    setPastEvents(past);
   };
 
   const renderEventCard = (event) => {
@@ -103,6 +114,17 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
           </div>
           <section className="event-listings">
             {upcomingEvents.map(renderEventCard)}
+          </section>
+        </>
+      )}
+
+      {pastEvents.length > 0 && (
+        <>
+          <div className="text-center text-[30px] text-white mt-10">
+            Past Events
+          </div>
+          <section className="event-listings">
+            {pastEvents.map(renderEventCard)}
           </section>
         </>
       )}

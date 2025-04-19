@@ -22,6 +22,7 @@ import UserLogin from "./USER/UserLogin";
 import AddMemberForm from './Components/AddMemberForm';
 import CommitteeProfile from "./CommitteePanel/CommitteeProfile";
 import CommitteeSettings from "./CommitteePanel/CommitteeSettings";
+import AdminEventDetailsControl from "./AdminPanel/AdminEventDetailsControl";
 
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/CommitteeEdit" element={<AddMemberForm onMemberAdded={() => setRefresh(!refresh)} selectedMember={selectedMember} setSelectedMember={setSelectedMember}/>}></Route>
           <Route path="/members/CommitteeProfile/:id" element={<CommitteeProfile></CommitteeProfile>}></Route>
           <Route path="/CommitteeSettings/:id" element={<CommitteeSettings></CommitteeSettings>}></Route>
+          <Route path="/EventEdit" element={<AdminEventDetailsControl></AdminEventDetailsControl>}></Route>
           <Route
             path="/AdminPage"
             element={

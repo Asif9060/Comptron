@@ -86,7 +86,7 @@ const EventDetails = () => {
             </div>
           </div> */}
 
-          <CommentSection></CommentSection>
+          <CommentSection eventId={event._id}></CommentSection>
         </div>
       </div>
     </div>

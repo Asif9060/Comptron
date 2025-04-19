@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import "./CSS/EventCoundown.css";
-import { useContext } from "react";
-import { AdminContext } from "../../AdminPanel/ToggleAdmin/AdminContext";
 import "./CSS/Reset.css";
 
 const EventCountdown = ({ setCountdownLoaded }) => {
-  const { isAdmin } = useContext(AdminContext);
-
   const [eventDate, setEventDate] = useState(null);
+  const [eventName, setEventName] = useState(""); // New state for event name
+
   const [timeRemaining, setTimeRemaining] = useState({
     days: "00",
     hours: "00",
@@ -17,38 +15,33 @@ const EventCountdown = ({ setCountdownLoaded }) => {
 
   const fetchEventDate = async () => {
     try {
-      const response = await fetch(
-        "https://comptron-server-2.onrender.com/api/event"
-      );
+      const response = await fetch("https://comptron-server-2.onrender.com/api/event");
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.eventDate) {
         const parsedEventDate = new Date(data.eventDate);
-        // setEventDate(data.eventDate);
         if (!isNaN(parsedEventDate)) {
-          setEventDate(parsedEventDate.getTime()); // Store the timestamp in milliseconds
+          setEventDate(parsedEventDate.getTime());
+          setEventName(data.eventName || "Upcoming Event"); // ✅ Set event name here
         } else {
           console.error("Invalid event date:", parsedEventDate);
         }
+      } else {
+        console.error("No event date found in response:", data);
       }
     } catch (error) {
       console.error("Error fetching event date:", error);
-    }
-    finally{
+    } finally {
       setCountdownLoaded(true);
     }
   };
 
   useEffect(() => {
     fetchEventDate();
-
-    // Listen for admin panel updates
     window.addEventListener("eventUpdated", fetchEventDate);
-
     return () => window.removeEventListener("eventUpdated", fetchEventDate);
   }, [setCountdownLoaded]);
 
-  // Countdown logic
   useEffect(() => {
     if (!eventDate) return;
 
@@ -58,20 +51,10 @@ const EventCountdown = ({ setCountdownLoaded }) => {
 
       if (remainingTime > 0) {
         setTimeRemaining({
-          days: String(
-            Math.floor(remainingTime / (1000 * 60 * 60 * 24))
-          ).padStart(2, "0"),
-          hours: String(
-            Math.floor(
-              (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-            )
-          ).padStart(2, "0"),
-          minutes: String(
-            Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60))
-          ).padStart(2, "0"),
-          seconds: String(
-            Math.floor((remainingTime % (1000 * 60)) / 1000)
-          ).padStart(2, "0"),
+          days: String(Math.floor(remainingTime / (1000 * 60 * 60 * 24))).padStart(2, "0"),
+          hours: String(Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, "0"),
+          minutes: String(Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0"),
+          seconds: String(Math.floor((remainingTime % (1000 * 60)) / 1000)).padStart(2, "0"),
         });
       } else {
         setTimeRemaining({
@@ -85,41 +68,38 @@ const EventCountdown = ({ setCountdownLoaded }) => {
 
     updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
-
     return () => clearInterval(interval);
   }, [eventDate]);
-
 
   return (
     <div className="countdown-wrapper">
       <div className="countdown-container">
-        <h1 className="eventTitle">CSE FEST</h1>
-        <p id="event-name"></p>
+        <h1 className="eventTitle">{eventName || "Upcoming Event"}</h1>
         <div className="countdown">
           <div className="time-section">
-            <span id="days">{timeRemaining.days}</span>
+            <span>{timeRemaining.days}</span>
             <p>Days</p>
           </div>
           <div className="time-section">
-            <span id="hours">{timeRemaining.hours}</span>
+            <span>{timeRemaining.hours}</span>
             <p>Hours</p>
           </div>
           <div className="time-section">
-            <span id="minutes">{timeRemaining.minutes}</span>
+            <span>{timeRemaining.minutes}</span>
             <p>Minutes</p>
           </div>
           <div className="time-section">
-            <span id="seconds">{timeRemaining.seconds}</span>
+            <span>{timeRemaining.seconds}</span>
             <p>Seconds</p>
           </div>
         </div>
-
       </div>
     </div>
   );
 };
 
 export default EventCountdown;
+
 
 {/* Render the reset button only for admins */}
 {/* {isAdmin && (

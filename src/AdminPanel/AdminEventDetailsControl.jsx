@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import moment from "moment-timezone";
+import AdminEventControl from "./AdminEventControl";
+import EventCountdown from "../Components/UI/EventCountdown";
+
 const AdminEventDetailsControl = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -9,6 +12,7 @@ const AdminEventDetailsControl = () => {
   const [editingEventId, setEditingEventId] = useState(null);
   const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
+  const [durationDays, setDurationDays] = useState(1); // New state for durationDays
 
   // Fetch all events when the component mounts
   useEffect(() => {
@@ -49,6 +53,7 @@ const AdminEventDetailsControl = () => {
     formData.append("description", description);
     formData.append("date", eventDate);
     formData.append("time", eventTime);
+    formData.append("durationDays", durationDays); // Include durationDays in the form data
     if (mainImage) formData.append("mainImage", mainImage);
     galleryImages.forEach((file) => {
       formData.append("galleryImages", file);
@@ -88,10 +93,11 @@ const AdminEventDetailsControl = () => {
     setEditingEventId(event._id);
     setTitle(event.title);
     setDescription(event.description);
-  
+
     const dt = moment.tz(event.dateTime, "Asia/Dhaka");
     setEventDate(dt.format("YYYY-MM-DD"));
     setEventTime(dt.format("HH:mm"));
+    setDurationDays(event.durationDays || 1); // Set durationDays for editing
   };
 
   const handleDelete = async (id) => {
@@ -115,7 +121,13 @@ const AdminEventDetailsControl = () => {
   };
 
   return (
-    <div className="p-8 flex flex-col translate-y-[4rem]  ">
+    <div className="p-8 flex text-white flex-col translate-y-[4rem]">
+      <h1 className="text-4xl translate-y-[-2rem] font-bold text-center text-[#15A6E1]">
+        Admin Event Management
+      </h1>
+      <AdminEventControl></AdminEventControl>
+      <EventCountdown></EventCountdown>
+      <br />
       {/* Event Form */}
       <div className="flex flex-col items-center border border-[#15A6E1] p-4 rounded-3xl shadow-md mb-8">
         <h2 className="p-2 text-[2rem] font-bold text-emerald-500">
@@ -127,7 +139,7 @@ const AdminEventDetailsControl = () => {
           encType="multipart/form-data"
         >
           <input
-            className="text-center bg-white p-2"
+            className="text-center text-black bg-white p-2"
             type="text"
             placeholder="Event Title"
             value={title}
@@ -135,37 +147,50 @@ const AdminEventDetailsControl = () => {
             required
           />
           <textarea
-            className="text-center bg-white p-2"
+            className="text-center text-black bg-white p-2"
             placeholder="Event Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
           />
           <input
-            className="bg-white p-2"
+            className="bg-white text-black p-2"
             type="file"
             accept="image/*"
             onChange={(e) => handleImageUpload(e, setMainImage)}
             required={!editingEventId}
           />
           <input
-            className="bg-white p-2"
+            className="bg-white text-black p-2"
             type="file"
             accept="image/*"
             multiple
             onChange={handleGalleryUpload}
           />
           <input
+            className="bg-white text-black p-2"
             type="date"
             value={eventDate}
             onChange={(e) => setEventDate(e.target.value)}
           />
 
           <input
+            className="bg-white text-black p-2"
             type="time"
             value={eventTime}
             onChange={(e) => setEventTime(e.target.value)}
           />
+          <label>
+            Duration (in days):
+            <input
+              type="number"
+              min="1"
+              value={durationDays}
+              onChange={(e) => setDurationDays(Number(e.target.value))}
+              className="bg-white text-black p-2 ml-2"
+              required
+            />
+          </label>
           <button
             className="button0 bg-emerald-500 text-white p-2 rounded-lg"
             type="submit"

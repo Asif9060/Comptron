@@ -50,14 +50,9 @@ const AdminDashboardPage = () => {
       <div className="flex flex-col items-center mt-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 w-full max-w-6xl">
           <div className="relative group">
-            {/* <button className="w-full p-12 bg-gradient-to-r from-[#003049] to-[#00B4D8] text-white text-3xl font-semibold rounded-xl shadow-lg transform hover:translate-y-1 hover:scale-105 transition-all duration-300 backdrop-blur-xl border border-opacity-30 border-transparent group-hover:animate-pulse">
-              Edit Member
-              <span className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#00B4D8] transition-all duration-300"></span>
-            </button> */}
             <NavLink to={"/CommitteeEdit"} className="w-full p-12 bg-gradient-to-r from-[#003049] to-[#00B4D8] text-white text-3xl font-semibold rounded-xl shadow-lg transform hover:translate-y-1 hover:scale-105 transition-all duration-300 backdrop-blur-xl border border-opacity-30 border-transparent group-hover:animate-pulse">
               Edit Member
-              
-
+              <span className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#00B4D8] transition-all duration-300"></span>
             </NavLink>
           </div>
 
@@ -69,10 +64,10 @@ const AdminDashboardPage = () => {
           </div>
 
           <div className="relative group">
-            <button className="w-full p-12 bg-gradient-to-r from-[#003049] to-[#00B4D8] text-white text-3xl font-semibold rounded-xl shadow-lg transform hover:translate-y-1 hover:scale-105 transition-all duration-300 backdrop-blur-xl border border-opacity-30 border-transparent group-hover:animate-pulse">
+            <NavLink to={"/EventEdit"} className="w-full p-12 bg-gradient-to-r from-[#003049] to-[#00B4D8] text-white text-3xl font-semibold rounded-xl shadow-lg transform hover:translate-y-1 hover:scale-105 transition-all duration-300 backdrop-blur-xl border border-opacity-30 border-transparent group-hover:animate-pulse">
               Event Management
               <span className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#00B4D8] transition-all duration-300"></span>
-            </button>
+            </NavLink>
           </div>
 
           <div className="relative group">
