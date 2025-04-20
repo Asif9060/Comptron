@@ -55,14 +55,14 @@ export default function CommitteeValidation() {
   };
 
   return (
-    <div className="p-6 max-w-xl mx-auto bg-white rounded-2xl shadow-md">
+    <div className="p-6 w-1/2 flex flex-col items-center mx-auto bg-gray-900 rounded-2xl shadow-md">
       <h1 className="text-2xl font-bold mb-4">Validate Committee Member</h1>
       <input
         type="text"
         placeholder="Enter Custom ID"
         value={customId}
         onChange={(e) => setCustomId(e.target.value)}
-        className="w-full p-2 border rounded mb-4"
+        className="w-3/6 p-2 border text-white bg-gray-800 text-center rounded mb-4"
       />
       <button
         onClick={handleSearch}

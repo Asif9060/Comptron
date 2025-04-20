@@ -80,7 +80,7 @@ const AdminPage = () => {
       {/* </AdminProvider> */}
         <AdminDashboardPage></AdminDashboardPage>
 
-        <CommitteeValidation></CommitteeValidation>
+        {/* <CommitteeValidation></CommitteeValidation> */}
     </div>
   );
 };

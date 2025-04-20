@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { addMember, updateMember } from "../services/memberService"; // Import API functions
 import MemberList from "./MemberList";
+import CommitteeValidation from "../CommitteePanel/CommitteeValidation";
 
 const AddMemberForm = ({
   onMemberAdded,
@@ -206,6 +207,7 @@ const AddMemberForm = ({
         </button>
       )}
       <MemberList onEdit={setSelectedMember} refresh={refresh}/>
+      <CommitteeValidation></CommitteeValidation>
     </form>
   );
 };

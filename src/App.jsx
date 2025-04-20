@@ -23,6 +23,10 @@ import AddMemberForm from './Components/AddMemberForm';
 import CommitteeProfile from "./CommitteePanel/CommitteeProfile";
 import CommitteeSettings from "./CommitteePanel/CommitteeSettings";
 import AdminEventDetailsControl from "./AdminPanel/AdminEventDetailsControl";
+import Recent from "./Components/Features/Recent";
+import AdminTextSlideControl from "./AdminPanel/AdminTextSlideControl";
+import ImageUpload from "./AdminPanel/ImageUpload";
+import AdminUsersPage from "./AdminPanel/AdminUsersPage";
 
 
 const App = () => {
@@ -48,10 +52,13 @@ const App = () => {
           <Route path="/settings/:id" element={<SettingsPage></SettingsPage>}></Route>
           <Route path="/Reset" element={<AdminPasswordResetPage></AdminPasswordResetPage>}></Route>
           <Route path="/UserLogin" element={<UserLogin></UserLogin>}></Route>
-          <Route path="/CommitteeEdit" element={<AddMemberForm onMemberAdded={() => setRefresh(!refresh)} selectedMember={selectedMember} setSelectedMember={setSelectedMember}/>}></Route>
+          <Route path="/ManageCommittee" element={<AddMemberForm onMemberAdded={() => setRefresh(!refresh)} selectedMember={selectedMember} setSelectedMember={setSelectedMember}/>}></Route>
           <Route path="/members/CommitteeProfile/:id" element={<CommitteeProfile></CommitteeProfile>}></Route>
           <Route path="/CommitteeSettings/:id" element={<CommitteeSettings></CommitteeSettings>}></Route>
-          <Route path="/EventEdit" element={<AdminEventDetailsControl></AdminEventDetailsControl>}></Route>
+          <Route path="/ManageEvent" element={<AdminEventDetailsControl></AdminEventDetailsControl>}></Route>
+          <Route path="/ManageActivity" element={<ImageUpload></ImageUpload>}></Route>
+          <Route path="/ManageNews" element={<AdminTextSlideControl></AdminTextSlideControl>}></Route>
+          <Route path="/ManageUsers" element={<AdminUsersPage></AdminUsersPage>}></Route>
           <Route
             path="/AdminPage"
             element={
