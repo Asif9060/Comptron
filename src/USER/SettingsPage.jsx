@@ -160,7 +160,7 @@ const handleDelete = async () => {
     );
   }
   if (customId !== id) {
-    return <p>Unauthorized</p>; // Or redirect
+    return <p className="text-white text-2xl font-bold flex justify-center items-center h-screen">Unauthorized</p>; // Or redirect
   }
 
   return (
