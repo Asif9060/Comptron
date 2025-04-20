@@ -1,3 +1,4 @@
+import SideMenu from "../Features/SideMenu";
 import "./CSS/Objectives.css";
 const Objectives = () => {
   return (

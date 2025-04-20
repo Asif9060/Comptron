@@ -91,7 +91,7 @@ const CommitteeProfile = () => {
             >
               All Members
             </NavLink>
-            <NavLink
+            {/* <NavLink
               to={`/CommitteeSettings/${id}`}
               className={({ isActive }) =>
                 `block px-4 py-2 rounded-lg ${
@@ -101,7 +101,7 @@ const CommitteeProfile = () => {
               onClick={() => setSidebarOpen(false)}
             >
               Settings
-            </NavLink>
+            </NavLink> */}
           </nav>
         </div>
       </div>
@@ -145,11 +145,11 @@ const CommitteeProfile = () => {
             )}
 
             <h1 className="text-3xl font-bold mb-2">{user.name}</h1>
-            {user.gender && (
+            {/* {user.gender && (
               <div className="text-center translate-y-[-2rem]">
                 <p className="text-gray-300">{user.gender}</p>
               </div>
-            )}
+            )} */}
             <p className="text-blue-400 text-center mb-2">{user.customId}</p>
             <p
               className={`text-sm text-center mb-4 ${

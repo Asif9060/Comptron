@@ -17,7 +17,6 @@ const SettingsPage = () => {
   const [success, setSuccess] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
-
   useEffect(() => {
     fetch(`https://comptron-server-2.onrender.com/api/users/profile/${id}`)
       .then((res) => {
@@ -161,11 +160,7 @@ const handleDelete = async () => {
     );
   }
   if (customId !== id) {
-    return (
-      <div className="flex justify-center items-center min-h-screen text-white bg-[#111]">
-        <p className="text-xl font-semibold">Unauthorized access</p>
-      </div>
-    );
+    return <p>Unauthorized</p>; // Or redirect
   }
 
   return (
@@ -188,6 +183,17 @@ const handleDelete = async () => {
               Dashboard
             </NavLink> */}
             <NavLink
+              to={`/`}
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg ${
+                  isActive ? "bg-blue-600" : "hover:bg-gray-700"
+                }`
+              }
+              onClick={() => setSidebarOpen(false)}
+            >
+              Home
+            </NavLink>
+            <NavLink
               to={`/profile/${id}`}
               className={({ isActive }) =>
                 `block px-4 py-2 rounded-lg ${
@@ -199,7 +205,7 @@ const handleDelete = async () => {
               Profile
             </NavLink>
             <NavLink
-              to={`/GMembers`}
+              to={`/AllMembers`}
               className={({ isActive }) =>
                 `block px-4 py-2 rounded-lg ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
@@ -292,7 +298,7 @@ const handleDelete = async () => {
             </label>
             <input
               type="url"
-              value={user.socials.linkedIn || ""}
+              value={user.linkedIn || ""}
               onChange={(e) => setUser({ ...user, linkedIn: e.target.value })}
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://linkedin.com/in/yourname"
@@ -302,7 +308,7 @@ const handleDelete = async () => {
             <label className="block text-sm font-medium mb-1">GitHub URL</label>
             <input
               type="url"
-              value={user.socials.github || ""}
+              value={user.github || ""}
               onChange={(e) => setUser({ ...user, github: e.target.value })}
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://github.com/yourusername"
@@ -314,7 +320,7 @@ const handleDelete = async () => {
             </label>
             <input
               type="url"
-              value={user.socials.portfolio || ""}
+              value={user.portfolio || ""}
               onChange={(e) => setUser({ ...user, portfolio: e.target.value })}
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://yourportfolio.com"
@@ -324,7 +330,7 @@ const handleDelete = async () => {
             <label className="block text-sm font-medium mb-1">CV URL</label>
             <input
               type="url"
-              value={user.socials.cv || ""}
+              value={user.cv || ""}
               onChange={(e) => setUser({ ...user, cv: e.target.value })}
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://drive.google.com/..."

@@ -11,18 +11,17 @@ const SettingsPage = () => {
     email: "",
     phone: "",
     socials: {
-        linkedIn: "",
-        github: "",
-        portfolio: "",
-        cv: "",
-      },
+      linkedIn: "",
+      github: "",
+      portfolio: "",
+      cv: "",
+    },
   });
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  
 
   useEffect(() => {
     fetch(`https://comptron-server-2.onrender.com/api/members/${id}`)
@@ -74,24 +73,24 @@ const SettingsPage = () => {
     setSuccess("");
 
     const formData = new FormData();
-  formData.append("name", user.name);
-  formData.append("skills", user.skills);
-  formData.append("email", user.email);
-  formData.append("phone", user.phone);
-  formData.append("socials", JSON.stringify(user.socials)); // this will now be parsed correctly
-  if (image && image.startsWith("data:image")) {
-    const blob = await (await fetch(image)).blob(); // convert base64 to blob
-    formData.append("image", blob, "profile.jpg");
-  }
+    formData.append("name", user.name);
+    formData.append("skills", user.skills);
+    formData.append("email", user.email);
+    formData.append("phone", user.phone);
+    formData.append("socials", JSON.stringify(user.socials)); // this will now be parsed correctly
+    if (image && image.startsWith("data:image")) {
+      const blob = await (await fetch(image)).blob(); // convert base64 to blob
+      formData.append("image", blob, "profile.jpg");
+    }
 
-  try {
-    const response = await fetch(
-      `https://comptron-server-2.onrender.com/api/members/${id}`,
-      {
-        method: "PUT",
-        body: formData,
-      }
-    );
+    try {
+      const response = await fetch(
+        `https://comptron-server-2.onrender.com/api/members/${id}`,
+        {
+          method: "PUT",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -119,11 +118,8 @@ const SettingsPage = () => {
     }
   };
 
+  // Compare with the route param
 
-// Compare with the route param
-
-  
-  
   const handleCancel = () => {
     navigate(`/profile/${id}`);
   };
@@ -138,13 +134,13 @@ const SettingsPage = () => {
       </div>
     );
   }
-//   if (customId !== id) {
-//     return (
-//       <div className="flex justify-center items-center min-h-screen text-white bg-[#111]">
-//         <p className="text-xl font-semibold">Unauthorized access</p>
-//       </div>
-//     );
-//   }
+  //   if (customId !== id) {
+  //     return (
+  //       <div className="flex justify-center items-center min-h-screen text-white bg-[#111]">
+  //         <p className="text-xl font-semibold">Unauthorized access</p>
+  //       </div>
+  //     );
+  //   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1f1f1f] p-8 flex justify-center">
@@ -165,6 +161,18 @@ const SettingsPage = () => {
             >
               Dashboard
             </NavLink> */}
+
+            <NavLink
+              to={`/`}
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg ${
+                  isActive ? "bg-blue-600" : "hover:bg-gray-700"
+                }`
+              }
+              onClick={() => setSidebarOpen(false)}
+            >
+              Home
+            </NavLink>
             <NavLink
               to={`/members/CommitteeProfile/${id}`}
               className={({ isActive }) =>
@@ -211,7 +219,6 @@ const SettingsPage = () => {
       </button>
       <div className="bg-[#1c1c1e] p-8 rounded-2xl shadow-xl w-full max-w-md text-white">
         <h1 className="text-3xl font-bold mb-6 text-center">Settings</h1>
-
         {error && (
           <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">
             {error}
@@ -281,7 +288,12 @@ const SettingsPage = () => {
             <input
               type="url"
               value={user.socials?.github || ""}
-              onChange={(e) => setUser({ ...user, socials: { ...user.socials, github: e.target.value } })}
+              onChange={(e) =>
+                setUser({
+                  ...user,
+                  socials: { ...user.socials, github: e.target.value },
+                })
+              }
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://github.com/yourusername"
             />
@@ -293,7 +305,12 @@ const SettingsPage = () => {
             <input
               type="url"
               value={user.socials?.portfolio || ""}
-              onChange={(e) => setUser({ ...user, socials: { ...user.socials, portfolio: e.target.value } })}
+              onChange={(e) =>
+                setUser({
+                  ...user,
+                  socials: { ...user.socials, portfolio: e.target.value },
+                })
+              }
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
               placeholder="https://yourportfolio.com"
             />

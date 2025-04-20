@@ -146,11 +146,11 @@ const ProfilePage = () => {
             )}
 
             <h1 className="text-3xl font-bold mb-2">{user.name}</h1>
-            {user.gender && (
+            {/* {user.gender && (
               <div className="text-center translate-y-[-2rem]">
                 <p className="text-gray-300">{user.gender}</p>
               </div>
-            )}
+            )} */}
             <p className="text-blue-400 text-center mb-2">{user.customId}</p>
             <p
               className={`text-sm text-center mb-4 ${
@@ -189,12 +189,12 @@ const ProfilePage = () => {
               </div>
             </div> */}
             <div className="flex flex-wrap gap-6 mb-10">
-              <div className="flex-1 text-center min-w-[280px] bg-[#2a2a2a] rounded-2xl p-6">
+              <div className="flex-1  min-w-[280px] bg-[#2a2a2a] rounded-2xl p-6">
                 <h2 className="text-xl text-center text-cyan-400 font-semibold mb-4">
                   Skills
                 </h2>
                 {user.skills && typeof user.skills === "string" ? (
-                  <ul className=" text-white space-y-1">
+                  <ul className=" text-white list-disc ml-5 space-y-1">
                     {user.skills.split(",").map((skill, index) => (
                       <li key={index}>{skill.trim()}</li>
                     ))}

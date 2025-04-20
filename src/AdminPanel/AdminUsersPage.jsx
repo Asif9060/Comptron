@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import ValidationControl from "../USER/ValidationControl";
+import AdminPasswordResetPage from "../USER/PasswordReset";
 
 const AdminUsersPage = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [editUserId, setEditUserId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(""); // ✅ New state for search
+
   const [editFormData, setEditFormData] = useState({
     name: "",
     customId: "",
@@ -33,10 +37,13 @@ const AdminUsersPage = () => {
           `https://comptron-server-2.onrender.com/api/users/delete/${customId}`,
           { method: "DELETE" }
         );
-        if (!response.ok) throw new Error(`Failed to delete. Status: ${response.status}`);
+        if (!response.ok)
+          throw new Error(`Failed to delete. Status: ${response.status}`);
 
         setSuccess("User deleted successfully.");
-        setUsers((prevUsers) => prevUsers.filter((user) => user.customId !== customId));
+        setUsers((prevUsers) =>
+          prevUsers.filter((user) => user.customId !== customId)
+        );
       } catch (err) {
         setError(err.message || "Failed to delete user");
       }
@@ -103,17 +110,46 @@ const AdminUsersPage = () => {
     }
   };
 
+  // ✅ Filter users based on name or ID
+  const filteredUsers = users.filter((user) => {
+    const lowerSearch = searchTerm.toLowerCase();
+    return (
+      user.name.toLowerCase().includes(lowerSearch) ||
+      user.customId.toLowerCase().includes(lowerSearch)
+    );
+  });
+
   return (
     <div className="min-h-screen bg-[#111] text-white p-6">
       <h1 className="text-3xl font-bold mb-6">All Users</h1>
+
+      {/* ✅ Search Input */}
+      <div className="mb-6 flex justify-center">
+        <input
+          type="text"
+          placeholder="Search by name or ID..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="mb-6 p-3 w-1/2 bg-[#222] rounded-lg border border-[#444] text-white"
+        />
+      </div>
+      <div className="flex items-center gap-18 mb-5 justify-center">
+        <div>
+          <ValidationControl></ValidationControl>
+        </div>
+        <div>
+          <AdminPasswordResetPage></AdminPasswordResetPage>
+        </div>
+      </div>
+
       {error && <div className="text-red-500 mb-4">{error}</div>}
       {success && <div className="text-green-500 mb-4">{success}</div>}
 
-      <div className="space-y-6">
-        {users.map((user) => (
+      <div className="space-y-6 flex flex-col items-center">
+        {filteredUsers.map((user) => (
           <div
             key={user.customId}
-            className="bg-[#1c1c1e] p-4 rounded-lg flex flex-col gap-4"
+            className="bg-[#1c1c1e] p-4 rounded-lg w-1/2 gap-4"
           >
             {editUserId === user.customId ? (
               <>
@@ -143,7 +179,7 @@ const AdminUsersPage = () => {
                   />
                   <input
                     type="text"
-                    name="linkedin"
+                    name="linkedIn"
                     value={editFormData.linkedIn}
                     onChange={handleEditChange}
                     placeholder="LinkedIn URL"
@@ -167,20 +203,12 @@ const AdminUsersPage = () => {
                   />
                   <input
                     type="text"
-                    name="cvUrl"
+                    name="cv"
                     value={editFormData.cv}
                     onChange={handleEditChange}
                     placeholder="CV URL"
-                    className="bg-[#333] text-white p-2 w-[127.3rem] rounded"
+                    className="bg-[#333] text-white p-2 rounded col-span-2"
                   />
-                  {/* <input
-                    type="text"
-                    name="image"
-                    value={editFormData.image}
-                    onChange={handleEditChange}
-                    placeholder="Image URL"
-                    className="bg-[#333] text-white p-2 rounded"
-                  /> */}
                 </div>
                 <div className="flex gap-3 mt-3">
                   <button
@@ -200,14 +228,12 @@ const AdminUsersPage = () => {
             ) : (
               <div className="flex justify-between items-center">
                 <div>
-                  <p><strong>Name:</strong> {user.name}</p>
-                  <p><strong>Custom ID:</strong> {user.customId}</p>
-                  {/* <p><strong>Skills:</strong> {user.skills}</p>
-                  <p><strong>LinkedIn:</strong> {user.linkedin}</p>
-                  <p><strong>GitHub:</strong> {user.github}</p>
-                  <p><strong>Portfolio:</strong> {user.portfolio}</p>
-                  <p><strong>CV:</strong> {user.cvUrl}</p>
-                  <p><strong>Image:</strong> <a href={user.image} target="_blank" rel="noreferrer">{user.image}</a></p> */}
+                  <p>
+                    <strong>Name:</strong> {user.name}
+                  </p>
+                  <p>
+                    <strong>Custom ID:</strong> {user.customId}
+                  </p>
                 </div>
                 <div className="flex gap-3">
                   <button

@@ -5,6 +5,7 @@ import "../Components/UI/CSS/VisionAndMission.css";
 import msgForMobile from "../assets/images/pooto/msgFormobile.php.png";
 import Footer from "../Components/Layout/Footer";
 import SideMenu from "../Components/Features/SideMenu";
+import AdvisorMessage from "../Components/UI/AdvisorMessage";
 const AboutPage = () => {
   return (
     <div className=" w-full h-screen">
@@ -69,7 +70,8 @@ const AboutPage = () => {
         <Objectives></Objectives>
       </div>
       <div className="msgadv">
-        <MessageFromAdvisor></MessageFromAdvisor>
+        {/* <MessageFromAdvisor></MessageFromAdvisor> */}
+        <AdvisorMessage></AdvisorMessage>
       </div>
       <div className="msgForMobile hidden">
         <div className="text-[25px]  text-slate-300 text-center mb-6 font-bold">
@@ -81,7 +83,7 @@ const AboutPage = () => {
         <Footer></Footer>
       </div>
 
-        <div className="-translate-y-[210rem] sidemenu fixed">
+        <div className="-translate-y-[185rem] sidemenu fixed">
           <SideMenu></SideMenu>
         </div>
 
