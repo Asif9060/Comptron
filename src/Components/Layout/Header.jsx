@@ -45,7 +45,7 @@ const Header = () => {
                 </p>
 
     
-                <div className="text-[#00ACF2] font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl md:translate-x-0 md:translate-y-0"  style={{ fontFamily: 'Arial, sans-serif', fontSize: '2rem', textAlign: 'center' }}>
+                <div className="text-[#00ACF2] font-bold text-xl clock sm:text-2xl md:text-3xl lg:text-4xl md:translate-x-0 md:translate-y-0"  style={{ fontFamily: 'Arial, sans-serif', fontSize: '2rem', textAlign: 'center' }}>
                 {formatTime(time)}
                 </div>
             </div>

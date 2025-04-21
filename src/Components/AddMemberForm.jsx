@@ -65,7 +65,7 @@ const AddMemberForm = ({
 
   return (
     <form
-      className=" gap-[2rem] grid place-items-center mt-12"
+      className=" gap-[2rem] grid comaddfield place-items-center mt-12"
       onSubmit={handleSubmit}
     >
       <div className="container01">
@@ -90,15 +90,6 @@ const AddMemberForm = ({
         />
       </div>
 
-      {/* <div className="container01">
-        <input
-          type="text"
-          className="input01"
-          placeholder="Facebook URL"
-          value={socials.linkedin}
-          onChange={(e) => setSocials({ ...socials, linkedin: e.target.value })}
-        />
-      </div> */}
 
       <label className="Documents-btn">
         <input
@@ -106,7 +97,7 @@ const AddMemberForm = ({
           onChange={handleImageChange}
           type="file"
           className="hidden-file-input"
-        />
+          />
         <span className="folderContainer">
           <svg
             className="fileBack"
@@ -128,7 +119,7 @@ const AddMemberForm = ({
                 x2="72.93"
                 y2="95.4804"
                 gradientUnits="userSpaceOnUse"
-              >
+                >
                 <stop stopColor="#a040fd"></stop>
                 <stop offset="1" stopColor="#5f41f3"></stop>
               </linearGradient>
@@ -146,7 +137,7 @@ const AddMemberForm = ({
               width="88"
               height="99"
               fill="url(#paint0_linear_117_6)"
-            ></rect>
+              ></rect>
             <defs>
               <linearGradient
                 id="paint0_linear_117_6"
@@ -173,7 +164,7 @@ const AddMemberForm = ({
             <path
               d="M0.29306 12.2478C0.133905 9.38186 2.41499 6.97059 5.28537 6.97059H30.419H58.1902C59.5751 6.97059 60.9288 6.55982 62.0802 5.79025L68.977 1.18034C70.1283 0.410771 71.482 0 72.8669 0H77H155.462C157.87 0 159.733 2.1129 159.43 4.50232L150.443 75.5023C150.19 77.5013 148.489 79 146.474 79H7.78403C5.66106 79 3.9079 77.3415 3.79019 75.2218L0.29306 12.2478Z"
               fill="url(#paint0_linear_117_5)"
-            ></path>
+              ></path>
             <defs>
               <linearGradient
                 id="paint0_linear_117_5"
@@ -214,6 +205,15 @@ const AddMemberForm = ({
 
 export default AddMemberForm;
 
+{/* <div className="container01">
+  <input
+    type="text"
+    className="input01"
+    placeholder="Facebook URL"
+    value={socials.linkedin}
+    onChange={(e) => setSocials({ ...socials, linkedin: e.target.value })}
+  />
+</div> */}
 {
   /* <input
   type="text"

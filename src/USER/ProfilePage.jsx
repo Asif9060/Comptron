@@ -129,7 +129,7 @@ const ProfilePage = () => {
         )}
 
         {user && (
-          <div className="bg-[#000000] w-[70rem] shadow-lg rounded-3xl p-10">
+          <div className="bg-[#000000] w-[70rem] layer shadow-lg rounded-3xl p-10">
             {user.image ? (
               <img
                 src={user.image}

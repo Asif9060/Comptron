@@ -75,6 +75,62 @@
     }
   }
 
+  @media (max-width: 768px) {
+    .countdown-container {
+      padding: 30px 40px;
+    }
+  
+    .eventTitle {
+      font-size: 2rem;
+    }
+  
+    #event-name {
+      font-size: 1rem;
+    }
+  
+    .countdown {
+      gap: 20px;
+    }
+  
+    .time-section span {
+      font-size: 2.5rem;
+      padding: 8px 16px;
+    }
+  
+    .time-section p {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .countdown-container {
+      padding: 20px 20px;
+    }
+  
+    .eventTitle {
+      font-size: 1.5rem;
+    }
+  
+    #event-name {
+      font-size: 0.9rem;
+    }
+  
+    .countdown {
+      align-items: center;
+      gap: 15px;
+    }
+  
+    .time-section span {
+      font-size: 2rem;
+      padding: 6px 12px;
+    }
+  
+    .time-section p {
+      font-size: 0.8rem;
+    }
+  }
+  
+
   /* Button */
 
   

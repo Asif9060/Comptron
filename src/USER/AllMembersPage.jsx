@@ -52,15 +52,21 @@ const AllMembersPage = () => {
         Registered Members
       </h1>
 
-      <div className="mb-8 flex justify-center">
-        <input
-          type="text"
-          placeholder="Search by name, skill, or ID..."
-          className="w-[40rem] p-4 rounded-lg text-lg text-white bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#15A6E1] transition duration-300"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
+      <div className="mb-8 flex justify-center px-4 w-full max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-2xl mx-auto">
+  <input
+    type="text"
+    placeholder="Search by name, skill, or ID..."
+    className="w-full p-3 md:p-4 rounded-lg text-base md:text-lg text-white bg-gray-800 placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#15A6E1] transition duration-300"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
+</div>
+
+
+
+
+
+
 
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-7xl">
         {filteredUsers.map((user) => (

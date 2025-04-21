@@ -252,44 +252,11 @@ const Dorja = () => {
                 </div>
               </div>
 
-              {/* <a href="#" className="login__htmlForgot">
-                Forgot your password?
-              </a> */}
-
+              
               <button onClick={handleSignIn} type="submit" className="login__button">
                 Login
               </button>
             </htmlForm>
-
-            {/* <div className="login__social">
-              <p className="login__social-title">Or login with</p>
-
-              <div className="login__social-links">
-                <a href="#" className="login__social-link">
-                  <img
-                    src={google}
-                    alt="image"
-                    className="login__social-img"
-                  />
-                </a>
-
-                <a href="#" className="login__social-link">
-                  <img
-                    src="/photo/icon-facebook.svg"
-                    alt="image"
-                    className="login__social-img"
-                  />
-                </a>
-
-                <a href="#" className="login__social-link">
-                  <img
-                    src="/photo/icon-apple.svg"
-                    alt="image"
-                    className="login__social-img"
-                  />
-                </a>
-              </div>
-            </div> */}
 
             <p className="login__switch">
               Don't have an account?
@@ -298,96 +265,70 @@ const Dorja = () => {
           </div>
         </div>
 
-        <div className="login__register">
-          <h1 className="login__title">Create new account.</h1>
-          {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
-          {success && <p className="text-green-600 text-sm mt-2 text-center">{success}</p>}
-
-          <div className="login__area">
-            <htmlForm action="" className="login__htmlForm">
-              <div className="login__content grid">
-                <div className="login__group grid">
-                  {/* <div className="login__box">
-                    <input
-                      type="text"
-                      id="names"
-                      required
-                      placeholder=" "
-                      className="login__input"
-                    />
-                    <label htmlFor="names" className="login__label">
-                      Names
-                    </label>
-
-                    <i className="ri-id-card-fill login__icon"></i>
-                  </div> */}
-
-                  {/* <div className="login__box">
-                    <input
-                      type="text"
-                      id="surnames"
-                      required
-                      placeholder=" "
-                      className="login__input"
-                    />
-                    <label htmlFor="surnames" className="login__label">
-                      Surnames
-                    </label>
-
-                    <i className="ri-id-card-fill login__icon"></i>
-                  </div> */}
-                </div>
-
-                <div className="login__box">
-                  <input
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    id="emailCreate"
-                    required
-                    placeholder=" "
-                    className="login__input"
-                  />
-                  <label htmlFor="emailCreate" className="login__label">
-                    Email
-                  </label>
-
-                  <i className="ri-mail-fill login__icon"></i>
-                </div>
-
-                <div className="login__box">
-                  <input
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    id="passwordCreate"
-                    required
-                    placeholder=" "
-                    className="login__input"
-                  />
-                  <label htmlFor="passwordCreate" className="login__label">
-                    Password
-                  </label>
-
-                  <i
-                    className="ri-eye-off-fill login__icon login__password"
-                    id="loginPasswordCreate"
-                  ></i>
-                </div>
-              </div>
-
-              <button onClick={handleSignUp} type="submit" className="login__button">
-                Create account
-              </button>
-            </htmlForm>
-
-            <p className="login__switch">
-              Already have an account?
-              <button className="ml-2" id="loginButtonAccess">Log In</button>
-            </p>
-          </div>
         </div>
       </div>
-    </div>
   );
 };
 
 export default Dorja;
+
+
+
+{/* <div className="login__register">
+  <h1 className="login__title">Create new account.</h1>
+  {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
+  {success && <p className="text-green-600 text-sm mt-2 text-center">{success}</p>}
+
+  <div className="login__area">
+    <htmlForm action="" className="login__htmlForm">
+      <div className="login__content grid">
+        <div className="login__group grid">
+          
+        </div>
+
+        <div className="login__box">
+          <input
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            id="emailCreate"
+            required
+            placeholder=" "
+            className="login__input"
+          />
+          <label htmlFor="emailCreate" className="login__label">
+            Email
+          </label>
+
+          <i className="ri-mail-fill login__icon"></i>
+        </div>
+
+        <div className="login__box">
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            id="passwordCreate"
+            required
+            placeholder=" "
+            className="login__input"
+          />
+          <label htmlFor="passwordCreate" className="login__label">
+            Password
+          </label>
+
+          <i
+            className="ri-eye-off-fill login__icon login__password"
+            id="loginPasswordCreate"
+          ></i>
+        </div>
+      </div>
+
+      <button onClick={handleSignUp} type="submit" className="login__button">
+        Create account
+      </button>
+    </htmlForm>
+
+    <p className="login__switch">
+      Already have an account?
+      <button className="ml-2" id="loginButtonAccess">Log In</button>
+    </p>
+  </div> */}

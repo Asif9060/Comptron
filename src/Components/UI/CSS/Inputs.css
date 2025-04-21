@@ -133,3 +133,90 @@
 .Documents-btn:hover .fileFront {
   transform: rotateX(30deg);
 }
+
+
+/* Keep all your existing styles as-is above this line... */
+
+/* Responsive tweaks */
+@media screen and (max-width: 1024px) {
+  .input01 {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .folderContainer {
+    left: 44%;
+    width: 36px;
+  }
+
+  .text {
+    left: 10%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .input01 {
+    max-width: 100%;
+    font-size: 0.95rem;
+    padding: 0.45rem;
+  }
+
+  .Documents-btn {
+    width: 160px;
+    height: 40px;
+    padding: 0px 12px;
+  }
+
+  .folderContainer {
+    width: 34px;
+    left: 42%;
+  }
+
+  .text {
+    font-size: 13px;
+    left: 9%;
+  }
+
+  .title01 {
+    font-size: 13px;
+    left: 22%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .input01 {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+
+  .Documents-btn {
+    width: 140px;
+    height: 38px;
+    padding: 0px 10px;
+    gap: 6px;
+  }
+
+  .folderContainer {
+    left: 40%;
+    width: 30px;
+  }
+
+  .fileBack, .fileFront {
+    width: 90%;
+  }
+
+  .filePage {
+    width: 55%;
+  }
+
+  .text {
+    font-size: 12px;
+    left: 7%;
+  }
+
+  .title01 {
+    font-size: 12px;
+    left: 20%;
+  }
+}

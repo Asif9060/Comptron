@@ -42,6 +42,8 @@ const HomePage = () => {
       position: "Advisor",
       url: {
         facebook: "https://www.facebook.com/memraihan",
+        linkedin: "https://www.linkedin.com/in/mraihanme/?original_referer=https%3A%2F%2Fwww.mraihan.me%2F",
+        github: "https://github.com/memraihan",
       },
     },
 

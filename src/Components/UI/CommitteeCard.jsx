@@ -53,7 +53,7 @@ const CommiteeCard = () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}`); // Your backend URL
       const data = await response.json();
-      console.log("Fetched members data:", data);
+      // console.log("Fetched members data:", data);
       setMembers(data); // Set members data into state
     } catch (error) {
       console.error("Error fetching members:", error);
