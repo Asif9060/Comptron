@@ -1,6 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, NavLink } from "react-router-dom";
 import logo from "../assets/images/Comptron Logo.png";
+import getCroppedImg from "../utils/cropImage";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import Cropper from "react-easy-crop";
+
 const SettingsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,6 +21,17 @@ const SettingsPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [cropperVisible, setCropperVisible] = useState(false);
+  const [croppedImage, setCroppedImage] = useState(null);
+  const [cropData, setCropData] = useState({ x: 0, y: 0, zoom: 1, width: 200, height: 200 });
+  const cropperRef = useRef(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+const [zoom, setZoom] = useState(1);
+const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+
+const onCropComplete = (croppedArea, croppedAreaPixels) => {
+  setCroppedAreaPixels(croppedAreaPixels);
+}
   
   useEffect(() => {
     fetch(`https://comptron-server-2.onrender.com/api/users/profile/${id}`)
@@ -50,6 +66,7 @@ const SettingsPage = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
+        setCropperVisible(true);
       };
       reader.readAsDataURL(file);
     }
@@ -65,7 +82,7 @@ const SettingsPage = () => {
       skills: user.skills,
       email: user.email,
       phone: user.phone,
-      image: image || "",
+      image: croppedImage || image,
       linkedIn: user.linkedIn,
       github: user.github,
       portfolio: user.portfolio,
@@ -147,6 +164,17 @@ const handleDelete = async () => {
   
   const handleCancel = () => {
     navigate(`/profile/${id}`);
+  };
+
+  const handleCroppedImage = async () => {
+    try {
+      const croppedImage = await getCroppedImg(image, croppedAreaPixels);
+      setCroppedImage(croppedImage); // base64 string
+      setImage(croppedImage);
+      setCropperVisible(false);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   if (loading) {
@@ -336,7 +364,7 @@ const handleDelete = async () => {
               placeholder="https://drive.google.com/..."
             />
           </div>
-          <div>
+          <div className="">
             <label className="block text-sm font-medium mb-1">
               Profile Image
             </label>
@@ -346,13 +374,20 @@ const handleDelete = async () => {
               onChange={handleImageChange}
               className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
             />
-            {image && (
+            {image && !cropperVisible && (
+              <img
+                src={croppedImage || image}
+                alt="Preview"
+                className="mt-2 w-24 h-24 rounded-full object-cover"
+              />
+            )}
+            {/* {image && (
               <img
                 src={image}
                 alt="Preview"
                 className="mt-2 w-24 h-24 rounded-full object-cover"
               />
-            )}
+            )} */}
           </div>
           <div className="flex gap-4">
             <button
@@ -370,6 +405,40 @@ const handleDelete = async () => {
             </button>
           </div>
         </form>
+
+        {cropperVisible && image && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="relative bg-white p-4 rounded-lg w-96 h-96">
+      <div className="relative w-full h-64">
+        <Cropper
+          image={image}
+          crop={crop}
+          zoom={zoom}
+          aspect={1}
+          cropShape="round"
+          showGrid={false}
+          onCropChange={setCrop}
+          onZoomChange={setZoom}
+          onCropComplete={onCropComplete}
+        />
+      </div>
+      <div className="mt-4 flex justify-between">
+        <button
+          onClick={handleCroppedImage}
+          className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg"
+        >
+          Crop Image
+        </button>
+        <button
+          onClick={() => setCropperVisible(false)}
+          className="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-lg"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
         {/* Delete Account Button */}
         <div className="mt-6 text-center">

@@ -134,7 +134,7 @@ const ProfilePage = () => {
               <img
                 src={user.image}
                 alt="Profile"
-                className="w-28 h-28 aspect-square rounded-full mx-auto mb-4 object-cover border-4 border-blue-500"
+                className="w-60 aspect-square rounded-full mx-auto mb-4 object-cover border-4 border-blue-500"
                 onError={(e) => (e.target.src = "/fallback-image.png")}
               />
             ) : (

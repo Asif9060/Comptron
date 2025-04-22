@@ -9,7 +9,7 @@ import EventCards from "../Components/UI/EventCards";
 import Events from "./Events";
 import CommentSection from "../Components/Features/CommentSection";
 import EventDetailsPart from "../Components/UI/EventDetailsPart";
-import TestPage from "./TestPage";
+
 import SideMenu from '../Components/Features/SideMenu';
 import RegisterForm from "../USER/RegisterForm";
 import Search from "./Search";

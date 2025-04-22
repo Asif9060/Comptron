@@ -1,6 +1,7 @@
-// RegistrationForm.jsx
-import React, { useState } from "react";
-import { userAuth, createUserWithEmailAndPassword } from "./FirebaseUser"; // adjust path if needed
+import React, { useState, useCallback } from "react";
+import Cropper from "react-easy-crop";
+import getCroppedImg from "../utils/cropImage"; // helper function provided below
+import { userAuth, createUserWithEmailAndPassword } from "./FirebaseUser";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,13 @@ const RegistrationForm = () => {
     image: "",
     password: "",
   });
+
+  const [rawImage, setRawImage] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [cropping, setCropping] = useState(false);
+
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
@@ -27,20 +35,34 @@ const RegistrationForm = () => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({ ...formData, image: reader.result });
+      reader.onload = () => {
+        setRawImage(reader.result);
+        setCropping(true);
       };
       reader.readAsDataURL(file);
     }
   };
 
+  const onCropComplete = useCallback((_, croppedPixels) => {
+    setCroppedAreaPixels(croppedPixels);
+  }, []);
+
+  const handleCropDone = async () => {
+    try {
+      const croppedImage = await getCroppedImg(rawImage, croppedAreaPixels);
+      setFormData({ ...formData, image: croppedImage });
+      setCropping(false);
+    } catch (e) {
+      console.error("Cropping failed", e);
+    }
+  };
+
   const handleSendOtp = async () => {
     setErrorMessage("");
-    if (!formData.email) {
+    if (!formData.email)
       return setErrorMessage("Email is required to send OTP.");
-    }
     try {
-      const response = await fetch(
+      const res = await fetch(
         "https://comptron-server-2.onrender.com/api/send-otp",
         {
           method: "POST",
@@ -48,15 +70,13 @@ const RegistrationForm = () => {
           body: JSON.stringify({ email: formData.email }),
         }
       );
-      const data = await response.json();
-      if (response.ok) {
+      const data = await res.json();
+      if (res.ok) {
         setOtpSent(true);
-        setErrorMessage("");
       } else {
         setErrorMessage(data.message || "Failed to send OTP.");
       }
-    } catch (error) {
-      console.error("OTP Error:", error);
+    } catch (err) {
       setErrorMessage("Error sending OTP.");
     }
   };
@@ -67,9 +87,8 @@ const RegistrationForm = () => {
     setSuccessMessage("");
     setLoading(true);
 
-    // 1. Verify OTP with backend
     try {
-      const verifyRes = await fetch(
+      const verify = await fetch(
         "https://comptron-server-2.onrender.com/api/verify-otp",
         {
           method: "POST",
@@ -77,28 +96,15 @@ const RegistrationForm = () => {
           body: JSON.stringify({ email: formData.email, code: otp }),
         }
       );
-      const verifyData = await verifyRes.json();
-      if (!verifyRes.ok) {
-        setErrorMessage(verifyData.message || "OTP verification failed.");
-        setLoading(false);
-        return;
-      }
-    } catch (err) {
-      setErrorMessage("OTP verification failed. Please try again.");
-      setLoading(false);
-      return;
-    }
+      const result = await verify.json();
+      if (!verify.ok) throw new Error(result.message || "OTP failed");
 
-    // 2. Create Firebase user
-    try {
       const userCredential = await createUserWithEmailAndPassword(
         userAuth,
         formData.email,
         formData.password
       );
-      const user = userCredential.user;
 
-      // 3. Register in your MongoDB backend
       const response = await fetch(
         "https://comptron-server-2.onrender.com/api/users/register",
         {
@@ -106,17 +112,14 @@ const RegistrationForm = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             ...formData,
-            firebaseUserId: user.uid,
+            firebaseUserId: userCredential.user.uid,
           }),
         }
       );
+
       if (response.ok) {
-        const userData = await response.json();
-        setSuccessMessage(
-          `Registration successful! Your ID: ${userData.customId}`
-        );
-        setOtpVerified(true);
-        // reset form
+        const data = await response.json();
+        setSuccessMessage(`Registered! Your ID: ${data.customId}`);
         setFormData({
           name: "",
           email: "",
@@ -133,8 +136,7 @@ const RegistrationForm = () => {
         setErrorMessage(errData.error || "Registration failed.");
       }
     } catch (err) {
-      console.error("Registration error:", err);
-      setErrorMessage(err.message || "Error during registration.");
+      setErrorMessage(err.message || "Registration error.");
     } finally {
       setLoading(false);
     }
@@ -143,87 +145,99 @@ const RegistrationForm = () => {
   return (
     <div className="p-8 max-w-md mx-auto bg-[#1C1C1C] rounded-xl shadow-md text-white">
       <h2 className="text-3xl font-bold mb-6 text-center">Register</h2>
-      {errorMessage && (
-        <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">
-          {errorMessage}
-        </div>
-      )}
-      {successMessage && (
-        <div className="bg-green-500 text-white px-4 py-2 rounded-lg mb-4">
-          {successMessage}
-        </div>
-      )}
+
+      {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+      {successMessage && <div className="text-green-500">{successMessage}</div>}
+
       <form onSubmit={handleVerifyAndRegister} className="flex flex-col gap-4">
+        {/* Other inputs */}
         <input
-          type="text"
           name="name"
           placeholder="Name"
           value={formData.name}
           onChange={handleChange}
-          className="p-2 rounded bg-[#2a2a2a] text-white"
+          className="p-2 bg-[#2a2a2a] rounded"
           required
         />
         <input
-          type="email"
           name="email"
           placeholder="Email"
+          type="email"
           value={formData.email}
           onChange={handleChange}
-          className="p-2 rounded bg-[#2a2a2a] text-white"
+          className="p-2 bg-[#2a2a2a] rounded"
           required
         />
         <input
-          type="tel"
           name="phone"
           placeholder="Phone"
+          type="tel"
           value={formData.phone}
           onChange={handleChange}
-          className="p-2 rounded bg-[#2a2a2a] text-white"
+          className="p-2 bg-[#2a2a2a] rounded"
           required
         />
         <input
-          type="text"
           name="skills"
-          placeholder="Skills (e.g., React, Node.js)"
+          placeholder="Skills"
           value={formData.skills}
           onChange={handleChange}
-          className="p-2 rounded bg-[#2a2a2a] text-white"
+          className="p-2 bg-[#2a2a2a] rounded"
           required
         />
-        <div>
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            className="w-full p-2 rounded bg-[#2a2a2a] text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="">Select your gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-        </div>
+        <select
+          name="gender"
+          value={formData.gender}
+          onChange={handleChange}
+          className="p-2 bg-[#2a2a2a] rounded"
+          required
+        >
+          <option value="">Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
         <input
-          type="password"
           name="password"
+          type="password"
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-          className="p-2 rounded bg-[#2a2a2a] text-white"
+          className="p-2 bg-[#2a2a2a] rounded"
           required
         />
         <input
           type="file"
           accept="image/*"
           onChange={handleImageUpload}
-          className="p-2 rounded bg-[#2a2a2a] text-gray-400"
+          className="p-2 bg-[#2a2a2a] rounded"
         />
 
-        {formData.image && (
+        {cropping && rawImage && (
+          <div className="relative w-full h-64 bg-black">
+            <Cropper
+              image={rawImage}
+              crop={crop}
+              zoom={zoom}
+              aspect={1}
+              onCropChange={setCrop}
+              onZoomChange={setZoom}
+              onCropComplete={onCropComplete}
+            />
+            <button
+              type="button"
+              onClick={handleCropDone}
+              className="absolute bottom-2 right-2 bg-green-600 px-3 py-1 rounded text-sm"
+            >
+              Done
+            </button>
+          </div>
+        )}
+
+        {formData.image && !cropping && (
           <img
             src={formData.image}
             alt="Preview"
-            className="rounded-full w-24 h-24 object-cover mx-auto"
+            className="w-24 h-24 rounded-full object-cover mx-auto"
           />
         )}
 
@@ -231,7 +245,7 @@ const RegistrationForm = () => {
           <button
             type="button"
             onClick={handleSendOtp}
-            className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg"
+            className="bg-blue-600 py-2 rounded-lg"
           >
             Send OTP
           </button>
@@ -239,16 +253,15 @@ const RegistrationForm = () => {
           <>
             <input
               type="text"
-              placeholder="Enter OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
-              className="p-2 rounded bg-[#2a2a2a] text-white"
-              required
+              placeholder="Enter OTP"
+              className="p-2 bg-[#2a2a2a] rounded"
             />
             <button
               type="submit"
+              className="bg-green-600 py-2 rounded-lg"
               disabled={loading}
-              className="bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg"
             >
               {loading ? "Registering..." : "Verify & Register"}
             </button>
