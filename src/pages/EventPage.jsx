@@ -3,7 +3,7 @@ import { AdminProvider } from "../AdminPanel/ToggleAdmin/AdminContext";
 import EventCountdown from "../Components/UI/EventCountdown";
 import EventShowcase from "../Components/UI/EventShowcase";
 
-// import EventSlider from "../Components/UI/EventSlider";
+import EventSlider from "../Components/UI/EventSlider";
 
 
 import SideMenu from "../Components/Features/SideMenu";
@@ -57,7 +57,7 @@ const EventPage = () => {
         <SideMenu />
       </div>
 
-      {/* <EventSlider /> */}
+      <EventSlider />
 
       <div className="absolute fixed -translate-y-6">
         <SideMenu />

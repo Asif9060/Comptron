@@ -30,7 +30,6 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
     fetchEvents();
   }, [setShowcaseLoaded]);
 
-  // ⏱️ Auto-update every minute
   useEffect(() => {
     const interval = setInterval(() => {
       categorizeEvents(events);
@@ -40,13 +39,10 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
     return () => clearInterval(interval); // cleanup
   }, [events]);
 
-  // 🔍 Categorize function
+
   const categorizeEvents = (data) => {
     const now = moment().tz("Asia/Dhaka");
 
-    const upcoming = [];
-    const ongoing = [];
-    const past = [];
 
     data.forEach((event) => {
       const eventStart = moment.tz(
