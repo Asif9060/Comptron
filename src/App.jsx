@@ -27,8 +27,11 @@ import Recent from "./Components/Features/Recent";
 import AdminTextSlideControl from "./AdminPanel/AdminTextSlideControl";
 import ImageUpload from "./AdminPanel/ImageUpload";
 import AdminUsersPage from "./AdminPanel/AdminUsersPage";
+<<<<<<< HEAD
 import UsersByYear from "./AdminPanel/UsersByYear";
 import CommitteeByYear from "./CommitteePanel/CommitteeByYear";
+=======
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
 
 
 const App = () => {
@@ -39,7 +42,11 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage></HomePage>}></Route>
+<<<<<<< HEAD
           <Route path="/Committee" element={<MembersPage></MembersPage>}></Route>
+=======
+          <Route path="/Members" element={<MembersPage></MembersPage>}></Route>
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
           <Route path="/About" element={<AboutPage></AboutPage>}></Route>
           <Route path="/Events" element={<EventPage></EventPage>}></Route>
           <Route path="/GMembers" element={<Members></Members>}></Route>
@@ -61,8 +68,11 @@ const App = () => {
           <Route path="/ManageActivity" element={<ImageUpload></ImageUpload>}></Route>
           <Route path="/ManageNews" element={<AdminTextSlideControl></AdminTextSlideControl>}></Route>
           <Route path="/ManageUsers" element={<AdminUsersPage></AdminUsersPage>}></Route>
+<<<<<<< HEAD
           <Route path="/UsersByYear" element={<UsersByYear></UsersByYear>}></Route>
           <Route path="/CommitteeByYear" element={<CommitteeByYear></CommitteeByYear>}></Route>
+=======
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
           <Route
             path="/AdminPage"
             element={

@@ -143,7 +143,11 @@ const SettingsPage = () => {
   //   }
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1f1f1f] p-4 lg:p-8">
+=======
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1f1f1f] p-8 flex justify-center">
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       <div
         className={`fixed inset-y-0 left-0 w-64 bg-[#1c1c1e] text-white transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -217,6 +221,7 @@ const SettingsPage = () => {
       >
         {sidebarOpen ? "✕" : "☰"}
       </button>
+<<<<<<< HEAD
 
       {/* Main Content */}
       <div className="md:ml-64 transition-all duration-300">
@@ -352,6 +357,160 @@ const SettingsPage = () => {
             </div>
           </form>
         </div>
+=======
+      <div className="bg-[#1c1c1e] p-8 rounded-2xl shadow-xl w-full max-w-md text-white">
+        <h1 className="text-3xl font-bold mb-6 text-center">Settings</h1>
+        {error && (
+          <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">
+            {error}
+          </div>
+        )}
+        {success && (
+          <div className="bg-green-500 text-white px-4 py-2 rounded-lg mb-4">
+            {success}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Name</label>
+            <input
+              type="text"
+              value={user.name}
+              onChange={(e) => setUser({ ...user, name: e.target.value })}
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your name"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Skills</label>
+            <input
+              type="text"
+              value={user.skills}
+              onChange={(e) => setUser({ ...user, skills: e.target.value })}
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your skills"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Email</label>
+            <input
+              type="email"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your email"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Phone</label>
+            <input
+              type="text"
+              value={user.phone}
+              onChange={(e) => setUser({ ...user, phone: e.target.value })}
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your phone"
+            />
+          </div>
+          {/* <div>
+            <label className="block text-sm font-medium mb-1">
+              LinkedIn URL
+            </label>
+            <input
+              type="url"
+              value={user.socials?.linkedIn || ""}
+              onChange={(e) => setUser({ ...user, socials: { ...user.socials, linkedIn: e.target.value } })}
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
+              placeholder="https://linkedin.com/in/yourname"
+            />
+          </div> */}
+          <div>
+            <label className="block text-sm font-medium mb-1">GitHub URL</label>
+            <input
+              type="url"
+              value={user.socials?.github || ""}
+              onChange={(e) =>
+                setUser({
+                  ...user,
+                  socials: { ...user.socials, github: e.target.value },
+                })
+              }
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
+              placeholder="https://github.com/yourusername"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Portfolio URL
+            </label>
+            <input
+              type="url"
+              value={user.socials?.portfolio || ""}
+              onChange={(e) =>
+                setUser({
+                  ...user,
+                  socials: { ...user.socials, portfolio: e.target.value },
+                })
+              }
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
+              placeholder="https://yourportfolio.com"
+            />
+          </div>
+          {/* <div>
+            <label className="block text-sm font-medium mb-1">CV URL</label>
+            <input
+              type="url"
+              value={user.socials?.cv || ""}
+              onChange={(e) => setUser({ ...user, socials: { ...user.socials, cv: e.target.value } })}
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
+              placeholder="https://drive.google.com/..."
+            />
+          </div> */}
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Profile Image
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
+            />
+            {image && (
+              <img
+                src={image}
+                alt="Preview"
+                className="mt-2 w-24 h-24 rounded-full object-cover"
+              />
+            )}
+          </div>
+          <div className="flex gap-4">
+            <button
+              type="submit"
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition-all duration-300"
+            >
+              Save Changes
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 rounded-lg transition-all duration-300"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        {/* Delete Account Button */}
+        {/* <div className="mt-6 text-center">
+          <button
+            onClick={handleDelete}
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg"
+          >
+            Delete Account
+          </button>
+        </div> */}
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       </div>
     </div>
   );

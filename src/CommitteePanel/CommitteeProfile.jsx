@@ -91,8 +91,13 @@ const CommitteeProfile = () => {
             >
               All Members
             </NavLink>
+<<<<<<< HEAD
             <NavLink
               to={`/Committee`}
+=======
+            {/* <NavLink
+              to={`/CommitteeSettings/${id}`}
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
               className={({ isActive }) =>
                 `block px-4 py-2 rounded-lg ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
@@ -100,8 +105,13 @@ const CommitteeProfile = () => {
               }
               onClick={() => setSidebarOpen(false)}
             >
+<<<<<<< HEAD
               Committee
             </NavLink>
+=======
+              Settings
+            </NavLink> */}
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
           </nav>
         </div>
       </div>

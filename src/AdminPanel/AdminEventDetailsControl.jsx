@@ -10,12 +10,18 @@ const AdminEventDetailsControl = () => {
   const [galleryImages, setGalleryImages] = useState([]);
   const [events, setEvents] = useState([]);
   const [editingEventId, setEditingEventId] = useState(null);
+<<<<<<< HEAD
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endDate, setEndDate] = useState("");
   const [endTime, setEndTime] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+=======
+  const [eventDate, setEventDate] = useState("");
+  const [eventTime, setEventTime] = useState("");
+  const [durationDays, setDurationDays] = useState(1); // New state for durationDays
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
 
   // Fetch all events when the component mounts
   useEffect(() => {
@@ -23,6 +29,7 @@ const AdminEventDetailsControl = () => {
   }, []);
 
   const fetchEvents = async () => {
+<<<<<<< HEAD
     try {
       setIsLoading(true);
       setError("");
@@ -40,6 +47,13 @@ const AdminEventDetailsControl = () => {
     } finally {
       setIsLoading(false);
     }
+=======
+    const res = await fetch(
+      "https://comptron-server-2.onrender.com/api/eventDetails"
+    );
+    const data = await res.json();
+    setEvents(data);
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
   };
 
   const handleImageUpload = (e, setImage) => {
@@ -61,6 +75,7 @@ const AdminEventDetailsControl = () => {
     setGalleryImages(files);
   };
 
+<<<<<<< HEAD
   const validateForm = () => {
     if (!title.trim()) {
       setError("Title is required");
@@ -152,11 +167,41 @@ const AdminEventDetailsControl = () => {
         throw new Error(errorData.message || "Failed to submit event");
       }
 
+=======
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("date", eventDate);
+    formData.append("time", eventTime);
+    formData.append("durationDays", durationDays); // Include durationDays in the form data
+    if (mainImage) formData.append("mainImage", mainImage);
+    galleryImages.forEach((file) => {
+      formData.append("galleryImages", file);
+    });
+
+    let url = "https://comptron-server-2.onrender.com/api/eventDetails/create";
+    let method = "POST";
+
+    if (editingEventId) {
+      url = `https://comptron-server-2.onrender.com/api/eventDetails/${editingEventId}`;
+      method = "PUT";
+    }
+
+    const response = await fetch(url, {
+      method,
+      body: formData,
+    });
+
+    if (response.ok) {
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       alert(
         editingEventId
           ? "Event Updated Successfully!"
           : "Event Created Successfully!"
       );
+<<<<<<< HEAD
       resetForm();
       fetchEvents();
     } catch (err) {
@@ -180,11 +225,25 @@ const AdminEventDetailsControl = () => {
     setError("");
   };
 
+=======
+      setTitle("");
+      setDescription("");
+      setMainImage(null);
+      setGalleryImages([]);
+      setEditingEventId(null);
+      fetchEvents();
+    } else {
+      alert("Error submitting event");
+    }
+  };
+
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
   const handleEdit = (event) => {
     setEditingEventId(event._id);
     setTitle(event.title);
     setDescription(event.description);
 
+<<<<<<< HEAD
     const startDt = moment.tz(event.startDateTime, "Asia/Dhaka");
     setStartDate(startDt.format("YYYY-MM-DD"));
     setStartTime(startDt.format("HH:mm"));
@@ -192,6 +251,12 @@ const AdminEventDetailsControl = () => {
     const endDt = moment.tz(event.endDateTime, "Asia/Dhaka");
     setEndDate(endDt.format("YYYY-MM-DD"));
     setEndTime(endDt.format("HH:mm"));
+=======
+    const dt = moment.tz(event.dateTime, "Asia/Dhaka");
+    setEventDate(dt.format("YYYY-MM-DD"));
+    setEventTime(dt.format("HH:mm"));
+    setDurationDays(event.durationDays || 1); // Set durationDays for editing
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
   };
 
   const handleDelete = async (id) => {
@@ -199,6 +264,7 @@ const AdminEventDetailsControl = () => {
       "Are you sure you want to delete this event?"
     );
     if (confirmDelete) {
+<<<<<<< HEAD
       try {
         setIsLoading(true);
         setError("");
@@ -218,6 +284,19 @@ const AdminEventDetailsControl = () => {
         console.error("Error deleting event:", err);
       } finally {
         setIsLoading(false);
+=======
+      const res = await fetch(
+        `https://comptron-server-2.onrender.com/api/eventDetails/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (res.ok) {
+        alert("Event Deleted Successfully!");
+        fetchEvents();
+      } else {
+        alert("Error deleting event");
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       }
     }
   };
@@ -227,6 +306,7 @@ const AdminEventDetailsControl = () => {
       <h1 className="text-4xl translate-y-[-2rem] font-bold text-center text-[#15A6E1]">
         Admin Event Management
       </h1>
+<<<<<<< HEAD
 
       {/* Show loading state */}
       {isLoading && (
@@ -244,6 +324,11 @@ const AdminEventDetailsControl = () => {
       <EventCountdown />
       <br />
 
+=======
+      <AdminEventControl></AdminEventControl>
+      <EventCountdown></EventCountdown>
+      <br />
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       {/* Event Form */}
       <div className="flex flex-col items-center border border-[#15A6E1] p-4 rounded-3xl shadow-md mb-8">
         <h2 className="p-2 text-[2rem] font-bold text-emerald-500">
@@ -255,20 +340,31 @@ const AdminEventDetailsControl = () => {
           encType="multipart/form-data"
         >
           <input
+<<<<<<< HEAD
             className="text-center text-black bg-white p-2 rounded"
+=======
+            className="text-center text-black bg-white p-2"
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
             type="text"
             placeholder="Event Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+<<<<<<< HEAD
             disabled={isLoading}
           />
           <textarea
             className="text-center text-black bg-white p-2 rounded"
+=======
+          />
+          <textarea
+            className="text-center text-black bg-white p-2"
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
             placeholder="Event Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
+<<<<<<< HEAD
             disabled={isLoading}
             rows={4}
           />
@@ -372,11 +468,63 @@ const AdminEventDetailsControl = () => {
                 : "Create Event"}
             </button>
           </div>
+=======
+          />
+          <input
+            className="bg-white text-black p-2"
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleImageUpload(e, setMainImage)}
+            required={!editingEventId}
+          />
+          <input
+            className="bg-white text-black p-2"
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleGalleryUpload}
+          />
+          <input
+            className="bg-white text-black p-2"
+            type="date"
+            value={eventDate}
+            onChange={(e) => setEventDate(e.target.value)}
+          />
+
+          <input
+            className="bg-white text-black p-2"
+            type="time"
+            value={eventTime}
+            onChange={(e) => setEventTime(e.target.value)}
+          />
+          <label>
+            Duration (in days):
+            <input
+              type="number"
+              min="1"
+              value={durationDays}
+              onChange={(e) => setDurationDays(Number(e.target.value))}
+              className="bg-white text-black p-2 ml-2"
+              required
+            />
+          </label>
+          <button
+            className="button0 bg-emerald-500 text-white p-2 rounded-lg"
+            type="submit"
+          >
+            {editingEventId ? "Update Event" : "Create Event"}
+          </button>
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
         </form>
       </div>
 
       {/* Event List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<<<<<<< HEAD
+=======
+        {" "}
+        {/* grid-cols-1 md:grid-cols-2 lg:grid-cols-3*/}
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
         {events.map((event) => (
           <div
             key={event._id}
@@ -384,6 +532,7 @@ const AdminEventDetailsControl = () => {
           >
             <h3 className="font-bold text-lg mb-2">{event.title}</h3>
             <p className="text-sm mb-2">{event.description}</p>
+<<<<<<< HEAD
 
             <div className="text-sm mb-4">
               <p>
@@ -405,6 +554,13 @@ const AdminEventDetailsControl = () => {
                 className="bg-yellow-400 Btn05 w-[6.5em] h-[47.5px] rounded text-white p-2"
                 onClick={() => handleEdit(event)}
                 disabled={isLoading}
+=======
+            {/* You can also show images here if you want */}
+            <div className="flex gap-2 mt-4">
+              <button
+                className="bg-yellow-400 Btn05 w-[6.5em]  h-[47.5px] rounded text-white p-2"
+                onClick={() => handleEdit(event)}
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
               >
                 Edit
                 <svg className="svg" viewBox="0 0 512 512">
@@ -414,7 +570,10 @@ const AdminEventDetailsControl = () => {
               <button
                 className="bg-red-500 button04 text-white p-2 rounded-md"
                 onClick={() => handleDelete(event._id)}
+<<<<<<< HEAD
                 disabled={isLoading}
+=======
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
               >
                 <div className="button-top">Delete</div>
                 <div className="button-bottom"></div>

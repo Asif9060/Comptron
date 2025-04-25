@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./CSS/EventShowcase.css";
 import moment from "moment-timezone";
+<<<<<<< HEAD
 import EventSlider from "./EventSlider";
+=======
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
 
 const EventShowcase = ({ setShowcaseLoaded }) => {
   const [events, setEvents] = useState([]);
@@ -32,7 +35,11 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       categorizeEvents(events);
+<<<<<<< HEAD
     }, 60 * 1000); // 1 minute
+=======
+    }, 20 * 1000); // 1 minute
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
 
     return () => clearInterval(interval); // cleanup
   }, [events]);
@@ -40,6 +47,7 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
   // 🔍 Categorize function
   const categorizeEvents = (data) => {
     const now = moment().tz("Asia/Dhaka");
+<<<<<<< HEAD
 
     const upcoming = [];
     const ongoing = [];
@@ -57,6 +65,19 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
         "Asia/Dhaka"
       );
 
+=======
+  
+    const upcoming = [];
+    const ongoing = [];
+    const past = [];
+  
+    data.forEach((event) => {
+      const eventStart = moment.tz(`${event.date} ${event.time}`, "YYYY-MM-DD hh:mm A", "Asia/Dhaka");
+      const duration = parseInt(event.durationDays) || 1;
+  
+      const eventEnd = moment(eventStart).add(duration, "days");
+  
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       if (eventStart.isAfter(now)) {
         upcoming.push(event);
       } else if (eventStart.isSameOrBefore(now) && eventEnd.isAfter(now)) {
@@ -65,23 +86,46 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
         past.push(event);
       }
     });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
     setUpcomingEvents(upcoming);
     setOngoingEvents(ongoing);
     setPastEvents(past);
   };
 
   const renderEventCard = (event) => {
+<<<<<<< HEAD
+=======
+    const formattedTime = moment(`${event.date}T${event.time}`)
+      .tz("Asia/Dhaka")
+      .format("hh:mm A");
+
+    const formattedDate = moment(`${event.date}T${event.time}`)
+      .tz("Asia/Dhaka")
+      .format("MMMM D, YYYY");
+
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
     return (
       <div key={event._id} className="event-card">
         <img src={event.mainImage} alt={event.title} className="event-image" />
         <div className="event-details">
           <h3 className="event-title01">{event.title}</h3>
+<<<<<<< HEAD
           <p>
             <span className="font-semibold">Starts:</span>{" "}
             {moment
               .tz(event.startDateTime, "Asia/Dhaka")
               .format("MMM D, YYYY h:mm A")}
+=======
+          <p className="event-date">
+            <i className="fa fa-calendar"></i> {formattedDate}
+          </p>
+          <p className="event-time">
+            <i className="fa fa-clock"></i> {formattedTime}
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
           </p>
           <div className="mt-5 flex">
             <Link to={`/event/${event._id}`} className="register-btn">
@@ -95,7 +139,10 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
 
   return (
     <div className="event-page">
+<<<<<<< HEAD
       <EventSlider />
+=======
+>>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       {ongoingEvents.length > 0 && (
         <>
           <div className="text-center text-[30px] text-white mt-5">
