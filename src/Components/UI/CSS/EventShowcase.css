@@ -29,11 +29,11 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-<<<<<<< HEAD
+
     width: 305px;
-=======
+
     width: 300px;
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
+
     margin: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;

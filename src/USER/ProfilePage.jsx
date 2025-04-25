@@ -151,10 +151,7 @@ const ProfilePage = () => {
                 <p className="text-gray-300">{user.gender}</p>
               </div>
             )} */}
-<<<<<<< HEAD
             <p className="text-blue-400 text-center mb-2">{user.bio}</p>
-=======
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
             <p className="text-blue-400 text-center mb-2">{user.customId}</p>
             <p
               className={`text-sm text-center mb-4 ${

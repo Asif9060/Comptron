@@ -5,10 +5,7 @@ import getCroppedImg from "../utils/cropImage";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import Cropper from "react-easy-crop";
-<<<<<<< HEAD
 // import BioEditor from "./BioEditor";
-=======
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
 
 const SettingsPage = () => {
   const { id } = useParams();
@@ -19,10 +16,7 @@ const SettingsPage = () => {
     skills: "",
     email: "",
     phone: "",
-<<<<<<< HEAD
     bio: "",
-=======
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
   });
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,7 +25,6 @@ const SettingsPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [cropperVisible, setCropperVisible] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
-<<<<<<< HEAD
   const [cropData, setCropData] = useState({
     x: 0,
     y: 0,
@@ -48,18 +41,6 @@ const SettingsPage = () => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
-=======
-  const [cropData, setCropData] = useState({ x: 0, y: 0, zoom: 1, width: 200, height: 200 });
-  const cropperRef = useRef(null);
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-const [zoom, setZoom] = useState(1);
-const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-
-const onCropComplete = (croppedArea, croppedAreaPixels) => {
-  setCroppedAreaPixels(croppedAreaPixels);
-}
-  
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
   useEffect(() => {
     fetch(`https://comptron-server-2.onrender.com/api/users/profile/${id}`)
       .then((res) => {
@@ -72,10 +53,7 @@ const onCropComplete = (croppedArea, croppedAreaPixels) => {
           skills: data.skills || "",
           email: data.email || "",
           phone: data.phone || "",
-<<<<<<< HEAD
           bio: data.bio || "",
-=======
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
         });
         setImage(data.image || null);
         setLoading(false);
@@ -118,10 +96,7 @@ const onCropComplete = (croppedArea, croppedAreaPixels) => {
       github: user.github,
       portfolio: user.portfolio,
       cv: user.cv,
-<<<<<<< HEAD
       bio: user.bio,
-=======
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
     };
 
     try {
@@ -149,10 +124,7 @@ const onCropComplete = (croppedArea, croppedAreaPixels) => {
         skills: data.skills || "",
         email: data.email || "",
         phone: data.phone || "",
-<<<<<<< HEAD
         bio: data.bio || "",
-=======
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       });
       setImage(data.image || null);
       setSuccess("Profile updated successfully!");
@@ -166,18 +138,10 @@ const onCropComplete = (croppedArea, croppedAreaPixels) => {
     }
   };
 
-<<<<<<< HEAD
   // Compare with the route param
 
   const handleDelete = async () => {
     if (
-=======
-
-// Compare with the route param
-
-const handleDelete = async () => {
-  if (
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       window.confirm(
         "Are you sure you want to delete your account? This action cannot be undone."
       )
@@ -190,22 +154,14 @@ const handleDelete = async () => {
             method: "DELETE",
           }
         );
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(
             errorData.message || `HTTP error! Status: ${response.status}`
           );
         }
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
         setSuccess("Account deleted successfully.");
         setTimeout(() => navigate("/"), 2000);
       } catch (err) {
@@ -214,12 +170,7 @@ const handleDelete = async () => {
       }
     }
   };
-<<<<<<< HEAD
 
-=======
-  
-  
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
   const handleCancel = () => {
     navigate(`/profile/${id}`);
   };
@@ -246,7 +197,6 @@ const handleDelete = async () => {
     );
   }
   if (customId !== id) {
-<<<<<<< HEAD
     return (
       <p className="text-white text-2xl font-bold flex justify-center items-center h-screen">
         Unauthorized
@@ -257,13 +207,6 @@ const handleDelete = async () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1f1f1f] p-4 lg:p-8">
       {/* Sidebar */}
-=======
-    return <p className="text-white text-2xl font-bold flex justify-center items-center h-screen">Unauthorized</p>; // Or redirect
-  }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1f1f1f] p-8 flex justify-center">
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       <div
         className={`fixed inset-y-0 left-0 w-64 bg-[#1c1c1e] text-white transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -336,7 +279,6 @@ const handleDelete = async () => {
       >
         {sidebarOpen ? "✕" : "☰"}
       </button>
-<<<<<<< HEAD
 
       {/* Main Content */}
       <div className="md:ml-64 transition-all duration-300">
@@ -535,199 +477,10 @@ const handleDelete = async () => {
               Delete Account
             </button>
           </div>
-=======
-      <div className="bg-[#1c1c1e] p-8 rounded-2xl shadow-xl w-full max-w-md text-white">
-        <h1 className="text-3xl font-bold mb-6 text-center">Settings</h1>
-
-        {error && (
-          <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">
-            {error}
-          </div>
-        )}
-        {success && (
-          <div className="bg-green-500 text-white px-4 py-2 rounded-lg mb-4">
-            {success}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Name</label>
-            <input
-              type="text"
-              value={user.name}
-              onChange={(e) => setUser({ ...user, name: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your name"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Skills</label>
-            <input
-              type="text"
-              value={user.skills}
-              onChange={(e) => setUser({ ...user, skills: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your skills"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
-            <input
-              type="email"
-              value={user.email}
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Phone</label>
-            <input
-              type="text"
-              value={user.phone}
-              onChange={(e) => setUser({ ...user, phone: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your phone"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              LinkedIn URL
-            </label>
-            <input
-              type="url"
-              value={user.linkedIn || ""}
-              onChange={(e) => setUser({ ...user, linkedIn: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
-              placeholder="https://linkedin.com/in/yourname"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">GitHub URL</label>
-            <input
-              type="url"
-              value={user.github || ""}
-              onChange={(e) => setUser({ ...user, github: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
-              placeholder="https://github.com/yourusername"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Portfolio URL
-            </label>
-            <input
-              type="url"
-              value={user.portfolio || ""}
-              onChange={(e) => setUser({ ...user, portfolio: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
-              placeholder="https://yourportfolio.com"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">CV URL</label>
-            <input
-              type="url"
-              value={user.cv || ""}
-              onChange={(e) => setUser({ ...user, cv: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
-              placeholder="https://drive.google.com/..."
-            />
-          </div>
-          <div className="">
-            <label className="block text-sm font-medium mb-1">
-              Profile Image
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
-            />
-            {image && !cropperVisible && (
-              <img
-                src={croppedImage || image}
-                alt="Preview"
-                className="mt-2 w-24 h-24 rounded-full object-cover"
-              />
-            )}
-            {/* {image && (
-              <img
-                src={image}
-                alt="Preview"
-                className="mt-2 w-24 h-24 rounded-full object-cover"
-              />
-            )} */}
-          </div>
-          <div className="flex gap-4">
-            <button
-              type="submit"
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition-all duration-300"
-            >
-              Save Changes
-            </button>
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 rounded-lg transition-all duration-300"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-
-        {cropperVisible && image && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="relative bg-white p-4 rounded-lg w-96 h-96">
-      <div className="relative w-full h-64">
-        <Cropper
-          image={image}
-          crop={crop}
-          zoom={zoom}
-          aspect={1}
-          cropShape="round"
-          showGrid={false}
-          onCropChange={setCrop}
-          onZoomChange={setZoom}
-          onCropComplete={onCropComplete}
-        />
-      </div>
-      <div className="mt-4 flex justify-between">
-        <button
-          onClick={handleCroppedImage}
-          className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg"
-        >
-          Crop Image
-        </button>
-        <button
-          onClick={() => setCropperVisible(false)}
-          className="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-lg"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-        {/* Delete Account Button */}
-        <div className="mt-6 text-center">
-          <button
-            onClick={handleDelete}
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg"
-          >
-            Delete Account
-          </button>
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
         </div>
       </div>
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default SettingsPage;
-=======
-export default SettingsPage;
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899

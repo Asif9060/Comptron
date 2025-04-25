@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { AdminProvider } from "../AdminPanel/ToggleAdmin/AdminContext";
 import EventCountdown from "../Components/UI/EventCountdown";
 import EventShowcase from "../Components/UI/EventShowcase";
-<<<<<<< HEAD
+
 // import EventSlider from "../Components/UI/EventSlider";
-=======
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
+
+
 import SideMenu from "../Components/Features/SideMenu";
 import logo from "../assets/images/Comptron Logo.png";
 
@@ -13,10 +13,10 @@ const EventPage = () => {
   const [loading, setLoading] = useState(true);
   const [countdownLoaded, setCountdownLoaded] = useState(false);
   const [showcaseLoaded, setShowcaseLoaded] = useState(false);
-<<<<<<< HEAD
-=======
+
+
   const [fadeOut, setFadeOut] = useState(false);
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
+
 
   useEffect(() => {
     if (countdownLoaded && showcaseLoaded) {
@@ -24,8 +24,8 @@ const EventPage = () => {
     }
   }, [countdownLoaded, showcaseLoaded]);
 
-<<<<<<< HEAD
-=======
+
+
   useEffect(() => {
     if (!loading) {
       setFadeOut(true); // Trigger fade out when loading is finished
@@ -37,7 +37,6 @@ const EventPage = () => {
     }
   }, [loading]);
 
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
   return (
     <div>
       {loading && (
@@ -53,18 +52,18 @@ const EventPage = () => {
         <EventCountdown setCountdownLoaded={setCountdownLoaded} />
       </AdminProvider>
 
-<<<<<<< HEAD
+
       <div className="fixed z-1000 -translate-y-6">
         <SideMenu />
       </div>
 
       {/* <EventSlider /> */}
-=======
+
       <div className="absolute fixed -translate-y-6">
         <SideMenu />
       </div>
 
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
+
       <EventShowcase setShowcaseLoaded={setShowcaseLoaded} />
     </div>
   );

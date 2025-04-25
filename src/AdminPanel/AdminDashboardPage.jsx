@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
-<<<<<<< HEAD
 import { NavLink, useNavigate } from "react-router-dom";
 import { saveAs } from "file-saver";
-=======
-import { NavLink } from "react-router-dom";
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
 
 const AdminDashboardPage = () => {
   const [stats, setStats] = useState({
@@ -14,19 +10,15 @@ const AdminDashboardPage = () => {
     deletedUsers: 0,
   });
 
-<<<<<<< HEAD
   const [usersByYear, setUsersByYear] = useState({});
 
   const navigate = useNavigate();
 
-=======
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
   useEffect(() => {
     fetch("https://comptron-server-2.onrender.com/api/users/stats")
       .then((res) => res.json())
       .then((data) => setStats(data))
       .catch((err) => console.error(err));
-<<<<<<< HEAD
 
     fetch("https://comptron-server-2.onrender.com/api/users/byYear")
       .then((res) => res.json())
@@ -53,17 +45,12 @@ const AdminDashboardPage = () => {
     navigate("/UsersByYear");
   };
 
-=======
-  }, []);
-
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
   return (
     <div className="min-h-screen bg-[#111] text-white p-6">
       <div className="max-w-screen-xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">Admin Dashboard</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-1 gap-6 mb-10">
-<<<<<<< HEAD
           <div
             className="bg-[#1c1c1e] p-6 rounded-lg text-center cursor-pointer hover:bg-[#2c2c2e] transition duration-300"
             onClick={handleTotalUsersClick}
@@ -71,16 +58,6 @@ const AdminDashboardPage = () => {
             <h2 className="text-2xl font-bold mb-2">Total Users</h2>
             <p className="text-lg">{stats.totalUsers}</p>
           </div>
-=======
-          <div className="bg-[#1c1c1e] p-6 rounded-lg text-center">
-            <h2 className="text-2xl font-bold mb-2">Total Users</h2>
-            <p className="text-lg">{stats.totalUsers}</p>
-          </div>
-          {/* <div className="bg-[#1c1c1e] p-6 rounded-lg text-center">
-            <h2 className="text-2xl font-bold mb-2">Active Users</h2>
-            <p className="text-lg">{stats.activeUsers}</p>
-          </div> */}
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-6">
@@ -102,11 +79,8 @@ const AdminDashboardPage = () => {
             </div>
           ))}
         </div>
-<<<<<<< HEAD
 
         {/* Removed Users by Year of Validation section */}
-=======
->>>>>>> 5b360adaf1e321f71c057e4eade3a49aa5a57899
       </div>
     </div>
   );
