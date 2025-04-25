@@ -32,7 +32,7 @@ const EventPage = () => {
         <EventCountdown setCountdownLoaded={setCountdownLoaded} />
       </AdminProvider>
 
-      <div className="fixed -translate-y-6">
+      <div className="fixed z-1000 -translate-y-6">
         <SideMenu />
       </div>
 
