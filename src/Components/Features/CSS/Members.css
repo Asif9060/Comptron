@@ -1,0 +1,93 @@
+.timeline {
+    position: relative;
+    max-width: 2000px;
+    margin: 50px auto;
+    padding: 20px 0;
+  }
+  
+  
+  .timeline-item {
+    display: flex;
+    justify-content: center; /* Center alignment for better symmetry */
+    align-items: center;
+    margin-bottom: 50px;
+    position: relative;
+    opacity: 0; /* Initially hidden for animation */
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  }
+  .timeline-item.active {
+    opacity: 1; /* Visible when active */
+    transform: translateY(0);
+  }
+  .timeline-item:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+  .timeline-item-content {
+    width: 45%;
+    padding: 20px;
+    border-radius: 8px;
+    background: linear-gradient(to right, #eceaea98, #0f6096a1); /* Subtle gradient background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 1; /* Ensures content is above the line */
+  }
+  .timeline-item img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    
+    position: relative;
+    z-index: 1; /* Ensures image is above the line */
+    border: 3px solid #4299e1; /* Blue border around images */
+  }
+  .timeline-item:nth-child(odd) img {
+    margin: 0 20px 0 0;
+  }
+  
+  .timeline-item-date {
+    font-size: 0.9em;
+    color: #2b6cb0; /* Darker blue for dates */
+    margin-bottom: 10px;
+  }
+  .timeline-item-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #6200ff; /* Slightly darker text for titles */
+  }
+  .timeline-item-description {
+    line-height: 1.5;
+    color: #4299e1; /* Light blue for descriptions */
+  }
+  @media (max-width: 768px) {
+    .timeline::after {
+      left: 20px;
+    }
+    .timeline-item {
+      flex-direction: column;
+      align-items: flex-start; /* Align items to the start on smaller screens */
+    }
+    .timeline-item:nth-child(odd) {
+      flex-direction: column;
+    }
+    .timeline-item-content {
+      width: 90%;
+      margin-left: 20px;
+    }
+    .timeline-item img {
+      transform: translateX(93%);
+    }
+    .timeline-item-title{
+      text-align: center;
+    }
+    .timeline-item-description{
+      text-align: justify;
+    }
+    .timeline-item-date{
+      text-align: center;
+    }
+
+  }
+
+  

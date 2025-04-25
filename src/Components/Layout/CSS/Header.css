@@ -1,0 +1,21 @@
+@media (max-width: 768px) {
+    .text{
+        display: none;
+    }
+    .text2{
+        font-size: 25px;
+        position: relative;
+        right: 10px;
+        top: 5px;
+    }
+
+    .logo{
+        position: relative;
+        left: 10px;
+        top: 12px;
+    }
+
+    .clock{
+        display: none;
+    }
+}
