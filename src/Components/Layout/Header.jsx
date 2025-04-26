@@ -31,7 +31,7 @@ const Header = () => {
       };
     return (
         <div className="w-full px-4">
-            <div className="flex flex-wrap items-center justify-center  md:justify-around gap-4">
+            <div className="flex flex-wrap items-center justify-center   md:justify-around gap-4">
    
                 <img 
                 className="w-16 sm:w-20 md:w-24 logo transform md:translate-x-[-50px] md:translate-y-[10px]" 
@@ -40,7 +40,7 @@ const Header = () => {
                 />
 
                 
-                <p className="text-xl text-white font-bold sm:text-2xl md:text-4xl lg:text-6xl lg:translate-x-12 text-center  md:text-left">
+                <p className="text-xl z-20 text-white font-bold sm:text-2xl md:text-4xl lg:text-6xl lg:translate-x-12 text-center  md:text-left">
                 <ColourfulText text="Comptron" /> <span className="text-[#483D68]" >- Creativity Assembled</span> <br />
                 </p>
 

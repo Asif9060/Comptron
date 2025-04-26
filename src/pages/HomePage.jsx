@@ -10,7 +10,7 @@ import Button from "../Components/UI/MemberButton";
 import TextEffect from "../Components/UI/TextEffect";
 import Menu from "../Components/Layout/Menu";
 import Welcomemsg from "../Components/Layout/Welcomemsg";
-import ScalingLogo from "../Components/UI/ScalingLogo";
+// import ScalingLogo from "../Components/UI/ScalingLogo";
 import Navbar2 from "../Components/Layout/Navbar2";
 import Footer from "../Components/Layout/Footer";
 import EventSlider from "../Components/Features/EventSlider";
@@ -108,7 +108,7 @@ const HomePage = () => {
       {/* <div className="flex justify-center">
           <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
         </div> */}
-        <ScalingLogo></ScalingLogo>
+        {/* <ScalingLogo></ScalingLogo> */}
       <GradientBackground></GradientBackground>
       <AnimatedBG></AnimatedBG>
       <Footer></Footer>
