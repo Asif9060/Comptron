@@ -120,7 +120,7 @@ const AdminUsersPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#111] text-white p-6">
+    <div className="min-h-screen text-white p-6">
       <h1 className="text-3xl font-bold mb-6">All Users</h1>
 
       {/* ✅ Search Input */}

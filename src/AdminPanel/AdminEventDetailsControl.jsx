@@ -255,7 +255,7 @@ const AdminEventDetailsControl = () => {
           encType="multipart/form-data"
         >
           <input
-            className="text-center text-black bg-white p-2 rounded"
+            className="text-center bg-gray-800 text-white p-2 rounded"
             type="text"
             placeholder="Event Title"
             value={title}
@@ -264,7 +264,7 @@ const AdminEventDetailsControl = () => {
             disabled={isLoading}
           />
           <textarea
-            className="text-center text-black bg-white p-2 rounded"
+            className="text-center bg-gray-800 text-white p-2 rounded"
             placeholder="Event Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -278,7 +278,7 @@ const AdminEventDetailsControl = () => {
               Main Image {!editingEventId && "*"}
             </label>
             <input
-              className="bg-white text-black p-2 rounded"
+              className="bg-gray-800 text-white p-2 rounded"
               type="file"
               accept="image/*"
               onChange={(e) => handleImageUpload(e, setMainImage)}
@@ -290,7 +290,7 @@ const AdminEventDetailsControl = () => {
           <div className="flex flex-col gap-2">
             <label className="text-sm">Gallery Images (Optional)</label>
             <input
-              className="bg-white text-black p-2 rounded"
+              className="bg-gray-800 text-white p-2 rounded"
               type="file"
               accept="image/*"
               multiple
@@ -303,7 +303,7 @@ const AdminEventDetailsControl = () => {
             <div className="flex flex-col gap-2">
               <label className="text-sm">Start Date *</label>
               <input
-                className="bg-white text-black p-2 rounded"
+                className="bg-gray-800 text-white p-2 rounded"
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
@@ -314,7 +314,7 @@ const AdminEventDetailsControl = () => {
             <div className="flex flex-col gap-2">
               <label className="text-sm">Start Time *</label>
               <input
-                className="bg-white text-black p-2 rounded"
+                className="bg-gray-800 text-white p-2 rounded"
                 type="time"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
@@ -328,7 +328,7 @@ const AdminEventDetailsControl = () => {
             <div className="flex flex-col gap-2">
               <label className="text-sm">End Date *</label>
               <input
-                className="bg-white text-black p-2 rounded"
+                className="bg-gray-800 text-white p-2 rounded"
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
@@ -339,7 +339,7 @@ const AdminEventDetailsControl = () => {
             <div className="flex flex-col gap-2">
               <label className="text-sm">End Time *</label>
               <input
-                className="bg-white text-black p-2 rounded"
+                className="bg-gray-800 text-white p-2 rounded"
                 type="time"
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}

@@ -36,12 +36,12 @@ const AdminEventControl = () => {
 
   return (
     <div className="flex flex-col items-center gap-4 justify-center">
-      <h2 className="text-white text-2xl">Update Event Info</h2>
+      <h2 className="text-black text-2xl">Update Event Info</h2>
 
       <input
         type="text"
         placeholder="Enter Event Name"
-        className="p-2 rounded border text-black border-white bg-white"
+        className="p-2 rounded border text-white border-black  bg-gray-800"
         value={newEventName}
         onChange={(e) => setNewEventName(e.target.value)}
       />

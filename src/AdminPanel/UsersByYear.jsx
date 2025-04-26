@@ -32,7 +32,7 @@ const UsersByYear = () => {
     : Object.keys(usersByYear);
 
   return (
-    <div className="min-h-screen bg-[#111] text-white p-6">
+    <div className="min-h-screen text-white p-6">
       <div className="max-w-screen-xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">Users by Year of Validation</h1>
 

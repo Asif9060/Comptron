@@ -10,8 +10,8 @@
 
 .input01 {
   background-color: transparent;
-  border: 2px solid white;
-  color: var(--light);
+  border: 2px solid black;
+  color: black;
   width: 500px;
   padding: .5rem;
   border-radius: var(--br);

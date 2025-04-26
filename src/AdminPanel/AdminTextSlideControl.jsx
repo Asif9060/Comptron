@@ -52,7 +52,7 @@ const AdminTextSlideControl = () => {
 
   return (
     <div className="grid place-items-center text-white rounded-3xl p-4">
-      <h2 className="text-center text-white text-3xl">News</h2>
+      <h2 className="text-center font-bold text-black text-5xl">News</h2>
 
       <div className="mb-8">
         <form
@@ -62,7 +62,7 @@ const AdminTextSlideControl = () => {
           <div>
             <label
               htmlFor="news-text"
-              className="block text-sm font-medium mb-2"
+              className="block text-black text-xl text-sm font-medium mb-2"
             >
               News Text
             </label>
@@ -75,7 +75,7 @@ const AdminTextSlideControl = () => {
             ></textarea>
           </div>
           <div>
-            <label htmlFor="link" className="block text-sm font-medium mb-2">
+            <label htmlFor="link" className="block text-sm text-black text-xl font-medium mb-2">
               Link
             </label>
             <input
