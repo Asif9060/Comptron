@@ -22,7 +22,7 @@ import AllMembersPage from "../USER/AllMembersPage";
 
 const Members = () => {
   return (
-    <div>
+    <div className="">
 
       <div className="fixed top-0 left-0 w-16 h-screen flex flex-col justify-center items-center z-10">
         <SideMenu></SideMenu>

@@ -258,7 +258,7 @@ const ToolbarPlugin = () => {
       </div>
 
       {/* Font family */}
-      <div className="flex flex-wrap gap-1 border-r pr-2 mr-2">
+      {/* <div className="flex flex-wrap gap-1 border-r pr-2 mr-2">
         <select 
           onChange={(e) => applyFontFamily(e.target.value)}
           className="px-2 py-1 rounded-md text-sm border border-gray-200 bg-white"
@@ -271,7 +271,7 @@ const ToolbarPlugin = () => {
           <option value="Verdana, sans-serif">Verdana</option>
           <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
         </select>
-      </div>
+      </div> */}
 
       {/* Colors */}
       <div className="flex flex-wrap gap-1 border-r pr-2 mr-2">

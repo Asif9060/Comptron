@@ -30,7 +30,7 @@ const ProfilePage = () => {
 
   if (!user && !error) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[#111] text-white text-2xl">
+      <div className="flex justify-center items-center min-h-screen bg-white text-white text-2xl">
         <div className="loader-container">
           <div className="rotating-circle"></div>
           <img src={logo} alt="Comptron Logo" className="logo1" />

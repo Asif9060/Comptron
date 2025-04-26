@@ -188,7 +188,7 @@ const SettingsPage = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[#111] text-white text-2xl">
+      <div className="flex justify-center items-center min-h-screen bg-white text-white text-2xl">
         <div className="loader-container">
           <div className="rotating-circle"></div>
           <img src={logo} alt="Comptron Logo" className="logo1" />
@@ -205,7 +205,7 @@ const SettingsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1f1f1f] p-4 lg:p-8">
+    <div className="min-h-screen bg-white p-4 lg:p-8">
       {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 w-64 bg-[#1c1c1e] text-white transform ${
@@ -282,7 +282,7 @@ const SettingsPage = () => {
 
       {/* Main Content */}
       <div className="md:ml-64 transition-all duration-300">
-        <div className="bg-[#1c1c1e] p-4 sm:p-6 lg:p-8 rounded-2xl shadow-xl w-full max-w-5xl mx-auto mt-4 text-white">
+        <div className="bg-[#1c1c1e] p-4 sm:p-6 lg:p-8 rounded-2xl shadow-[0px_0px_66px_36px_rgba(0,_0,_0,_0.1)] w-full max-w-5xl mx-auto mt-4 text-white">
           <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center">Settings</h1>
 
           {error && (

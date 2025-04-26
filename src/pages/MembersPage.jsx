@@ -8,7 +8,7 @@ import { CardsContext, CardsProvider } from "../CommitteePanel/CardsContext";
 import ShinyText from './../Components/UI/ShinyText';
 const MembersPage = () => {
   return (
-    <div className="bg-[#1C1C1C]">
+    <div className="bg-[]">
       <Header></Header>
       <Navbar2></Navbar2>
       {/* <Menu></Menu> */}

@@ -56,15 +56,15 @@
 
   @media (min-width: 1024px) {
     .feature {
-      border-right: 1px solid #e5e5e5;
+      border-right: 1px solid black;
     }
     
     .feature:nth-child(4n+1) {
-      border-left: 1px solid #e5e5e5;
+      border-left: 1px solid black;
     }
     
     .feature:nth-child(-n+4) {
-      border-bottom: 1px solid #e5e5e5;
+      border-bottom: 1px solid black;
     }
   }
 
@@ -113,7 +113,7 @@
     padding: 0 2.5rem;
     display: flex;
     align-items: center;
-    color: white;
+    color: black;
   }
 
   .feature-title::before {
@@ -123,7 +123,7 @@
     height: 1.5rem;
     width: 4px;
     border-radius: 0 4px 4px 0;
-    background-color: #ccc;
+    background-color: black;
     transition: all 0.2s ease;
   }
 
@@ -144,11 +144,15 @@
     transform: translateX(0.5rem);
     color:  #15A6E1;
   }
+  .feature:hover .feature-description {
+    transform: translateX(0.5rem);
+    color:  white;
+  }
 
   /* Feature description */
   .feature-description {
-    font-size: 0.875rem;
-    color: white;
+    font-size: .975rem;
+    color: black;
     max-width: 20rem;
     position: relative;
     z-index: 10;

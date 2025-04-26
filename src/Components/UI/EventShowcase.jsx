@@ -5,7 +5,6 @@ import moment from "moment-timezone";
 
 import EventSlider from "./EventSlider";
 
-
 const EventShowcase = ({ setShowcaseLoaded }) => {
   const [events, setEvents] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
@@ -14,12 +13,11 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch(
-          "https://comptron-server-2.onrender.com/api/eventDetails"
-        );
+        const res = await fetch("https://comptron-server-2.onrender.com/api/eventDetails");
         const data = await res.json();
+        console.log("Fetched events:", data);
         setEvents(data);
-        categorizeEvents(data); // initial setup
+        categorizeEvents(data);
       } catch (err) {
         console.error("Error fetching events:", err);
       } finally {
@@ -33,90 +31,53 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       categorizeEvents(events);
-
-    }, 60 * 1000); // 1 minute
-
-    return () => clearInterval(interval); // cleanup
+    }, 20 * 1000);
+    return () => clearInterval(interval);
   }, [events]);
-
 
   const categorizeEvents = (data) => {
     const now = moment().tz("Asia/Dhaka");
-
-
-    data.forEach((event) => {
-      const eventStart = moment.tz(
-        `${event.startDateTime} ${event.startdateTime}`,
-        "YYYY-MM-DD hh:mm A",
-        "Asia/Dhaka"
-      );
-      const eventEnd = moment.tz(
-        `${event.endDateTime} ${event.endDateTime}`,
-        "YYYY-MM-DD hh:mm A",
-        "Asia/Dhaka"
-      );
-
-  
     const upcoming = [];
     const ongoing = [];
     const past = [];
-  
-    data.forEach((event) => {
-      const eventStart = moment.tz(`${event.date} ${event.time}`, "YYYY-MM-DD hh:mm A", "Asia/Dhaka");
-      const duration = parseInt(event.durationDays) || 1;
-  
-      const eventEnd = moment(eventStart).add(duration, "days");
-  
 
-      if (eventStart.isAfter(now)) {
+    data.forEach((event) => {
+      const start = moment.tz(event.startDateTime, "Asia/Dhaka");
+      const end = moment.tz(event.endDateTime, "Asia/Dhaka");
+
+      if (start.isAfter(now)) {
         upcoming.push(event);
-      } else if (eventStart.isSameOrBefore(now) && eventEnd.isAfter(now)) {
+      } else if (start.isSameOrBefore(now) && end.isAfter(now)) {
         ongoing.push(event);
       } else {
         past.push(event);
       }
     });
 
-
-
-  
-
     setUpcomingEvents(upcoming);
     setOngoingEvents(ongoing);
     setPastEvents(past);
-  });
+  };
 
   const renderEventCard = (event) => {
+    const formattedStartDate = moment.tz(event.startDateTime, "Asia/Dhaka").format("MMMM D, YYYY");
+    const formattedStartTime = moment.tz(event.startDateTime, "Asia/Dhaka").format("hh:mm A");
 
-
-    const formattedTime = moment(`${event.date}T${event.time}`)
-      .tz("Asia/Dhaka")
-      .format("hh:mm A");
-
-    const formattedDate = moment(`${event.date}T${event.time}`)
-      .tz("Asia/Dhaka")
-      .format("MMMM D, YYYY");
-
+    const formattedEndDate = moment.tz(event.endDateTime, "Asia/Dhaka").format("MMMM D, YYYY");
+    const formattedEndTime = moment.tz(event.endDateTime, "Asia/Dhaka").format("hh:mm A");
 
     return (
       <div key={event._id} className="event-card">
         <img src={event.mainImage} alt={event.title} className="event-image" />
         <div className="event-details">
           <h3 className="event-title01">{event.title}</h3>
-
           <p>
             <span className="font-semibold">Starts:</span>{" "}
-            {moment
-              .tz(event.startDateTime, "Asia/Dhaka")
-              .format("MMM D, YYYY h:mm A")}
+            {formattedStartDate} at {formattedStartTime}
           </p>
-
-          <p className="event-date">
-            <i className="fa fa-calendar"></i> {formattedDate}
-          </p>
-          <p className="event-time">
-            <i className="fa fa-clock"></i> {formattedTime}
-
+          <p>
+            <span className="font-semibold">Ends:</span>{" "}
+            {formattedEndDate} at {formattedEndTime}
           </p>
           <div className="mt-5 flex">
             <Link to={`/event/${event._id}`} className="register-btn">
@@ -130,46 +91,31 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
 
   return (
     <div className="event-page">
-
       <EventSlider />
 
       {ongoingEvents.length > 0 && (
         <>
-          <div className="text-center text-[30px] text-white mt-5">
-            Ongoing Events
-          </div>
-          <section className="event-listings">
-            {ongoingEvents.map(renderEventCard)}
-          </section>
+          <div className="text-center text-[30px] text-white mt-5">Ongoing Events</div>
+          <section className="event-listings">{ongoingEvents.map(renderEventCard)}</section>
         </>
       )}
 
       {upcomingEvents.length > 0 && (
         <>
-          <div className="text-center text-[30px] text-white mt-10">
-            Upcoming Events
-          </div>
-          <section className="event-listings">
-            {upcomingEvents.map(renderEventCard)}
-          </section>
+          <div className="text-center text-[30px] text-white mt-10">Upcoming Events</div>
+          <section className="event-listings">{upcomingEvents.map(renderEventCard)}</section>
         </>
       )}
 
       {pastEvents.length > 0 && (
         <>
-          <div className="text-center text-[30px] text-white mt-10">
-            Past Events
-          </div>
-          <section className="event-listings">
-            {pastEvents.map(renderEventCard)}
-          </section>
+          <div className="text-center text-[30px] text-white mt-10">Past Events</div>
+          <section className="event-listings">{pastEvents.map(renderEventCard)}</section>
         </>
       )}
 
       {events.length === 0 && (
-        <div className="text-center text-white mt-10 text-lg">
-          No events found.
-        </div>
+        <div className="text-center text-white mt-10 text-lg">No events found.</div>
       )}
 
       <footer className="mt-12">
@@ -181,6 +127,5 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
     </div>
   );
 };
-}
 
 export default EventShowcase;

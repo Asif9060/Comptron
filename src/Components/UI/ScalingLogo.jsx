@@ -17,8 +17,8 @@ const ScalingLogo = () => {
 
   return (
     <div
-  className="fixed scaleres top-0 left-0 w-full h-full flex items-center justify-center overflow-hidden"
-  style={{ zIndex: -1 }}
+  className="fixed  scaleres top-0 left-0 w-full h-full flex items-center justify-center overflow-hidden"
+  style={{ zIndex: 1 }}
 >
   <img
     src={logo}
@@ -29,7 +29,7 @@ const ScalingLogo = () => {
       transition: "transform 0.1s ease-out",
       minWidth: "300px",
       minHeight: "300px",
-      opacity: 0.1, // Reduced opacity for better readability
+      opacity: 0.5, // Reduced opacity for better readability
     }}
   />
 </div>

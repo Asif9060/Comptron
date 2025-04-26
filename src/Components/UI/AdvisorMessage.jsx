@@ -64,7 +64,7 @@ E-mail: rianku11@gmail.com , mraihan@nwu.ac.bd`;
   }, []);
 
   return (
-    <div className="bg-[#1C1C1C] min-h-screen flex items-center justify-center p-6 pt-50">
+    <div className=" min-h-screen flex items-center justify-center p-6 pt-50">
       <div className="bg-[#1C1C1C] max-w-7xl w-full rounded-lg shadow-xl border-t-4 border-[#15A6E1] p-6">
         <div className="bg-[#15A6E1] text-white text-center text-lg font-semibold rounded-t-md -mt-6 -mx-6 mb-6 py-3">
           Message From Advisor

@@ -10,7 +10,7 @@ const AboutPage = () => {
   return (
     <div className=" w-full h-screen">
       {/* <div className="text-[35px] underline underline-offset-9 text-white text-center">Objectives</div> */}
-      <div className="relative translate-y-[4rem] mb-[2rem] z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-5xl dark:text-[#15A6E1]">
+      <div className="relative translate-y-[4rem] mb-[2rem] z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-black md:text-4xl lg:text-5xl dark:text-[#15A6E1]">
         {"Our Vision & Mission".split(" ").map((word, index) => (
           <motion.span
             key={index}
@@ -28,7 +28,7 @@ const AboutPage = () => {
         ))}
       </div>
       <div className="flex translate-y-[5rem] flex-col mb-[5rem] items-center justify-center">
-        <p className=" flex vision text-center text-white  w-[70rem]">
+        <p className=" flex vision text-center text-black text-2xl  w-[70rem]">
           To be a pioneering hub for technological innovation, research, and
           problem-solving, empowering students across all disciplines to harness
           the power of computing, artificial intelligence, and advanced
@@ -37,7 +37,7 @@ const AboutPage = () => {
         </p>
         <br />
         <br />
-        <p className="flex mission text-center text-white w-[70rem]">
+        <p className="flex mission text-center text-2xl text-black w-[70rem]">
           Comptron is committed to fostering an intellectually stimulating
           environment where students develop problem-solving skills,
           computational expertise, and research-driven innovation. Through
@@ -49,7 +49,7 @@ const AboutPage = () => {
         </p>
       </div>
 
-      <div className="relative translate-y-[7rem] z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-5xl dark:text-slate-300">
+      <div className="relative translate-y-[7rem] z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-black md:text-700 md:text-4xl lg:text-5xl">
         {"Objectives".split(" ").map((word, index) => (
           <motion.span
             key={index}

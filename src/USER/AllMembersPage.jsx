@@ -47,7 +47,7 @@ const AllMembersPage = () => {
   }
 
   return (
-    <div className="bg-[#1C1C1C] h-screen text-white flex flex-col items-center px-5 py-10">
+    <div className="h-screen text-white flex flex-col items-center px-5 py-10">
       <h1 className="text-4xl font-bold mb-8 text-center">
         Registered Members
       </h1>

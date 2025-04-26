@@ -30,7 +30,6 @@ import Recent from "../Components/Features/Recent";
 const HomePage = () => {
   const [className, setClassName] = useState("");
 
-
   const updateClassName = (newClass) => {
     setClassName(newClass);
   };
@@ -42,7 +41,8 @@ const HomePage = () => {
       position: "Advisor",
       url: {
         facebook: "https://www.facebook.com/memraihan",
-        linkedin: "https://www.linkedin.com/in/mraihanme/?original_referer=https%3A%2F%2Fwww.mraihan.me%2F",
+        linkedin:
+          "https://www.linkedin.com/in/mraihanme/?original_referer=https%3A%2F%2Fwww.mraihan.me%2F",
         github: "https://github.com/memraihan",
       },
     },
@@ -67,51 +67,51 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="bg-gray-800">
-      <Theme appearance={className}>
-        <Header></Header>
-        {/* <Navbar></Navbar> */}
-        <Navbar2></Navbar2>
-        {/* <DarkMode updateClassName={updateClassName}></DarkMode> */}
-        <TextSlide></TextSlide>
-        {/* <Menu></Menu> */}
-        <div className="absolute fixed translate-y-8 z-3">
-          {/* <SideMenu></SideMenu> */}
-        </div>
-        <TextEffect></TextEffect>
-        <Welcomemsg></Welcomemsg>
-        <h1 className=" recent font-bold py-5 text-5xl text-[#15A6E1] ">Recent Activity</h1>
-        {/* <EventSlider></EventSlider> */}
-        <Recent></Recent>
-        <ImageSlide></ImageSlide>
-        <div className="flex justify-center">
+    <div className="bg-[#FFFFFF]">
+      <Header></Header>
+      {/* <Navbar></Navbar> */}
+      <Navbar2></Navbar2>
+      {/* <DarkMode updateClassName={updateClassName}></DarkMode> */}
+      <TextSlide></TextSlide>
+      {/* <Menu></Menu> */}
+      <div className="absolute fixed translate-y-8 z-3">
+        {/* <SideMenu></SideMenu> */}
+      </div>
+      <TextEffect></TextEffect>
+      <Welcomemsg></Welcomemsg>
+      <h1 className=" recent font-bold py-5 text-5xl text-[#15A6E1] ">
+        Recent Activity
+      </h1>
+      {/* <EventSlider></EventSlider> */}
+      <Recent></Recent>
+      <ImageSlide></ImageSlide>
+      {/* <div className="flex justify-center">
           <hr className="my-12 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
-        </div>
-        <h1 className="flex justify-center text-4xl font-bold text-[#15A6E1] underline underline-offset-7">
-          Advisory Board
-        </h1>
-        <div className="flex teacher justify-center gap-7 ">
-          <TeacherCard cont={contents[0]}></TeacherCard>
-          <TeacherCard cont={contents[1]}></TeacherCard>
-          <TeacherCard cont={contents[2]}></TeacherCard>
-        </div>
-        <h2 className="flex mt-[5rem] justify-center text-4xl text-[#15A6E1] font-bold underline underline-offset-6">
-          Our Elected Members
-        </h2>
-        {/* <Members></Members> */}
-        <CoreMembers></CoreMembers>
-        <Button></Button>
-        <div className="flex justify-center">
+        </div> */}
+      <h1 className="flex justify-center text-4xl font-bold text-[#15A6E1] underline underline-offset-7">
+        Advisory Board
+      </h1>
+      <div className="flex teacher justify-center gap-7 ">
+        <TeacherCard cont={contents[0]}></TeacherCard>
+        <TeacherCard cont={contents[1]}></TeacherCard>
+        <TeacherCard cont={contents[2]}></TeacherCard>
+      </div>
+      <h2 className="flex mt-[5rem] justify-center text-4xl text-[#15A6E1] font-bold underline underline-offset-6">
+        Our Elected Members
+      </h2>
+      {/* <Members></Members> */}
+      <CoreMembers></CoreMembers>
+      <Button></Button>
+      {/* <div className="flex justify-center">
           <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
-        </div>
-        <div className="flex justify-center">
+        </div> */}
+      {/* <div className="flex justify-center">
           <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
-        </div>
+        </div> */}
         <ScalingLogo></ScalingLogo>
-        <GradientBackground></GradientBackground>
-        <AnimatedBG></AnimatedBG>
-        <Footer></Footer>
-      </Theme>
+      <GradientBackground></GradientBackground>
+      <AnimatedBG></AnimatedBG>
+      <Footer></Footer>
     </div>
   );
 };
