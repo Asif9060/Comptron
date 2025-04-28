@@ -46,7 +46,8 @@ const Footer = () => {
                 <div className="social-media">
                     <h4>Follow Us</h4>
                     <div className="social-icons">
-                        <a href="https://www.facebook.com/comptron.nwu" target="_blank"><i className="fab fa-facebook"></i> Facebook</a>
+                        <a href="https://www.facebook.com/comptron.nwu" target="_blank">Facebook</a>
+                        <a href="https://www.youtube.com/@ComptronClubNWU" target="_blank">Youtube</a>
                         {/* <a href="https://www.twitter.com" target="_blank"><i className="fab fa-twitter"></i> Twitter</a>
                         <a href="https://www.linkedin.com" target="_blank"><i className="fab fa-linkedin"></i> LinkedIn</a> */}
                     </div>

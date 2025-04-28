@@ -72,12 +72,12 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
         <div className="event-details">
           <h3 className="event-title01">{event.title}</h3>
           <p>
-            <span className="font-semibold">Starts:</span>{" "}
-            {formattedStartDate} at {formattedStartTime}
+            <span className="font-semibold">Date:</span>{" "}
+            {formattedStartDate}
           </p>
           <p>
-            <span className="font-semibold">Ends:</span>{" "}
-            {formattedEndDate} at {formattedEndTime}
+            <span className="font-semibold">Time:</span>{" "}
+            {formattedStartTime}
           </p>
           <div className="mt-5 flex">
             <Link to={`/event/${event._id}`} className="register-btn">
@@ -91,38 +91,35 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
 
   return (
     <div className="event-page">
-      <EventSlider />
+      {/* <EventSlider /> */}
 
       {ongoingEvents.length > 0 && (
         <>
-          <div className="text-center text-[30px] text-white mt-5">Ongoing Events</div>
+          <div className="text-center text-[30px] mt-5">Ongoing Events</div>
           <section className="event-listings">{ongoingEvents.map(renderEventCard)}</section>
         </>
       )}
 
       {upcomingEvents.length > 0 && (
         <>
-          <div className="text-center text-[30px] text-white mt-10">Upcoming Events</div>
+          <div className="text-center text-[30px] mt-10">Upcoming Events</div>
           <section className="event-listings">{upcomingEvents.map(renderEventCard)}</section>
         </>
       )}
 
       {pastEvents.length > 0 && (
         <>
-          <div className="text-center text-[30px] text-white mt-10">Past Events</div>
+          <div className="text-center text-[30px] mt-10">Past Events</div>
           <section className="event-listings">{pastEvents.map(renderEventCard)}</section>
         </>
       )}
 
       {events.length === 0 && (
-        <div className="text-center text-white mt-10 text-lg">No events found.</div>
+        <div className="text-center mt-10 text-lg">No events found.</div>
       )}
 
-      <footer className="mt-12">
+      <footer className="mt-45">
         <p>&copy; 2025 Comptron. All rights reserved.</p>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Contact Us</a>
       </footer>
     </div>
   );

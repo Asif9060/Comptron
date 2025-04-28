@@ -18,7 +18,7 @@ const EventDetails = () => {
 
   if (!event)
     return (
-      <div className="flex justify-center items-center h-screen bg-black z-50 fixed w-full top-0 left-0">
+      <div className="flex justify-center items-center h-screen z-50 fixed w-full top-0 left-0">
         <div className="loader-container">
           <div className="rotating-circle"></div>
           <img src={logo} alt="Comptron Logo" className="logo1" />
@@ -45,7 +45,7 @@ const EventDetails = () => {
       <div className="container06">
         <h1 className="">
           <span className="text-[32px]">🔥</span>
-          <span className="event-title">{event.title}</span>
+          <span className="event-title2">{event.title}</span>
           <span className="text-[32px]">🔥</span>
         </h1>
         <div className="main-content">

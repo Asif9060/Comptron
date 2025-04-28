@@ -124,14 +124,16 @@ const AdminUsersPage = () => {
       <h1 className="text-3xl font-bold mb-6">All Users</h1>
 
       {/* ✅ Search Input */}
-      <div className="mb-6 flex justify-center">
+      <div className="mb-6 flex flex-col items-center justify-center">
         <input
           type="text"
           placeholder="Search by name or ID..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="mb-6 p-3 w-1/2 bg-[#222] rounded-lg border border-[#444] text-white"
-        />
+          />
+          {error && <div className="text-red-500 font-bold text-xl mb-4">{error}</div>}
+          {success && <div className="text-green-500 font-bold text-xl mb-4">{success}</div>}
       </div>
       <div className="flex items-center gap-18 mb-5 justify-center">
         <div>
@@ -142,8 +144,6 @@ const AdminUsersPage = () => {
         </div>
       </div>
 
-      {error && <div className="text-red-500 mb-4">{error}</div>}
-      {success && <div className="text-green-500 mb-4">{success}</div>}
 
       <div className="space-y-6 flex flex-col items-center">
         {filteredUsers.map((user) => (

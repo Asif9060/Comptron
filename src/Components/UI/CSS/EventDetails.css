@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 .container06 {
-    max-width: 1500px;
-    background: #1C1C1C;
+    max-width: 1800px;
     padding: 25px;
     text-align: center;
     backdrop-filter: blur(15px);
@@ -12,6 +11,15 @@
 .event-title01 {
     font-size: 19px;
     font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.event-title2 {
+    font-size: 25px;
+    font-weight: 700;
     margin-bottom: 15px;
     text-transform: uppercase;
     background: linear-gradient(90deg, #ff00ff, #00ffff);

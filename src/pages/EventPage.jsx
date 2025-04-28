@@ -8,6 +8,7 @@ import EventShowcase from "../Components/UI/EventShowcase";
 
 import SideMenu from "../Components/Features/SideMenu";
 import logo from "../assets/images/Comptron Logo.png";
+import Slider from "../Components/UI/Slider";
 
 const EventPage = () => {
   const [loading, setLoading] = useState(true);
@@ -65,6 +66,7 @@ const EventPage = () => {
 
 
       <EventShowcase setShowcaseLoaded={setShowcaseLoaded} />
+      {/* <Slider></Slider> */}
     </div>
   );
 };
