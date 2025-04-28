@@ -32,7 +32,7 @@ const CommitteeByYear = () => {
     : committeeByYear;
 
   return (
-    <div className="min-h-screen bg-[#111] text-white p-6">
+    <div className="min-h-screen w-1/2 bg-[#1E2939] text-white p-6">
       <div className="max-w-screen-xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">Committee Members by Year</h1>
         <div className="mb-6">
