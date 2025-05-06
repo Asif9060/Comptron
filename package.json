@@ -43,6 +43,7 @@
         "firebase": "^11.5.0",
         "framer-motion": "^12.5.0",
         "gsap": "^3.12.7",
+        "html2canvas": "^1.4.1",
         "jquery": "^3.7.1",
         "lexical": "^0.30.0",
         "lucide-react": "^0.477.0",

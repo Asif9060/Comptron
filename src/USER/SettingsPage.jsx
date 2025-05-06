@@ -17,6 +17,13 @@ const SettingsPage = () => {
     email: "",
     phone: "",
     bio: "",
+    studentId: "",
+    bloodGroup: "",
+    dateOfBirth: "",
+    linkedIn: "",
+    github: "",
+    portfolio: "",
+    cv: "",
   });
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -54,6 +61,13 @@ const SettingsPage = () => {
           email: data.email || "",
           phone: data.phone || "",
           bio: data.bio || "",
+          studentId: data.studentId || "",
+          bloodGroup: data.bloodGroup || "",
+          dateOfBirth: data.dateOfBirth || "",
+          linkedIn: data.linkedIn || "",
+          github: data.github || "",
+          portfolio: data.portfolio || "",
+          cv: data.cv || "",
         });
         setImage(data.image || null);
         setLoading(false);
@@ -97,6 +111,9 @@ const SettingsPage = () => {
       portfolio: user.portfolio,
       cv: user.cv,
       bio: user.bio,
+      studentId: user.studentId,
+      bloodGroup: user.bloodGroup,
+      dateOfBirth: user.dateOfBirth,
     };
 
     try {
@@ -283,7 +300,9 @@ const SettingsPage = () => {
       {/* Main Content */}
       <div className="md:ml-64 transition-all duration-300">
         <div className="bg-[#1c1c1e] p-4 sm:p-6 lg:p-8 rounded-2xl shadow-[0px_0px_66px_36px_rgba(0,_0,_0,_0.1)] w-full max-w-5xl mx-auto mt-4 text-white">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center">Settings</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center">
+            Settings
+          </h1>
 
           {error && (
             <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">
@@ -308,15 +327,58 @@ const SettingsPage = () => {
                   placeholder="Enter your name"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <label className="block text-sm font-medium mb-1">Bio</label>
                 <input
-                  type="text" 
+                  type="text"
                   value={user.bio}
                   onChange={(e) => setUser({ ...user, bio: e.target.value })}
                   className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Write something about yourself..."
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium mb-1">
+                  Student ID
+                </label>
+                <input
+                  type="text"
+                  value={user.studentId}
+                  onChange={(e) =>
+                    setUser({ ...user, studentId: e.target.value })
+                  }
+                  className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your student ID"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium mb-1">
+                  Blood Group
+                </label>
+                <input
+                  type="text"
+                  value={user.bloodGroup}
+                  onChange={(e) =>
+                    setUser({ ...user, bloodGroup: e.target.value })
+                  }
+                  className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your blood group"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium mb-1">
+                  Date of Birth
+                </label>
+                <input
+                  type="date"
+                  value={user.dateOfBirth}
+                  onChange={(e) =>
+                    setUser({ ...user, dateOfBirth: e.target.value })
+                  }
+                  className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="YYYY-MM-DD"
                 />
               </div>
 
@@ -357,13 +419,17 @@ const SettingsPage = () => {
                 <input
                   type="url"
                   value={user.linkedIn || ""}
-                  onChange={(e) => setUser({ ...user, linkedIn: e.target.value })}
+                  onChange={(e) =>
+                    setUser({ ...user, linkedIn: e.target.value })
+                  }
                   className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="https://linkedin.com/in/yourname"
                 />
               </div>
               <div className="space-y-2">
-                <label className="block text-sm font-medium mb-1">GitHub URL</label>
+                <label className="block text-sm font-medium mb-1">
+                  GitHub URL
+                </label>
                 <input
                   type="url"
                   value={user.github || ""}
@@ -379,7 +445,9 @@ const SettingsPage = () => {
                 <input
                   type="url"
                   value={user.portfolio || ""}
-                  onChange={(e) => setUser({ ...user, portfolio: e.target.value })}
+                  onChange={(e) =>
+                    setUser({ ...user, portfolio: e.target.value })
+                  }
                   className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="https://yourportfolio.com"
                 />
@@ -413,7 +481,6 @@ const SettingsPage = () => {
                     />
                   )}
                 </div>
-              
               </div>
             </div>
 
@@ -436,8 +503,8 @@ const SettingsPage = () => {
 
           {cropperVisible && image && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-              <div className="relative bg-white p-4 rounded-lg w-96 h-96">
-                <div className="relative w-full h-64">
+              <div className="relative bg-white p-4 rounded-lg w-[50rem]">
+                <div className="relative w-full h-96">
                   <Cropper
                     image={image}
                     crop={crop}
@@ -449,6 +516,32 @@ const SettingsPage = () => {
                     onZoomChange={setZoom}
                     onCropComplete={onCropComplete}
                   />
+                </div>
+                {/* Zoom Controls */}
+                <div className="flex items-center justify-center gap-2 mt-4">
+                  <button
+                    type="button"
+                    className="bg-gray-300 text-black px-2 py-1 rounded-full text-lg font-bold hover:bg-gray-400"
+                    onClick={() => setZoom((z) => Math.max(1, z - 0.1))}
+                  >
+                    −
+                  </button>
+                  <input
+                    type="range"
+                    min={1}
+                    max={3}
+                    step={0.01}
+                    value={zoom}
+                    onChange={(e) => setZoom(Number(e.target.value))}
+                    className="w-40 accent-blue-600"
+                  />
+                  <button
+                    type="button"
+                    className="bg-gray-300 text-black px-2 py-1 rounded-full text-lg font-bold hover:bg-gray-400"
+                    onClick={() => setZoom((z) => Math.min(3, z + 0.1))}
+                  >
+                    +
+                  </button>
                 </div>
                 <div className="mt-4 flex justify-between">
                   <button

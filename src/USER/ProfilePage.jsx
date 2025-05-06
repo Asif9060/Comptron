@@ -4,6 +4,9 @@ import logo from "../assets/images/Comptron Logo.png";
 import male from "../assets/images/male.jpg";
 import female from "../assets/images/female.jpg";
 import SideMenu from "../Components/Features/SideMenu";
+import signature from "../assets/images/signature.jpg";
+import html2canvas from "html2canvas";
+import PropTypes from "prop-types";
 const ProfilePage = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
@@ -11,6 +14,7 @@ const ProfilePage = () => {
   const [successMsg, setSuccessMsg] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [error, setError] = useState("");
+  const [showIdCard, setShowIdCard] = useState(false);
 
   useEffect(() => {
     fetch(`https://comptron-server-2.onrender.com/api/users/profile/${id}`)
@@ -27,6 +31,175 @@ const ProfilePage = () => {
         setError("Failed to load profile. Please check the user ID.");
       });
   }, [id]);
+
+  const downloadIdCard = async () => {
+    const idCard = document.getElementById("digital-id-card");
+    if (!idCard) return;
+
+    try {
+      const canvas = await html2canvas(idCard, {
+        backgroundColor: "#000000",
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        logging: true,
+        onclone: (clonedDoc) => {
+          const clonedElement = clonedDoc.getElementById("digital-id-card");
+          if (clonedElement) {
+            clonedElement.style.transform = "none";
+            clonedElement.style.width = "400px";
+          }
+        },
+      });
+
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) return;
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.download = `${user?.name || "user"}-digital-id.png`;
+          link.href = url;
+          link.click();
+          URL.revokeObjectURL(url);
+        },
+        "image/png",
+        1.0
+      );
+    } catch (err) {
+      console.error("Error generating ID card:", err);
+      setError("Failed to generate ID card");
+    }
+  };
+
+  const IdCardModal = ({ onClose }) => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-transparent max-w-2xl w-full">
+        <div className="flex justify-end mb-2">
+          <button
+            onClick={onClose}
+            className="text-white hover:text-red-500 text-xl"
+          >
+            ✕
+          </button>
+        </div>
+        <div
+          id="digital-id-card"
+          className="w-full"
+          style={{ width: "400px", margin: "0 auto" }}
+        >
+          <div className="bg-[#112D4E] rounded-none overflow-hidden shadow-2xl relative">
+            {/* Waves Design */}
+            <div className="absolute top-0 right-0 w-full h-full overflow-hidden">
+              <svg
+                className="absolute top-0 right-0"
+                viewBox="0 0 500 150"
+                preserveAspectRatio="none"
+              >
+                <path
+                  className="fill-[#ffffff] "
+                  d="M0,100 C150,200 350,0 500,100 L500,0 L0,0 Z"
+                ></path>
+              </svg>
+              <svg
+                className="absolute bottom-0 right-0"
+                viewBox="0 0 500 150"
+                preserveAspectRatio="none"
+              >
+                <path
+                  className="fill-[#ffffff]"
+                  d="M0,100 C150,200 350,0 500,100 L500,0 L0,0 Z"
+                  transform="rotate(180)"
+                ></path>
+              </svg>
+            </div>
+
+            {/* Header */}
+            <div className="relative p-4 flex items-center justify-between">
+              <img src={logo} alt="Comptron Logo" className="w-20" />
+              <div className="text-right">
+                {/* <h2 className="text-3xl font-bold text-white">Comptron</h2>
+                <p className="text-cyan-400 text-sm">Creativity Assembled</p> */}
+              </div>
+            </div>
+
+            {/* Profile Image */}
+            <div className="relative px-4 py-2">
+              <div className="w-32 h-32 mx-auto rounded-lg overflow-hidden border-2 border-[#15A6E1]">
+                <img
+                  src={
+                    user?.image ||
+                    (user?.gender?.toLowerCase() === "female" ? female : male)
+                  }
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* User Details */}
+            <div className="relative p-4 text-center">
+              <h1 className="text-2xl font-bold text-white mb-1">
+                {user?.name}
+              </h1>
+              <p className="text-[#15A6E1] translate-y-[-2rem] text-lg mb-4">
+                {user?.role || "GENERAL MEMBER"}
+              </p>
+
+              <div className="text-white space-y-2 text-left">
+                {[
+                  ["Student ID", user?.studentId || user?.customId],
+                  ["Blood Group", user?.bloodGroup || "N/A"],
+                  ["Date of Birth", user?.dateOfBirth || "N/A"],
+                  ["Contact", user?.phone || "N/A"],
+                  ["Email", user?.email || "N/A"],
+                ].map(([label, value]) => (
+                  <div key={label} className="flex">
+                    <span className="text-[#15A6E1] min-w-[120px]">
+                      {label}
+                    </span>
+                    <span className="px-1">:</span>
+                    <span>{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Signature Section */}
+            <div className="relative w-[30rem] translate-x-[-2.5rem] bg-white p-4 mt-2 border-t border-[#15A6E1]">
+              <div className="flex justify-center">
+                <div className=" text-center">
+                  <img
+                    src={signature}
+                    alt="Advisor Signature"
+                    className=" mx-auto mb-1"
+                  />
+                  {/* <p className="text-black bg-white p-1 translate-y-[-5px] text-sm">Signature of the Advisor</p> */}
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Bar */}
+            <div className="bg-[#112D4E] h-6"></div>
+          </div>
+        </div>
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={downloadIdCard}
+            className="bg-[#15A6E1] hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center gap-2"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+            </svg>
+            Download ID Card
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  IdCardModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+  };
 
   if (!user && !error) {
     return (
@@ -116,7 +289,7 @@ const ProfilePage = () => {
       </button>
 
       {/* Main Content */}
-      <div className="w-full flex bg-black  max-w-5xl rounded-3xl shadow-[gray_0px_0px_15px_2px] p-10">
+      <div className="flex bg-black translate-x-[5rem] max-w-5xl rounded-3xl shadow-[gray_0px_0px_15px_2px] p-10">
         {error && (
           <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">
             {error}
@@ -129,7 +302,7 @@ const ProfilePage = () => {
         )}
 
         {user && (
-          <div className="bg-[#000000] w-[70rem] layer shadow-lg rounded-3xl p-10">
+          <div className="bg-[#000000] w-[70rem] h-[62rem] layer shadow-lg rounded-3xl p-10">
             {user.image ? (
               <img
                 src={user.image}
@@ -167,9 +340,9 @@ const ProfilePage = () => {
             </p>
 
             <div className="flex gap-2 justify-center mb-6">
-              <span className="bg-blue-600 px-3 py-1 rounded-full text-sm">
+              {/* <span className="bg-blue-600 px-3 py-1 rounded-full text-sm">
                 Badge
-              </span>
+              </span> */}
               {/* <span className="bg-green-600 px-3 py-1 rounded-full text-sm">
                 Top Skill
               </span> */}
@@ -189,6 +362,22 @@ const ProfilePage = () => {
                 <p>Since</p>
               </div>
             </div> */}
+            <div className="mb-6 flex justify-center">
+              <button
+                onClick={() => setShowIdCard(true)}
+                className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 flex items-center gap-2 shadow-lg"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zM216 232l0 102.1 31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31L168 232c0-13.3 10.7-24 24-24s24 10.7 24 24z" />
+                </svg>
+                View Digital ID
+              </button>
+            </div>
+
             <div className="flex flex-wrap gap-6 mb-10">
               <div className="flex-1  min-w-[280px] bg-[#2a2a2a] rounded-2xl p-6">
                 <h2 className="text-xl text-center text-cyan-400 font-semibold mb-4">
@@ -348,6 +537,9 @@ const ProfilePage = () => {
           </div>
         )}
       </div>
+      {showIdCard && user && (
+        <IdCardModal onClose={() => setShowIdCard(false)} />
+      )}
     </div>
   );
 };
