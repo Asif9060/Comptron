@@ -7,6 +7,7 @@ import SideMenu from "../Components/Features/SideMenu";
 import signature from "../assets/images/signature.jpg";
 import html2canvas from "html2canvas";
 import PropTypes from "prop-types";
+import qr from "../assets/images/frame.png";
 const ProfilePage = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
@@ -33,24 +34,75 @@ const ProfilePage = () => {
   }, [id]);
 
   const downloadIdCard = async () => {
-    const idCard = document.getElementById("digital-id-card");
-    if (!idCard) return;
+    const frontCard = document.getElementById("digital-id-card-front");
+    const backCard = document.getElementById("digital-id-card-back");
+    if (!frontCard || !backCard) return;
 
     try {
-      const canvas = await html2canvas(idCard, {
-        backgroundColor: "#000000",
+      // Create a container with exact dimensions
+      const container = document.createElement("div");
+      container.style.width = "800px";
+      container.style.height = "700px";
+      container.style.display = "flex";
+      container.style.justifyContent = "space-between";
+      container.style.backgroundColor = "#112D4E";
+      container.style.padding = "0";
+      container.style.margin = "0";
+
+      // Clone the cards and their inner content
+      const frontClone = frontCard.cloneNode(true);
+      const backClone = backCard.cloneNode(true);
+
+      // Reset styles and set exact dimensions for both cards
+      [frontClone, backClone].forEach((card) => {
+        card.style.transform = "none";
+        card.style.position = "relative";
+        card.style.inset = "auto";
+        card.style.width = "400px";
+        card.style.margin = "0";
+        card.style.padding = "0";
+      });
+
+      // Make sure all elements maintain their background colors
+      const applyStyles = (element) => {
+        const bgElements = element.querySelectorAll('[data-bg="primary"]');
+        bgElements.forEach((el) => {
+          el.style.backgroundColor = "#112D4E";
+          el.style.width = "100%";
+          el.style.margin = "0";
+          el.style.padding = "0";
+        });
+      };
+
+      applyStyles(frontClone);
+      applyStyles(backClone);
+
+      // Add to container
+      container.appendChild(frontClone);
+      container.appendChild(backClone);
+
+      // Hide container initially
+      container.style.position = "fixed";
+      container.style.left = "-9999px";
+      container.style.top = "-9999px";
+
+      // Add to document for capturing
+      document.body.appendChild(container);
+
+      const canvas = await html2canvas(container, {
+        backgroundColor: "#112D4E",
         scale: 2,
         useCORS: true,
         allowTaint: true,
         logging: true,
-        onclone: (clonedDoc) => {
-          const clonedElement = clonedDoc.getElementById("digital-id-card");
-          if (clonedElement) {
-            clonedElement.style.transform = "none";
-            clonedElement.style.width = "400px";
-          }
+        onclone: function (clonedDoc) {
+          const clonedContainer = clonedDoc.body.firstChild;
+          clonedContainer.style.backgroundColor = "#112D4E";
         },
       });
+
+      // Remove the temporary container
+      document.body.removeChild(container);
 
       canvas.toBlob(
         (blob) => {
@@ -71,131 +123,250 @@ const ProfilePage = () => {
     }
   };
 
-  const IdCardModal = ({ onClose }) => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-transparent max-w-2xl w-full">
-        <div className="flex justify-end mb-2">
-          <button
-            onClick={onClose}
-            className="text-white hover:text-red-500 text-xl"
+  const IdCardModal = ({ onClose }) => {
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="bg-transparent max-w-2xl w-full">
+          <div className="flex justify-end mb-2">
+            <button
+              onClick={onClose}
+              className="text-white hover:text-red-500 text-xl"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div
+            className="perspective-1000 relative w-full"
+            style={{ perspective: "1000px" }}
           >
-            ✕
-          </button>
-        </div>
-        <div
-          id="digital-id-card"
-          className="w-full"
-          style={{ width: "400px", margin: "0 auto" }}
-        >
-          <div className="bg-[#112D4E] rounded-none overflow-hidden shadow-2xl relative">
-            {/* Waves Design */}
-            <div className="absolute top-0 right-0 w-full h-full overflow-hidden">
-              <svg
-                className="absolute top-0 right-0"
-                viewBox="0 0 500 150"
-                preserveAspectRatio="none"
+            <div
+              className={`relative transition-transform duration-700 transform-style-preserve-3d w-full ${
+                isFlipped ? "rotate-y-180" : ""
+              }`}
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* Front of Card */}
+              <div
+                id="digital-id-card-front"
+                className="w-full backface-hidden"
+                style={{
+                  width: "400px",
+                  margin: "0 auto",
+                  backfaceVisibility: "hidden",
+                }}
               >
-                <path
-                  className="fill-[#ffffff] "
-                  d="M0,100 C150,200 350,0 500,100 L500,0 L0,0 Z"
-                ></path>
-              </svg>
-              <svg
-                className="absolute bottom-0 right-0"
-                viewBox="0 0 500 150"
-                preserveAspectRatio="none"
-              >
-                <path
-                  className="fill-[#ffffff]"
-                  d="M0,100 C150,200 350,0 500,100 L500,0 L0,0 Z"
-                  transform="rotate(180)"
-                ></path>
-              </svg>
-            </div>
-
-            {/* Header */}
-            <div className="relative p-4 flex items-center justify-between">
-              <img src={logo} alt="Comptron Logo" className="w-20" />
-              <div className="text-right">
-                {/* <h2 className="text-3xl font-bold text-white">Comptron</h2>
-                <p className="text-cyan-400 text-sm">Creativity Assembled</p> */}
-              </div>
-            </div>
-
-            {/* Profile Image */}
-            <div className="relative px-4 py-2">
-              <div className="w-32 h-32 mx-auto rounded-lg overflow-hidden border-2 border-[#15A6E1]">
-                <img
-                  src={
-                    user?.image ||
-                    (user?.gender?.toLowerCase() === "female" ? female : male)
-                  }
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* User Details */}
-            <div className="relative p-4 text-center">
-              <h1 className="text-2xl font-bold text-white mb-1">
-                {user?.name}
-              </h1>
-              <p className="text-[#15A6E1] translate-y-[-2rem] text-lg mb-4">
-                {user?.role || "GENERAL MEMBER"}
-              </p>
-
-              <div className="text-white space-y-2 text-left">
-                {[
-                  ["Student ID", user?.studentId || user?.customId],
-                  ["Blood Group", user?.bloodGroup || "N/A"],
-                  ["Date of Birth", user?.dateOfBirth || "N/A"],
-                  ["Contact", user?.phone || "N/A"],
-                  ["Email", user?.email || "N/A"],
-                ].map(([label, value]) => (
-                  <div key={label} className="flex">
-                    <span className="text-[#15A6E1] min-w-[120px]">
-                      {label}
-                    </span>
-                    <span className="px-1">:</span>
-                    <span>{value}</span>
+                <div
+                  className="bg-[#112D4E] rounded-none overflow-hidden shadow-2xl relative"
+                  data-bg="primary"
+                >
+                  {/* Waves Design */}
+                  <div className="absolute top-0 right-0 w-full h-full overflow-hidden">
+                    <svg
+                      className="absolute top-0 right-0"
+                      viewBox="0 0 500 150"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        className="fill-[#ffffff] "
+                        d="M0,100 C150,200 350,0 500,100 L500,0 L0,0 Z"
+                      ></path>
+                    </svg>
+                    <svg
+                      className="absolute bottom-0 right-0"
+                      viewBox="0 0 500 150"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        className="fill-[#ffffff]"
+                        d="M0,100 C150,200 350,0 500,100 L500,0 L0,0 Z"
+                        transform="rotate(180)"
+                      ></path>
+                    </svg>
                   </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Signature Section */}
-            <div className="relative w-[30rem] translate-x-[-2.5rem] bg-white p-4 mt-2 border-t border-[#15A6E1]">
-              <div className="flex justify-center">
-                <div className=" text-center">
-                  <img
-                    src={signature}
-                    alt="Advisor Signature"
-                    className=" mx-auto mb-1"
-                  />
-                  {/* <p className="text-black bg-white p-1 translate-y-[-5px] text-sm">Signature of the Advisor</p> */}
+                  {/* Header */}
+                  <div className="relative p-4 flex items-center justify-between">
+                    <img src={logo} alt="Comptron Logo" className="w-20" />
+                    <div className="text-right">
+                      {/* <h2 className="text-3xl font-bold text-white">Comptron</h2>
+                      <p className="text-cyan-400 text-sm">Creativity Assembled</p> */}
+                    </div>
+                  </div>
+
+                  {/* Profile Image */}
+                  <div className="relative px-4 py-2">
+                    <div className="w-32 h-32 mx-auto rounded-lg overflow-hidden border-2 border-[#15A6E1]">
+                      <img
+                        src={
+                          user?.image ||
+                          (user?.gender?.toLowerCase() === "female"
+                            ? female
+                            : male)
+                        }
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  {/* User Details */}
+                  <div className="relative p-4 text-center">
+                    <h1 className="text-2xl font-bold text-white mb-1">
+                      {user?.name}
+                    </h1>
+                    <p className="text-[#15A6E1] translate-y-[-2rem] text-lg mb-4">
+                      {user?.role || "GENERAL MEMBER"}
+                    </p>
+
+                    <div className="text-white space-y-2 text-left">
+                      {[
+                        ["Student ID", user?.studentId || user?.customId],
+                        ["Blood Group", user?.bloodGroup || "N/A"],
+                        ["Date of Birth", user?.dateOfBirth || "N/A"],
+                        ["Contact", user?.phone || "N/A"],
+                        ["Email", user?.email || "N/A"],
+                      ].map(([label, value]) => (
+                        <div key={label} className="flex">
+                          <span className="text-[#15A6E1] min-w-[120px]">
+                            {label}
+                          </span>
+                          <span className="px-1">:</span>
+                          <span>{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Signature Section */}
+                  <div className="relative w-[30rem] translate-x-[-2.5rem] bg-white p-4 mt-2 border-t border-[#15A6E1]">
+                    <div className="flex justify-center">
+                      <div className=" text-center">
+                        <img
+                          src={signature}
+                          alt="Advisor Signature"
+                          className=" mx-auto mb-1"
+                        />
+                        {/* <p className="text-black bg-white p-1 translate-y-[-5px] text-sm">Signature of the Advisor</p> */}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Bar */}
+                  <div className="bg-[#112D4E] h-6"></div>
+                </div>
+              </div>
+
+              {/* Back of Card */}
+              <div
+                id="digital-id-card-back"
+                className="absolute inset-0 w-full backface-hidden rotate-y-180"
+                style={{
+                  width: "400px",
+                  margin: "0 auto",
+                  backfaceVisibility: "hidden",
+                  transform: "rotateY(180deg)",
+                }}
+              >
+                <div
+                  className="bg-[#112D4E] rounded-none overflow-hidden shadow-2xl relative h-full"
+                  data-bg="primary"
+                >
+                  <div className="p-6 flex flex-col h-full">
+                    <h2 className="text-2xl font-bold text-center text-white mb-6">
+                      Terms and Condition
+                    </h2>
+
+                    <div className="space-y-4 text-white mb-8">
+                      <p className="flex items-start gap-2">
+                        <span className="text-[#15A6E1] text-xl">•</span>
+                        This card is a property of Comptron Creativity Assembled
+                        club.
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-[#15A6E1] text-xl">•</span>
+                        If lost or misplaced card must be reported immediately
+                        to the office or contact number.
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-[#15A6E1] text-xl">•</span>
+                        This card will remain valid till 21 February 2026.
+                      </p>
+                    </div>
+
+                    {/* QR Code */}
+                    <div className="flex justify-center translate-y-[2.3rem] mb-8">
+                      <div className="bg-white p-2 rounded-lg">
+                        <img src={qr} alt="QR Code" className="w-32 h-32" />
+                      </div>
+                    </div>
+
+                    {/* Contact Information */}
+                    <div className="mt-auto text-white text-center space-y-2">
+                      <p className="flex items-center justify-center gap-2">
+                        <svg
+                          className="w-5 h-5"
+                          fill="#15A6E1"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                        comptron@nwu.ac.bd
+                      </p>
+                      <p className="flex items-center justify-center gap-2">
+                        <svg
+                          className="w-5 h-5"
+                          fill="#15A6E1"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 0a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16zm1-11h-2v4h2V7zm0 6h-2v2h2v-2z" />
+                        </svg>
+                        https://comptron.nwu.ac.bd
+                      </p>
+                      <p className="flex items-center justify-center gap-2 ">
+                        <svg
+                          className="w-5 h-5 translate-y-[-0.8rem] translate-x-[0.8rem]"
+                          fill="#15A6E1"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 0a7.5 7.5 0 00-7.5 7.5c0 5.625 7.5 12.5 7.5 12.5s7.5-6.875 7.5-12.5A7.5 7.5 0 0010 0zm0 11.25a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5z" />
+                        </svg>
+                        Building-2; 58, KDA Avenue, Sonadanga, Khulna-9100
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Bottom Bar */}
-            <div className="bg-[#112D4E] h-6"></div>
+          <div className="flex justify-center mt-4 gap-4">
+            <button
+              onClick={() => setIsFlipped(!isFlipped)}
+              className="bg-[#15A6E1] hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M16 2H8C4.691 2 2 4.691 2 8v8c0 3.309 2.691 6 6 6h8c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm-2 12H8v-2h6v2z" />
+              </svg>
+              Flip Card
+            </button>
+            <button
+              onClick={downloadIdCard}
+              className="bg-[#15A6E1] hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+              </svg>
+              Download ID Card
+            </button>
           </div>
         </div>
-        <div className="flex justify-center mt-4">
-          <button
-            onClick={downloadIdCard}
-            className="bg-[#15A6E1] hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center gap-2"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-            </svg>
-            Download ID Card
-          </button>
-        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   IdCardModal.propTypes = {
     onClose: PropTypes.func.isRequired,
