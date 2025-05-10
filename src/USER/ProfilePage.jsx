@@ -4,7 +4,7 @@ import logo from "../assets/images/Comptron Logo.png";
 import male from "../assets/images/male.jpg";
 import female from "../assets/images/female.jpg";
 import SideMenu from "../Components/Features/SideMenu";
-import signature from "../assets/images/signature.jpg";
+import signature from "../assets/images/Signature.jpg";
 import html2canvas from "html2canvas";
 import PropTypes from "prop-types";
 import qr from "../assets/images/frame.png";
