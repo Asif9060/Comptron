@@ -41,7 +41,7 @@ img {
 
 .card__article {
   position: relative;
-  overflow: hidden;
+  overflow: hidden;  
 }
 
 .card__img {
@@ -173,6 +173,7 @@ img {
 /* Responsive design for small screens */
 @media screen and (max-width: 768px) {
   .container {
+    display: inline;
     transform: translateX(0);
     margin-inline: 1rem;
     padding-block: 3rem;
@@ -180,12 +181,13 @@ img {
 
   .card__container {
     grid-template-columns: 1fr;
-    transform: translateX(-1rem);
+    transform: translateX(0);
   }
 
   .card__img {
     width: 100%;
-    height: 350px;
+    height: 450px;
+    border-radius: 0%;
   }
 
   .card__data {
@@ -201,6 +203,10 @@ img {
 
   .card__description {
     font-size: 0.75rem;
+  }
+  .card__article {
+    
+    overflow: hidden;  
   }
 }
 
