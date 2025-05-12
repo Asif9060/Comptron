@@ -80,7 +80,7 @@ const CommiteeCard = () => {
     }
 
   return (
-    <div className="container md:translate-x-[14.5rem]">
+    <div className="container">
       <div className="card__container">
         {members.length > 0 ? (
           members.map((member) => (
