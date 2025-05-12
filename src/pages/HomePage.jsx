@@ -26,6 +26,9 @@ import CoreMembers from "../Components/Features/CoreMembers";
 import { Divider } from "@heroui/divider";
 import SideMenu from "../Components/Features/SideMenu";
 import Recent from "../Components/Features/Recent";
+import Hero from "../Components/Layout/Hero";
+import AboutClub from "../Components/Layout/AboutClub";
+
 
 const HomePage = () => {
   const [className, setClassName] = useState("");
@@ -68,17 +71,19 @@ const HomePage = () => {
 
   return (
     <div className="bg-[#FFFFFF]">
-      <Header></Header>
-      {/* <Navbar></Navbar> */}
-      <Navbar2></Navbar2>
-      {/* <DarkMode updateClassName={updateClassName}></DarkMode> */}
+      <Hero></Hero>
       <TextSlide></TextSlide>
+      <AboutClub></AboutClub>
+      {/* <Header></Header> */}
+      {/* <Navbar></Navbar> */}
+      {/* <Navbar2></Navbar2> */}
+      {/* <DarkMode updateClassName={updateClassName}></DarkMode> */}
       {/* <Menu></Menu> */}
       <div className="absolute fixed translate-y-8 z-3">
         {/* <SideMenu></SideMenu> */}
       </div>
       <TextEffect></TextEffect>
-      <Welcomemsg></Welcomemsg>
+      {/* <Welcomemsg></Welcomemsg> */}
       <h1 className=" recent font-bold py-5 text-5xl text-[#15A6E1] ">
         Recent Activity
       </h1>
@@ -108,7 +113,7 @@ const HomePage = () => {
       {/* <div className="flex justify-center">
           <hr className="my-10 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
         </div> */}
-        {/* <ScalingLogo></ScalingLogo> */}
+      {/* <ScalingLogo></ScalingLogo> */}
       <GradientBackground></GradientBackground>
       <AnimatedBG></AnimatedBG>
       <Footer></Footer>
