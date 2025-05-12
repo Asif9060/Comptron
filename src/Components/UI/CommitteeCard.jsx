@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Card = ({ imgSrc, alt, role, name, facebook, customId  }) => (
   <article className="card__article">
     <img src={imgSrc} alt={alt} className="card__img" />
-    <div className="card__data -translate-x-10.5">
+    <div className="card__data flex flex-col items-center justify-center -translate-x-10.5">
       <h2 className="card__title">{name}</h2>
           <p className="text-xs text-gray-800">{customId}</p>
       <span className="card__description">{role}</span>

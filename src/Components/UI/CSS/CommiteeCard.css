@@ -180,6 +180,7 @@ img {
 
   .card__container {
     grid-template-columns: 1fr;
+    transform: translateX(-1rem);
   }
 
   .card__img {
@@ -189,7 +190,7 @@ img {
 
   .card__data {
     width: 80%;
-    left: 10%;
+    left: 22%;
     padding: 1rem;
     bottom: -7rem;
   }
