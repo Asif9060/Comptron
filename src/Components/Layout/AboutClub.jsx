@@ -6,6 +6,7 @@ const AboutClub = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
   const sectionRef = useRef(null);
   const imagesRef = useRef(null);
   const textRef = useRef(null);
@@ -51,6 +52,8 @@ const AboutClub = () => {
         // Check if element is in viewport
         if (rect.top < window.innerHeight * 0.75 && rect.bottom > 0) {
           setIsVisible(true);
+        } else {
+          setIsVisible(false); // Reset visibility when out of viewport
         }
         
         // Calculate how far the element is from the top of the viewport
@@ -70,6 +73,8 @@ const AboutClub = () => {
 
     // Also handle window resize to ensure responsive behavior
     const handleResize = () => {
+      // Update window width state
+      setWindowWidth(window.innerWidth);
       // Recalculate when window is resized
       handleScroll();
     };
@@ -84,21 +89,24 @@ const AboutClub = () => {
     };
   }, []);
 
-  // Simple sliding effect based on scroll position
-  const getSlideTransform = (index) => {
-    // Determine direction based on row position (first row slides right, second row slides left)
+  // Get image styles based on device type
+  const getImageStyles = (index) => {
+    // For mobile devices, use reveal animation from CSS
+    if (windowWidth < 768) {
+      return {
+        transition: "opacity 0.8s ease, transform 0.8s ease",
+        // Add transition delay based on index for staggered effect
+        transitionDelay: `${index * 0.1}s`
+      };
+    }
+    
+    // For desktop, revert to original sliding effect
     const direction = index < 2 ? 1 : -1;
     
     // Calculate slide distance based on scroll progress and screen size
     let maxSlideDistance;
     
-    if (window.innerWidth < 480) {
-      // Extra small screens
-      maxSlideDistance = 60;
-    } else if (window.innerWidth < 768) {
-      // Small screens
-      maxSlideDistance = 80;
-    } else if (window.innerWidth < 1024) {
+    if (windowWidth < 1024) {
       // Medium screens
       maxSlideDistance = 150;
     } else {
@@ -108,7 +116,11 @@ const AboutClub = () => {
     
     const slideDistance = scrollPosition * maxSlideDistance * direction;
     
-    return `translateX(${slideDistance}px)`;
+    return {
+      transform: `translateX(${slideDistance}px)`,
+      opacity: isVisible ? 1 : 0,
+      transition: "transform 0.6s ease-out, opacity 0.8s ease"
+    };
   };
 
   return (
@@ -131,7 +143,7 @@ const AboutClub = () => {
           </p>
         </div>
 
-        {/* Image Showcase with Simple Sliding Effect */}
+        {/* Image Showcase with device-specific animations */}
         <div 
           ref={imagesRef}
           className="relative grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12"
@@ -147,32 +159,22 @@ const AboutClub = () => {
               </div>
             ))
           ) : (
-            // Actual images
+            // Actual images with device-specific animations
             images.map((image, index) => (
               <div 
                 key={index}
-                className="overflow-hidden rounded-md sm:rounded-lg shadow-md sm:shadow-lg transition-all duration-500 w-full md:w-[400px] lg:w-[550px] h-[250px] md:h-[300px] mx-auto group bg-white"
-                style={{ 
-                  transform: getSlideTransform(index),
-                  opacity: isVisible ? 1 : 0,
-                  transition: "transform 0.6s ease-out, opacity 0.8s ease"
-                }}
+                className={`overflow-hidden rounded-md sm:rounded-lg shadow-md sm:shadow-lg w-full md:w-[400px] lg:w-[550px] h-[250px] md:h-[300px] mx-auto group bg-white ${windowWidth < 768 ? 'reveal' : ''} ${windowWidth < 768 && isVisible ? 'active' : ''}`}
+                style={getImageStyles(index)}
               >
-                <div className="w-full h-full flex items-center justify-center p-2">
+                <div className="w-full h-full flex items-center justify-center p-2 overflow-hidden">
                   <img 
                     src={image.src} 
                     alt={image.alt}
+                    className="w-auto h-auto max-w-full max-h-full object-contain transition-transform duration-500 ease-in-out transform group-hover:scale-105"
                     style={{
-                      maxWidth: '100%',
-                      maxHeight: '100%',
-                      width: 'auto',
-                      height: 'auto',
-                      objectFit: 'contain',
                       display: 'block',
-                      margin: '0 auto',
-                      transition: 'transform 0.5s ease'
+                      margin: '0 auto'
                     }}
-                    className="group-hover:scale-105"
                   />
                 </div>
               </div>

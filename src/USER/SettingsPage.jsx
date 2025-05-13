@@ -7,6 +7,46 @@ import "react-image-crop/dist/ReactCrop.css";
 import Cropper from "react-easy-crop";
 // import BioEditor from "./BioEditor";
 
+// Create a custom centered toast component with blurred backdrop
+const CenteredToast = ({ visible, setVisible, message, type }) => {
+  useEffect(() => {
+    if (visible) {
+      const timer = setTimeout(() => {
+        setVisible(false);
+      }, type === 'success' ? 3000 : 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [visible, setVisible, type]);
+
+  if (!visible) return null;
+
+  const bgColor = type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#1F2937';
+  
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+      {/* Backdrop with blur effect */}
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-md transition-all duration-300"></div>
+      
+      {/* Toast content */}
+      <div 
+        className="relative px-4 sm:px-8 py-4 sm:py-5 rounded-lg shadow-lg text-white text-center w-full max-w-xs sm:max-w-md transition-all duration-300"
+        style={{ 
+          background: bgColor,
+          animation: 'fadeIn 0.3s ease-out'
+        }}
+      >
+        {type === 'loading' && (
+          <div className="flex justify-center mb-2 sm:mb-3">
+            <div className="animate-spin rounded-full h-5 w-5 sm:h-7 sm:w-7 border-b-2 border-white"></div>
+          </div>
+        )}
+        <p className="text-sm sm:text-base md:text-lg font-medium break-words">{message}</p>
+      </div>
+    </div>
+  );
+};
+
 const SettingsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -43,6 +83,28 @@ const SettingsPage = () => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  
+  // Toast visibility states
+  const [loadingToast, setLoadingToast] = useState(false);
+  const [successToast, setSuccessToast] = useState(false);
+  const [errorToast, setErrorToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
+  // Add CSS for animation
+  useEffect(() => {
+    // Create style element if it doesn't exist
+    if (!document.getElementById('toast-animations')) {
+      const style = document.createElement('style');
+      style.id = 'toast-animations';
+      style.innerHTML = `
+        @keyframes fadeIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
 
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -74,7 +136,8 @@ const SettingsPage = () => {
       })
       .catch((err) => {
         console.error("Fetch error:", err);
-        setError("Failed to load profile. Please check the user ID.");
+        setToastMessage("Failed to load profile. Please check the user ID.");
+        setErrorToast(true);
         setLoading(false);
       });
   }, [id]);
@@ -83,7 +146,8 @@ const SettingsPage = () => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 10 * 1024 * 1024) {
-        setError("Image size must be less than 5MB");
+        setToastMessage("Image size must be less than 5MB");
+        setErrorToast(true);
         return;
       }
       const reader = new FileReader();
@@ -97,8 +161,8 @@ const SettingsPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
+    setLoadingToast(true);
+    setToastMessage("Updating profile...");
 
     const payload = {
       name: user.name,
@@ -142,12 +206,23 @@ const SettingsPage = () => {
         email: data.email || "",
         phone: data.phone || "",
         bio: data.bio || "",
+        studentId: data.studentId || "",
+        bloodGroup: data.bloodGroup || "",
+        dateOfBirth: data.dateOfBirth || "",
+        linkedIn: data.linkedIn || "",
+        github: data.github || "",
+        portfolio: data.portfolio || "",
+        cv: data.cv || "",
       });
       setImage(data.image || null);
-      setSuccess("Profile updated successfully!");
+      setLoadingToast(false);
+      setSuccessToast(true);
+      setToastMessage("Profile updated successfully!");
     } catch (err) {
       console.error("Update error:", err);
-      setError(
+      setLoadingToast(false);
+      setErrorToast(true);
+      setToastMessage(
         err.message.includes("User not found")
           ? "User not found. Please verify the profile ID."
           : err.message || "Failed to update profile"
@@ -155,16 +230,16 @@ const SettingsPage = () => {
     }
   };
 
-  // Compare with the route param
-
   const handleDelete = async () => {
     if (
       window.confirm(
         "Are you sure you want to delete your account? This action cannot be undone."
       )
     ) {
+      setLoadingToast(true);
+      setToastMessage("Deleting account...");
+      
       try {
-        // Step 1: Delete from your own backend/database
         const response = await fetch(
           `https://comptron-server-2.onrender.com/api/users/delete/${id}`,
           {
@@ -179,11 +254,15 @@ const SettingsPage = () => {
           );
         }
 
-        setSuccess("Account deleted successfully.");
+        setLoadingToast(false);
+        setSuccessToast(true);
+        setToastMessage("Account deleted successfully.");
         setTimeout(() => navigate("/"), 2000);
       } catch (err) {
         console.error("Delete error:", err);
-        setError(err.message || "Failed to delete account");
+        setLoadingToast(false);
+        setErrorToast(true);
+        setToastMessage(err.message || "Failed to delete account");
       }
     }
   };
@@ -200,6 +279,8 @@ const SettingsPage = () => {
       setCropperVisible(false);
     } catch (e) {
       console.error(e);
+      setErrorToast(true);
+      setToastMessage("Failed to crop image. Please try again.");
     }
   };
 
@@ -215,7 +296,7 @@ const SettingsPage = () => {
   }
   if (customId !== id) {
     return (
-      <p className="text-white text-2xl font-bold flex justify-center items-center h-screen">
+      <p className="text-black text-5xl font-bold flex justify-center items-center h-screen">
         Unauthorized
       </p>
     ); // Or redirect
@@ -223,6 +304,26 @@ const SettingsPage = () => {
 
   return (
     <div className="min-h-screen bg-white p-4 lg:p-8">
+      {/* Custom Toast Components */}
+      <CenteredToast 
+        visible={loadingToast} 
+        setVisible={setLoadingToast}
+        message={toastMessage}
+        type="loading"
+      />
+      <CenteredToast 
+        visible={successToast} 
+        setVisible={setSuccessToast}
+        message={toastMessage}
+        type="success"
+      />
+      <CenteredToast 
+        visible={errorToast} 
+        setVisible={setErrorToast}
+        message={toastMessage}
+        type="error"
+      />
+      
       {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 w-64 bg-[#1c1c1e] text-white transform ${
@@ -232,15 +333,6 @@ const SettingsPage = () => {
         <div className="p-4">
           <h2 className="text-2xl font-bold mb-6">Menu</h2>
           <nav className="space-y-2">
-            {/* <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                `block px-4 py-2 rounded-lg ${isActive ? "bg-blue-600" : "hover:bg-gray-700"}`
-              }
-              onClick={() => setSidebarOpen(false)}
-            >
-              Dashboard
-            </NavLink> */}
             <NavLink
               to={`/`}
               className={({ isActive }) =>
@@ -303,17 +395,6 @@ const SettingsPage = () => {
           <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center">
             Settings
           </h1>
-
-          {error && (
-            <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">
-              {error}
-            </div>
-          )}
-          {success && (
-            <div className="bg-green-500 text-white px-4 py-2 rounded-lg mb-4">
-              {success}
-            </div>
-          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -503,8 +584,8 @@ const SettingsPage = () => {
 
           {cropperVisible && image && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-              <div className="relative bg-white p-4 rounded-lg w-[50rem]">
-                <div className="relative w-full h-96">
+              <div className="relative bg-white p-4 rounded-lg w-full max-w-md sm:max-w-lg md:max-w-[50rem]">
+                <div className="relative w-full h-64 sm:h-96">
                   <Cropper
                     image={image}
                     crop={crop}

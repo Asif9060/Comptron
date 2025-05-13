@@ -8,6 +8,10 @@ import signature from "../assets/images/Signature.jpg";
 import html2canvas from "html2canvas";
 import PropTypes from "prop-types";
 import qr from "../assets/images/frame.png";
+import { userAuth } from "./FirebaseUser";
+import { onAuthStateChanged } from "firebase/auth";
+import "./pp.css";
+
 const ProfilePage = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
@@ -16,6 +20,17 @@ const ProfilePage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [error, setError] = useState("");
   const [showIdCard, setShowIdCard] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
+
+  // Check if current user is authenticated
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(userAuth, (user) => {
+      setCurrentUser(user);
+    });
+    
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     fetch(`https://comptron-server-2.onrender.com/api/users/profile/${id}`)
@@ -26,14 +41,27 @@ const ProfilePage = () => {
       .then((data) => {
         setUser(data);
         setError("");
+        
+        // Check if profile belongs to current user
+        if (currentUser && currentUser.email === data.email) {
+          setIsOwnProfile(true);
+        } else {
+          setIsOwnProfile(false);
+        }
       })
       .catch((err) => {
         console.error("Fetch error:", err);
         setError("Failed to load profile. Please check the user ID.");
       });
-  }, [id]);
+  }, [id, currentUser]);
 
   const downloadIdCard = async () => {
+    // Only allow download if this is the user's own profile
+    if (!isOwnProfile) {
+      setError("You can only download your own ID card.");
+      return;
+    }
+
     const frontCard = document.getElementById("digital-id-card-front");
     const backCard = document.getElementById("digital-id-card-back");
     if (!frontCard || !backCard) return;
@@ -127,12 +155,12 @@ const ProfilePage = () => {
     const [isFlipped, setIsFlipped] = useState(false);
 
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
         <div className="bg-transparent max-w-2xl w-full">
           <div className="flex justify-end mb-2">
             <button
               onClick={onClose}
-              className="text-white hover:text-red-500 text-xl"
+              className="text-white hover:text-red-500 text-xl p-2"
             >
               ✕
             </button>
@@ -153,13 +181,14 @@ const ProfilePage = () => {
                 id="digital-id-card-front"
                 className="w-full backface-hidden"
                 style={{
-                  width: "400px",
+                  width: "100%",
+                  maxWidth: "400px",
                   margin: "0 auto",
                   backfaceVisibility: "hidden",
                 }}
               >
                 <div
-                  className="bg-[#112D4E] rounded-none overflow-hidden shadow-2xl relative"
+                  className="bg-[#112D4E] rounded-none overflow-hidden shadow-2xl relative h-auto"
                   data-bg="primary"
                 >
                   {/* Waves Design */}
@@ -170,7 +199,7 @@ const ProfilePage = () => {
                       preserveAspectRatio="none"
                     >
                       <path
-                        className="fill-[#ffffff] "
+                        className="fill-[#ffffff]"
                         d="M0,100 C150,200 350,0 500,100 L500,0 L0,0 Z"
                       ></path>
                     </svg>
@@ -188,8 +217,8 @@ const ProfilePage = () => {
                   </div>
 
                   {/* Header */}
-                  <div className="relative p-4 flex items-center justify-between">
-                    <img src={logo} alt="Comptron Logo" className="w-20" />
+                  <div className="relative p-2 sm:p-4 flex items-center justify-between">
+                    <img src={logo} alt="Comptron Logo" className="w-14 sm:w-20" />
                     <div className="text-right">
                       {/* <h2 className="text-3xl font-bold text-white">Comptron</h2>
                       <p className="text-cyan-400 text-sm">Creativity Assembled</p> */}
@@ -197,8 +226,8 @@ const ProfilePage = () => {
                   </div>
 
                   {/* Profile Image */}
-                  <div className="relative px-4 py-2">
-                    <div className="w-32 h-32 mx-auto rounded-lg overflow-hidden border-2 border-[#15A6E1]">
+                  <div className="relative px-2 sm:px-4 py-1 sm:py-2">
+                    <div className="w-20 h-20 sm:w-32 sm:h-32 mx-auto rounded-lg overflow-hidden border-2 border-[#15A6E1]">
                       <img
                         src={
                           user?.image ||
@@ -213,15 +242,15 @@ const ProfilePage = () => {
                   </div>
 
                   {/* User Details */}
-                  <div className="relative p-4 text-center">
-                    <h1 className="text-2xl font-bold text-white mb-1">
+                  <div className="relative p-2 sm:p-4 text-center">
+                    <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">
                       {user?.name}
                     </h1>
-                    <p className="text-[#15A6E1] translate-y-[-2rem] text-lg mb-4">
+                    <p className="text-[#15A6E1] translate-y-[-1rem] sm:translate-y-[-2rem] text-base sm:text-lg mb-2 sm:mb-4">
                       {user?.role || "GENERAL MEMBER"}
                     </p>
 
-                    <div className="text-white space-y-2 text-left">
+                    <div className="text-white space-y-1 sm:space-y-2 text-left text-sm sm:text-base">
                       {[
                         ["Student ID", user?.studentId || user?.customId],
                         ["Blood Group", user?.bloodGroup || "N/A"],
@@ -230,24 +259,24 @@ const ProfilePage = () => {
                         ["Email", user?.email || "N/A"],
                       ].map(([label, value]) => (
                         <div key={label} className="flex">
-                          <span className="text-[#15A6E1] min-w-[120px]">
+                          <span className="text-[#15A6E1] min-w-[90px] sm:min-w-[120px]">
                             {label}
                           </span>
                           <span className="px-1">:</span>
-                          <span>{value}</span>
+                          <span className="break-words flex-1">{value}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Signature Section */}
-                  <div className="relative w-[30rem] translate-x-[-2.5rem] bg-white p-4 mt-2 border-t border-[#15A6E1]">
+                  <div className="relative w-full sm:w-[30rem] sm:translate-x-[-2.5rem] bg-white p-2 sm:p-4 mt-2 border-t border-[#15A6E1]">
                     <div className="flex justify-center">
-                      <div className=" text-center">
+                      <div className="text-center">
                         <img
                           src={signature}
                           alt="Advisor Signature"
-                          className=" mx-auto mb-1"
+                          className="mx-auto mb-1 w-24 sm:w-auto"
                         />
                         {/* <p className="text-black bg-white p-1 translate-y-[-5px] text-sm">Signature of the Advisor</p> */}
                       </div>
@@ -255,7 +284,7 @@ const ProfilePage = () => {
                   </div>
 
                   {/* Bottom Bar */}
-                  <div className="bg-[#112D4E] h-6"></div>
+                  <div className="bg-[#112D4E] h-4 sm:h-6"></div>
                 </div>
               </div>
 
@@ -264,7 +293,8 @@ const ProfilePage = () => {
                 id="digital-id-card-back"
                 className="absolute inset-0 w-full backface-hidden rotate-y-180"
                 style={{
-                  width: "400px",
+                  width: "100%",
+                  maxWidth: "400px",
                   margin: "0 auto",
                   backfaceVisibility: "hidden",
                   transform: "rotateY(180deg)",
@@ -274,12 +304,12 @@ const ProfilePage = () => {
                   className="bg-[#112D4E] rounded-none overflow-hidden shadow-2xl relative h-full"
                   data-bg="primary"
                 >
-                  <div className="p-6 flex flex-col h-full">
-                    <h2 className="text-2xl font-bold text-center text-white mb-6">
+                  <div className="p-3 sm:p-6 flex flex-col h-full">
+                    <h2 className="text-xl sm:text-2xl font-bold text-center text-white mb-3 sm:mb-6">
                       Terms and Condition
                     </h2>
 
-                    <div className="space-y-4 text-white mb-8">
+                    <div className="space-y-2 sm:space-y-4 text-white mb-4 sm:mb-8 text-xs sm:text-base">
                       <p className="flex items-start gap-2">
                         <span className="text-[#15A6E1] text-xl">•</span>
                         This card is a property of Comptron Creativity Assembled
@@ -297,17 +327,17 @@ const ProfilePage = () => {
                     </div>
 
                     {/* QR Code */}
-                    <div className="flex justify-center translate-y-[2.3rem] mb-8">
+                    <div className="flex justify-center translate-y-[1rem] sm:translate-y-[2.3rem] mb-4 sm:mb-8">
                       <div className="bg-white p-2 rounded-lg">
-                        <img src={qr} alt="QR Code" className="w-32 h-32" />
+                        <img src={qr} alt="QR Code" className="w-24 sm:w-32 h-24 sm:h-32" />
                       </div>
                     </div>
 
                     {/* Contact Information */}
-                    <div className="mt-auto text-white text-center space-y-2">
-                      <p className="flex items-center justify-center gap-2">
+                    <div className="mt-auto text-white text-center space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                      <p className="flex items-center justify-center gap-1 sm:gap-2">
                         <svg
-                          className="w-5 h-5"
+                          className="w-4 h-4 sm:w-5 sm:h-5"
                           fill="#15A6E1"
                           viewBox="0 0 20 20"
                         >
@@ -316,9 +346,9 @@ const ProfilePage = () => {
                         </svg>
                         comptron@nwu.ac.bd
                       </p>
-                      <p className="flex items-center justify-center gap-2">
+                      <p className="flex items-center justify-center gap-1 sm:gap-2">
                         <svg
-                          className="w-5 h-5"
+                          className="w-4 h-4 sm:w-5 sm:h-5"
                           fill="#15A6E1"
                           viewBox="0 0 20 20"
                         >
@@ -326,9 +356,9 @@ const ProfilePage = () => {
                         </svg>
                         https://comptron.nwu.ac.bd
                       </p>
-                      <p className="flex items-center justify-center gap-2 ">
+                      <p className="flex items-center justify-center gap-1 sm:gap-2">
                         <svg
-                          className="w-5 h-5 translate-y-[-0.8rem] translate-x-[0.8rem]"
+                          className="w-4 h-4 sm:w-5 sm:h-5 translate-y-[-0.4rem] sm:translate-y-[-0.8rem] translate-x-[0.4rem] sm:translate-x-[0.8rem]"
                           fill="#15A6E1"
                           viewBox="0 0 20 20"
                         >
@@ -343,25 +373,29 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          <div className="flex justify-center mt-4 gap-4">
+          <div className="flex justify-center mt-4 gap-2 sm:gap-4">
             <button
               onClick={() => setIsFlipped(!isFlipped)}
-              className="bg-[#15A6E1] hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center gap-2"
+              className="bg-[#15A6E1] hover:bg-blue-700 text-white px-3 sm:px-6 py-2 rounded-lg flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M16 2H8C4.691 2 2 4.691 2 8v8c0 3.309 2.691 6 6 6h8c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm-2 12H8v-2h6v2z" />
               </svg>
               Flip Card
             </button>
-            <button
-              onClick={downloadIdCard}
-              className="bg-[#15A6E1] hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center gap-2"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-              </svg>
-              Download ID Card
-            </button>
+            
+            {/* Only show download button for user's own profile */}
+            {isOwnProfile && (
+              <button
+                onClick={downloadIdCard}
+                className="bg-[#15A6E1] hover:bg-blue-700 text-white px-3 sm:px-6 py-2 rounded-lg flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
+              >
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                </svg>
+                Download ID Card
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -384,121 +418,151 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className=" text-white font-[Poppins] h-screen flex items-center justify-center px-5 py-10">
+    <div className="text-white font-[Poppins] min-h-screen flex items-center justify-center px-2 sm:px-5 py-5 sm:py-10">
       {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 w-64 bg-[#1c1c1e] text-white transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 transition-transform duration-300 ease-in-out z-50`}
+        } md:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-lg`}
       >
-        <div className="p-4">
-          <h2 className="text-2xl font-bold mb-6">Menu</h2>
-          <nav className="space-y-2">
-            {/* <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                `block px-4 py-2 rounded-lg ${isActive ? "bg-blue-600" : "hover:bg-gray-700"}`
-              }
-              onClick={() => setSidebarOpen(false)}
-            >
-              Dashboard
-            </NavLink> */}
+        <div className="p-4 pt-12 md:pt-4 flex flex-col h-full">
+          <h2 className="text-2xl font-bold mb-6 text-center md:text-left">Menu</h2>
+          <nav className="space-y-3 flex-1">
             <NavLink
               to={`/`}
               className={({ isActive }) =>
-                `block px-4 py-2 rounded-lg ${
+                `block px-4 py-3 rounded-lg transition-colors duration-200 flex items-center ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
                 }`
               }
               onClick={() => setSidebarOpen(false)}
             >
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
               Home
             </NavLink>
             <NavLink
               to={`/profile/${id}`}
               className={({ isActive }) =>
-                `block px-4 py-2 rounded-lg ${
+                `block px-4 py-3 rounded-lg transition-colors duration-200 flex items-center ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
                 }`
               }
               onClick={() => setSidebarOpen(false)}
             >
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
               Profile
             </NavLink>
             <NavLink
               to={`/GMembers`}
               className={({ isActive }) =>
-                `block px-4 py-2 rounded-lg ${
+                `block px-4 py-3 rounded-lg transition-colors duration-200 flex items-center ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
                 }`
               }
               onClick={() => setSidebarOpen(false)}
             >
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+              </svg>
               All Members
             </NavLink>
             <NavLink
               to={`/settings/${id}`}
               className={({ isActive }) =>
-                `block px-4 py-2 rounded-lg ${
+                `block px-4 py-3 rounded-lg transition-colors duration-200 flex items-center ${
                   isActive ? "bg-blue-600" : "hover:bg-gray-700"
                 }`
               }
               onClick={() => setSidebarOpen(false)}
             >
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
               Settings
             </NavLink>
           </nav>
+          
+          {isOwnProfile && (
+            <div className="mt-auto mb-4 px-4">
+              <button
+                onClick={() => setShowIdCard(true)}
+                className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-lg hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 flex items-center justify-center gap-2 shadow-md"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z" />
+                </svg>
+                ID Card
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Mobile Sidebar Toggle */}
-      <button
-        className="md:hidden fixed top-4 left-4 z-50 text-white"
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      >
-        {sidebarOpen ? "✕" : "☰"}
-      </button>
+      {/* Backdrop overlay for mobile */}
+      {sidebarOpen && (
+        <div 
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
 
-      {/* Main Content */}
-      <div className="flex bg-black translate-x-[5rem] max-w-5xl rounded-3xl shadow-[gray_0px_0px_15px_2px] p-10">
+      {/* Main Content - adjust for sidebar on desktop */}
+      <div className="flex bg-black md:translate-x-[5rem] max-w-5xl rounded-3xl shadow-[gray_0px_0px_15px_2px] p-3 sm:p-5 md:p-10 w-full mx-2 sm:mx-0 relative">
+        {/* Mobile Sidebar Toggle - Now positioned relative to card */}
+        <button
+          className="md:hidden absolute top-4 left-4 z-10 text-white bg-gray-800 hover:bg-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          aria-label="Toggle menu"
+        >
+          {sidebarOpen ? 
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            : 
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          }
+        </button>
+
         {error && (
-          <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4">
+          <div className="bg-red-500 text-white px-4 py-2 rounded-lg mb-4 w-full">
             {error}
           </div>
         )}
         {successMsg && (
-          <div className="bg-green-500 text-white px-4 py-2 rounded-lg mb-4 animate-fade-in">
+          <div className="bg-green-500 text-white px-4 py-2 rounded-lg mb-4 animate-fade-in w-full">
             {successMsg}
           </div>
         )}
 
         {user && (
-          <div className="bg-[#000000] w-[70rem] h-[62rem] layer shadow-lg rounded-3xl p-10">
+          <div className="bg-[#000000] resp w-full layer shadow-lg rounded-3xl p-4 sm:p-6 md:p-10 overflow-y-auto pt-12 md:pt-4">
             {user.image ? (
               <img
                 src={user.image}
                 alt="Profile"
-                className="w-60 aspect-square rounded-full mx-auto mb-4 object-cover border-4 border-blue-500"
+                className="w-24 sm:w-32 md:w-60 aspect-square rounded-full mx-auto mb-4 object-cover border-4 border-blue-500"
                 onError={(e) => (e.target.src = "/fallback-image.png")}
               />
             ) : (
               <img
                 src={user.gender?.toLowerCase() === "female" ? female : male}
                 alt="Default Avatar"
-                className="w-28 h-28 aspect-square rounded-full mx-auto mb-4 object-cover border-4 border-gray-500"
+                className="w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 aspect-square rounded-full mx-auto mb-4 object-cover border-4 border-gray-500"
               />
             )}
 
-            <h1 className="text-3xl font-bold mb-2">{user.name}</h1>
-            {/* {user.gender && (
-              <div className="text-center translate-y-[-2rem]">
-                <p className="text-gray-300">{user.gender}</p>
-              </div>
-            )} */}
-            <p className="text-blue-400 text-center mb-2">{user.bio}</p>
-            <p className="text-blue-400 text-center mb-2">{user.customId}</p>
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 text-center">{user.name}</h1>
+            <p className="text-blue-400 text-center mb-2 text-sm sm:text-base">{user.bio}</p>
+            <p className="text-blue-400 text-center mb-2 text-sm sm:text-base">{user.customId}</p>
             <p
-              className={`text-sm text-center mb-4 ${
+              className={`text-xs sm:text-sm text-center mb-4 ${
                 user.isValid ? "text-green-400" : "text-red-400"
               }`}
             >
@@ -519,27 +583,13 @@ const ProfilePage = () => {
               </span> */}
             </div>
 
-            {/* <div className="grid grid-cols-3 text-sm text-gray-400 gap-4 mb-6">
-              <div>
-                <p className="text-white text-lg font-bold"></p>
-                <p>Events</p>
-              </div>
-              <div>
-                <p className="text-white text-lg font-bold"></p>
-                <p>Skills</p>
-              </div>
-              <div>
-                <p className="text-white text-lg font-bold"></p>
-                <p>Since</p>
-              </div>
-            </div> */}
             <div className="mb-6 flex justify-center">
               <button
                 onClick={() => setShowIdCard(true)}
-                className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 flex items-center gap-2 shadow-lg"
+                className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 flex items-center gap-2 shadow-lg text-sm sm:text-base"
               >
                 <svg
-                  className="w-6 h-6"
+                  className="w-5 h-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -549,33 +599,33 @@ const ProfilePage = () => {
               </button>
             </div>
 
-            <div className="flex flex-wrap gap-6 mb-10">
-              <div className="flex-1  min-w-[280px] bg-[#2a2a2a] rounded-2xl p-6">
-                <h2 className="text-xl text-center text-cyan-400 font-semibold mb-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 mb-10">
+              <div className="flex-1 min-w-[250px] bg-[#2a2a2a] rounded-2xl p-4 sm:p-6">
+                <h2 className="text-lg sm:text-xl text-cyan-400 font-semibold mb-3 sm:mb-4">
                   Skills
                 </h2>
                 {user.skills && typeof user.skills === "string" ? (
-                  <ul className=" text-white list-disc ml-5 space-y-1">
+                  <ul className="text-white list-disc ml-5 space-y-1 text-sm sm:text-base">
                     {user.skills.split(",").map((skill, index) => (
                       <li key={index}>{skill.trim()}</li>
                     ))}
                   </ul>
                 ) : Array.isArray(user.skills) && user.skills.length > 0 ? (
-                  <ul className=" text-white space-y-1">
+                  <ul className="text-white space-y-1 text-sm sm:text-base">
                     {user.skills.map((skill, index) => (
                       <li key={index}>{skill}</li>
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-gray-400 text-sm">No skills added</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">No skills added</p>
                 )}
               </div>
 
-              <div className="flex-1 min-w-[280px] items-center bg-[#2a2a2a] rounded-2xl p-6">
-                <h2 className="text-xl text-center text-cyan-400 font-semibold mb-4">
+              <div className="flex-1 min-w-[250px] items-center bg-[#2a2a2a] rounded-2xl p-4 sm:p-6">
+                <h2 className="text-lg sm:text-xl text-cyan-400 font-semibold mb-3 sm:mb-4">
                   External Links
                 </h2>
-                <div className="grid grid-cols-2 gap-4 text-center text-sm text-gray-200">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 text-center text-xs sm:text-sm text-gray-200">
                   {user.linkedIn && (
                     <p>
                       <a
@@ -584,7 +634,7 @@ const ProfilePage = () => {
                         className="hover:text-cyan-400 transition-all space-y-1"
                       >
                         <svg
-                          className="w-10 h-10 inline"
+                          className="w-7 h-7 sm:w-10 sm:h-10 inline"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 448 512"
                         >
@@ -669,14 +719,14 @@ const ProfilePage = () => {
             </div>
 
             {/* New Contact Info Section */}
-            <div className="bg-[#2a2a2a] rounded-2xl text-center py-6">
-              <h2 className="text-xl text-cyan-400 font-semibold mb-4">
+            <div className="bg-[#2a2a2a] rounded-2xl text-center py-4 sm:py-6 px-2">
+              <h2 className="text-lg sm:text-xl text-cyan-400 font-semibold mb-3 sm:mb-4">
                 Contact Info
               </h2>
-              <p className="text-gray-300">
+              <p className="text-gray-300 text-sm sm:text-base flex items-center justify-center gap-1 sm:gap-2 mb-2">
                 <span className="font-medium">
                   <svg
-                    className="w-5 h-5 -translate-x-1 inline"
+                    className="w-4 h-4 sm:w-5 sm:h-5 inline"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
                   >
@@ -686,13 +736,12 @@ const ProfilePage = () => {
                     />
                   </svg>
                 </span>
-                {user.email || "Not provided"}
+                <span className="break-all">{user.email || "Not provided"}</span>
               </p>
-              <p className="text-gray-300">
+              <p className="text-gray-300 text-sm sm:text-base flex items-center justify-center gap-1 sm:gap-2">
                 <span className="font-medium">
-                  {" "}
                   <svg
-                    className="w-5 h-5 -translate-x-1 inline"
+                    className="w-4 h-4 sm:w-5 sm:h-5 inline"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512"
                   >
@@ -700,7 +749,7 @@ const ProfilePage = () => {
                       fill="#15A6E1"
                       d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
                     />
-                  </svg>{" "}
+                  </svg>
                 </span>
                 {user.phone || "Not provided"}
               </p>
