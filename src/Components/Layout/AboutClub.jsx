@@ -15,10 +15,9 @@ const AboutClub = () => {
     const fetchImages = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://comptron-server-2.onrender.com/api/eventImages");
+        const response = await fetch("https://comptron-server-2.onrender.com/api/AboutImages");
         const data = await response.json();
         
-        // Map API data to the format we need
         const formattedImages = data.map((item, index) => ({
           src: item.imageUrl,
           alt: item.title || `Club Image ${index + 1}`,

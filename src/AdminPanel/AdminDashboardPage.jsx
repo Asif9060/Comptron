@@ -67,6 +67,7 @@ const AdminDashboardPage = () => {
             { to: "/ManageEvent", label: "Event Management" },
             { to: "/ManageActivity", label: "Recent Activity" },
             { to: "/ManageUsers", label: "Manage Users" },
+            { to: "/ManageAboutImage", label: "About Image" },
           ].map((item, idx) => (
             <div key={idx} className="relative group">
               <NavLink
@@ -80,7 +81,7 @@ const AdminDashboardPage = () => {
           ))}
         </div>
 
-        {/* Removed Users by Year of Validation section */}
+        
       </div>
     </div>
   );

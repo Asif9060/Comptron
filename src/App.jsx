@@ -29,6 +29,7 @@ import ImageUpload from "./AdminPanel/ImageUpload";
 import AdminUsersPage from "./AdminPanel/AdminUsersPage";
 import UsersByYear from "./AdminPanel/UsersByYear";
 import CommitteeByYear from "./CommitteePanel/CommitteeByYear";
+import AboutImage from "./AdminPanel/AboutImage";
 // import Bio from "./USER/Bio";
 
 
@@ -65,6 +66,7 @@ const App = () => {
           <Route path="/ManageActivity" element={<ImageUpload></ImageUpload>}></Route>
           <Route path="/ManageNews" element={<AdminTextSlideControl></AdminTextSlideControl>}></Route>
           <Route path="/ManageUsers" element={<AdminUsersPage></AdminUsersPage>}></Route>
+          <Route path="/ManageAboutImage" element={<AboutImage></AboutImage>}></Route>
           <Route path="/UsersByYear" element={<UsersByYear></UsersByYear>}></Route>
           <Route path="/CommitteeByYear" element={<CommitteeByYear></CommitteeByYear>}></Route>
           {/* <Route path="/Bio" element={<Bio></Bio>}></Route> */}
