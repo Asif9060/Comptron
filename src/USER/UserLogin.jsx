@@ -1,7 +1,7 @@
 // LoginPage.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { userAuth } from "./FirebaseUser";
 import { useParams } from "react-router-dom"; // Your Firebase initialization file
 import toast, { Toaster } from "react-hot-toast"; // Import toast without ToastPosition
@@ -87,7 +87,28 @@ const UserLogin = () => {
       // Firebase login
       await signInWithEmailAndPassword(userAuth, email, password);
 
-      // Fetch user by email from backend
+      // First check if user is pending approval
+      const pendingResponse = await fetch(
+        `https://comptron-server-2.onrender.com/api/users/pending/check/${email}`
+      );
+      
+      if (pendingResponse.ok) {
+        const pendingData = await pendingResponse.json();
+        
+        if (pendingData.isPending) {
+          // User exists in pending collection, so they can't log in yet
+          setLoadingToast(false);
+          setErrorToast(true);
+          setToastMessage("Your account is pending for admin approval. Please wait for approval before logging in.");
+          
+          // Sign out the user from Firebase since they're not approved yet
+          const auth = getAuth();
+          await signOut(auth);
+          return;
+        }
+      }
+
+      // Check if user exists in main collection (approved users)
       const response = await fetch(
         `https://comptron-server-2.onrender.com/api/users/getByEmail/${email}`
       );
@@ -105,9 +126,14 @@ const UserLogin = () => {
           navigate(`/profile/${data.customId}`);
         }, 2000);
       } else {
+        // User might have been rejected or doesn't exist
         setLoadingToast(false);
         setErrorToast(true);
-        setToastMessage("User not found or missing ID.");
+        setToastMessage("Account not found. Your registration may have been rejected or is still pending approval.");
+        
+        // Sign out the user from Firebase
+        const auth = getAuth();
+        await signOut(auth);
       }
     } catch (err) {
       console.error(err);

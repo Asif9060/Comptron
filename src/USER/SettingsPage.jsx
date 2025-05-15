@@ -438,15 +438,23 @@ const SettingsPage = () => {
                 <label className="block text-sm font-medium mb-1">
                   Blood Group
                 </label>
-                <input
-                  type="text"
+                <select
                   value={user.bloodGroup}
                   onChange={(e) =>
                     setUser({ ...user, bloodGroup: e.target.value })
                   }
                   className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter your blood group"
-                />
+                >
+                  <option value="">Select Blood Group</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                </select>
               </div>
               <div className="space-y-2">
                 <label className="block text-sm font-medium mb-1">
@@ -481,6 +489,7 @@ const SettingsPage = () => {
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
                   className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter your email"
+                  disabled
                 />
               </div>
               <div className="space-y-2">

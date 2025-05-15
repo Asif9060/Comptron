@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../utils/cropImage"; // helper function provided below
-import { userAuth, createUserWithEmailAndPassword } from "./FirebaseUser";
+import { userAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "./FirebaseUser";
+import { useNavigate } from "react-router-dom";
 
 // List of common temporary email domains to block
 const TEMP_EMAIL_DOMAINS = [
@@ -28,6 +29,17 @@ const isTemporaryEmail = (email) => {
     domain.toLowerCase() === tempDomain.toLowerCase() || 
     domain.toLowerCase().endsWith('.' + tempDomain.toLowerCase())
   );
+};
+
+// Update the domain validation function
+const isValidEmailDomain = (email) => {
+  if (!email) return false;
+  const domain = email.split('@')[1];
+  if (!domain) return false;
+  
+  // Only allow these specific domains
+  const allowedDomains = ['gmail.com', 'nwu.ac.bd'];
+  return allowedDomains.includes(domain.toLowerCase());
 };
 
 // Create a custom centered toast component with blurred backdrop
@@ -71,6 +83,7 @@ const CenteredToast = ({ visible, setVisible, message, type }) => {
 };
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -163,6 +176,13 @@ const RegistrationForm = () => {
       return;
     }
     
+    // Check if the email domain is allowed
+    if (!isValidEmailDomain(formData.email)) {
+      setToastMessage("Only Gmail and NWU email addresses are allowed.");
+      setErrorToast(true);
+      return;
+    }
+    
     // Check if the email is from a temporary email service
     if (isTemporaryEmail(formData.email)) {
       setToastMessage("Temporary email addresses are not allowed. Please use a permanent email address.");
@@ -203,6 +223,13 @@ const RegistrationForm = () => {
   const handleVerifyAndRegister = async (e) => {
     e.preventDefault();
     
+    // Check if the email domain is allowed
+    if (!isValidEmailDomain(formData.email)) {
+      setToastMessage("Only Gmail and NWU email addresses are allowed.");
+      setErrorToast(true);
+      return;
+    }
+    
     // Double-check to ensure a temporary email hasn't been used
     if (isTemporaryEmail(formData.email)) {
       setToastMessage("Temporary email addresses are not allowed. Please use a permanent email address.");
@@ -233,23 +260,28 @@ const RegistrationForm = () => {
       );
 
       const response = await fetch(
-        "https://comptron-server-2.onrender.com/api/users/register",
+        "https://comptron-server-2.onrender.com/api/users/pending/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             ...formData,
             firebaseUserId: userCredential.user.uid,
+            password: formData.password
           }),
         }
       );
 
       if (response.ok) {
-        const data = await response.json();
+        // Sign out the user to prevent automatic login
+        await signOut(userAuth);
+        
+        // Show success message with clear instructions
         setLoadingToast(false);
         setSuccessToast(true);
-        setToastMessage(`Registration successful! Your ID: ${data.customId}`);
-        setOtpVerified(true);
+        setToastMessage(`Registration successful! Your account requires admin approval before you can log in. You'll receive an email when approved.`);
+        
+        // Clear form data
         setFormData({
           name: "",
           email: "",
@@ -261,6 +293,11 @@ const RegistrationForm = () => {
         });
         setOtp("");
         setOtpSent(false);
+        
+        // After 4 seconds, navigate to login page
+        setTimeout(() => {
+          navigate("/UserLogin");
+        }, 4000);
       } else {
         const errData = await response.json();
         setLoadingToast(false);
@@ -422,16 +459,6 @@ const RegistrationForm = () => {
                 {loading ? "Registering..." : "Verify & Register"}
               </button>
             </>
-          )}
-
-          {otpVerified && (
-            <button
-              type="button"
-              onClick={() => (window.location.href = "/UserLogin")}
-              className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg mt-4 transition duration-300"
-            >
-              Go to Login
-            </button>
           )}
         </form>
       </div>

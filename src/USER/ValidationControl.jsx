@@ -42,7 +42,7 @@ const ValidationControl = () => {
   };
 
   return (
-    <div className="p-10 text-white flex flex-col max-w-lg bg-gray-900 text-center border border-gray-700 rounded-xl mx-auto shadow-lg">
+    <div className="p-10 text-white flex flex-col max-w-lg bg-gray-900 text-center mt-[8px] border border-gray-700 rounded-xl mx-auto shadow-lg">
       <h1 className="text-3xl font-bold mb-4">Member Validation Control</h1>
       <input
         type="text"

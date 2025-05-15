@@ -34,12 +34,12 @@ const Dorja = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         localStorage.setItem("userEmail", currentUser.email);
+        localStorage.setItem("isAdmin", "true"); // Set admin status
         navigate("");
       }
     });
@@ -57,7 +57,12 @@ const Dorja = () => {
         password
       );
       setUser(userCredential.user);
+      
+      // Store user info in localStorage
       localStorage.setItem("userEmail", userCredential.user.email);
+      localStorage.setItem("isAdmin", "true"); // Mark this user as an admin
+      
+      console.log("Logged in as:", userCredential.user.email);
       setSuccess("Login successful!");
       navigate("/AdminPage");
     } catch (error) {
@@ -78,6 +83,8 @@ const Dorja = () => {
       setUser(userCredential.user);
 
       localStorage.setItem("userEmail", userCredential.user.email);
+      localStorage.setItem("isAdmin", "true"); // Mark new user as admin
+      
       setSuccess("Account created successfully! Please log in.");
       navigate("/Dorja");
     } catch (error) {
@@ -103,7 +110,11 @@ const Dorja = () => {
             if (currentUser) {
                 setUser(currentUser);
                 localStorage.setItem("userEmail", currentUser.email);
-                navigate("/AdminPage");
+                localStorage.setItem("isAdmin", "true");
+                // Only navigate if we're not already on the login page
+                if (window.location.pathname !== "/Dorja") {
+                    navigate("/AdminPage");
+                }
             }
         });
     });

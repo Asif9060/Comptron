@@ -132,10 +132,10 @@ const AdminUsersPage = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="mb-6 p-3 w-1/2 bg-[#222] rounded-lg border border-[#444] text-white"
           />
-          {error && <div className="text-red-500 font-bold text-xl mb-4">{error}</div>}
-          {success && <div className="text-green-500 font-bold text-xl mb-4">{success}</div>}
+          {error && <div className="text-red-500 font-bold text-xl mb-5">{error}</div>}
+          {success && <div className="text-green-500 font-bold text-xl mb-9">{success}</div>}
       </div>
-      <div className="flex items-center gap-18 mb-5 justify-center">
+      <div className="flex items-center gap-18 mb-5 translate-y-[-25rem] justify-center">
         <div>
           <ValidationControl></ValidationControl>
         </div>
@@ -145,7 +145,7 @@ const AdminUsersPage = () => {
       </div>
 
 
-      <div className="space-y-6 flex flex-col items-center">
+      <div className="space-y-6 -translate-y-[45rem]  flex flex-col items-center">
         {filteredUsers.map((user) => (
           <div
             key={user.customId}
