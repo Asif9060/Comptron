@@ -59,6 +59,7 @@ const SettingsPage = () => {
     bio: "",
     studentId: "",
     bloodGroup: "",
+    department: "",
     dateOfBirth: "",
     linkedIn: "",
     github: "",
@@ -125,6 +126,7 @@ const SettingsPage = () => {
           bio: data.bio || "",
           studentId: data.studentId || "",
           bloodGroup: data.bloodGroup || "",
+          department: data.department || "",
           dateOfBirth: data.dateOfBirth || "",
           linkedIn: data.linkedIn || "",
           github: data.github || "",
@@ -177,6 +179,7 @@ const SettingsPage = () => {
       bio: user.bio,
       studentId: user.studentId,
       bloodGroup: user.bloodGroup,
+      department: user.department,
       dateOfBirth: user.dateOfBirth,
     };
 
@@ -208,6 +211,7 @@ const SettingsPage = () => {
         bio: data.bio || "",
         studentId: data.studentId || "",
         bloodGroup: data.bloodGroup || "",
+        department: data.department || "",
         dateOfBirth: data.dateOfBirth || "",
         linkedIn: data.linkedIn || "",
         github: data.github || "",
@@ -454,6 +458,26 @@ const SettingsPage = () => {
                   <option value="O-">O-</option>
                   <option value="AB+">AB+</option>
                   <option value="AB-">AB-</option>
+                </select>
+              </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium mb-1">
+                  Department
+                </label>
+                <select
+                  value={user.department}
+                  onChange={(e) =>
+                    setUser({ ...user, department: e.target.value })
+                  }
+                  className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Select Department</option>
+                  <option value="CSE">CSE</option>
+                  <option value="EEE">EEE</option>
+                  <option value="CIVIL">CIVIL</option>
+                  <option value="BBA">BBA</option>
+                  <option value="LAW">LAW</option>
+                  <option value="EEL">EEL</option>
                 </select>
               </div>
               <div className="space-y-2">
