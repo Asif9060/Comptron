@@ -1,0 +1,84 @@
+/* .mentors-section {
+  margin: 30px 0;
+  text-align: center;
+}
+.mentors-section h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #00c9ff;
+}
+.mentors-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.mentor-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  width: 180px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mentor-card img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 2px solid #00c9ff;
+}
+.mentor-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00c9ff;
+}
+
+.learning-section {
+  background: rgba(0, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 10px;
+  margin-top: 30px;
+  color: white;
+  text-align: left;
+}
+.learning-section h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #92fe9d;
+}
+.learning-section ul {
+  list-style: none;
+  padding-left: 20px;
+}
+.learning-section ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  position: relative;
+}
+.learning-section ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+.event-details {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: left;
+  color: white;
+}
+.event-details h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #00c9ff;
+}
+.event-details p {
+  font-size: 16px;
+  margin-bottom: 10px;
+} */

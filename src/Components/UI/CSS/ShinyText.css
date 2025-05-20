@@ -1,0 +1,32 @@
+.shiny-text {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    background: linear-gradient(90deg, #ffffff,#15A6E1, #ffffff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s infinite linear;
+    
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 200% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .shiny-text {
+      display: inline-block;
+      font-size:1rem;
+      position: relative;
+      
+    }
+  }

@@ -1,0 +1,89 @@
+h1 {
+    text-align: center;
+    margin-block-end: 2.5rem;
+  }
+
+  .company{
+    color: rgb(0, 0, 0);
+  }
+  
+  .stock-ticker {
+    font-size: 15px;
+    padding-block: 8px;
+    border-block: 1px solid rgb(0, 0, 0);
+    box-shadow: 0 0 .2rem #fff,
+            0 0 .2rem #fff,
+            0 0 0px #10A5E0,
+            0 0 0px #10A5E0,
+            0 0 0px #10A5E0,
+            inset 0 0 1.3rem #10A5E0;
+    overflow: hidden;
+    user-select: none;
+  
+    --gap: 20px;
+    display: flex;
+    gap: var(--gap);
+  }
+  
+  .stock-ticker ul {
+    list-style: none;
+    flex-shrink: 0;
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap);
+    
+    animation: scroll 30s linear infinite;
+  }
+  
+  .stock-ticker:hover ul {
+    animation-play-state: paused;
+  }
+  
+  @keyframes scroll {
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  .stock-ticker ul:first-child {
+    /* background-color: yellow; */
+  }
+  
+  .stock-ticker ul:last-child {
+    /* background-color: pink; */
+  }
+  
+  .stock-ticker .company,
+  .stock-ticker .price {
+    font-weight: bold;
+  }
+  
+  .stock-ticker .price {
+    margin-inline: 4px;
+  }
+  
+  .stock-ticker .plus::before {
+    content: "↑";
+  }
+  
+  .stock-ticker .minus::before {
+    content: "↓";
+  }
+  
+  .stock-ticker .plus .change,
+  .stock-ticker .plus::before {
+    color: #089981;
+  }
+  
+  .stock-ticker .minus .change,
+  .stock-ticker .minus::before {
+    color: #f23645;
+  }
+
+  @media (max-width: 768px){
+    .stock-ticker {
+      font-size: 12px;
+    }
+  }

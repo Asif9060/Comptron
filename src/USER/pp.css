@@ -1,0 +1,5 @@
+@media (max-width: 768px) {
+    .resp {
+        transform: translate(57px, 0px);
+    }
+}

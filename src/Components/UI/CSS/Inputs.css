@@ -1,0 +1,222 @@
+.container01 {
+  --light: rgb(255, 255, 255);
+  --dark: rgb(50, 50, 50);
+  --br: 8px;
+}
+
+.container01:hover .title01 {
+  opacity: 1;
+}
+
+.input01 {
+  background-color: transparent;
+  border: 2px solid black;
+  color: black;
+  width: 500px;
+  padding: .5rem;
+  border-radius: var(--br);
+  outline: none;
+  opacity: .8;
+  transition: .2s ease-in-out;
+
+}
+
+.input01:focus {
+  opacity: 1;
+}
+
+.title01 {
+  border-radius: var(--br);
+  transform: translate(-50%, -230%);
+  background-color: var(--light);
+  transition: .2s ease-in-out;
+  opacity: 0;
+  color: var(--dark);
+  position: absolute;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: .5rem;
+  left: 24%;
+}
+
+.title::before {
+  transform: translate(-50%, 50%) rotate(45deg);
+  background-color: var(--light);
+  position: absolute;
+  z-index: -1;
+  content: '';
+  width: 10px;
+  height: 10px;
+  bottom: 0;
+  left: 50%;
+}
+
+/* File */
+
+.Documents-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 45px;
+  border: none;
+  padding: 0px 17px;
+  border-radius: 5px;
+  background: linear-gradient(to left bottom, #9b3ce8, #3386ef, #13bcec);
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+}
+
+.hidden-file-input {
+  
+  display: none; /* Hide the default file input */
+}
+
+.folderContainer {
+  
+  width: 40px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  left: 47.5%;  
+
+}
+
+.fileBack {
+  z-index: 1;
+  width: 80%;
+  height: auto;
+}
+
+.filePage {
+  width: 50%;
+  height: auto;
+  position: absolute;
+  z-index: 2;
+  transition: all 0.3s ease-out;
+}
+
+.fileFront {
+  width: 85%;
+  height: auto;
+  position: absolute;
+  z-index: 3;
+  opacity: 0.95;
+  transform-origin: bottom;
+  transition: all 0.3s ease-out;
+}
+
+.text {
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 4;
+  left: 12%;
+}
+
+.Documents-btn:hover .filePage {
+  transform: translateY(-5px);
+}
+
+.Documents-btn:hover {
+  background-color: rgb(58, 58, 94);
+}
+
+.Documents-btn:hover .fileFront {
+  transform: rotateX(30deg);
+}
+
+
+/* Keep all your existing styles as-is above this line... */
+
+/* Responsive tweaks */
+@media screen and (max-width: 1024px) {
+  .input01 {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .folderContainer {
+    left: 44%;
+    width: 36px;
+  }
+
+  .text {
+    left: 10%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .input01 {
+    max-width: 100%;
+    font-size: 0.95rem;
+    padding: 0.45rem;
+  }
+
+  .Documents-btn {
+    width: 160px;
+    height: 40px;
+    padding: 0px 12px;
+  }
+
+  .folderContainer {
+    width: 34px;
+    left: 42%;
+  }
+
+  .text {
+    font-size: 13px;
+    left: 9%;
+  }
+
+  .title01 {
+    font-size: 13px;
+    left: 22%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .input01 {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+
+  .Documents-btn {
+    width: 140px;
+    height: 38px;
+    padding: 0px 10px;
+    gap: 6px;
+  }
+
+  .folderContainer {
+    left: 40%;
+    width: 30px;
+  }
+
+  .fileBack, .fileFront {
+    width: 90%;
+  }
+
+  .filePage {
+    width: 55%;
+  }
+
+  .text {
+    font-size: 12px;
+    left: 7%;
+  }
+
+  .title01 {
+    font-size: 12px;
+    left: 20%;
+  }
+}
