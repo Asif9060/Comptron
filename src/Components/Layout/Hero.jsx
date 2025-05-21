@@ -115,7 +115,7 @@ const Hero = () => {
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 opacity-30 rounded-full blur-3xl animate-[pulse_8s_ease-in-out_infinite] z-0"></div>
       <div className="absolute top-1/2 -right-48 w-96 h-96 bg-gradient-to-bl from-indigo-500 via-blue-300 to-teal-400 opacity-20 rounded-full blur-3xl animate-[pulse_12s_ease-in-out_infinite_1s] z-0"></div>
       <div className="absolute -bottom-20 left-1/3 w-80 h-80 bg-gradient-to-tr from-pink-400 via-purple-500 to-blue-400 opacity-25 rounded-full blur-3xl animate-[pulse_10s_ease-in-out_infinite_2s] z-0"></div>
-
+      
       {/* Overlay with slightly less opacity */}
       <div className="absolute inset-0 bg-gray-900 bg-opacity-60 z-0"></div>
 
