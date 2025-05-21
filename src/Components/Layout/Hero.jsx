@@ -7,6 +7,7 @@ import male from "../../assets/images/male.jpg";
 import female from "../../assets/images/female.jpg";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { userAuth } from "../../USER/FirebaseUser";
+import background from "../../assets/images/background.gif";
 import { NavLink } from "react-router-dom"; // Make sure to add a default avatar image
 import {
   Menu,
