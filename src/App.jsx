@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import HomePage from "./pages/HomePage";
 import MembersPage from "./pages/MembersPage";
 import AboutPage from "./pages/AboutPage";
@@ -19,7 +20,7 @@ import AllMembersPage from "./USER/AllMembersPage";
 import SettingsPage from "./USER/SettingsPage";
 import AdminPasswordResetPage from "./USER/PasswordReset";
 import UserLogin from "./USER/UserLogin";
-import AddMemberForm from './Components/AddMemberForm';
+import AddMemberForm from "./Components/AddMemberForm";
 import CommitteeProfile from "./CommitteePanel/CommitteeProfile";
 import CommitteeSettings from "./CommitteePanel/CommitteeSettings";
 import AdminEventDetailsControl from "./AdminPanel/AdminEventDetailsControl";
@@ -43,27 +44,55 @@ const App = () => {
   useEffect(() => {
     console.log("Current user email:", localStorage.getItem("userEmail"));
   }, []);
-  
+
   return (
-    <div>
+    <>
+      <Toaster position="top-center" />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage></HomePage>}></Route>
-          <Route path="/Committee" element={<MembersPage></MembersPage>}></Route>
+          <Route
+            path="/Committee"
+            element={<MembersPage></MembersPage>}
+          ></Route>
           <Route path="/Members" element={<MembersPage></MembersPage>}></Route>
           <Route path="/About" element={<AboutPage></AboutPage>}></Route>
           <Route path="/Events" element={<EventPage></EventPage>}></Route>
           <Route path="/GMembers" element={<Members></Members>}></Route>
           <Route path="/Dorja" element={<Dorja></Dorja>}></Route>
-          <Route path="/EventDetails" element={<EventDetails></EventDetails>}></Route>
+          <Route
+            path="/EventDetails"
+            element={<EventDetails></EventDetails>}
+          ></Route>
           <Route path="/Event" element={<Events></Events>}></Route>
-          <Route path="/event/:id" element={<EventDetails></EventDetails>}></Route>
-          <Route path="/User" element={<GeneralMemberPage></GeneralMemberPage>}></Route>
-          <Route path="/Register" element={<RegistrationForm></RegistrationForm>}></Route>
-          <Route path="/AllMembers" element={<AllMembersPage></AllMembersPage>}></Route>
-          <Route path="/profile/:id" element={<ProfilePage></ProfilePage>}></Route>
-          <Route path="/settings/:id" element={<SettingsPage></SettingsPage>}></Route>
-          <Route path="/Reset" element={<AdminPasswordResetPage></AdminPasswordResetPage>}></Route>
+          <Route
+            path="/event/:id"
+            element={<EventDetails></EventDetails>}
+          ></Route>
+          <Route
+            path="/User"
+            element={<GeneralMemberPage></GeneralMemberPage>}
+          ></Route>
+          <Route
+            path="/Register"
+            element={<RegistrationForm></RegistrationForm>}
+          ></Route>
+          <Route
+            path="/AllMembers"
+            element={<AllMembersPage></AllMembersPage>}
+          ></Route>
+          <Route
+            path="/profile/:id"
+            element={<ProfilePage></ProfilePage>}
+          ></Route>
+          <Route
+            path="/settings/:id"
+            element={<SettingsPage></SettingsPage>}
+          ></Route>
+          <Route
+            path="/Reset"
+            element={<AdminPasswordResetPage></AdminPasswordResetPage>}
+          ></Route>
           <Route path="/UserLogin" element={<UserLogin></UserLogin>}></Route>
           <Route path="/unauthorized" element={<Unauthorized />}></Route>
 
@@ -81,7 +110,11 @@ const App = () => {
             path="/ManageCommittee"
             element={
               <AdminProtectedRoute>
-                <AddMemberForm onMemberAdded={() => setRefresh(!refresh)} selectedMember={selectedMember} setSelectedMember={setSelectedMember}/>
+                <AddMemberForm
+                  onMemberAdded={() => setRefresh(!refresh)}
+                  selectedMember={selectedMember}
+                  setSelectedMember={setSelectedMember}
+                />
               </AdminProtectedRoute>
             }
           ></Route>
@@ -179,7 +212,7 @@ const App = () => {
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
-    </div>
+    </>
   );
 };
 

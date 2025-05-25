@@ -10,7 +10,10 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
         "@headlessui/react": "^2.2.0",
+        "@hello-pangea/dnd": "^18.0.1",
         "@heroicons/react": "^2.2.0",
         "@heroui/divider": "^2.2.11",
         "@heroui/system": "^2.4.12",
@@ -20,6 +23,8 @@
         "@lexical/link": "^0.30.0",
         "@lexical/list": "^0.30.0",
         "@lexical/react": "^0.30.0",
+        "@mui/material": "^7.1.0",
+        "@mui/x-data-grid": "^8.4.0",
         "@radix-ui/themes": "^3.2.0",
         "@schedule-x/events-service": "^2.20.0",
         "@schedule-x/react": "^2.20.0",
@@ -63,6 +68,7 @@
         "react-chartjs-2": "^5.3.0",
         "react-color": "^2.19.3",
         "react-cropper": "^2.3.3",
+        "react-csv": "^2.2.2",
         "react-dom": "^19.0.0",
         "react-easy-crop": "^5.4.1",
         "react-firebase-hooks": "^5.1.1",

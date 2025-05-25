@@ -2,12 +2,11 @@ import { useState, useEffect, Fragment, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import logo from "../../assets/images/Comptron Logo.png";
-import "./CSS/sparkle.css";
 import male from "../../assets/images/male.jpg";
 import female from "../../assets/images/female.jpg";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { userAuth } from "../../USER/FirebaseUser";
-import background from "../../assets/images/background.gif";
+import background from "../../assets/images/tech/BGHigh.mp4";
 import { NavLink } from "react-router-dom"; // Make sure to add a default avatar image
 import {
   Menu,
@@ -112,21 +111,22 @@ const Hero = () => {
 
   return (
     <section className="relative h-screen w-full bg-cover bg-center overflow-hidden">
-      {/* Multiple animated gradient blobs for more dynamic effect */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 opacity-30 rounded-full blur-3xl animate-[pulse_8s_ease-in-out_infinite] z-0"></div>
-      <div className="absolute top-1/2 -right-48 w-96 h-96 bg-gradient-to-bl from-indigo-500 via-blue-300 to-teal-400 opacity-20 rounded-full blur-3xl animate-[pulse_12s_ease-in-out_infinite_1s] z-0"></div>
-      <div className="absolute -bottom-20 left-1/3 w-80 h-80 bg-gradient-to-tr from-pink-400 via-purple-500 to-blue-400 opacity-25 rounded-full blur-3xl animate-[pulse_10s_ease-in-out_infinite_2s] z-0"></div>
-      
-      {/* Overlay with slightly less opacity */}
-      <div className="absolute inset-0 bg-gray-900 bg-opacity-60 z-0"></div>
-
-      {/* Improved sparkle animation with fewer sparkles for better performance */}
-      <div className="absolute inset-0 sparkle z-0">
-        {Array.from({ length: 70 }).map((_, i) => (
-          <div key={i} className="sparkle-dot"></div>
-        ))}
+      {" "}
+      {/* Video Background */}{" "}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover filter blur-[5px] scale-105"
+          src={background}
+        ></video>
       </div>
-
+      {/* Slight dark overlay to improve text visibility */}
+      <div className="absolute inset-0 bg-black/30 z-[1]"></div>
+      {/* Dark overlay for better content visibility */}
+      {/* <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div> */}
       {/* Navbar with scroll transparency effect - only sticky on desktop */}
       <div
         className={`hidden sm:flex fixed top-0 left-0 w-full justify-between items-center px-6 py-4 z-30 transition-all duration-300 bg-transparent`}
@@ -281,7 +281,6 @@ const Hero = () => {
           </button>
         </div>
       </div>
-
       {/* Mobile navbar - non-sticky */}
       <div className="sm:hidden absolute top-0 left-0 w-full flex justify-between items-center px-4 py-3 z-30">
         <a href="/" className="flex items-center gap-2">
@@ -312,7 +311,6 @@ const Hero = () => {
           </button>
         </div>
       </div>
-
       {/* Improved sidebar with backdrop blur and animation */}
       <div
         className={`fixed top-0 right-0 h-full w-72 bg-gray-900/90 backdrop-blur-md text-white p-8 z-40 shadow-xl transform transition-transform duration-300 ease-in-out ${
@@ -419,7 +417,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-
       {/* Overlay that closes menu when clicked outside */}
       {menuOpen && (
         <div
@@ -428,7 +425,6 @@ const Hero = () => {
           aria-hidden="true"
         ></div>
       )}
-
       {/* Hero Content with reveal animations */}
       <div className="relative z-10 flex flex-col justify-center items-center text-white text-center h-full px-4 sm:px-6 max-w-4xl mx-auto">
         <div className="space-y-6 sm:space-y-8">
@@ -437,9 +433,8 @@ const Hero = () => {
             of the Faculty of CSE.
           </p>
           <h1 className="text-3xl sm:text-6xl font-extrabold opacity-0 animate-[fadeIn_0.8s_forwards_0.6s]">
-            <span className="bg-gradient-to-r from-[#15A7E2] to-[#3D3455] bg-clip-text text-transparent animate-gradient-move drop-shadow-xl">
+            <span className="bg-gradient-to-r from-[#15A7E2] to-[#15A7E2] bg-clip-text text-transparent animate-gradient-move drop-shadow-xl">
               {typedText}
-              <span className="animate-blink">|</span>
             </span>
           </h1>
           <div className="opacity-0 animate-[fadeIn_0.8s_forwards_0.9s] pt-2 sm:pt-4">
@@ -468,7 +463,6 @@ const Hero = () => {
           {/* Floating features section - hidden on mobile for minimalism */}
         </div>
       </div>
-
       {/* Scroll indicator - hidden on mobile */}
       <div className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
         <svg

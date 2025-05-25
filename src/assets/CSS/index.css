@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+::-webkit-scrollbar{
+  display: none;
+}
+
 @media (max-width: 768px) {
   .recent {
     transform: translateY(20px);

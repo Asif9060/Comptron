@@ -3,18 +3,108 @@ import { useParams } from "react-router-dom";
 import "../Components/UI/CSS/EventDetails.css";
 import CommentSection from "../Components/Features/CommentSection";
 import SideMenu from "../Components/Features/SideMenu";
+import RegistrationForm from "../Components/Features/RegistrationForm";
 import logo from "../assets/images/Comptron Logo.png";
+import Modal from "react-modal";
+
+// Set the app element for react-modal
+Modal.setAppElement("#root");
+
+const customModalStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "rgba(26, 26, 26, 0.95)",
+    border: "1px solid rgba(51, 51, 51, 0.5)",
+    borderRadius: "0.5rem",
+    padding: "2rem",
+    maxWidth: "90vw",
+    width: "600px",
+    maxHeight: "90vh",
+    overflow: "auto",
+    opacity: 0,
+    transition: "opacity 300ms ease-in-out, transform 300ms ease-in-out",
+    backdropFilter: "blur(8px)",
+    WebkitBackdropFilter: "blur(8px)", // For Safari support
+    boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    backdropFilter: "blur(4px)",
+    WebkitBackdropFilter: "blur(4px)", // For Safari support
+    transition: "all 300ms ease-in-out",
+  },
+};
+
+const afterOpenModal = () => {
+  // Fade in the modal and overlay
+  if (Modal.defaultStyles.overlay) {
+    Modal.defaultStyles.overlay.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  }
+  // Apply fade-in and slide-up animation to modal content
+  const content = document.querySelector(".ReactModal__Content");
+  if (content) {
+    content.style.opacity = 1;
+    content.style.transform = "translate(-50%, -50%) scale(1)";
+  }
+};
+
+const beforeCloseModal = () => {
+  return new Promise((resolve) => {
+    // Fade out the modal and overlay
+    if (Modal.defaultStyles.overlay) {
+      Modal.defaultStyles.overlay.backgroundColor = "rgba(0, 0, 0, 0)";
+    }
+    // Apply fade-out and slide-down animation to modal content
+    const content = document.querySelector(".ReactModal__Content");
+    if (content) {
+      content.style.opacity = 0;
+      content.style.transform = "translate(-50%, -40%) scale(0.95)";
+    }
+    // Wait for animation to complete
+    setTimeout(resolve, 300);
+  });
+};
 
 const EventDetails = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetch(`https://comptron-server-2.onrender.com/api/eventDetails/${id}`)
-      .then((res) => res.json())
-      .then((data) => setEvent(data))
-      .catch((err) => console.error(err));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Full event data received:", data);
+        console.log("Bullet points array:", data.bulletPoints);
+        if (!data.bulletPoints || !Array.isArray(data.bulletPoints)) {
+          console.warn(
+            "Bullet points missing or not an array:",
+            data.bulletPoints
+          );
+        }
+        setEvent(data);
+      })
+      .catch((err) => {
+        console.error("Error fetching event:", err);
+        // You might want to set some error state here
+      });
   }, [id]);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = async () => {
+    await beforeCloseModal();
+    setIsModalOpen(false);
+  };
 
   if (!event)
     return (
@@ -36,39 +126,117 @@ const EventDetails = () => {
           <div className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent top-1/2 -translate-y-1/2 z-0"></div>
           <div className="inline-block relative z-10 px-4 sm:px-6 py-2 bg-gray-900 rounded-lg">
             <div className="flex items-center justify-center gap-3 sm:gap-4">
-              <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-blue-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path d="M11.983 1.907a.75.75 0 00-1.292-.657l-8.5 9.5A.75.75 0 002.75 12h6.572l-1.305 6.093a.75.75 0 001.292.657l8.5-9.5A.75.75 0 0017.25 8h-6.572l1.305-6.093z" />
               </svg>
               <h1 className="event-title2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 translate-y-1.5">
                 {event.title}
               </h1>
-              <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-purple-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path d="M11.983 1.907a.75.75 0 00-1.292-.657l-8.5 9.5A.75.75 0 002.75 12h6.572l-1.305 6.093a.75.75 0 001.292.657l8.5-9.5A.75.75 0 0017.25 8h-6.572l1.305-6.093z" />
               </svg>
             </div>
           </div>
         </div>
         <div className="main-content w-full">
-          <img 
+          <img
             className="event-img w-full rounded-lg object-cover mb-4 sm:mb-6 md:mb-8 
-                       h-48 sm:h-64 md:h-80 lg:h-96 shadow-lg" 
-            src={event.mainImage} 
-            alt="Event Main" 
+                       h-48 sm:h-64 md:h-80 lg:h-96 shadow-lg"
+            src={event.mainImage}
+            alt="Event Main"
           />
-          <p className="event-description text-base sm:text-lg md:text-xl mb-6 sm:mb-8 md:mb-10 px-2 sm:px-4 md:px-6">
+          <p className="event-description sm:text-lg md:text-xl mb-6 sm:mb-8 md:mb-10 px-2 sm:px-4 md:px-6">
             {event.description}
-          </p>
+          </p>{" "}
+          {/* Bullet Points Section */}
+          {event.bulletPoints?.length > 0 && (
+            <div className="bg-gray-800 rounded-xl p-6 backdrop-blur-sm border border-gray-700/30 mb-8 px-4 sm:px-6 md:px-8">
+              <h3 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                Event Details
+              </h3>
+              <div className="">
+                {event.bulletPoints.map((point, index) => (
+                  <div
+                    key={index}
+                    className="grid grid-cols-9 sm:grid-cols-[200px,1fr] gap-2"
+                  >
+                    <div className="text-blue-400 font-semibold flex">
+                      {point.label} :
+                    </div>
+                    <div className="text-gray-300 flex">{point.text}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
             {event.galleryImages.map((img, index) => (
-              <img 
-                key={index} 
-                src={img} 
+              <img
+                key={index}
+                src={img}
                 alt={`Gallery ${index}`}
-                className="w-full rounded-lg object-cover h-40 sm:h-48 md:h-52 lg:h-60 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]" 
+                className="w-full rounded-lg object-cover h-40 sm:h-48 md:h-52 lg:h-60 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
               />
             ))}
           </div>
-
+          {/* Registration Section */}
+          {event.registrationForm?.enabled && (
+            <div className="mt-8 sm:mt-10 md:mt-12 mb-8 text-center">
+              <button
+                onClick={openModal}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 transform hover:scale-105"
+              >
+                Register for Event
+              </button>
+            </div>
+          )}
+          {/* Registration Modal */}
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={closeModal}
+            style={customModalStyles}
+            contentLabel="Event Registration Form"
+            onAfterOpen={afterOpenModal}
+            closeTimeoutMS={300}
+          >
+            <div className="relative">
+              <button
+                onClick={closeModal}
+                className="absolute top-0 right-0 text-gray-400 hover:text-white transition-colors duration-200"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+              <RegistrationForm
+                eventId={event._id}
+                formFields={event.registrationForm?.fields || []}
+                onSubmit={async () => {
+                  await closeModal();
+                }}
+              />
+            </div>
+          </Modal>
           <div className="mt-8 sm:mt-10 md:mt-12">
             <CommentSection eventId={event._id}></CommentSection>
           </div>
