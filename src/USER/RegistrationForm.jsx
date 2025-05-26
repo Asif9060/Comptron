@@ -370,7 +370,7 @@ const RegistrationForm = () => {
 
         // After 4 seconds, navigate to login page
         setTimeout(() => {
-          navigate("/UserLogin");
+          navigate("/");
         }, 4000);
       } else {
         const errData = await response.json();

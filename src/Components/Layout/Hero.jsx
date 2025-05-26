@@ -24,16 +24,24 @@ const Hero = () => {
   const [typedText, setTypedText] = useState("");
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isPending, setIsPending] = useState(false);
   const [user] = useAuthState(userAuth);
   const texts = useMemo(() => ["COMPTRON, NWU", "Creativity Assembled"], []);
   const navigate = useNavigate();
   const auth = getAuth();
   const [customUser, setCustomUser] = useState(null);
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (user?.email) {
         try {
+          // Check if user is pending
+          const pendingRes = await fetch(
+            `https://comptron-server-2.onrender.com/api/users/pending/check/${user.email}`
+          );
+          const pendingData = await pendingRes.json();
+          setIsPending(pendingData.isPending);
+
+          // Get user data if exists
           const res = await fetch(
             `https://comptron-server-2.onrender.com/api/users/getByEmail/${user.email}`
           );
@@ -261,12 +269,29 @@ const Hero = () => {
               </Transition>
             </Menu>
           ) : (
-            <NavLink
-              to="/UserLogin"
-              className="px-5 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-md hover:scale-105 hover:from-pink-500 hover:to-blue-500 transition-all duration-300"
-            >
-              Join Now
-            </NavLink>
+            <div className="flex items-center gap-3">
+              {/* Desktop view buttons */}
+              {user && isPending ? (
+                <div className="px-5 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full font-semibold shadow-md">
+                  Pending Approval
+                </div>
+              ) : !user ? (
+                <>
+                  <NavLink
+                    to="/Register"
+                    className="px-5 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-md hover:scale-105 hover:from-pink-500 hover:to-blue-500 transition-all duration-300"
+                  >
+                    Join Now
+                  </NavLink>
+                  <NavLink
+                    to="/UserLogin"
+                    className="px-5 py-2 bg-gradient-to-r from-blue-400 to-indigo-500 text-white rounded-full font-semibold shadow-md hover:scale-105 hover:from-indigo-400 hover:to-blue-500 transition-all duration-300"
+                  >
+                    Login
+                  </NavLink>
+                </>
+              ) : null}
+            </div>
           )}
           <button
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white z-30 shadow-lg hover:bg-blue-100 transition-colors duration-300"
@@ -291,13 +316,29 @@ const Hero = () => {
           />
         </a>
         <div className="flex items-center gap-3">
-          <a
-            href="/UserLogin"
-            className="px-4 py-1.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full text-sm font-semibold shadow-md"
-            aria-label="Join Now"
-          >
-            Join Now
-          </a>
+          {" "}
+          <div className="flex gap-2">
+            {user && isPending ? (
+              <div className="px-3 py-1.5 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full text-sm font-semibold shadow-md">
+                Pending
+              </div>
+            ) : !user ? (
+              <>
+                <NavLink
+                  to="/Register"
+                  className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full text-sm font-semibold shadow-md hover:from-pink-500 hover:to-blue-500 transition-all duration-300"
+                >
+                  Join Now
+                </NavLink>
+                <NavLink
+                  to="/UserLogin"
+                  className="px-3 py-1.5 bg-gradient-to-r from-blue-400 to-indigo-500 text-white rounded-full text-sm font-semibold shadow-md hover:from-indigo-400 hover:to-blue-500 transition-all duration-300"
+                >
+                  Login
+                </NavLink>
+              </>
+            ) : null}
+          </div>
           <button
             className="w-9 h-9 flex items-center justify-center rounded-full bg-white z-30 shadow-lg"
             onClick={() => setMenuOpen(true)}
@@ -427,16 +468,17 @@ const Hero = () => {
       )}
       {/* Hero Content with reveal animations */}
       <div className="relative z-10 flex flex-col justify-center items-center text-white text-center h-full px-4 sm:px-6 max-w-4xl mx-auto">
-        <div className="space-y-6 sm:space-y-8">
-          <p className="text-base sm:text-xl opacity-0 animate-[fadeIn_0.8s_forwards_0.3s] max-w-md sm:max-w-2xl mx-auto leading-relaxed">
+        <div className="space-y-6 sm:space-y-8">          <p className="text-base sm:text-xl opacity-0 animate-[fadeIn_0.8s_forwards_0.3s] max-w-md sm:max-w-2xl mx-auto leading-relaxed">
             Comptron Club of NWU is an organization run by teachers and students
             of the Faculty of CSE.
           </p>
-          <h1 className="text-3xl sm:text-6xl font-extrabold opacity-0 animate-[fadeIn_0.8s_forwards_0.6s]">
-            <span className="bg-gradient-to-r from-[#15A7E2] to-[#15A7E2] bg-clip-text text-transparent animate-gradient-move drop-shadow-xl">
-              {typedText}
-            </span>
-          </h1>
+          <div className="h-[72px] sm:h-[144px] flex items-center justify-center">
+            <h1 className="text-3xl sm:text-6xl font-extrabold opacity-0 animate-[fadeIn_0.8s_forwards_0.6s]">
+              <span className="bg-gradient-to-r from-[#15A7E2] to-[#15A7E2] bg-clip-text text-transparent animate-gradient-move drop-shadow-xl inline-block min-w-[300px] sm:min-w-[600px]">
+                {typedText}
+              </span>
+            </h1>
+          </div>
           <div className="opacity-0 animate-[fadeIn_0.8s_forwards_0.9s] pt-2 sm:pt-4">
             <a
               href="/Events"
