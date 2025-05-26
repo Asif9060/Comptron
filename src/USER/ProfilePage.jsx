@@ -777,7 +777,7 @@ const ProfilePage = () => {
                     <img
                       src={user.image}
                       alt="Profile"
-                      className="w-full h-full rounded-full object-cover border-4 border-blue-500/80 group-hover:border-blue-400 transition-all duration-300 shadow-lg"
+                      className="w-full h-full rounded-full aspect-square object-cover border-4 border-blue-500/80 group-hover:border-blue-400 transition-all duration-300 shadow-lg"
                       onError={(e) => (e.target.src = "/fallback-image.png")}
                     />
                   ) : (
@@ -786,7 +786,7 @@ const ProfilePage = () => {
                         user.gender?.toLowerCase() === "female" ? female : male
                       }
                       alt="Default Avatar"
-                      className="w-full h-full rounded-full object-cover border-4 border-gray-600/80 group-hover:border-gray-500 transition-all duration-300 shadow-lg"
+                      className="w-full h-full aspect-square rounded-full object-cover border-4 border-gray-600/80 group-hover:border-gray-500 transition-all duration-300 shadow-lg"
                     />
                   )}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-600/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
