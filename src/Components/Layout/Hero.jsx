@@ -151,7 +151,7 @@ const Hero = () => {
           {user ? (
             <Menu as="div" className="relative">
               <div>
-                <MenuButton className="relative w-10 h-10 rounded-full overflow-hidden hover:ring-2 hover:ring-blue-400 transition-all duration-300 group">
+                <MenuButton className="relative mt-2 w-10 h-10 rounded-full overflow-hidden hover:ring-2 hover:ring-blue-400 transition-all duration-300 group">
                   <img
                     src={
                       customUser?.image ||
