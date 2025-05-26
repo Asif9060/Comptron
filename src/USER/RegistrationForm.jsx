@@ -1,44 +1,94 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../utils/cropImage"; // helper function provided below
-import { userAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "./FirebaseUser";
+import {
+  userAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "./FirebaseUser";
 import { useNavigate } from "react-router-dom";
 
 // List of common temporary email domains to block
 const TEMP_EMAIL_DOMAINS = [
-  "tempmail.com", "temp-mail.org", "temp-mail.io", "tempmail.io", "temp-mail.ru", 
-  "tempmail.ru", "10minutemail.com", "mailinator.com", "guerrillamail.com", "sharklasers.com", 
-  "guerrillamail.info", "grr.la", "guerrillamail.biz", "guerrillamail.org", "guerrillamail.net", 
-  "yopmail.com", "yopmail.fr", "yopmail.net", "cool.fr.nf", "jetable.fr.nf", 
-  "nospam.ze.tc", "nomail.xl.cx", "mega.zik.dj", "speed.1s.fr", "courriel.fr.nf", 
-  "moncourrier.fr.nf", "monemail.fr.nf", "monmail.fr.nf", "discard.email", "discardmail.com", 
-  "spambog.com", "mailnesia.com", "mailinator.net", "mailinator2.com", "trashmail.net", 
-  "trashmail.com", "getnada.com", "emailfake.com", "tempr.email", "dispostable.com",
-  "1secmail.com", "mohmal.com", "dropmail.me", "tempmail.dev", "maildrop.cc",
-  "gettempemail.com", "mailtemp.net", "10minemail.com", "emailondeck.com", "tempmailo.com",
-  "disposablemail.com", "throwawaymail.com", "throwmail.com", "hulapla.de", "trash-mail.com"
+  "tempmail.com",
+  "temp-mail.org",
+  "temp-mail.io",
+  "tempmail.io",
+  "temp-mail.ru",
+  "tempmail.ru",
+  "10minutemail.com",
+  "mailinator.com",
+  "guerrillamail.com",
+  "sharklasers.com",
+  "guerrillamail.info",
+  "grr.la",
+  "guerrillamail.biz",
+  "guerrillamail.org",
+  "guerrillamail.net",
+  "yopmail.com",
+  "yopmail.fr",
+  "yopmail.net",
+  "cool.fr.nf",
+  "jetable.fr.nf",
+  "nospam.ze.tc",
+  "nomail.xl.cx",
+  "mega.zik.dj",
+  "speed.1s.fr",
+  "courriel.fr.nf",
+  "moncourrier.fr.nf",
+  "monemail.fr.nf",
+  "monmail.fr.nf",
+  "discard.email",
+  "discardmail.com",
+  "spambog.com",
+  "mailnesia.com",
+  "mailinator.net",
+  "mailinator2.com",
+  "trashmail.net",
+  "trashmail.com",
+  "getnada.com",
+  "emailfake.com",
+  "tempr.email",
+  "dispostable.com",
+  "1secmail.com",
+  "mohmal.com",
+  "dropmail.me",
+  "tempmail.dev",
+  "maildrop.cc",
+  "gettempemail.com",
+  "mailtemp.net",
+  "10minemail.com",
+  "emailondeck.com",
+  "tempmailo.com",
+  "disposablemail.com",
+  "throwawaymail.com",
+  "throwmail.com",
+  "hulapla.de",
+  "trash-mail.com",
 ];
 
 // Function to check if email is from a temporary mail service
 const isTemporaryEmail = (email) => {
   if (!email) return false;
-  const domain = email.split('@')[1];
+  const domain = email.split("@")[1];
   if (!domain) return false;
-  
-  return TEMP_EMAIL_DOMAINS.some(tempDomain => 
-    domain.toLowerCase() === tempDomain.toLowerCase() || 
-    domain.toLowerCase().endsWith('.' + tempDomain.toLowerCase())
+
+  return TEMP_EMAIL_DOMAINS.some(
+    (tempDomain) =>
+      domain.toLowerCase() === tempDomain.toLowerCase() ||
+      domain.toLowerCase().endsWith("." + tempDomain.toLowerCase())
   );
 };
 
 // Update the domain validation function
 const isValidEmailDomain = (email) => {
   if (!email) return false;
-  const domain = email.split('@')[1];
+  const domain = email.split("@")[1];
   if (!domain) return false;
-  
+
   // Only allow these specific domains
-  const allowedDomains = ['gmail.com', 'nwu.ac.bd'];
+  const allowedDomains = ["gmail.com", "nwu.ac.bd"];
   return allowedDomains.includes(domain.toLowerCase());
 };
 
@@ -46,37 +96,43 @@ const isValidEmailDomain = (email) => {
 const CenteredToast = ({ visible, setVisible, message, type }) => {
   useEffect(() => {
     if (visible) {
-      const timer = setTimeout(() => {
-        setVisible(false);
-      }, type === 'success' ? 3000 : 5000);
-      
+      const timer = setTimeout(
+        () => {
+          setVisible(false);
+        },
+        type === "success" ? 3000 : 5000
+      );
+
       return () => clearTimeout(timer);
     }
   }, [visible, setVisible, type]);
 
   if (!visible) return null;
 
-  const bgColor = type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#1F2937';
-  
+  const bgColor =
+    type === "success" ? "#10B981" : type === "error" ? "#EF4444" : "#1F2937";
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
       {/* Backdrop with blur effect */}
       <div className="absolute inset-0 bg-black/30 backdrop-blur-md transition-all duration-300"></div>
-      
+
       {/* Toast content */}
-      <div 
+      <div
         className="relative px-4 sm:px-8 py-4 sm:py-5 rounded-lg shadow-lg text-white text-center w-full max-w-xs sm:max-w-md transition-all duration-300"
-        style={{ 
+        style={{
           background: bgColor,
-          animation: 'fadeIn 0.3s ease-out'
+          animation: "fadeIn 0.3s ease-out",
         }}
       >
-        {type === 'loading' && (
+        {type === "loading" && (
           <div className="flex justify-center mb-2 sm:mb-3">
             <div className="animate-spin rounded-full h-5 w-5 sm:h-7 sm:w-7 border-b-2 border-white"></div>
           </div>
         )}
-        <p className="text-sm sm:text-base md:text-lg font-medium break-words">{message}</p>
+        <p className="text-sm sm:text-base md:text-lg font-medium break-words">
+          {message}
+        </p>
       </div>
     </div>
   );
@@ -108,7 +164,7 @@ const RegistrationForm = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
   const [loading, setLoading] = useState(false);
-  
+
   // Toast visibility states
   const [loadingToast, setLoadingToast] = useState(false);
   const [successToast, setSuccessToast] = useState(false);
@@ -118,9 +174,9 @@ const RegistrationForm = () => {
   // Add CSS for animation
   useEffect(() => {
     // Create style element if it doesn't exist
-    if (!document.getElementById('toast-animations')) {
-      const style = document.createElement('style');
-      style.id = 'toast-animations';
+    if (!document.getElementById("toast-animations")) {
+      const style = document.createElement("style");
+      style.id = "toast-animations";
       style.innerHTML = `
         @keyframes fadeIn {
           from { opacity: 0; transform: scale(0.95); }
@@ -133,9 +189,13 @@ const RegistrationForm = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    
+
     // Clear email-related error when email changes
-    if (e.target.name === 'email' && errorToast && toastMessage.includes("temporary")) {
+    if (
+      e.target.name === "email" &&
+      errorToast &&
+      toastMessage.includes("temporary")
+    ) {
       setErrorToast(false);
     }
   };
@@ -179,24 +239,26 @@ const RegistrationForm = () => {
       setErrorToast(true);
       return;
     }
-    
+
     // Check if the email domain is allowed
     if (!isValidEmailDomain(formData.email)) {
       setToastMessage("Only Gmail and NWU email addresses are allowed.");
       setErrorToast(true);
       return;
     }
-    
+
     // Check if the email is from a temporary email service
     if (isTemporaryEmail(formData.email)) {
-      setToastMessage("Temporary email addresses are not allowed. Please use a permanent email address.");
+      setToastMessage(
+        "Temporary email addresses are not allowed. Please use a permanent email address."
+      );
       setErrorToast(true);
       return;
     }
-    
+
     setLoadingToast(true);
     setToastMessage("Sending OTP...");
-    
+
     try {
       const res = await fetch(
         "https://comptron-server-2.onrender.com/api/send-otp",
@@ -208,7 +270,7 @@ const RegistrationForm = () => {
       );
       const data = await res.json();
       setLoadingToast(false);
-      
+
       if (res.ok) {
         setOtpSent(true);
         setSuccessToast(true);
@@ -226,21 +288,23 @@ const RegistrationForm = () => {
 
   const handleVerifyAndRegister = async (e) => {
     e.preventDefault();
-    
+
     // Check if the email domain is allowed
     if (!isValidEmailDomain(formData.email)) {
       setToastMessage("Only Gmail and NWU email addresses are allowed.");
       setErrorToast(true);
       return;
     }
-    
+
     // Double-check to ensure a temporary email hasn't been used
     if (isTemporaryEmail(formData.email)) {
-      setToastMessage("Temporary email addresses are not allowed. Please use a permanent email address.");
+      setToastMessage(
+        "Temporary email addresses are not allowed. Please use a permanent email address."
+      );
       setErrorToast(true);
       return;
     }
-    
+
     setLoadingToast(true);
     setToastMessage("Verifying OTP & creating account...");
     setLoading(true);
@@ -255,7 +319,8 @@ const RegistrationForm = () => {
         }
       );
       const result = await verify.json();
-      if (!verify.ok) throw new Error(result.message || "OTP verification failed");
+      if (!verify.ok)
+        throw new Error(result.message || "OTP verification failed");
 
       const userCredential = await createUserWithEmailAndPassword(
         userAuth,
@@ -271,7 +336,7 @@ const RegistrationForm = () => {
           body: JSON.stringify({
             ...formData,
             firebaseUserId: userCredential.user.uid,
-            password: formData.password
+            password: formData.password,
           }),
         }
       );
@@ -279,12 +344,14 @@ const RegistrationForm = () => {
       if (response.ok) {
         // Sign out the user to prevent automatic login
         await signOut(userAuth);
-        
+
         // Show success message with clear instructions
         setLoadingToast(false);
         setSuccessToast(true);
-        setToastMessage(`Registration successful! Your account requires admin approval before you can log in. You'll receive an email when approved.`);
-        
+        setToastMessage(
+          `Registration successful! Your account requires admin approval before you can log in. You'll receive an email when approved.`
+        );
+
         // Clear form data
         setFormData({
           name: "",
@@ -300,7 +367,7 @@ const RegistrationForm = () => {
         });
         setOtp("");
         setOtpSent(false);
-        
+
         // After 4 seconds, navigate to login page
         setTimeout(() => {
           navigate("/UserLogin");
@@ -331,30 +398,37 @@ const RegistrationForm = () => {
         </div>
 
         {/* Custom Toast Components */}
-        <CenteredToast 
-          visible={loadingToast} 
+        <CenteredToast
+          visible={loadingToast}
           setVisible={setLoadingToast}
           message={toastMessage}
           type="loading"
         />
-        <CenteredToast 
-          visible={successToast} 
+        <CenteredToast
+          visible={successToast}
           setVisible={setSuccessToast}
           message={toastMessage}
           type="success"
         />
-        <CenteredToast 
-          visible={errorToast} 
+        <CenteredToast
+          visible={errorToast}
           setVisible={setErrorToast}
           message={toastMessage}
           type="error"
         />
-        
-        <div className="relative">
-          <h2 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Join Comptron</h2>
-          <p className="text-gray-400 text-center mb-8 text-lg">Be part of the tech revolution</p>
 
-          <form onSubmit={handleVerifyAndRegister} className="flex flex-col gap-6">
+        <div className="relative">
+          <h2 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Join Comptron
+          </h2>
+          <p className="text-gray-400 text-center mb-8 text-lg">
+            Be part of the tech revolution
+          </p>
+
+          <form
+            onSubmit={handleVerifyAndRegister}
+            className="flex flex-col gap-6"
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-sm text-gray-400">Name</label>
@@ -488,13 +562,38 @@ const RegistrationForm = () => {
                       className="text-gray-400 hover:text-blue-400 transition-colors duration-300 focus:outline-none"
                     >
                       {showPassword ? (
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                          />
                         </svg>
                       ) : (
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                          />
                         </svg>
                       )}
                     </button>
@@ -529,11 +628,68 @@ const RegistrationForm = () => {
                   crop={crop}
                   zoom={zoom}
                   aspect={1}
+                  cropShape="round"
+                  showGrid={false}
                   onCropChange={setCrop}
                   onZoomChange={setZoom}
                   onCropComplete={onCropComplete}
                   className="rounded-lg"
                 />
+
+                {/* Zoom Controls */}
+                <div className="absolute bottom-4 left-4 flex items-center bg-black/50 rounded-lg p-2 backdrop-blur-sm">
+                  <button
+                    type="button"
+                    onClick={() => setZoom(Math.max(1, zoom - 0.1))}
+                    className="text-white hover:text-blue-400 transition-colors p-1"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M20 12H4"
+                      />
+                    </svg>
+                  </button>
+
+                  <input
+                    type="range"
+                    value={zoom}
+                    min={1}
+                    max={3}
+                    step={0.1}
+                    aria-labelledby="Zoom"
+                    onChange={(e) => setZoom(e.target.value)}
+                    className="mx-2 w-32 accent-blue-500"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => setZoom(Math.min(3, zoom + 0.1))}
+                    className="text-white hover:text-blue-400 transition-colors p-1"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
                 <button
                   type="button"
                   onClick={handleCropDone}
@@ -553,9 +709,25 @@ const RegistrationForm = () => {
               >
                 {loadingToast ? (
                   <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     Sending...
                   </span>
@@ -581,9 +753,25 @@ const RegistrationForm = () => {
                 >
                   {loading ? (
                     <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       Registering...
                     </span>
