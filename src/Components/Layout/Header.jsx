@@ -2,6 +2,7 @@ import logo from "../../assets/images/Comptron Logo.png"
 import { useState, useEffect } from 'react';
 import './CSS/Header.css';
 import ColourfulText from "./ColourfulText";
+import "./CSS/ColorfulText.css";
 const Header = () => {
     const [time, setTime] = useState(new Date());
     
@@ -40,7 +41,7 @@ const Header = () => {
                 />
 
                 
-                <p className="text-xl z-20 text-white font-bold sm:text-2xl md:text-4xl lg:text-3xl xl:text-5xl 2xl:text-6xl lg:translate-x-[100px] 2xl:translate-x-[330px] text-center md:text-left">
+                <p className="text-xl colorful-text z-20 text-white font-bold sm:text-2xl md:text-4xl lg:text-3xl xl:text-5xl 2xl:text-6xl lg:translate-x-[100px] 2xl:translate-x-[330px] text-center md:text-left">
                 <ColourfulText text="Comptron" /> <span className="text-[#483D68]" >- Creativity Assembled</span> <br />
                 </p>
 

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
+import "./CSS/ColorfulText.css";
 
 export default function ColourfulText({ text }) {
   const colors = [
