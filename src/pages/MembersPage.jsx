@@ -21,7 +21,7 @@ const MembersPage = () => {
         <CardsContext></CardsContext>
         <CommitteeCard></CommitteeCard>
       </CardsProvider>
-      <div className="lg:translate-y-[200rem]">
+      <div className="lg:translate-y-[200rem] mt-10">
 
       <Footer></Footer>
       </div>

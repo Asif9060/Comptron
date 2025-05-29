@@ -30,52 +30,76 @@ img {
 .container {
   display: grid;
   place-items: center;
-  margin-inline: 1.5rem;
-  padding-block: 5rem;
+  padding-block: 2rem;
+  
 }
 
 .card__container {
-  display: grid;
-  row-gap: 3.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1.75rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .card__article {
   position: relative;
-  overflow: hidden;  
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+  width: 380px;
+  margin: 2rem;
+  
+}
+
+.card__article::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  pointer-events: none;
+}
+
+.card__article:hover {
+  transform: translateY(-5px);
 }
 
 .card__img {
-  width: 80%;
+  width: 100%;
+  aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 1.5rem;
-  height: 200px;
+  border-radius: 1rem;
 }
 
 .card__data {
-  background-color: var(--container-color);
-  padding: 1.5rem 2rem;
-  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.15);
-  border-radius: 1rem;
   position: absolute;
-  bottom: -9rem;
+  bottom: 0;
   left: 0;
   right: 0;
-  margin-inline: auto;
-  opacity: 0;
-  transition: opacity 1s 1s;
+  padding: 1rem;
+  color: white;
+  z-index: 1;
+  transition: filter 0.3s ease;
 }
 
-.card__description {
-  display: block;
-  font-size: var(--small-font-size);
-  margin-bottom: 0.25rem;
+.card__article:hover .card__data {
+  filter: blur(4px);
 }
 
 .card__title {
-  font-size: var(--h2-font-size);
-  font-weight: 500;
-  color: var(--title-color);
-  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.card__description {
+  font-size: 0.875rem;
+  opacity: 0.9;
 }
 
 .card__button {
@@ -87,63 +111,6 @@ img {
 
 .card__button:hover {
   text-decoration: underline;
-}
-
-/* Naming animations in hover */
-.card__article:hover .card__data {
-  animation: show-data 1s forwards;
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-
-.card__article:hover {
-  animation: remove-overflow 2s forwards;
-}
-
-.card__article:not(:hover) {
-  animation: show-overflow 2s forwards;
-}
-
-.card__article:not(:hover) .card__data {
-  animation: remove-data 1s forwards;
-}
-
-/* Card animation */
-@keyframes show-data {
-  50% {
-    transform: translateY(-10rem);
-  }
-  100% {
-    transform: translateY(-7rem);
-  }
-}
-
-@keyframes remove-overflow {
-  to {
-    overflow: initial;
-  }
-}
-
-@keyframes remove-data {
-  0% {
-    transform: translateY(-7rem);
-  }
-  50% {
-    transform: translateY(-10rem);
-  }
-  100% {
-    transform: translateY(0.5rem);
-  }
-}
-
-@keyframes show-overflow {
-  0% {
-    overflow: initial;
-    pointer-events: none;
-  }
-  50% {
-    overflow: hidden;
-  }
 }
 
 /* Loader styles */
@@ -164,6 +131,11 @@ img {
   margin-bottom: 1rem;
 }
 
+.logo1 {
+  width: 50px;
+  height: 50px;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -181,32 +153,36 @@ img {
 
   .card__container {
     grid-template-columns: 1fr;
-    transform: translateX(0);
+    transform: translateY(-3rem);
   }
 
   .card__img {
     width: 100%;
-    height: 450px;
-    border-radius: 0%;
+    height: 300px;
+    border-radius: 1rem;
   }
 
   .card__data {
-    width: 80%;
-    left: 22%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
     padding: 1rem;
-    bottom: -7rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   }
 
   .card__title {
-    font-size: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
   }
 
   .card__description {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
-  .card__article {
-    
-    overflow: hidden;  
+
+  .card__article{
+    margin-bottom: -1rem;
   }
 }
 
@@ -240,6 +216,7 @@ img {
   .card__container {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 2rem;
+    margin-right: 3rem;
   }
 
   .card__img {
