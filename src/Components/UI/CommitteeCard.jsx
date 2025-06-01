@@ -12,7 +12,7 @@ const Card = ({ imgSrc, alt, role, name, facebook, customId }) => {
       // Remove the class after animation
       setTimeout(() => {
          article.classList.remove("show-overlay");
-      }, 2000); // Remove after 3 seconds
+      }, 3000); // Remove after 3 seconds
    };
 
    return (
@@ -27,7 +27,8 @@ const Card = ({ imgSrc, alt, role, name, facebook, customId }) => {
             <div className="absolute inset-0 backdrop-blur-sm bg-black/30 transition-all duration-300 flex items-center justify-center opacity-0 md:group-hover:opacity-100 group-[.show-overlay]:opacity-100">
                <Link
                   to={`/members/CommitteeProfile/${customId}`}
-                  className="bg-blue-600 text-white py-2 px-4 rounded-md text-sm hover:bg-blue-700 transition transform scale-0 md:group-hover:scale-100 group-[.show-overlay]:scale-100 duration-300">
+                  className="bg-blue-600 text-white py-2 px-4 rounded-md text-sm hover:bg-blue-700 transition transform scale-0 md:group-hover:scale-100 group-[.show-overlay]:scale-100 duration-300 z-10"
+               >
                   View Profile
                </Link>
             </div>

@@ -108,19 +108,19 @@ img {
 }
 
 .card__data {
-   position: absolute;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   padding: 1rem;
-   color: white;
-   z-index: 1;
-   transition: filter 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  color: white;
+  z-index: 1;
+  transition: all 0.3s ease;
 }
 
-/* Remove the blur effect on hover */
+.card__article.show-overlay .card__data,
 .card__article:hover .card__data {
-   filter: none;
+  filter: blur(4px);
 }
 
 .card__title {
@@ -195,15 +195,18 @@ img {
    }
 
    .card__data {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      padding: 1rem;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-      filter: none;
-   }
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  }
+  
+  .card__article.show-overlay .card__data {
+    filter: blur(4px);
+  }
 
    .card__title {
       font-size: 1.1rem;
