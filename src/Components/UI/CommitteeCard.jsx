@@ -13,10 +13,10 @@ const Card = ({ imgSrc, alt, role, name, facebook, customId }) => (
         <p className="text-xs text-white">{customId}</p>
         <span className="card__description">{role}</span>
       </div>
-      <div className="absolute inset-0 backdrop-blur-sm bg-black/30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+      <div className="absolute inset-0 backdrop-blur-sm bg-black/30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100">
         <Link
           to={`/members/CommitteeProfile/${customId}`}
-          className="bg-blue-600 text-white py-2 px-4 rounded-md text-sm hover:bg-blue-700 transition transform scale-0 group-hover:scale-100 duration-300"
+          className="bg-blue-600 text-white py-2 px-4 rounded-md text-sm hover:bg-blue-700 transition transform scale-0 group-hover:scale-100 group-active:scale-100 duration-300"
         >
           View Profile
         </Link>
