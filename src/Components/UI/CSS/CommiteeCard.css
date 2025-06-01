@@ -87,8 +87,9 @@ img {
   transition: filter 0.3s ease;
 }
 
+/* Remove the blur effect on hover */
 .card__article:hover .card__data {
-  filter: blur(4px);
+  filter: none;
 }
 
 .card__title {
@@ -170,6 +171,7 @@ img {
     width: 100%;
     padding: 1rem;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    filter: none;
   }
 
   .card__title {
@@ -181,7 +183,7 @@ img {
     font-size: 0.8rem;
   }
 
-  .card__article{
+  .card__article {
     margin-bottom: -1rem;
   }
 }
