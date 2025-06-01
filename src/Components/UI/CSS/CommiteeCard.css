@@ -2,270 +2,268 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
 :root {
-  --first-color: hsl(82, 60%, 28%);
-  --title-color: hsl(0, 0%, 15%);
-  --text-color: hsl(0, 0%, 35%);
-  --body-color: #1C1C1C;
-  --container-color: hsl(0, 0%, 100%);
+   --first-color: hsl(82, 60%, 28%);
+   --title-color: hsl(0, 0%, 15%);
+   --text-color: hsl(0, 0%, 35%);
+   --body-color: #1c1c1c;
+   --container-color: hsl(0, 0%, 100%);
 
-  --body-font: "Poppins", sans-serif;
-  --h2-font-size: 1.25rem;
-  --small-font-size: 0.813rem;
+   --body-font: "Poppins", sans-serif;
+   --h2-font-size: 1.25rem;
+   --small-font-size: 0.813rem;
 }
 
 @media screen and (min-width: 1120px) {
-  :root {
-    --h2-font-size: 1.15rem;
-    --small-font-size: 0.875rem;
-  }
+   :root {
+      --h2-font-size: 1.15rem;
+      --small-font-size: 0.875rem;
+   }
 }
 
-
 img {
-  display: block;
-  max-width: 100%;
-  height: auto;
+   display: block;
+   max-width: 100%;
+   height: auto;
 }
 
 .container {
-  display: grid;
-  place-items: center;
-  padding-block: 2rem;
-  
+   display: grid;
+   place-items: center;
+   padding-block: 2rem;
 }
 
 .card__container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 1.75rem;
-  justify-content: center;
-  align-items: center;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 2rem;
+   padding: 1.75rem;
+   justify-content: center;
+   align-items: center;
 }
 
 .card__article {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease;
-  width: 380px;
-  margin: 2rem;
+   position: relative;
+   overflow: hidden;
+   border-radius: 1rem;
+   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+   transition: transform 0.3s ease;
+   width: 380px;
+   margin: 2rem;
 }
 
 .card__article::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  pointer-events: none;
+   content: "";
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 50%;
+   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+   pointer-events: none;
 }
 
 /* Add touch handling for mobile */
 @media (max-width: 768px) {
-  .card__article:active {
-    transform: scale(0.98);
-  }
-  
-  .card__article:active,
-  .card__article:focus {
-    outline: none;
-  }
+   .card__article:active {
+      transform: scale(0.98);
+   }
 
-  .card__article:active .card__data {
-    filter: none;
-  }
-  
-  /* Show overlay on touch for mobile */
-  .card__article:active {
-    transform: translateY(-2px);
-  }
-  
-  .card__article:active {
-    animation: touchPulse 0.3s forwards;
-  }
+   .card__article:active,
+   .card__article:focus {
+      outline: none;
+   }
+
+   .card__article:active .card__data {
+      filter: none;
+   }
+
+   /* Show overlay on touch for mobile */
+   .card__article:active {
+      transform: translateY(-2px);
+   }
+
+   .card__article:active {
+      animation: touchPulse 0.3s forwards;
+   }
 }
 
 @keyframes touchPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.98);
-  }
-  100% {
-    transform: scale(1);
-    outline: none;
-  }
+   0% {
+      transform: scale(1);
+   }
+   50% {
+      transform: scale(0.98);
+   }
+   100% {
+      transform: scale(1);
+      outline: none;
+   }
 }
 
 .card__img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 1rem;
+   width: 100%;
+   aspect-ratio: 1;
+   object-fit: cover;
+   border-radius: 1rem;
 }
 
 .card__data {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  color: white;
-  z-index: 1;
-  transition: filter 0.3s ease;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   padding: 1rem;
+   color: white;
+   z-index: 1;
+   transition: filter 0.3s ease;
 }
 
 /* Remove the blur effect on hover */
 .card__article:hover .card__data {
-  filter: none;
+   filter: none;
 }
 
 .card__title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+   font-size: 1.25rem;
+   font-weight: 600;
+   margin-bottom: 0.25rem;
 }
 
 .card__description {
-  font-size: 0.875rem;
-  opacity: 0.9;
+   font-size: 0.875rem;
+   opacity: 0.9;
 }
 
 .card__button {
-  text-decoration: none;
-  font-size: var(--small-font-size);
-  font-weight: 500;
-  color: var(--first-color);
+   text-decoration: none;
+   font-size: var(--small-font-size);
+   font-weight: 500;
+   color: var(--first-color);
 }
 
 .card__button:hover {
-  text-decoration: underline;
+   text-decoration: underline;
 }
 
 /* Loader styles */
 .loader-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
 }
 
 .rotating-circle {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  border-top-color: #3498db;
-  border-radius: 50%;
-  animation: spin 1s ease-in-out infinite;
-  margin-bottom: 1rem;
+   width: 50px;
+   height: 50px;
+   border: 5px solid rgba(0, 0, 0, 0.1);
+   border-top-color: #3498db;
+   border-radius: 50%;
+   animation: spin 1s ease-in-out infinite;
+   margin-bottom: 1rem;
 }
 
 .logo1 {
-  width: 50px;
-  height: 50px;
+   width: 50px;
+   height: 50px;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+   to {
+      transform: rotate(360deg);
+   }
 }
 
 /* Responsive design for small screens */
 @media screen and (max-width: 768px) {
-  .container {
-    display: inline;
-    transform: translateX(0);
-    margin-inline: 1rem;
-    padding-block: 3rem;
-  }
+   .container {
+      display: inline;
+      transform: translateX(0);
+      margin-inline: 1rem;
+      padding-block: 3rem;
+   }
 
-  .card__container {
-    grid-template-columns: 1fr;
-    transform: translateY(-3rem);
-  }
+   .card__container {
+      grid-template-columns: 1fr;
+      transform: translateY(-3rem);
+   }
 
-  .card__img {
-    width: 100%;
-    height: 300px;
-    border-radius: 1rem;
-  }
+   .card__img {
+      width: 100%;
+      height: 300px;
+      border-radius: 1rem;
+   }
 
-  .card__data {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding: 1rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    filter: none;
-  }
+   .card__data {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      filter: none;
+   }
 
-  .card__title {
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
-  }
+   .card__title {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+   }
 
-  .card__description {
-    font-size: 0.8rem;
-  }
+   .card__description {
+      font-size: 0.8rem;
+   }
 
-  .card__article {
-    margin-bottom: -1rem;
-  }
+   .card__article {
+      margin-bottom: -1rem;
+   }
 }
 
 /* Responsive design for medium screens (tablets) */
 @media screen and (min-width: 769px) and (max-width: 1119px) {
-  .container {
-    transform: translateX(0);
-  }
-  
-  .card__container {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 1.5rem;
-  }
+   .container {
+      transform: translateX(0);
+   }
 
-  .card__img {
-    height: 250px;
-  }
+   .card__container {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1.5rem;
+   }
 
-  .card__data {
-    width: 250px;
-    padding: 1rem;
-  }
+   .card__img {
+      height: 250px;
+   }
+
+   .card__data {
+      width: 250px;
+      padding: 1rem;
+   }
 }
 
 /* Responsive design for large screens (laptops/desktops) */
 @media screen and (min-width: 1120px) {
-  .container {
-    height: 100vh;
-  }
+   .container {
+      height: 100vh;
+   }
 
-  .card__container {
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 2rem;
-    margin-right: 3rem;
-  }
+   .card__container {
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 2rem;
+      margin-right: 3rem;
+   }
 
-  .card__img {
-    height: 500px;
-  }
+   .card__img {
+      height: 500px;
+   }
 
-  .card__data {
-    width: 316px;
-    padding-inline: 2.5rem;
-  }
+   .card__data {
+      width: 316px;
+      padding-inline: 2.5rem;
+   }
 }
 
 @media screen and (max-width: 1600px) {
-  .container {
-    transform: translateX(-200px);
-  }
+   .container {
+      transform: translateX(-200px);
+   }
 }
