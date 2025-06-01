@@ -51,7 +51,6 @@ img {
   transition: transform 0.3s ease;
   width: 380px;
   margin: 2rem;
-  
 }
 
 .card__article::after {
@@ -65,8 +64,42 @@ img {
   pointer-events: none;
 }
 
-.card__article:hover {
-  transform: translateY(-5px);
+/* Add touch handling for mobile */
+@media (max-width: 768px) {
+  .card__article:active {
+    transform: scale(0.98);
+  }
+  
+  .card__article:active,
+  .card__article:focus {
+    outline: none;
+  }
+
+  .card__article:active .card__data {
+    filter: none;
+  }
+  
+  /* Show overlay on touch for mobile */
+  .card__article:active {
+    transform: translateY(-2px);
+  }
+  
+  .card__article:active {
+    animation: touchPulse 0.3s forwards;
+  }
+}
+
+@keyframes touchPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+    outline: none;
+  }
 }
 
 .card__img {
