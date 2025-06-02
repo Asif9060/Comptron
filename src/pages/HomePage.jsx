@@ -101,7 +101,7 @@ const HomePage = () => {
         <TeacherCard cont={contents[1]}></TeacherCard>
         <TeacherCard cont={contents[2]}></TeacherCard>
       </div>
-      <h2 className="flex mt-[5rem] justify-center text-4xl text-[#15A6E1] font-bold underline underline-offset-6">
+      <h2 className="flex councilor mt-[5rem] justify-center text-4xl text-[#15A6E1] font-bold underline underline-offset-6">
         Councilor (2025-2026)
       </h2>
       {/* <Members></Members> */}

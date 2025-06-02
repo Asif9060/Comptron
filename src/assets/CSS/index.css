@@ -79,6 +79,10 @@
       align-items: center;
       justify-content: center;
     }
+
+    .councilor{
+      font-size: 25px;
+    }
     
   }
 

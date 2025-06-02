@@ -111,19 +111,19 @@
   }
   
   /* Footer */
-  footer {
+  .footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 20px;
   }
   
-  footer a {
+  .footer a {
     color: #007BFF;
     text-decoration: none;
     margin: 0 10px;
   }
   
-  footer a:hover {
+  .footer a:hover {
     text-decoration: underline;
   }

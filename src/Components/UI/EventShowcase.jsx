@@ -118,9 +118,7 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
         <div className="text-center mt-10 text-lg">No events found.</div>
       )}
 
-      <footer className="mt-45">
-        <p>&copy; 2025 Comptron. All rights reserved.</p>
-      </footer>
+      
     </div>
   );
 };
