@@ -11,18 +11,25 @@ const FloatingMenu = () => {
    // Calculate if menu should open to the right based on position
    const shouldOpenRight = position.x < window.innerWidth / 2;
 
-   const handleMouseDown = (e) => {
+   const handleDragStart = (e) => {
+      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+
       setIsDragging(true);
       initialMousePosition.current = {
-         x: e.clientX - position.x,
-         y: e.clientY - (position.y === '50%' ? window.innerHeight / 2 : position.y)
+         x: clientX - position.x,
+         y: clientY - (position.y === '50%' ? window.innerHeight / 2 : position.y)
       };
    };
 
-   const handleMouseMove = (e) => {
+   const handleDragMove = (e) => {
       if (isDragging) {
-         const newX = e.clientX - initialMousePosition.current.x;
-         const newY = e.clientY - initialMousePosition.current.y;
+         e.preventDefault(); // Prevent scrolling while dragging on mobile
+         const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+         const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+         
+         const newX = clientX - initialMousePosition.current.x;
+         const newY = clientY - initialMousePosition.current.y;
          
          // Keep menu within viewport bounds
          const maxX = window.innerWidth - 40; // menu width
@@ -35,18 +42,31 @@ const FloatingMenu = () => {
       }
    };
 
-   const handleMouseUp = () => {
+   const handleDragEnd = () => {
       setIsDragging(false);
    };
 
    useEffect(() => {
       if (isDragging) {
-         document.addEventListener('mousemove', handleMouseMove);
-         document.addEventListener('mouseup', handleMouseUp);
+         // Mouse events
+         document.addEventListener('mousemove', handleDragMove);
+         document.addEventListener('mouseup', handleDragEnd);
+         
+         // Touch events
+         document.addEventListener('touchmove', handleDragMove, { passive: false });
+         document.addEventListener('touchend', handleDragEnd);
+         document.addEventListener('touchcancel', handleDragEnd);
       }
+      
       return () => {
-         document.removeEventListener('mousemove', handleMouseMove);
-         document.removeEventListener('mouseup', handleMouseUp);
+         // Cleanup mouse events
+         document.removeEventListener('mousemove', handleDragMove);
+         document.removeEventListener('mouseup', handleDragEnd);
+         
+         // Cleanup touch events
+         document.removeEventListener('touchmove', handleDragMove);
+         document.removeEventListener('touchend', handleDragEnd);
+         document.removeEventListener('touchcancel', handleDragEnd);
       };
    }, [isDragging]);
 
@@ -66,16 +86,17 @@ const FloatingMenu = () => {
    return (
       <div
          ref={dragRef}
-         className={`fixed z-50 md:hidden ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+         className={`fixed z-50 md:hidden ${isDragging ? 'cursor-grabbing touch-none' : 'cursor-grab touch-none'}`}
          id="floating-menu"
          style={{
             left: `${position.x}px`,
             top: typeof position.y === 'number' ? `${position.y}px` : position.y,
             transform: typeof position.y === 'number' ? 'none' : 'translateY(-50%)'
          }}
-         onMouseDown={handleMouseDown}>
+         onMouseDown={handleDragStart}
+         onTouchStart={handleDragStart}>
          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => !isDragging && setIsMenuOpen(!isMenuOpen)}
             className="w-10 h-10 bg-[#15A6E1] rounded-full flex items-center justify-center shadow-lg hover:bg-[#1089BD] transition-all duration-300 transform hover:scale-105">
             <div className="w-6 h-5 flex flex-col justify-between items-center relative">
                <span className={`w-full h-0.5 bg-white rounded-full transform transition-all duration-300 ${
