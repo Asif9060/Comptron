@@ -147,7 +147,7 @@ export default function Example() {
                           onClick={() => signOut(userAuth)}
                           className={classNames(
                             active ? "bg-gray-100" : "",
-                            "block w-full text-left px-4 py-2 text-sm text-gray-700"
+                            "block w-full cursor-pointer text-left px-4 py-2 text-sm text-gray-700"
                           )}
                         >
                           Sign out

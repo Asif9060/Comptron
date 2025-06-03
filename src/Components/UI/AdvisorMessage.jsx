@@ -124,7 +124,7 @@ const AdvisorMessage = () => {
             className="lg:w-1/3"
           >
             <div className="relative">
-              <div className="relative w-[280px] h-[320px] mx-auto overflow-hidden rounded-xl border-2 border-[#15A6E1]/30 shadow-lg">
+              <div className="relative w-[280px] h-[260px] mx-auto overflow-hidden rounded-xl border-2 border-[#15A6E1]/30 shadow-lg">
                 <img
                   src={Advisor}
                   alt="Advisor"

@@ -1,64 +1,108 @@
-import './CSS/Footer.css';
+import "./CSS/Footer.css";
 const Footer = () => {
-    return (
-        <div>
-            <footer className="footer-container">
-                <div className="footer-content">
-                    <div className="logo">
-                        <h1>Comptron</h1>
-                        <p>North Western University's Premier Tech Club</p>
-                    </div>
+   return (
+      <div>
+         <footer className="footer-container">
+            <div className="footer-content">
+               <div className="logo">
+                  <h1>Comptron</h1>
+                  <p>North Western University's Premier Tech Club</p>
+               </div>
 
-                    <div className="landscape-layout">
-                        <div className="footer-section about">
-                            <h4>About Comptron</h4>
-                            <p>Comptron is North Western University's tech club dedicated to fostering innovation, collaboration, and learning in the fields of technology and computer science.</p>
-                        </div>
+               <div className="landscape-layout">
+                  <div className="footer-section about">
+                     <h4>About Comptron</h4>
+                     <p>
+                        Comptron is North Western University's tech club dedicated to
+                        fostering innovation, collaboration, and learning in the fields of
+                        technology and computer science.
+                     </p>
+                  </div>
 
-                        <div className="footer-section features">
-                            <h4>What We Do</h4>
-                            <ul>
-                                <p><i className="fas fa-users"></i> Workshops & Seminars</p>
-                                <p><i className="fas fa-project-diagram"></i> Collaborative Projects</p>
-                                <p><i className="fas fa-graduation-cap"></i> Mentorship Programs</p>
-                                <p><i className="fas fa-laptop-code"></i> Hackathons & Coding Competitions</p>
-                            </ul>
-                        </div>
+                  <div className="footer-section features">
+                     <h4>What We Do</h4>
+                     <ul>
+                        <p>
+                           <i className="fas fa-users"></i> Workshops & Seminars
+                        </p>
+                        <p>
+                           <i className="fas fa-project-diagram"></i> Collaborative
+                           Projects
+                        </p>
+                        <p>
+                           <i className="fas fa-graduation-cap"></i> Mentorship Programs
+                        </p>
+                        <p>
+                           <i className="fas fa-laptop-code"></i> Hackathons & Coding
+                           Competitions
+                        </p>
+                     </ul>
+                  </div>
 
-                        <div className="footer-section contact">
-                            <h4>Contact Us</h4>
-                            <p><i className="fas fa-map-marker-alt"></i> North Western University, Khulna, Bangladesh</p>
-                            <p><i className="fas fa-phone"></i> </p>
-                            <p><i className="fas fa-envelope"></i> comptron@nwu.ac.bd
-                            </p>
-                        </div>
+                  <div className="footer-section contact">
+                     <h4>Contact Us</h4>
+                     <p>
+                        <i className="fas fa-map-marker-alt"></i> North Western
+                        University, Khulna, Bangladesh
+                     </p>
+                     <p>
+                        <i className="fas fa-phone"></i>{" "}
+                     </p>
+                     <p>
+                        <i className="fas fa-envelope"></i> comptron@nwu.ac.bd
+                     </p>
+                  </div>
 
-                        {/* <div className="footer-section newsletter">
+                  {/* <div className="footer-section newsletter">
                             <h4>Join Our Mailing List</h4>
                             <form>
                                 <input type="email" placeholder="Enter your email"/>
                                 <button type="submit">Subscribe</button>
                             </form>
                         </div> */}
-                    </div>
-                </div>
+               </div>
+            </div>
 
-                <div className="social-media">
-                    <h4>Follow Us</h4>
-                    <div className="social-icons">
-                        <a href="https://www.facebook.com/comptron.nwu" target="_blank">Facebook</a>
-                        <a href="https://www.youtube.com/@ComptronClubNWU" target="_blank">Youtube</a>
-                        {/* <a href="https://www.twitter.com" target="_blank"><i className="fab fa-twitter"></i> Twitter</a>
-                        <a href="https://www.linkedin.com" target="_blank"><i className="fab fa-linkedin"></i> LinkedIn</a> */}
-                    </div>
-                </div>
+            <div className="social-media">
+               <h4>Follow Us</h4>
+               <div className="social-icons">
+                  <a
+                     href="https://www.facebook.com/comptron.nwu "
+                     className="translate-x-4"
+                     target="_blank">
+                     <svg
+                        className="w-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                           fill="#005cfa"
+                           d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"
+                        />
+                     </svg>
+                  </a>
+                  <a href="https://www.facebook.com/comptron.nwu" target="_blank">
+                     Facebook
+                  </a>
+                  <a className="translate-x-4" href="https://www.youtube.com/@ComptronClubNWU" target="_blank">
+                     <svg className="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                        <path
+                           fill="#ff0019"
+                           d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"
+                        />
+                     </svg>
+                  </a>
+                  <a href="https://www.youtube.com/@ComptronClubNWU" target="_blank">
+                     Youtube
+                  </a>
+               </div>
+            </div>
 
-                <div className="copyright">
-                    &copy; 2025 Comptron - North Western University. All rights reserved.
-                </div>
-            </footer>
-        </div>
-    );
+            <div className="copyright">
+               &copy; 2025 Comptron - North Western University. All rights reserved.
+            </div>
+         </footer>
+      </div>
+   );
 };
 
 export default Footer;

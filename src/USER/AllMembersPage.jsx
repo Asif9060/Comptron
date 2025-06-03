@@ -90,7 +90,7 @@ const AllMembersPage = () => {
                   <p className="text-center">{user.skills}</p>
 
                   <Link to={`/profile/${user.customId}`} className="w-full">
-                     <button className="mt-6 w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition">
+                     <button className="mt-6 w-full cursor-pointer py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition">
                         View Details
                      </button>
                   </Link>

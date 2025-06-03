@@ -652,6 +652,9 @@ const ProfilePage = () => {
               </svg>
               All Members
             </NavLink>
+            
+            {isOwnProfile && (
+
             <NavLink
               to={`/settings/${id}`}
               className={({ isActive }) =>
@@ -685,6 +688,7 @@ const ProfilePage = () => {
               </svg>
               Settings
             </NavLink>
+            )}
           </nav>
 
           {isOwnProfile && (
