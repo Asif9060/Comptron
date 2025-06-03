@@ -86,7 +86,11 @@ img {
       animation: touchPulse 0.3s forwards;
    }
    .ft{
-      width: 110%;
+      width: 25.2rem;
+      transform: translateX(.7rem);
+      position: absolute;
+
+      
    }
 }
 
