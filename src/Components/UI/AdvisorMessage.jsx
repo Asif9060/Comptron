@@ -98,7 +98,7 @@ const AdvisorMessage = () => {
     })
   };
   return (
-    <div className="min-h-screen flex items-center justify-center p-2 sm:p-6 pt-20 sm:pt-50">
+    <div className="min-h-screen flex mt-25 items-center justify-center p-2 sm:p-6 pt-20 sm:pt-50">
       <motion.div 
         ref={messageRef}
         variants={cardVariants}
