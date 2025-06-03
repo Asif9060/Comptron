@@ -97,34 +97,33 @@ const AdvisorMessage = () => {
       }
     })
   };
-
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 pt-50">
+    <div className="min-h-screen flex items-center justify-center p-2 sm:p-6 pt-20 sm:pt-50">
       <motion.div 
         ref={messageRef}
         variants={cardVariants}
         initial="hidden"
         animate={isVisible ? "visible" : "hidden"}
-        className="bg-gradient-to-br from-[#121212] to-[#202020] max-w-7xl w-full rounded-xl shadow-2xl overflow-hidden p-8"
+        className="bg-gradient-to-br from-[#121212] to-[#202020] w-full max-w-7xl rounded-xl shadow-2xl overflow-hidden p-4 sm:p-8"
       >
         <motion.div
           variants={titleVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
-          className="bg-[#15A6E1] text-white text-center text-xl font-bold rounded-lg mb-10 py-4 shadow-lg"
+          className="bg-[#15A6E1] text-white text-center text-lg sm:text-xl font-bold rounded-lg mb-6 sm:mb-10 py-3 sm:py-4 shadow-lg"
         >
           Message From Advisor
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-10 items-center">
+        <div className="flex flex-col lg:flex-row gap-6 sm:gap-10 items-center">
           <motion.div
             variants={imageVariants}
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
-            className="lg:w-1/3"
+            className="w-full lg:w-1/3"
           >
             <div className="relative">
-              <div className="relative w-[280px] h-[260px] mx-auto overflow-hidden rounded-xl border-2 border-[#15A6E1]/30 shadow-lg">
+              <div className="relative w-[220px] sm:w-[280px] h-[200px] sm:h-[260px] mx-auto overflow-hidden rounded-xl border-2 border-[#15A6E1]/30 shadow-lg">
                 <img
                   src={Advisor}
                   alt="Advisor"
@@ -134,7 +133,7 @@ const AdvisorMessage = () => {
             </div>
           </motion.div>
 
-          <div className="lg:w-2/3 space-y-5 text-justify">
+          <div className="lg:w-2/3 space-y-4 sm:space-y-5 text-justify">
             {textParagraphs.map((paragraph, index) => (
               <motion.p
                 key={index}
@@ -142,48 +141,46 @@ const AdvisorMessage = () => {
                 variants={textVariants}
                 initial="hidden"
                 animate={isVisible ? "visible" : "hidden"}
-                className="text-[#15A6E1] text-base leading-relaxed"
+                className="text-[#15A6E1] text-sm sm:text-base leading-relaxed"
               >
                 {paragraph}
               </motion.p>
             ))}
             
-            {/* Advisor bio with better mobile formatting */}
             <motion.div
               custom={textParagraphs.length}
               variants={textVariants}
               initial="hidden"
               animate={isVisible ? "visible" : "hidden"}
-              className="text-[#15A6E1]/80 text-sm italic"
+              className="text-[#15A6E1]/80 text-xs sm:text-sm italic"
             >
-              <div>
+              <div className="space-y-0.5">
                 {Object.values(advisorDetails).map((line, index) => (
                   <div key={index}>{line}</div>
                 ))}
               </div>
             </motion.div>
             
-            {/* Contact info with better mobile formatting */}
             <motion.div
               custom={textParagraphs.length + 1}
               variants={textVariants}
               initial="hidden"
               animate={isVisible ? "visible" : "hidden"}
-              className="text-[#15A6E1]/80 text-sm italic"
+              className="text-[#15A6E1]/80 text-xs sm:text-sm italic"
             >
               <div className="font-medium mb-1">Office Address:</div>
               <div className="flex flex-col space-y-1">
-                <div className="flex">
+                <div className="flex flex-col sm:flex-row">
                   <span className="w-14 inline-block">PABX:</span>
-                  <span>{contactDetails.pabx}</span>
+                  <span className="sm:ml-2">{contactDetails.pabx}</span>
                 </div>
-                <div className="flex">
+                <div className="flex flex-col sm:flex-row">
                   <span className="w-14 inline-block">Phone:</span>
-                  <span>{contactDetails.phone}</span>
+                  <span className="sm:ml-2">{contactDetails.phone}</span>
                 </div>
-                <div className="flex">
+                <div className="flex flex-col sm:flex-row">
                   <span className="w-14 inline-block">Email:</span>
-                  <span>{contactDetails.email}</span>
+                  <span className="sm:ml-2 break-words">{contactDetails.email}</span>
                 </div>
               </div>
             </motion.div>
@@ -194,12 +191,12 @@ const AdvisorMessage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 2.5, duration: 0.8 }}
-          className="mt-8 text-center"
+          className="mt-6 sm:mt-8 text-center"
         >
           <div className="inline-flex items-center gap-2">
-            <div className="h-[1px] w-24 bg-gradient-to-r from-transparent to-[#15A6E1]"></div>
-            <span className="text-[#15A6E1] text-sm">Creativity Assembled</span>
-            <div className="h-[1px] w-24 bg-gradient-to-l from-transparent to-[#15A6E1]"></div>
+            <div className="h-[1px] w-16 sm:w-24 bg-gradient-to-r from-transparent to-[#15A6E1]"></div>
+            <span className="text-[#15A6E1] text-xs sm:text-sm">Creativity Assembled</span>
+            <div className="h-[1px] w-16 sm:w-24 bg-gradient-to-l from-transparent to-[#15A6E1]"></div>
           </div>
         </motion.div>
       </motion.div>
