@@ -343,7 +343,9 @@ const Hero = () => {
                      className="w-[50px] bg-white p-1 rounded-lg mr-3"
                   />
                </a>
-               <a href="/" className="font-bold text-xl tracking-wide">Comptron</a>
+               <a href="/" className="font-bold text-xl tracking-wide">
+                  Comptron
+               </a>
             </div>
             <hr className="mb-6 border-gray-700" />
             <button
@@ -439,9 +441,10 @@ const Hero = () => {
          <div className="relative z-10 flex flex-col justify-center items-center text-white text-center h-full px-4 sm:px-6 max-w-4xl mx-auto">
             <div className="space-y-6 sm:space-y-8">
                {" "}
-               <p className="text-base sm:text-xl opacity-0 animate-[fadeIn_0.8s_forwards_0.3s] max-w-md sm:max-w-2xl mx-auto leading-relaxed">
-                  Comptron Club of NWU is an organization run by teachers and students of
-                  the Faculty of CSE.
+               <p className="text-base sm:text-[19px] opacity-0 animate-[fadeIn_0.8s_forwards_0.3s] max-w-md sm:max-w-[50rem] mx-auto leading-relaxed">
+                  Unlock Your Potential with Comptron. <br/> The official computer club of North
+                  Western University, driven by the passion of our CSE faculty and
+                  students. <br/> At Comptron, it's where Creativity Assembled.
                </p>
                <div className="h-[72px] sm:h-[144px] flex items-center justify-center">
                   <h1 className="text-3xl sm:text-6xl font-extrabold opacity-0 animate-[fadeIn_0.8s_forwards_0.6s]">

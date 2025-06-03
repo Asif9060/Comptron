@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./CSS/CommiteeCard.css";
 import logo from "../../assets/images/Comptron Logo.png";
 import { Link } from "react-router-dom";
+import Footer from "../Layout/Footer";
 
 const Card = ({ imgSrc, alt, role, name, facebook, customId }) => {
    const handleTouch = (e) => {
@@ -70,7 +71,7 @@ const CommiteeCard = () => {
    }
 
    return (
-      <div className="container md:translate-x-[14.5rem]">
+      <div className="container translate-x-5">
          <div className="card__container">
             {members.length > 0 ? (
                members.map((member) => (
@@ -91,6 +92,9 @@ const CommiteeCard = () => {
             ) : (
                <p>No members found</p>
             )}
+         </div>
+         <div className="inline-block -translate-x-5 ft w-[120rem] ">
+            <Footer></Footer>
          </div>
       </div>
    );

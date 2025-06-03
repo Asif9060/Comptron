@@ -3,7 +3,7 @@ import Objectives from "../Components/UI/Objectives";
 import { motion } from "framer-motion";
 import FloatingMenu from "../Components/UI/FloatingMenu";
 import "../Components/UI/CSS/VisionAndMission.css";
-import msgForMobile from "../assets/images/pooto/msgFormobile.php.png";
+import msgForMobile from "../assets/images/photo/msgFormobile.php.png";
 import Footer from "../Components/Layout/Footer";
 import SideMenu from "../Components/Features/SideMenu";
 import AdvisorMessage from "../Components/UI/AdvisorMessage";

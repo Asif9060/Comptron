@@ -1,5 +1,5 @@
 import "./CSS/TeacherCard.css";
-import raihanSir from "../../assets/images/pooto/M. Raihan.jpg";
+import raihanSir from "../../assets/images/photo/M. Raihan.jpg";
 const TeacherCard = (props) => {
   return (
     <div className="flex justify-center">
@@ -33,7 +33,7 @@ const TeacherCard = (props) => {
             <span className="name">{props.cont["name"]}</span>
             <span className="about-me">
               {props.cont["position"]} <br />
-              Comptron <br /> North Western University, Khulna
+              {props.cont["from"]} <br /> North Western University, Khulna
             </span>
           </div>
 

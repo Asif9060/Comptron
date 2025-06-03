@@ -85,6 +85,9 @@ img {
    .card__article:active {
       animation: touchPulse 0.3s forwards;
    }
+   .ft{
+      width: 110%;
+   }
 }
 
 @keyframes touchPulse {

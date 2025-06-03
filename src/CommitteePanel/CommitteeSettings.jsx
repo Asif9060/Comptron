@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, NavLink } from "react-router-dom";
 import logo from "../assets/images/Comptron Logo.png";
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 const SettingsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,12 +18,17 @@ const SettingsPage = () => {
       portfolio: "",
       cv: "",
     },
-  });
-  const [image, setImage] = useState(null);
+  });  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [upImg, setUpImg] = useState(null);
+  const [crop, setCrop] = useState({ unit: '%', width: 100, aspect: 1 });
+  const [completedCrop, setCompletedCrop] = useState(null);
+  const [showCropDialog, setShowCropDialog] = useState(false);
+  const imgRef = useRef(null);
+  const previewCanvasRef = useRef(null);
 
   useEffect(() => {
     fetch(`https://comptron-server-2.onrender.com/api/members/${id}`)
@@ -51,7 +58,6 @@ const SettingsPage = () => {
         setLoading(false);
       });
   }, [id]);
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -60,11 +66,57 @@ const SettingsPage = () => {
         return;
       }
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
+      reader.addEventListener('load', () => {
+        setUpImg(reader.result);
+        setShowCropDialog(true);
+      });
       reader.readAsDataURL(file);
     }
+  };
+
+  const onLoad = (img) => {
+    imgRef.current = img;
+  };
+
+  const generateCroppedImage = async (crop, scale = 1) => {
+    if (!imgRef.current || !crop.width || !crop.height) return;
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const image = imgRef.current;
+
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+
+    const pixelRatio = window.devicePixelRatio;
+    canvas.width = crop.width * scaleX;
+    canvas.height = crop.height * scaleY;
+
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width * scaleX,
+      crop.height * scaleY
+    );
+
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setImage(reader.result);
+            setShowCropDialog(false);
+          };
+          reader.readAsDataURL(blob);
+        }
+      }, 'image/jpeg', 1);
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -218,7 +270,46 @@ const SettingsPage = () => {
         {sidebarOpen ? "✕" : "☰"}
       </button>
 
-      {/* Main Content */}
+      {/* Main Content */}      {/* Crop Dialog */}
+      {showCropDialog && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-[#1c1c1e] p-6 rounded-xl max-w-2xl w-full">
+            <h3 className="text-xl font-semibold text-white mb-4">Crop Image</h3>
+            <div className="relative">
+              <ReactCrop
+                crop={crop}
+                onChange={(c) => setCrop(c)}
+                onComplete={(c) => setCompletedCrop(c)}
+                aspect={1}
+                className="max-h-[60vh] mx-auto"
+              >
+                <img
+                  ref={imgRef}
+                  alt="Crop me"
+                  src={upImg}
+                  onLoad={(e) => onLoad(e.target)}
+                  className="max-w-full h-auto"
+                />
+              </ReactCrop>
+            </div>
+            <div className="flex justify-end gap-3 mt-4">
+              <button
+                className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
+                onClick={() => setShowCropDialog(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                onClick={() => generateCroppedImage(completedCrop)}
+              >
+                Apply
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="md:ml-64 transition-all duration-300">
         <div className="bg-[#1c1c1e] p-4 sm:p-6 lg:p-8 rounded-2xl shadow-xl w-full max-w-5xl mx-auto mt-4 text-white">
           <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center">

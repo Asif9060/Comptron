@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Advisor from "../../assets/images/pooto/M. Raihan.jpg";
+import Advisor from "../../assets/images/photo/M. Raihan.jpg";
 import { motion } from "framer-motion";
 
 const AdvisorMessage = () => {

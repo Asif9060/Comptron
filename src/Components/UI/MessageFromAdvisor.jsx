@@ -1,6 +1,6 @@
 "use client"
-import message from '../../assets/images/pooto/www.nwu.ac.bd_message_advisor_comptron.php.png';
-import msg from '../../assets/images/pooto/rmsg.png';
+import message from '../../assets/images/photo/www.nwu.ac.bd_message_advisor_comptron.php.png';
+import msg from '../../assets/images/photo/rmsg.png';
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import './CSS/MesageFromAdvisor.css'

@@ -24,11 +24,13 @@
    font-weight: bold;
    color: #15a6e1;
    margin-bottom: 10px;
+   transform: translateX(-1rem);
 }
 
 .logo p {
    font-size: 14px;
    color: #bbdefb;
+   transform: translateX(-1rem);
 }
 
 .landscape-layout {
