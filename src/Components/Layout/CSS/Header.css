@@ -19,3 +19,11 @@
         display: none;
     }
 }
+
+@media (min-width: 1200px) {
+    .logo{
+        position: relative;
+        left: 10px;
+        top: 12px;
+    }
+}

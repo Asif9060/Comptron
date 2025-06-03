@@ -8,6 +8,7 @@ import EventShowcase from "../Components/UI/EventShowcase";
 import SideMenu from "../Components/Features/SideMenu";
 import logo from "../assets/images/Comptron Logo.png";
 import Slider from "../Components/UI/Slider";
+import FloatingMenu from "../Components/UI/FloatingMenu";
 
 const EventPage = () => {
    const [loading, setLoading] = useState(true);
@@ -45,11 +46,12 @@ const EventPage = () => {
          <div className="flex-grow">
             <AdminProvider>
                <EventCountdown setCountdownLoaded={setCountdownLoaded} />
-            </AdminProvider>
+            </AdminProvider>{" "}
             <div className="fixed z-50 -translate-y-6">
                <SideMenu />
             </div>
-            <EventShowcase setShowcaseLoaded={setShowcaseLoaded} />{" "}
+            <FloatingMenu />
+            <EventShowcase setShowcaseLoaded={setShowcaseLoaded} />
          </div>
          <footer className="mt-auto bg-[#1E2939] text-white py-3 pl-4 sm:pl-8 md:pl-16">
             <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
