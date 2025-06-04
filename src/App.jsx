@@ -34,6 +34,7 @@ import CommitteeByYear from "./CommitteePanel/CommitteeByYear";
 import AboutImage from "./AdminPanel/AboutImage";
 import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
+import PastEvents from "./Components/UI/PastEvents";
 // import Bio from "./USER/Bio";
 
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
                <Route path="/About" element={<AboutPage></AboutPage>}></Route>
                <Route path="/Events" element={<EventPage></EventPage>}></Route>
                <Route path="/GMembers" element={<Members></Members>}></Route>
+               <Route path="/past-events" element={<PastEvents></PastEvents>}></Route>
                <Route
                   path="/EventDetails"
                   element={<EventDetails></EventDetails>}></Route>

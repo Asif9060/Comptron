@@ -106,13 +106,13 @@ const HomePage = () => {
           <hr className="my-12 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
         </div> */}
          <h1 className="flex justify-center text-2xl sm:text-3xl md:text-4xl mt-8 md:mt-15 font-bold text-[#15A6E1] underline underline-offset-4 md:underline-offset-7 px-4">
-            Department Head
+            Head of the Department
          </h1>
          <div>
             <TeacherCard cont={contents[3]}></TeacherCard>
          </div>
          <h1 className="flex justify-center text-2xl sm:text-3xl md:text-4xl mt-8 md:mt-15 font-bold text-[#15A6E1] underline underline-offset-4 md:underline-offset-7 px-4">
-            Advisory Board
+            Advisory Panel
          </h1>
          <div className="flex teacher justify-center gap-7 ">
             <TeacherCard cont={contents[0]}></TeacherCard>
@@ -120,7 +120,7 @@ const HomePage = () => {
             <TeacherCard cont={contents[2]}></TeacherCard>
          </div>
          <h2 className="flex councilor mt-[5rem] justify-center text-4xl text-[#15A6E1] font-bold underline underline-offset-6">
-            Councilor (2025-2026)
+            Councilors (2025-2026)
          </h2>
          {/* <Members></Members> */}
          <CoreMembers></CoreMembers>

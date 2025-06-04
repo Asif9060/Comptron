@@ -1,4 +1,6 @@
 import "./CSS/Footer.css";
+import { Link } from "react-router-dom";
+import Asif from "../../assets/images/Asif.jpg";
 const Footer = () => {
    return (
       <div>
@@ -18,7 +20,6 @@ const Footer = () => {
                         technology and computer science.
                      </p>
                   </div>
-
                   <div className="footer-section features">
                      <h4>What We Do</h4>
                      <ul>
@@ -38,31 +39,53 @@ const Footer = () => {
                         </p>
                      </ul>
                   </div>
-
                   <div className="footer-section contact">
                      <h4>Contact Us</h4>
-                     <p>
-                        <i className="fas fa-map-marker-alt"></i> North Western
-                        University, Khulna, Bangladesh
-                     </p>
+                     <p>Department of Computer Science and Engineering</p>
+                     <p>North Western University, Khulna, Bangladesh</p>
                      <p>
                         <i className="fas fa-phone"></i>{" "}
                      </p>
                      <p>
                         <i className="fas fa-envelope"></i> comptron@nwu.ac.bd
                      </p>
-                  </div>
+                  </div>{" "}
+                  <div className="footer-section flex flex-col items-center newsletter">
+                     <h4>Developed By</h4>
+                     <div className="flex gap-6 mt-4">
+                        <Link
+                           to="/profile/CGM2025-2447"
+                           className="developer-card group relative cursor-pointer">
+                           <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-blue-500/30 transform transition-all duration-300 group-hover:scale-110 group-hover:ring-blue-500 hover:shadow-lg">
+                              <img
+                                 src={Asif}
+                                 alt="Developer 1"
+                                 className="w-full h-full object-cover"
+                              />
+                           </div>
+                           <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-900/90 backdrop-blur-sm px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
+                              <p className="text-xs text-white">G.M Asif Foisal</p>
+                           </div>
+                        </Link>
 
-                  {/* <div className="footer-section newsletter">
-                            <h4>Join Our Mailing List</h4>
-                            <form>
-                                <input type="email" placeholder="Enter your email"/>
-                                <button type="submit">Subscribe</button>
-                            </form>
-                        </div> */}
+                        <Link
+                           to="/profile/CGM2025-2728"
+                           className="developer-card group relative cursor-pointer">
+                           <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-blue-500/30 transform transition-all duration-300 group-hover:scale-110 group-hover:ring-blue-500 hover:shadow-lg">
+                              <img
+                                 src="/path-to-developer2-image.jpg"
+                                 alt="Developer 2"
+                                 className="w-full h-full object-cover"
+                              />
+                           </div>
+                           <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-900/90 backdrop-blur-sm px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
+                              <p className="text-xs text-white">Sardar Shamsul Arefin Shawon</p>
+                           </div>
+                        </Link>
+                     </div>
+                  </div>
                </div>
             </div>
-
             <div className="social-media">
                <h4>Follow Us</h4>
                <div className="social-icons">
@@ -116,10 +139,9 @@ const Footer = () => {
                   </a>
                   <a href="https://www.linkedin.com/company/comptron-nwu" target="_blank">
                      LinkedIn
-                  </a>
+                  </a>{" "}
                </div>
-            </div>
-
+            </div>{" "}
             <div className="copyright">
                &copy; 2025 Comptron - North Western University. All rights reserved.
             </div>

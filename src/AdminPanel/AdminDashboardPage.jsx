@@ -80,8 +80,8 @@ const AdminDashboardPage = () => {
   const menuItems = [
     { 
       to: "/ManageCommittee", 
-      label: "Committee Management", 
-      icon: "👥", 
+      label: "Committee Management",
+      icon: "👥",
       bgFrom: "from-indigo-600", 
       bgTo: "to-blue-500",
       delay: 0
