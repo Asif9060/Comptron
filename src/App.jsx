@@ -146,6 +146,13 @@ const App = () => {
                         <AdminUsersPage />
                      </AdminProtectedRoute>
                   }></Route>
+               <Route
+                  path="/ManageUsers"
+                  element={
+                     <AdminProtectedRoute>
+                        <AdminTextSlideControl />
+                     </AdminProtectedRoute>
+                  }></Route>
 
                <Route
                   path="/ManageAboutImage"

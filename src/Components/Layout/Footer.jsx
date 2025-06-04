@@ -1,6 +1,7 @@
 import "./CSS/Footer.css";
 import { Link } from "react-router-dom";
 import Asif from "../../assets/images/Asif.jpg";
+import Shawon from "../../assets/images/Shawon.jpg";
 const Footer = () => {
    return (
       <div>
@@ -47,7 +48,7 @@ const Footer = () => {
                         <i className="fas fa-phone"></i>{" "}
                      </p>
                      <p>
-                        <i className="fas fa-envelope"></i> comptron@nwu.ac.bd
+                        <i className="fas fa-envelope"></i> comptron@nwu.ac.bd comptron.nwu@gmail.com
                      </p>
                   </div>{" "}
                   <div className="footer-section flex flex-col items-center newsletter">
@@ -59,7 +60,7 @@ const Footer = () => {
                            <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-blue-500/30 transform transition-all duration-300 group-hover:scale-110 group-hover:ring-blue-500 hover:shadow-lg">
                               <img
                                  src={Asif}
-                                 alt="Developer 1"
+                                 alt="Developer"
                                  className="w-full h-full object-cover"
                               />
                            </div>
@@ -73,8 +74,8 @@ const Footer = () => {
                            className="developer-card group relative cursor-pointer">
                            <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-blue-500/30 transform transition-all duration-300 group-hover:scale-110 group-hover:ring-blue-500 hover:shadow-lg">
                               <img
-                                 src="/path-to-developer2-image.jpg"
-                                 alt="Developer 2"
+                                 src={Shawon}
+                                 alt="Developer"
                                  className="w-full h-full object-cover"
                               />
                            </div>
