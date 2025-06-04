@@ -6,14 +6,13 @@ import "react-image-crop/dist/ReactCrop.css";
 const SettingsPage = () => {
    const { id } = useParams();
    const navigate = useNavigate();
-   const customId = localStorage.getItem("customId");
-   const [user, setUser] = useState({
+   const customId = localStorage.getItem("customId");   const [user, setUser] = useState({
       name: "",
       skills: "",
       email: "",
       phone: "",
       socials: {
-         linkedIn: "",
+         linkedin: "",
          github: "",
          portfolio: "",
          cv: "",
@@ -37,14 +36,13 @@ const SettingsPage = () => {
             if (!res.ok) throw new Error(`Failed to fetch profile: ${res.status}`);
             return res.json();
          })
-         .then((data) => {
-            setUser({
+         .then((data) => {            setUser({
                name: data.name || "",
                skills: data.skills || "",
                email: data.email || "",
                phone: data.phone || "",
                socials: {
-                  linkedIn: data.socials?.linkedIn || "",
+                  linkedin: data.socials?.linkedin || "",
                   github: data.socials?.github || "",
                   portfolio: data.socials?.portfolio || "",
                   cv: data.socials?.cv || "",
@@ -127,14 +125,13 @@ const SettingsPage = () => {
    const handleSubmit = async (e) => {
       e.preventDefault();
       setError("");
-      setSuccess("");
-
-      const formData = new FormData();
+      setSuccess("");      const formData = new FormData();
       formData.append("name", user.name);
       formData.append("skills", user.skills);
       formData.append("email", user.email);
       formData.append("phone", user.phone);
-      formData.append("socials", JSON.stringify(user.socials)); // this will now be parsed correctly
+      console.log('Sending socials:', user.socials); // Debug log
+      formData.append("socials", JSON.stringify(user.socials));
       if (image && image.startsWith("data:image")) {
          const blob = await (await fetch(image)).blob(); // convert base64 to blob
          formData.append("image", blob, "profile.jpg");
@@ -156,12 +153,17 @@ const SettingsPage = () => {
             );
          }
 
-         const data = await response.json();
-         setUser({
+         const data = await response.json();         setUser({
             name: data.name || "",
             skills: data.skills || "",
             email: data.email || "",
             phone: data.phone || "",
+            socials: data.socials || {
+               linkedin: "",
+               github: "",
+               portfolio: "",
+               cv: "",
+            },
          });
          setImage(data.image || null);
          setSuccess("Profile updated successfully!");
@@ -381,16 +383,15 @@ const SettingsPage = () => {
                         />
                      </div>
 
-                     
-                     <div className="space-y-2">
+                       <div className="space-y-2">
                         <label className="block text-sm font-medium">LinkedIn URL</label>
                         <input
                            type="url"
-                           value={user.socials?.linkedIn || ""}
+                           value={user.socials?.linkedin || ""}
                            onChange={(e) =>
                               setUser({
                                  ...user,
-                                 socials: { ...user.socials, linkedIn: e.target.value },
+                                 socials: { ...user.socials, linkedin: e.target.value },
                               })
                            }
                            className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"

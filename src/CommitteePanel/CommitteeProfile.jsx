@@ -302,10 +302,9 @@ const CommitteeProfile = () => {
                                  </a>
                               )}
 
-                                                         
-                              {user.socials?.linkedIn && (
+                                                           {user.socials?.linkedin && (
                                  <a
-                                    href={user.socials.linkedIn}
+                                    href={user.socials.linkedin}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group flex flex-col items-center gap-2 hover:scale-110 transition-all duration-300">

@@ -139,7 +139,7 @@ const AboutClub = () => {
           </h2>
           <div className="w-16 sm:w-20 h-1 bg-gray-300 mx-auto mb-6 sm:mb-8"></div>
           <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed px-2">
-            Founded in 2018, Comptron is the official computer science club of NWU, dedicated to fostering innovation, technical expertise, and collaborative growth. We regularly host coding challenges, tech workshops, and industry-connected events to prepare students for real-world tech careers.
+            Founded in 2018, Comptron is the official computer club of NWU, dedicated to fostering innovation, technical expertise, and collaborative growth. We regularly host coding challenges, tech workshops, and industry-connected events to prepare students for real-world tech careers.
           </p>
         </div>
 
