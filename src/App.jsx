@@ -37,182 +37,151 @@ import Unauthorized from "./pages/Unauthorized";
 // import Bio from "./USER/Bio";
 
 const App = () => {
-  const [refresh, setRefresh] = useState(false);
-  const [selectedMember, setSelectedMember] = useState(null);
+   const [refresh, setRefresh] = useState(false);
+   const [selectedMember, setSelectedMember] = useState(null);
 
-  // Debug current user
-  useEffect(() => {
-    console.log("Current user email:", localStorage.getItem("userEmail"));
-  }, []);
+   // Debug current user
+   useEffect(() => {
+      console.log("Current user email:", localStorage.getItem("userEmail"));
+   }, []);
 
-  return (
-    <>
-      <Toaster position="top-center" />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage></HomePage>}></Route>
-          <Route
-            path="/Committee"
-            element={<MembersPage></MembersPage>}
-          ></Route>
-          <Route path="/About" element={<AboutPage></AboutPage>}></Route>
-          <Route path="/Events" element={<EventPage></EventPage>}></Route>
-          <Route path="/GMembers" element={<Members></Members>}></Route>
-          <Route path="/Dorja" element={<Dorja></Dorja>}></Route>
-          <Route
-            path="/EventDetails"
-            element={<EventDetails></EventDetails>}
-          ></Route>
-          <Route path="/Event" element={<Events></Events>}></Route>
-          <Route
-            path="/event/:id"
-            element={<EventDetails></EventDetails>}
-          ></Route>
-          <Route
-            path="/User"
-            element={<GeneralMemberPage></GeneralMemberPage>}
-          ></Route>
-          <Route
-            path="/Register"
-            element={<RegistrationForm></RegistrationForm>}
-          ></Route>
-          <Route
-            path="/AllMembers"
-            element={<AllMembersPage></AllMembersPage>}
-          ></Route>
-          <Route
-            path="/profile/:id"
-            element={<ProfilePage></ProfilePage>}
-          ></Route>
-          <Route
-            path="/settings/:id"
-            element={<SettingsPage></SettingsPage>}
-          ></Route>
-          <Route
-            path="/Reset"
-            element={<AdminPasswordResetPage></AdminPasswordResetPage>}
-          ></Route>
-          <Route path="/UserLogin" element={<UserLogin></UserLogin>}></Route>
-          <Route path="/unauthorized" element={<Unauthorized />}></Route>
+   return (
+      <>
+         <Toaster position="top-center" />
+         <BrowserRouter>
+            <Routes>
+               <Route path="/Dorja" element={<Dorja></Dorja>}></Route>
+               <Route path="/" element={<HomePage></HomePage>}></Route>
+               <Route path="/Committee" element={<MembersPage></MembersPage>}></Route>
+               <Route path="/About" element={<AboutPage></AboutPage>}></Route>
+               <Route path="/Events" element={<EventPage></EventPage>}></Route>
+               <Route path="/GMembers" element={<Members></Members>}></Route>
+               <Route
+                  path="/EventDetails"
+                  element={<EventDetails></EventDetails>}></Route>
+               <Route path="/Event" element={<Events></Events>}></Route>
+               <Route path="/event/:id" element={<EventDetails></EventDetails>}></Route>
+               <Route
+                  path="/User"
+                  element={<GeneralMemberPage></GeneralMemberPage>}></Route>
+               <Route
+                  path="/Register"
+                  element={<RegistrationForm></RegistrationForm>}></Route>
+               <Route
+                  path="/AllMembers"
+                  element={<AllMembersPage></AllMembersPage>}></Route>
+               <Route path="/profile/:id" element={<ProfilePage></ProfilePage>}></Route>
+               <Route
+                  path="/settings/:id"
+                  element={<SettingsPage></SettingsPage>}></Route>
+               <Route
+                  path="/Reset"
+                  element={<AdminPasswordResetPage></AdminPasswordResetPage>}></Route>
+               <Route path="/UserLogin" element={<UserLogin></UserLogin>}></Route>
+               <Route path="/unauthorized" element={<Unauthorized />}></Route>
 
-          {/* Admin Protected Routes */}
-          <Route
-            path="/AdminPage"
-            element={
-              <AdminProtectedRoute>
-                <AdminPage />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               {/* Admin Protected Routes */}
+               <Route
+                  path="/AdminPage"
+                  element={
+                     <AdminProtectedRoute>
+                        <AdminPage />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/ManageCommittee"
-            element={
-              <AdminProtectedRoute>
-                <AddMemberForm
-                  onMemberAdded={() => setRefresh(!refresh)}
-                  selectedMember={selectedMember}
-                  setSelectedMember={setSelectedMember}
-                />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/ManageCommittee"
+                  element={
+                     <AdminProtectedRoute>
+                        <AddMemberForm
+                           onMemberAdded={() => setRefresh(!refresh)}
+                           selectedMember={selectedMember}
+                           setSelectedMember={setSelectedMember}
+                        />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/members/CommitteeProfile/:id"
-            element={
-              <AdminProtectedRoute>
-                <CommitteeProfile />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/members/CommitteeProfile/:id"
+                  element={<CommitteeProfile />}></Route>
 
-          <Route
-            path="/CommitteeSettings/:id"
-            element={
-              <AdminProtectedRoute>
-                <CommitteeSettings />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/CommitteeSettings/:id"
+                  element={
+                     <AdminProtectedRoute>
+                        <CommitteeSettings />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/ManageEvent"
-            element={
-              <AdminProtectedRoute>
-                <AdminEventDetailsControl />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/ManageEvent"
+                  element={
+                     <AdminProtectedRoute>
+                        <AdminEventDetailsControl />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/ManageActivity"
-            element={
-              <AdminProtectedRoute>
-                <ImageUpload />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/ManageActivity"
+                  element={
+                     <AdminProtectedRoute>
+                        <ImageUpload />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/ManageNews"
-            element={
-              <AdminProtectedRoute>
-                <AdminTextSlideControl />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/ManageNews"
+                  element={
+                     <AdminProtectedRoute>
+                        <AdminTextSlideControl />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/ManageUsers"
-            element={
-              <AdminProtectedRoute>
-                <AdminUsersPage />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/ManageUsers"
+                  element={
+                     <AdminProtectedRoute>
+                        <AdminUsersPage />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/ManageAboutImage"
-            element={
-              <AdminProtectedRoute>
-                <AboutImage />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/ManageAboutImage"
+                  element={
+                     <AdminProtectedRoute>
+                        <AboutImage />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/UsersByYear"
-            element={
-              <AdminProtectedRoute>
-                <UsersByYear />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/UsersByYear"
+                  element={
+                     <AdminProtectedRoute>
+                        <UsersByYear />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/CommitteeByYear"
-            element={
-              <AdminProtectedRoute>
-                <CommitteeByYear />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/CommitteeByYear"
+                  element={
+                     <AdminProtectedRoute>
+                        <CommitteeByYear />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route
-            path="/UserApproval"
-            element={
-              <AdminProtectedRoute>
-                <UserApprovalPage />
-              </AdminProtectedRoute>
-            }
-          ></Route>
+               <Route
+                  path="/UserApproval"
+                  element={
+                     <AdminProtectedRoute>
+                        <UserApprovalPage />
+                     </AdminProtectedRoute>
+                  }></Route>
 
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+               <Route path="*" element={<NotFound />}></Route>
+            </Routes>
+         </BrowserRouter>
+      </>
+   );
 };
 
 export default App;

@@ -381,6 +381,39 @@ const SettingsPage = () => {
                         />
                      </div>
 
+                     
+                     <div className="space-y-2">
+                        <label className="block text-sm font-medium">LinkedIn URL</label>
+                        <input
+                           type="url"
+                           value={user.socials?.linkedIn || ""}
+                           onChange={(e) =>
+                              setUser({
+                                 ...user,
+                                 socials: { ...user.socials, linkedIn: e.target.value },
+                              })
+                           }
+                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           placeholder="https://linkedin.com/in/yourusername"
+                        />
+                     </div>
+                     
+                     <div className="space-y-2">
+                        <label className="block text-sm font-medium">CV Link</label>
+                        <input
+                           type="url"
+                           value={user.socials?.cv || ""}
+                           onChange={(e) =>
+                              setUser({
+                                 ...user,
+                                 socials: { ...user.socials, cv: e.target.value },
+                              })
+                           }
+                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           placeholder="Link to your CV (Google Drive, Dropbox etc.)"
+                        />
+                     </div>
+
                      <div className="space-y-2">
                         <label className="block text-sm font-medium">Portfolio URL</label>
                         <input

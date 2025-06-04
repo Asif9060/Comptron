@@ -16,8 +16,8 @@ const CoreMembers = () => {
       imageUrl: fardin,
       socials: {
         facebook: "https://www.facebook.com/itzfardinhere",
-        linkedin: "https://www.linkedin.com/in/tanzil-parvez-fardin",
-        github: "https://github.com/fardin",
+        linkedin: "	https://www.linkedin.com/in/tanzilparvez/",
+        github: "	https://github.com/tanzil321",
       },
     },
     {
@@ -28,8 +28,8 @@ const CoreMembers = () => {
       imageUrl: alamin,
       socials: {
         facebook: "https://www.facebook.com/alaminshaikh1703",
-        linkedin: "https://www.linkedin.com/in/al-amin-saikh",
-        github: "https://github.com/alamin",
+        linkedin: "https://www.linkedin.com/in/alaminshaikhseo?trk=contact-info",
+        github: "	https://github.com/alaminshaikh1703",
       },
     },
     {
@@ -52,8 +52,8 @@ const CoreMembers = () => {
       imageUrl: redoy,
       socials: {
         facebook: "https://www.facebook.com/tanvir.redoy.14",
-        linkedin: "https://www.linkedin.com/in/tanvir-redoy",
-        github: "https://github.com/redoy",
+        linkedin: "https://www.linkedin.com/in/tanvir-redoy-500052369/",
+        github: "https://github.com/Redoy-Xenon",
       },
     },
     {

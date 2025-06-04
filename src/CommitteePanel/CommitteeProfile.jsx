@@ -301,6 +301,54 @@ const CommitteeProfile = () => {
                                     </span>
                                  </a>
                               )}
+
+                                                         
+                              {user.socials?.linkedIn && (
+                                 <a
+                                    href={user.socials.linkedIn}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group flex flex-col items-center gap-2 hover:scale-110 transition-all duration-300">
+                                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
+                                       <svg
+                                          className="w-6 h-6"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          viewBox="0 0 448 512">
+                                          <path
+                                             fill="currentColor"
+                                             d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"
+                                          />
+                                       </svg>
+                                    </div>
+                                    <span className="text-sm text-gray-300 group-hover:text-white">
+                                       LinkedIn
+                                    </span>
+                                 </a>
+                              )}
+                              
+                              {user.socials?.cv && (
+                                 <a
+                                    href={user.socials.cv}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group flex flex-col items-center gap-2 hover:scale-110 transition-all duration-300">
+                                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
+                                       <svg
+                                          className="w-6 h-6"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          viewBox="0 0 384 512">
+                                          <path
+                                             fill="currentColor"
+                                             d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM64 224H88c30.9 0 56 25.1 56 56s-25.1 56-56 56H80v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm24 80c13.3 0 24-10.7 24-24s-10.7-24-24-24H80v48h8zm72-64c0-8.8 7.2-16 16-16h24c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H176c-8.8 0-16-7.2-16-16V240zm32 112h8c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16h-8v96zm96-128h48c8.8 0 16 7.2 16 16s-7.2 16-16 16H304v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H304v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16z"
+                                          />
+                                       </svg>
+                                    </div>
+                                    <span className="text-sm text-gray-300 group-hover:text-white">
+                                       CV
+                                    </span>
+                                 </a>
+                              )}
+
                               {user.socials?.portfolio && (
                                  <a
                                     href={user.socials.portfolio}
