@@ -302,7 +302,7 @@ const CommitteeProfile = () => {
                                  </a>
                               )}
 
-                                                           {user.socials?.linkedin && (
+                              {user.socials?.linkedin && (
                                  <a
                                     href={user.socials.linkedin}
                                     target="_blank"
@@ -324,7 +324,7 @@ const CommitteeProfile = () => {
                                     </span>
                                  </a>
                               )}
-                              
+
                               {user.socials?.cv && (
                                  <a
                                     href={user.socials.cv}

@@ -6,7 +6,8 @@ import "react-image-crop/dist/ReactCrop.css";
 const SettingsPage = () => {
    const { id } = useParams();
    const navigate = useNavigate();
-   const customId = localStorage.getItem("customId");   const [user, setUser] = useState({
+   const customId = localStorage.getItem("customId");
+   const [user, setUser] = useState({
       name: "",
       skills: "",
       email: "",
@@ -36,7 +37,8 @@ const SettingsPage = () => {
             if (!res.ok) throw new Error(`Failed to fetch profile: ${res.status}`);
             return res.json();
          })
-         .then((data) => {            setUser({
+         .then((data) => {
+            setUser({
                name: data.name || "",
                skills: data.skills || "",
                email: data.email || "",
@@ -125,12 +127,13 @@ const SettingsPage = () => {
    const handleSubmit = async (e) => {
       e.preventDefault();
       setError("");
-      setSuccess("");      const formData = new FormData();
+      setSuccess("");
+      const formData = new FormData();
       formData.append("name", user.name);
       formData.append("skills", user.skills);
       formData.append("email", user.email);
       formData.append("phone", user.phone);
-      console.log('Sending socials:', user.socials); // Debug log
+      console.log("Sending socials:", user.socials); // Debug log
       formData.append("socials", JSON.stringify(user.socials));
       if (image && image.startsWith("data:image")) {
          const blob = await (await fetch(image)).blob(); // convert base64 to blob
@@ -153,7 +156,8 @@ const SettingsPage = () => {
             );
          }
 
-         const data = await response.json();         setUser({
+         const data = await response.json();
+         setUser({
             name: data.name || "",
             skills: data.skills || "",
             email: data.email || "",
@@ -383,7 +387,7 @@ const SettingsPage = () => {
                         />
                      </div>
 
-                       <div className="space-y-2">
+                     <div className="space-y-2">
                         <label className="block text-sm font-medium">LinkedIn URL</label>
                         <input
                            type="url"
@@ -398,7 +402,7 @@ const SettingsPage = () => {
                            placeholder="https://linkedin.com/in/yourusername"
                         />
                      </div>
-                     
+
                      <div className="space-y-2">
                         <label className="block text-sm font-medium">CV Link</label>
                         <input
