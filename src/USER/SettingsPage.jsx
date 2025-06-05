@@ -171,32 +171,35 @@ const SettingsPage = () => {
       setLoadingToast(true);
       setToastMessage("Updating profile...");
 
-      const payload = {
-         name: user.name,
-         skills: user.skills,
-         email: user.email,
-         phone: user.phone,
-         image: croppedImage || image,
-         linkedIn: user.linkedIn,
-         github: user.github,
-         portfolio: user.portfolio,
-         cv: user.cv,
-         bio: user.bio,
-         studentId: user.studentId,
-         bloodGroup: user.bloodGroup,
-         department: user.department,
-         dateOfBirth: user.dateOfBirth,
-      };
+      const formData = new FormData();
+      formData.append('name', user.name);
+      formData.append('skills', user.skills);
+      formData.append('email', user.email);
+      formData.append('phone', user.phone);
+      formData.append('linkedIn', user.linkedIn);
+      formData.append('github', user.github);
+      formData.append('portfolio', user.portfolio);
+      formData.append('cv', user.cv);
+      formData.append('bio', user.bio);
+      formData.append('studentId', user.studentId);
+      formData.append('bloodGroup', user.bloodGroup);
+      formData.append('department', user.department);
+      formData.append('dateOfBirth', user.dateOfBirth);
+
+      // Convert base64 image to blob if it exists
+      if (croppedImage || image) {
+         const imageData = croppedImage || image;
+         const base64Response = await fetch(imageData);
+         const blob = await base64Response.blob();
+         formData.append('image', blob);
+      }
 
       try {
          const response = await fetch(
             `https://comptron-server-2.onrender.com/api/users/profile/${id}`,
             {
                method: "PUT",
-               headers: {
-                  "Content-Type": "application/json",
-               },
-               body: JSON.stringify(payload),
+               body: formData,
             }
          );
 

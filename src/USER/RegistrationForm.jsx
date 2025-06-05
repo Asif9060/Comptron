@@ -328,16 +328,31 @@ const RegistrationForm = () => {
         formData.password
       );
 
+      // Create FormData instance
+      const registrationData = new FormData();
+      registrationData.append('name', formData.name);
+      registrationData.append('email', formData.email);
+      registrationData.append('phone', formData.phone);
+      registrationData.append('studentId', formData.studentId);
+      registrationData.append('department', formData.department);
+      registrationData.append('bloodGroup', formData.bloodGroup);
+      registrationData.append('skills', formData.skills);
+      registrationData.append('gender', formData.gender);
+      registrationData.append('password', formData.password);
+      registrationData.append('firebaseUserId', userCredential.user.uid);
+
+      // Convert base64 image to blob if it exists
+      if (formData.image) {
+        const base64Response = await fetch(formData.image);
+        const blob = await base64Response.blob();
+        registrationData.append('image', blob);
+      }
+
       const response = await fetch(
         "https://comptron-server-2.onrender.com/api/users/pending/register",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...formData,
-            firebaseUserId: userCredential.user.uid,
-            password: formData.password,
-          }),
+          body: registrationData,
         }
       );
 
