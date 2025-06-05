@@ -35,6 +35,9 @@ import AboutImage from "./AdminPanel/AboutImage";
 import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
 import PastEvents from "./Components/UI/PastEvents";
+import NewsPortal from "./pages/NewsPortal";
+import NewsDetails from "./pages/NewsDetails";
+import AdminNewsArticleControl from "./AdminPanel/AdminNewsArticleControl";
 // import Bio from "./USER/Bio";
 
 const App = () => {
@@ -58,6 +61,7 @@ const App = () => {
                <Route path="/Events" element={<EventPage></EventPage>}></Route>
                <Route path="/GMembers" element={<Members></Members>}></Route>
                <Route path="/past-events" element={<PastEvents></PastEvents>}></Route>
+               
                <Route
                   path="/EventDetails"
                   element={<EventDetails></EventDetails>}></Route>
@@ -81,6 +85,9 @@ const App = () => {
                   element={<AdminPasswordResetPage></AdminPasswordResetPage>}></Route>
                <Route path="/UserLogin" element={<UserLogin></UserLogin>}></Route>
                <Route path="/unauthorized" element={<Unauthorized />}></Route>
+               {/* News Portal Routes */}
+               <Route path="/news" element={<NewsPortal />}></Route>
+               <Route path="/news/:newsId" element={<NewsDetails />}></Route>
 
                {/* Admin Protected Routes */}
                <Route
@@ -151,6 +158,14 @@ const App = () => {
                   element={
                      <AdminProtectedRoute>
                         <AdminTextSlideControl />
+                     </AdminProtectedRoute>
+                  }></Route>
+
+               <Route
+                  path="/ManageNewsArticles"
+                  element={
+                     <AdminProtectedRoute>
+                        <AdminNewsArticleControl />
                      </AdminProtectedRoute>
                   }></Route>
 

@@ -95,6 +95,14 @@ const AdminDashboardPage = () => {
       delay: 0.1
     },
     { 
+      to: "/ManageNewsArticles", 
+      label: "News Articles", 
+      icon: "📝", 
+      bgFrom: "from-blue-500", 
+      bgTo: "to-cyan-400",
+      delay: 0.15
+    },
+    { 
       to: "/ManageEvent", 
       label: "Event Management", 
       icon: "🎉", 

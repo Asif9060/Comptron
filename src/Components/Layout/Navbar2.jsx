@@ -22,6 +22,7 @@ const navigation = [
   { name: "Events", href: "/Events", current: false },
   { name: "Members", href: "/GMembers", current: false },
   { name: "About Us", href: "/About", current: false },
+  { name: "Comptron News", href: "/News", current: false },
 ];
 
 function classNames(...classes) {

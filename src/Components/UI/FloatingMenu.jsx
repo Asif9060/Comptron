@@ -148,6 +148,12 @@ const FloatingMenu = () => {
                      <i className="fas fa-users text-xs"></i>
                      <span>Members</span>
                   </Link>
+                  <Link
+                     to="/News"
+                     className="flex items-center gap-2 text-white hover:text-[#15A6E1] transition-colors px-3 py-2 rounded-md hover:bg-gray-800/50 text-sm">
+                     <i className="fas fa-users text-xs"></i>
+                     <span>News</span>
+                  </Link>
                </div>
             </div>
          )}
