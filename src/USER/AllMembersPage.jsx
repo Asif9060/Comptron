@@ -11,7 +11,7 @@ const AllMembersPage = () => {
    const [searchTerm, setSearchTerm] = useState("");
    const [loading, setLoading] = useState(true);
    const [currentPage, setCurrentPage] = useState(1);
-   const cardsPerPage = 12;
+   const cardsPerPage = 9;
 
    useEffect(() => {
       fetch("https://comptron-server-2.onrender.com/api/users")
