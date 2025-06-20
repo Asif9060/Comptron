@@ -88,23 +88,37 @@ const UserLogin = () => {
       // Firebase login
       await signInWithEmailAndPassword(userAuth, email, password);
 
-      // First check if user is pending approval
+      // Try advisory API first
+      const advisoryRes = await fetch(
+        `https://comptron-server-2.onrender.com/api/advisory/getByEmail/${email}`
+      );
+      const advisoryData = await advisoryRes.json();
+      if (advisoryRes.ok && advisoryData.customId) {
+        // Advisory user found, no approval needed
+        localStorage.setItem("customId", advisoryData.customId);
+        setLoadingToast(false);
+        setSuccessToast(true);
+        setToastMessage("Welcome back!");
+        setTimeout(() => {
+          navigate(`/advisory/profile/${advisoryData.customId}`);
+        }, 2000);
+        setLoading(false);
+        return;
+      }
+
+      // Not advisory, check if user is pending approval
       const pendingResponse = await fetch(
         `https://comptron-server-2.onrender.com/api/users/pending/check/${email}`
       );
-      
       if (pendingResponse.ok) {
         const pendingData = await pendingResponse.json();
-        
         if (pendingData.isPending) {
-          // User exists in pending collection, so they can't log in yet
           setLoadingToast(false);
           setErrorToast(true);
           setToastMessage("Your account is pending for admin approval. Please wait for approval before logging in.");
-          
-          // Sign out the user from Firebase since they're not approved yet
           const auth = getAuth();
           await signOut(auth);
+          setLoading(false);
           return;
         }
       }
@@ -114,25 +128,18 @@ const UserLogin = () => {
         `https://comptron-server-2.onrender.com/api/users/getByEmail/${email}`
       );
       const data = await response.json();
-
       if (response.ok && data.customId) {
         localStorage.setItem("customId", data.customId);
-        // Show success toast
         setLoadingToast(false);
         setSuccessToast(true);
         setToastMessage("Welcome back!");
-        
-        // Wait for 2 seconds before navigating
         setTimeout(() => {
           navigate(`/profile/${data.customId}`);
         }, 2000);
       } else {
-        // User might have been rejected or doesn't exist
         setLoadingToast(false);
         setErrorToast(true);
         setToastMessage("Account not found. Your registration may have been rejected or is still pending approval.");
-        
-        // Sign out the user from Firebase
         const auth = getAuth();
         await signOut(auth);
       }

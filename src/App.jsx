@@ -38,13 +38,16 @@ import PastEvents from "./Components/UI/PastEvents";
 import NewsPortal from "./pages/NewsPortal";
 import NewsDetails from "./pages/NewsDetails";
 import AdminNewsArticleControl from "./AdminPanel/AdminNewsArticleControl";
+// import AdvisoryRegistrationForm from "./AdvisoryPanel/AdvisoryRegistrationForm";
+import AdvisoryProfilePage from "./AdvisoryPanel/AdvisoryProfilePage";
+import AdvisorySettingsPage from "./AdvisoryPanel/AdvisorySettingsPage";
+
 // import Bio from "./USER/Bio";
 
 const App = () => {
    const [refresh, setRefresh] = useState(false);
    const [selectedMember, setSelectedMember] = useState(null);
 
-   // Debug current user
    useEffect(() => {
       console.log("Current user email:", localStorage.getItem("userEmail"));
    }, []);
@@ -61,6 +64,9 @@ const App = () => {
                <Route path="/Events" element={<EventPage></EventPage>}></Route>
                <Route path="/GMembers" element={<Members></Members>}></Route>
                <Route path="/past-events" element={<PastEvents></PastEvents>}></Route>
+               {/* <Route path="/advisoryRegistration" element={<AdvisoryRegistrationForm></AdvisoryRegistrationForm>}></Route> */}
+               <Route path="/advisory/profile/:id" element={<AdvisoryProfilePage></AdvisoryProfilePage>}></Route>
+               <Route path="/advisory/settings/:id" element={<AdvisorySettingsPage></AdvisorySettingsPage>}></Route>
                
                <Route
                   path="/EventDetails"

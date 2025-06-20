@@ -40,6 +40,7 @@ const HomePage = () => {
    const contents = [
       {
          img: [RaihanSir],
+         profile:"/advisory/profile/CAP-MRI",
          name: "M. Raihan",
          position: "Advisor",
          from:"Comptron",
@@ -49,10 +50,12 @@ const HomePage = () => {
                "https://www.linkedin.com/in/mraihanme/?original_referer=https%3A%2F%2Fwww.mraihan.me%2F",
             github: "https://github.com/memraihan",
          },
+         
       },
 
       {
          img: [InzamamSir],
+         profile:"/advisory/profile/CAP-IUH",
          name: "Md. Inzamam-Ul-Hossain",
          position: "Moderator",
          from:"Comptron",
@@ -63,6 +66,7 @@ const HomePage = () => {
 
       {
          img: [PeyaMaam],
+         profile:"/advisory/profile/CAP-ZJ",
          name: "Zahrul Jannat Peya",
          position: "Moderator",
          from:"Comptron",
@@ -72,12 +76,14 @@ const HomePage = () => {
       },
       {
          img: [DeptHead],
+         profile:"/advisory/profile/CAH-MAH",
          name: "Md. Mahedi Hasan",
          position: "Department Head",
          from:"Computer Science and Engineering",
          url: {
             facebook: "",
          },
+         
       },
    ];
 

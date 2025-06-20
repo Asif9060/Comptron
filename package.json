@@ -12,7 +12,7 @@
     "dependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
-        "@headlessui/react": "^2.2.0",
+        "@headlessui/react": "^2.2.4",
         "@hello-pangea/dnd": "^18.0.1",
         "@heroicons/react": "^2.2.0",
         "@heroui/divider": "^2.2.11",
@@ -87,7 +87,7 @@
         "styled-components": "^6.1.15",
         "sweetalert2": "^11.17.2",
         "swiper": "^11.2.4",
-        "tailwind-merge": "^3.0.2",
+        "tailwind-merge": "^3.3.1",
         "tailwindcss": "^4.0.14",
         "tailwindcss-animate": "^1.0.7",
         "tinymce": "^7.8.0",

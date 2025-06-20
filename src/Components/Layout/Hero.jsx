@@ -24,9 +24,30 @@ const Hero = () => {
    const navigate = useNavigate();
    const auth = getAuth();
    const [customUser, setCustomUser] = useState(null);
+   const [isAdvisory, setIsAdvisory] = useState(false);
+
+   // Utility to check advisory email
+   const isAdvisoryEmail = (email) => email && email.endsWith("@nwu.ac.bd");
+
    useEffect(() => {
       const fetchUserData = async () => {
          if (user?.email) {
+            try {
+               // Try advisory API first
+               const advisoryRes = await fetch(
+                  `https://comptron-server-2.onrender.com/api/advisory/getByEmail/${user.email}`
+               );
+               const advisoryData = await advisoryRes.json();
+               if (advisoryRes.ok && advisoryData.customId) {
+                  setIsAdvisory(true);
+                  setCustomUser(advisoryData);
+                  setIsPending(false); // Advisory users are always approved
+                  return;
+               }
+            } catch (error) {
+               // Ignore advisory fetch error, try regular user
+            }
+            setIsAdvisory(false);
             try {
                // Check if user is pending
                const pendingRes = await fetch(
@@ -48,7 +69,6 @@ const Hero = () => {
             }
          }
       };
-
       fetchUserData();
    }, [user]);
 
@@ -183,7 +203,11 @@ const Hero = () => {
                            <MenuItem>
                               {({ active }) => (
                                  <a
-                                    href={`/profile/${customUser?.customId || ""}`}
+                                    href={
+                                       isAdvisory
+                                          ? `/advisory/profile/${customUser?.customId || ""}`
+                                          : `/profile/${customUser?.customId || ""}`
+                                    }
                                     className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors flex items-center gap-2">
                                     <svg
                                        className="w-4 h-4"
@@ -204,7 +228,11 @@ const Hero = () => {
                            <MenuItem>
                               {({ active }) => (
                                  <a
-                                    href={`/settings/${customUser?.customId || ""}`}
+                                    href={
+                                       isAdvisory
+                                          ? `/advisory/settings/${customUser?.customId || ""}`
+                                          : `/settings/${customUser?.customId || ""}`
+                                    }
                                     className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors flex items-center gap-2">
                                     <svg
                                        className="w-4 h-4"
@@ -255,7 +283,7 @@ const Hero = () => {
                ) : (
                   <div className="flex items-center gap-3">
                      {/* Desktop view buttons */}
-                     {user && isPending ? (
+                     {user && isPending && !isAdvisory ? (
                         <div className="px-5 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full font-semibold shadow-md">
                            Pending Approval
                         </div>
@@ -299,7 +327,7 @@ const Hero = () => {
             <div className="flex items-center gap-3">
                {" "}
                <div className="flex gap-2">
-                  {user && isPending ? (
+                  {user && isPending && !isAdvisory ? (
                      <div className="px-3 py-1.5 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full text-sm font-semibold shadow-md">
                         Pending
                      </div>
