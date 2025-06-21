@@ -641,6 +641,14 @@ const AdvisorySettingsPage = () => {
                   </div>
                </form>
 
+               <div className="mt-6 text-center">
+                  <button
+                     onClick={() => navigate('/Reset')}
+                     className="w-full sm:w-auto px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition-all duration-300">
+                     Change Password
+                  </button>
+               </div>
+
                {cropperVisible && image && (
                   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                      <div className="relative bg-white p-4 rounded-lg w-full max-w-md sm:max-w-lg md:max-w-[50rem]">
