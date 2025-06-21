@@ -419,9 +419,9 @@ const AdvisoryProfilePage = () => {
                 </svg>
                 About Me
               </h2>
-              <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+              <div className="text-gray-300 leading-relaxed text-sm sm:text-base">
                 <div className="content-display" dangerouslySetInnerHTML={{ __html: user?.bio }} />
-              </p>
+              </div>
             </motion.div>
 
             {/* Skills Section */}

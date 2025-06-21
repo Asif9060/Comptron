@@ -217,7 +217,7 @@ const RichTextEditor = ({ initialContent, onContentChange, contentClassName }) =
       <MenuBar editor={editor} />
       <EditorContent 
         editor={editor} 
-        className={`prose prose-invert max-w-none p-4 min-h-[50px]  ${contentClassName || 'bg-gray-900 text-white'}`}
+        className={`prose prose-invert max-w-none p-4 min-h-[50px]  ${contentClassName || 'bg-gray-900 text-black'}`}
       />
     </div>
   );
