@@ -80,7 +80,7 @@ const EventShowcase = ({ setShowcaseLoaded }) => {
          <div key={event._id} className="event-card">
             <img src={event.mainImage} alt={event.title} className="event-image" />
             <div className="event-details">
-               <h3 className="event-title01">{event.title}</h3>
+               <h3 className="event-title01" dangerouslySetInnerHTML={{ __html: event.title }}></h3>
                <p>
                   <span className="font-semibold">Date:</span> {formattedStartDate}
                </p>

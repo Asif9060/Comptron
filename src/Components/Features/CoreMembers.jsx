@@ -6,6 +6,7 @@ import redoy from "../../assets/images/Committee/Redoy.jpg";
 import wale from "../../assets/images/Committee/Wale.jpg";
 import { FaFacebook, FaLinkedin, FaGithub } from "react-icons/fa";
 import { Divider } from "@heroui/divider";
+import { Link } from "react-router-dom";
 const CoreMembers = () => {
   const timelineData = [
     {
@@ -19,6 +20,7 @@ const CoreMembers = () => {
         linkedin: "	https://www.linkedin.com/in/tanzilparvez/",
         github: "	https://github.com/tanzil321",
       },
+      profile:"/members/CommitteeProfile/CCM2025-6702"
     },
     {
       role: "VICE-PRESIDENT",
@@ -31,6 +33,7 @@ const CoreMembers = () => {
         linkedin: "https://www.linkedin.com/in/alaminshaikhseo?trk=contact-info",
         github: "	https://github.com/alaminshaikh1703",
       },
+      profile:"/members/CommitteeProfile/CCM2025-5112"
     },
     {
       role: "GENERAL SECRETARY",
@@ -43,6 +46,7 @@ const CoreMembers = () => {
         linkedin: "https://www.linkedin.com/in/sourov-hasan-ahir",
         github: "https://github.com/ahir",
       },
+      profile:"/members/CommitteeProfile/CCM2025-7570"
     },
     {
       role: "JOINT SECRETARY",
@@ -55,6 +59,7 @@ const CoreMembers = () => {
         linkedin: "https://www.linkedin.com/in/tanvir-redoy-500052369/",
         github: "https://github.com/Redoy-Xenon",
       },
+      profile:"/members/CommitteeProfile/CCM2025-5570"
     },
     {
       role: "TREASURER",
@@ -67,51 +72,53 @@ const CoreMembers = () => {
         linkedin: "https://www.linkedin.com/in/md-waleullah",
         github: "https://github.com/waleullah",
       },
+      profile:"/members/CommitteeProfile/CCM2025-8107"
     },
   ];
 
   return (
     <div className="core-members-container">
       {timelineData.map((member, index) => (
-        <div
-          key={index}
-          className="card3"
-          style={{
-            "--card-bg": `url(${member.imageUrl})`,
-          }}
-        >
-          {" "}
-          <div className="details">
-            <div className="cardHeader">{member.name}</div>
-            <div className="cardText">{member.role}</div>
-            <div className="social-links">
-              <a
-                href={member.socials.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-              >
-                <FaFacebook />
-              </a>
-              <a
-                href={member.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-              >
-                <FaLinkedin />
-              </a>
-              <a
-                href={member.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-              >
-                <FaGithub />
-              </a>
+        <Link to={member.profile} key={index} className="contents">
+          <div
+            className="card3"
+            style={{
+              "--card-bg": `url(${member.imageUrl})`,
+            }}
+          >
+            {" "}
+            <div className="details">
+              <div className="cardHeader">{member.name}</div>
+              <div className="cardText">{member.role}</div>
+              <div className="social-links">
+                <a
+                  href={member.socials.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                >
+                  <FaFacebook />
+                </a>
+                <a
+                  href={member.socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                >
+                  <FaLinkedin />
+                </a>
+                <a
+                  href={member.socials.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                >
+                  <FaGithub />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

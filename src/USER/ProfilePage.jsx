@@ -3,11 +3,9 @@ import { useParams, NavLink } from "react-router-dom";
 import logo from "../assets/images/Comptron Logo.png";
 import male from "../assets/images/male.jpg";
 import female from "../assets/images/female.jpg";
-import SideMenu from "../Components/Features/SideMenu";
 import signature from "../assets/images/Signature.jpg";
 import html2canvas from "html2canvas";
 import PropTypes from "prop-types";
-import qr from "../assets/images/frame.png";
 import { userAuth } from "./FirebaseUser";
 import { onAuthStateChanged } from "firebase/auth";
 import QRCode from "qrcode";
@@ -348,7 +346,33 @@ const ProfilePage = () => {
                       {user?.name}
                     </h1>
                     <p className="text-[#15A6E1] translate-y-[-1rem] sm:translate-y-[-2rem] text-base sm:text-lg mb-2 sm:mb-4">
-                      {user?.role || "GENERAL MEMBER"}
+                    {user?.role || "GENERAL MEMBER"}
+                    </p>
+                     
+                    <p className="font-mono text-blue-400 text-center mb-2 text-sm sm:text-base">
+                      {user?.customId}
+                    </p>
+                    <p
+                      className={`text-xs sm:text-sm text-center mb-4 flex items-center justify-center gap-1 ${
+                        user.isValid ? "text-green-400" : "text-red-400"
+                      }`}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                      </svg>
+                      <span>
+                        Membership:{" "}
+                        {user.isValid
+                          ? `Valid until ${new Date(
+                              user.validityDate
+                            ).toLocaleDateString()}`
+                          : "Expired"}
+                      </span>
                     </p>
 
                     <div className="text-white space-y-1 sm:space-y-2 text-left text-sm sm:text-base">
@@ -368,6 +392,7 @@ const ProfilePage = () => {
                         </div>
                       ))}
                     </div>
+                    
                   </div>
 
                   {/* Signature Section */}
@@ -442,17 +467,6 @@ const ProfilePage = () => {
                         <div className="mt-2 text-center">
                           <p className="text-[#112D4E] font-medium text-xs">
                             <span className="flex items-center justify-center gap-1">
-                              {/* <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 11C8.10457 11 9 10.1046 9 9C9 7.89543 8.10457 7 7 7C5.89543 7 5 7.89543 5 9C5 10.1046 5.89543 11 7 11Z" fill="#15A6E1"/>
-                                <path d="M19.071 19.0711C19.4616 18.6806 19.4616 18.0474 19.071 17.6569L17.6568 16.2427C17.2663 15.8522 16.6331 15.8522 16.2426 16.2427C15.8521 16.6332 15.8521 17.2664 16.2426 17.6569L17.6568 19.0711C18.0474 19.4616 18.6805 19.4616 19.071 19.0711Z" fill="#15A6E1"/>
-                                <path d="M17 7C18.1046 7 19 7.89543 19 9C19 10.1046 18.1046 11 17 11C15.8954 11 15 10.1046 15 9C15 7.89543 15.8954 7 17 7Z" fill="#15A6E1"/>
-                                <path d="M7 13C5.89543 13 5 13.8954 5 15C5 16.1046 5.89543 17 7 17C8.10457 17 9 16.1046 9 15C9 13.8954 8.10457 13 7 13Z" fill="#15A6E1"/>
-                                <path d="M7 19C5.89543 19 5 19.8954 5 21C5 22.1046 5.89543 23 7 23C8.10457 23 9 22.1046 9 21C9 19.8954 8.10457 19 7 19Z" fill="#15A6E1"/>
-                                <path d="M17 13C15.8954 13 15 13.8954 15 15C15 16.1046 15.8954 17 17 17C18.1046 17 19 16.1046 19 15C19 13.8954 18.1046 13 17 13Z" fill="#15A6E1"/>
-                                <path d="M17 1C15.8954 1 15 1.89543 15 3C15 4.10457 15.8954 5 17 5C18.1046 5 19 4.10457 19 3C19 1.89543 18.1046 1 17 1Z" fill="#15A6E1"/>
-                                <path d="M3 17C1.89543 17 1 17.8954 1 19C1 20.1046 1.89543 21 3 21C4.10457 21 5 20.1046 5 19C5 17.8954 4.10457 17 3 17Z" fill="#15A6E1"/>
-                                <path d="M3 7C1.89543 7 1 7.89543 1 9C1 10.1046 1.89543 11 3 11C4.10457 11 5 10.1046 5 9C5 7.89543 4.10457 7 3 7Z" fill="#15A6E1"/>
-                              </svg> */}
                             </span>
                           </p>
                         </div>
@@ -483,13 +497,6 @@ const ProfilePage = () => {
                         https://comptron.nwu.ac.bd
                       </p>
                       <p className="flex items-center justify-center gap-1 sm:gap-2">
-                        {/* <svg
-                          className="w-4 h-4 sm:w-5 sm:h-5 translate-y-[-0.4rem] sm:translate-y-[-0.8rem] translate-x-[0.4rem] sm:translate-x-[0.8rem]"
-                          fill="#15A6E1"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M10 0a7.5 7.5 0 00-7.5 7.5c0 5.625 7.5 12.5 7.5 12.5s7.5-6.875 7.5-12.5A7.5 7.5 0 0010 0zm0 11.25a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5z" />
-                        </svg> */}
                         Building-2; 58, KDA Avenue, Sonadanga, Khulna-9100
                       </p>
                     </div>
@@ -796,11 +803,14 @@ const ProfilePage = () => {
                   <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-600/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                   {user.name}
                 </h1>
+                <p className="text-2xl sm:text-3xl md:text-2xl font-bold translate-y-[-1em] mb-2 text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                {user?.role || "General Member"}
+                </p>
                 <p className="text-blue-400 text-center mb-1 text-sm sm:text-base">
-                  {user.bio}
+                  <div className="content-display" dangerouslySetInnerHTML={{ __html: user?.bio }} />
                 </p>
                 <p className="font-mono text-blue-400 text-center mb-2 text-sm sm:text-base">
                   {user.customId}
@@ -1062,7 +1072,8 @@ const ProfilePage = () => {
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
-                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg>
                   </div>
                   <div>

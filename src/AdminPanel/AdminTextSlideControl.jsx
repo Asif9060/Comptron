@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import RichTextEditor from "../RichTextStyle/RichTextEditor";
 
 const AdminTextSlideControl = () => {
    const navigate = useNavigate();
@@ -71,12 +72,11 @@ const AdminTextSlideControl = () => {
                      className="block text-black text-xl text-sm font-medium mb-2">
                      News Text
                   </label>
-                  <textarea
-                     value={text}
-                     onChange={(e) => setText(e.target.value)}
-                     id="news-text"
-                     rows="4"
-                     className="w-[50rem] bg-gray-800 border border-gray-700 rounded-lg p-3 resize-none focus:outline-none focus:border-indigo-500"></textarea>
+                  <RichTextEditor
+                     initialContent={text}
+                     onContentChange={(newContent) => setText(newContent)}
+                     contentClassName="bg-gray-800 text-black"
+                  />
                </div>
                <div>
                   <label
@@ -106,7 +106,9 @@ const AdminTextSlideControl = () => {
                   key={item._id}
                   className="flex justify-between items-start bg-gray-800 p-4 rounded-lg shadow-md">
                   <div className="w-[60rem]  mr-4">
-                     <p className="text-base  font-medium mb-2">{item.text}</p>
+                     <p className="text-base  font-medium mb-2"
+                        dangerouslySetInnerHTML={{ __html: item.text }}>
+                     </p>
                   </div>
                   <div className="flex flex-col space-y-2">
                      <button

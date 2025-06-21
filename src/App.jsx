@@ -41,6 +41,8 @@ import AdminNewsArticleControl from "./AdminPanel/AdminNewsArticleControl";
 // import AdvisoryRegistrationForm from "./AdvisoryPanel/AdvisoryRegistrationForm";
 import AdvisoryProfilePage from "./AdvisoryPanel/AdvisoryProfilePage";
 import AdvisorySettingsPage from "./AdvisoryPanel/AdvisorySettingsPage";
+import Preview from "./RichTextStyle/Preview";
+import RichTextEditor from "./RichTextStyle/RichTextEditor";
 
 // import Bio from "./USER/Bio";
 
@@ -67,6 +69,8 @@ const App = () => {
                {/* <Route path="/advisoryRegistration" element={<AdvisoryRegistrationForm></AdvisoryRegistrationForm>}></Route> */}
                <Route path="/advisory/profile/:id" element={<AdvisoryProfilePage></AdvisoryProfilePage>}></Route>
                <Route path="/advisory/settings/:id" element={<AdvisorySettingsPage></AdvisorySettingsPage>}></Route>
+               <Route path="/preview/:id" element={<Preview></Preview>}></Route>
+               <Route path="/textStyle" element={<RichTextEditor></RichTextEditor>}></Route>
                
                <Route
                   path="/EventDetails"

@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { FaUpload, FaImage, FaEdit, FaTrash, FaPlus, FaTimes } from "react-icons/fa";
+import RichTextEditor from "../RichTextStyle/RichTextEditor";
 
 const AdminNewsArticleControl = () => {
    const navigate = useNavigate();
@@ -248,13 +249,10 @@ const AdminNewsArticleControl = () => {
                            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
                               Title *
                            </label>
-                           <input
-                              type="text"
-                              id="title"
-                              value={title}
-                              onChange={(e) => setTitle(e.target.value)}
-                              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-                              required
+                           <RichTextEditor
+                              initialContent={title}
+                              onContentChange={(newContent) => setTitle(newContent)}
+                              contentClassName="bg-white text-gray-800"
                            />
                         </div>
 
@@ -262,26 +260,21 @@ const AdminNewsArticleControl = () => {
                            <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">
                               Summary *
                            </label>
-                           <textarea
-                              id="summary"
-                              value={summary}
-                              onChange={(e) => setSummary(e.target.value)}
-                              rows="3"
-                              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-                              required
-                           ></textarea>
+                           <RichTextEditor
+                              initialContent={summary}
+                              onContentChange={(newContent) => setSummary(newContent)}
+                              contentClassName="bg-white text-gray-800"
+                           />
                         </div>
 
                         <div>
                            <label htmlFor="author" className="block text-sm font-medium text-gray-700 mb-1">
                               Author
                            </label>
-                           <input
-                              type="text"
-                              id="author"
-                              value={author}
-                              onChange={(e) => setAuthor(e.target.value)}
-                              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                           <RichTextEditor
+                              initialContent={author}
+                              onContentChange={(newContent) => setAuthor(newContent)}
+                              contentClassName="bg-white text-gray-800"
                            />
                         </div>
                      </div>
@@ -372,14 +365,11 @@ const AdminNewsArticleControl = () => {
                      <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
                         Content *
                      </label>
-                     <textarea
-                        id="content"
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        rows="10"
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm font-mono"
-                        required
-                     ></textarea>
+                     <RichTextEditor
+                        initialContent={content}
+                        onContentChange={(newContent) => setContent(newContent)}
+                        contentClassName="bg-white text-gray-800"
+                     />
                      <p className="text-xs text-gray-500 mt-1">HTML formatting is supported</p>
                   </div>
 
@@ -438,7 +428,7 @@ const AdminNewsArticleControl = () => {
                               </div>
                               <div className="p-4 md:w-3/4">
                                  <div className="flex justify-between items-start">
-                                    <h3 className="text-lg font-semibold mb-2 text-gray-800">{article.title}</h3>
+                                    <h3 className="text-lg font-semibold mb-2 text-gray-800" dangerouslySetInnerHTML={{ __html: article.title }} ></h3>
                                     <div className="flex space-x-2">
                                        <button
                                           onClick={() => handleEdit(article)}
@@ -454,9 +444,9 @@ const AdminNewsArticleControl = () => {
                                        </button>
                                     </div>
                                  </div>
-                                 <p className="text-sm text-gray-600 mb-4">{article.summary}</p>
+                                 <p className="text-sm text-gray-600 mb-4" dangerouslySetInnerHTML={{ __html: article.summary }}></p>
                                  <div className="flex justify-between items-center text-xs text-gray-500">
-                                    <span className="bg-gray-100 px-2 py-1 rounded">{article.author ? `By ${article.author}` : "No author"}</span>
+                                    <span className="bg-gray-100 px-2 py-1 rounded" dangerouslySetInnerHTML={{ __html: article.author }}></span>
                                     <span>
                                        {article.publishedAt
                                           ? format(new Date(article.publishedAt), "MMM dd, yyyy")

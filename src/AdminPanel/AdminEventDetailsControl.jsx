@@ -6,6 +6,7 @@ import AdminEventControl from "./AdminEventControl";
 import EventCountdown from "../Components/UI/EventCountdown";
 import FormBuilder from "../Components/Features/FormBuilder";
 import { defaultFields } from "../utils/defaultFormFields";
+import RichTextEditor from "../RichTextStyle/RichTextEditor";
 
 const AdminEventDetailsControl = () => {
    const navigate = useNavigate();
@@ -420,28 +421,26 @@ const AdminEventDetailsControl = () => {
                   }}
                   encType="multipart/form-data">
                   {/* Title Input */}
-                  <div className="group">
-                     <input
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder-gray-400 text-gray-800 group-hover:border-gray-400"
-                        type="text"
-                        placeholder="Event Title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                        disabled={isLoading}
+                  <div className="group ">
+                     <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Event Title <span className="text-red-500">*</span>
+                     </label>
+                     <RichTextEditor
+                        initialContent={title}
+                        onContentChange={(newContent) => setTitle(newContent)}
+                        contentClassName="bg-white text-gray-800"
                      />
                   </div>
 
                   {/* Description Input */}
                   <div className="group">
-                     <textarea
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder-gray-400 text-gray-800 group-hover:border-gray-400 min-h-[120px] resize-y"
-                        placeholder="Event Description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                        disabled={isLoading}
-                        rows={4}
+                     <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Event Description <span className="text-red-500">*</span>
+                     </label>
+                     <RichTextEditor
+                        initialContent={description}
+                        onContentChange={(newContent) => setDescription(newContent)}
+                        contentClassName="bg-white text-gray-800"
                      />
                   </div>
 
@@ -472,15 +471,17 @@ const AdminEventDetailsControl = () => {
                                        e.target.value
                                     )
                                  }
-                                 className="w-full px-4 py-2 mb-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder-gray-400 text-gray-800"
+                                 className="w-full px-4 py-2 mb-2 bg-gray-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder-gray-400 text-gray-800"
                               />
-                              <textarea
-                                 placeholder="Text content"
-                                 value={point.text}
-                                 onChange={(e) =>
-                                    handleBulletPointChange(index, "text", e.target.value)
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                 Text Content
+                              </label>
+                              <RichTextEditor
+                                 initialContent={point.text}
+                                 onContentChange={(newContent) =>
+                                    handleBulletPointChange(index, "text", newContent)
                                  }
-                                 className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder-gray-400 text-gray-800 resize-y min-h-[80px]"
+                                 contentClassName="bg-white text-gray-800"
                               />
                            </div>
                            {bulletPoints.length > 1 && (
@@ -515,7 +516,7 @@ const AdminEventDetailsControl = () => {
                         </label>
                         <div className="relative group">
                            <input
-                              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
+                              className="w-full px-4 py-3 bg-gray-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
                               type="file"
                               accept="image/*"
                               onChange={(e) => handleImageUpload(e, setMainImage)}
@@ -531,7 +532,7 @@ const AdminEventDetailsControl = () => {
                         </label>
                         <div className="relative group">
                            <input
-                              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
+                              className="w-full px-4 py-3 bg-gray-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
                               type="file"
                               accept="image/*"
                               multiple
@@ -550,7 +551,7 @@ const AdminEventDetailsControl = () => {
                               Start Date <span className="text-red-500">*</span>
                            </label>
                            <input
-                              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800"
+                              className="w-full px-4 py-3 bg-gray-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800"
                               type="date"
                               value={startDate}
                               onChange={(e) => setStartDate(e.target.value)}
@@ -563,7 +564,7 @@ const AdminEventDetailsControl = () => {
                               Start Time <span className="text-red-500">*</span>
                            </label>
                            <input
-                              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800"
+                              className="w-full px-4 py-3 bg-gray-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800"
                               type="time"
                               value={startTime}
                               onChange={(e) => setStartTime(e.target.value)}
@@ -579,7 +580,7 @@ const AdminEventDetailsControl = () => {
                               End Date <span className="text-red-500">*</span>
                            </label>
                            <input
-                              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800"
+                              className="w-full px-4 py-3 bg-gray-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800"
                               type="date"
                               value={endDate}
                               onChange={(e) => setEndDate(e.target.value)}
@@ -592,7 +593,7 @@ const AdminEventDetailsControl = () => {
                               End Time <span className="text-red-500">*</span>
                            </label>
                            <input
-                              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800"
+                              className="w-full px-4 py-3 bg-gray-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-800"
                               type="time"
                               value={endTime}
                               onChange={(e) => setEndTime(e.target.value)}
@@ -656,11 +657,11 @@ const AdminEventDetailsControl = () => {
                   className="relative group bg-white rounded-xl p-6 shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-xl">
                   <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-white/50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative">
-                     <h3 className="font-bold text-xl mb-3 text-gray-800">
-                        {event.title}
+                     <h3 className="font-bold text-xl mb-3 text-gray-800"
+                        dangerouslySetInnerHTML={{ __html: event.title }}>
                      </h3>
-                     <p className="text-gray-600 mb-4 line-clamp-2">
-                        {event.description}
+                     <p className="text-gray-600 mb-4 line-clamp-2"
+                        dangerouslySetInnerHTML={{ __html: event.description }}>
                      </p>
 
                      <div className="space-y-2 mb-6">

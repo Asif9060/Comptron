@@ -86,4 +86,18 @@
     
   }
 
+  .ProseMirror{
+    background-color: #F9FAFB;
+    height: 50px;
+    border-radius: 5px;
+  }
+
+  .ProseMirror p.is-empty::before {
+    content: attr(data-placeholder);
+    color: #8e929b; /* Tailwind's gray-400 */
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
   

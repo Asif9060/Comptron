@@ -134,9 +134,10 @@ const EventDetails = () => {
               >
                 <path d="M11.983 1.907a.75.75 0 00-1.292-.657l-8.5 9.5A.75.75 0 002.75 12h6.572l-1.305 6.093a.75.75 0 001.292.657l8.5-9.5A.75.75 0 0017.25 8h-6.572l1.305-6.093z" />
               </svg>
-              <h1 className="event-title2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 translate-y-1.5">
-                {event.title}
-              </h1>
+              <h1
+                className="event-title2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 translate-y-1.5"
+                dangerouslySetInnerHTML={{ __html: event.title }}
+              ></h1>
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-purple-500"
                 fill="currentColor"
@@ -155,9 +156,10 @@ const EventDetails = () => {
             src={event.mainImage}
             alt="Event Main"
           />
-          <p className="event-description sm:text-lg md:text-xl mb-6 sm:mb-8 md:mb-10 px-2 sm:px-4 md:px-6">
-            {event.description}
-          </p>{" "}
+          <p
+            className="event-description sm:text-lg md:text-xl mb-6 sm:mb-8 md:mb-10 px-2 sm:px-4 md:px-6"
+            dangerouslySetInnerHTML={{ __html: event.description }}
+          ></p>{" "}
           {/* Bullet Points Section */}
           {event.bulletPoints?.length > 0 && (
             <div className="bg-gray-800 rounded-xl p-6 backdrop-blur-sm border border-gray-700/30 mb-8 px-4 sm:px-6 md:px-8">
@@ -173,7 +175,10 @@ const EventDetails = () => {
                     <div className="text-blue-400 font-semibold flex">
                       {point.label} :
                     </div>
-                    <div className="text-gray-300 flex">{point.text}</div>
+                    <div
+                      className="text-gray-300 flex"
+                      dangerouslySetInnerHTML={{ __html: point.text }}
+                    ></div>
                   </div>
                 ))}
               </div>

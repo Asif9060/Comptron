@@ -208,17 +208,17 @@ const NewsPortal = () => {
                               </div>
 
                               <div className="p-6 flex-grow flex flex-col">
-                                 <h2 className="text-xl font-bold mb-3 text-gray-800 line-clamp-2">
-                                    {article.title}
+                                 <h2 className="text-xl font-bold mb-3 text-gray-800 line-clamp-2"
+                                    dangerouslySetInnerHTML={{ __html: article.title }}>
                                  </h2>
-                                 <p className="text-gray-600 mb-4 line-clamp-3 flex-grow">
-                                    {article.summary}
+                                 <p className="text-gray-600 mb-4 line-clamp-3 flex-grow"
+                                    dangerouslySetInnerHTML={{ __html: article.summary }}>
                                  </p>
                                  <div className="flex items-center justify-between text-sm text-gray-500 mt-auto pt-4 border-t">
                                     {article.author && (
                                        <div className="flex items-center">
                                           <FaUser className="mr-1 text-blue-500" />
-                                          <span>{article.author}</span>
+                                          <span dangerouslySetInnerHTML={{ __html: article.author }}></span>
                                        </div>
                                     )}
                                     {article.publishedAt && (

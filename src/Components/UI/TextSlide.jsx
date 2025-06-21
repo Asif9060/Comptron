@@ -21,8 +21,8 @@ const TextSlide = () => {
           {news.map((item, index) => (
             <li key={index}>
               <span className="company">
-                <a className="hover:text-[#10A5E0]" href={item.link}>
-                  {item.text}
+                <a className="hover:text-[#10A5E0]" href={item.link}
+                  dangerouslySetInnerHTML={{ __html: item.text }}>
                 </a>
               </span>
             </li>
@@ -32,8 +32,8 @@ const TextSlide = () => {
           {news.map((item, index) => (
             <li key={index}>
               <span className="company">
-                <a className="hover:text-[#10A5E0]" href={item.link}>
-                  {item.text}
+                <a className="hover:text-[#10A5E0]" href={item.link}
+                  dangerouslySetInnerHTML={{ __html: item.text }}>
                 </a>
               </span>
             </li>

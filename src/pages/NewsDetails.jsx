@@ -135,20 +135,20 @@ const NewsDetails = () => {
                      {article.author && (
                         <div className="flex items-center">
                            <FaUser className="mr-2 text-blue-500" />
-                           <span>By {article.author}</span>
+                           <span dangerouslySetInnerHTML={{ __html: article.author }}></span>
                         </div>
                      )}
                   </div>
 
                   {/* Title */}
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 text-gray-800 leading-tight">
-                     {article.title}
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 text-gray-800 leading-tight"
+                     dangerouslySetInnerHTML={{ __html: article.title }}>
                   </h1>
 
                   {/* Summary */}
                   <div className="bg-blue-50 border-l-4 border-blue-500 p-4 lg:p-6 mb-6 lg:mb-8 rounded-r">
-                     <p className="text-lg lg:text-xl text-gray-700 italic">
-                        {article.summary}
+                     <p className="text-lg lg:text-xl text-gray-700 italic"
+                        dangerouslySetInnerHTML={{ __html: article.summary }}>
                      </p>
                   </div>
 

@@ -5,7 +5,7 @@ import getCroppedImg from "../utils/cropImage";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import Cropper from "react-easy-crop";
-// import BioEditor from "./BioEditor";
+import RichTextEditor from "../RichTextStyle/RichTextEditor";
 
 // Create a custom centered toast component with blurred backdrop
 const CenteredToast = ({ visible, setVisible, message, type }) => {
@@ -62,7 +62,7 @@ const AdvisorySettingsPage = () => {
       email: "",
       phone: "",
       bio: "",
-      studentId: "",
+     studentId: "",
       bloodGroup: "",
       department: "",
       dateOfBirth: "",
@@ -436,12 +436,9 @@ const AdvisorySettingsPage = () => {
 
                      <div className="space-y-2">
                         <label className="block text-sm font-medium mb-1">Bio</label>
-                        <input
-                           type="text"
-                           value={user.bio}
-                           onChange={(e) => setUser({ ...user, bio: e.target.value })}
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="Write something about yourself..."
+                        <RichTextEditor
+                           initialContent={user.bio}
+                           onContentChange={(newContent) => setUser({ ...user, bio: newContent })}
                         />
                      </div>
 
@@ -456,7 +453,7 @@ const AdvisorySettingsPage = () => {
                               setUser({ ...user, studentId: e.target.value })
                            }
                            className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="Enter your student ID"
+                           placeholder="Enter your role (e.g., Advisor)"
                         />
                      </div>
                      <div className="space-y-2">
