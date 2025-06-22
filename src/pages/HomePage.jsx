@@ -40,7 +40,7 @@ const HomePage = () => {
    const contents = [
       {
          img: [RaihanSir],
-         profile:"/advisory/profile/CAP-MRI",
+         profile:"/advisory/profile/CAB-MRI",
          name: "M. Raihan",
          position: "Advisor",
          from:"Comptron",
@@ -55,7 +55,7 @@ const HomePage = () => {
 
       {
          img: [InzamamSir],
-         profile:"/advisory/profile/CAP-IUH",
+         profile:"/advisory/profile/CAB-IUH",
          name: "Md. Inzamam-Ul-Hossain",
          position: "Moderator",
          from:"Comptron",
@@ -66,7 +66,7 @@ const HomePage = () => {
 
       {
          img: [PeyaMaam],
-         profile:"/advisory/profile/CAP-ZJ",
+         profile:"/advisory/profile/CAB-ZJ",
          name: "Zahrul Jannat Peya",
          position: "Moderator",
          from:"Comptron",
@@ -76,7 +76,7 @@ const HomePage = () => {
       },
       {
          img: [DeptHead],
-         profile:"/advisory/profile/CAH-MAH",
+         profile:"/advisory/profile/CAB-MAH",
          name: "Md. Mahedi Hasan",
          position: "Department Head",
          from:"Computer Science and Engineering",
