@@ -6,7 +6,7 @@ import male from "../../assets/images/male.jpg";
 import female from "../../assets/images/female.jpg";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { userAuth } from "../../USER/FirebaseUser";
-import background from "../../assets/images/tech/BGHigh.mp4";
+import background from "../../assets/images/tech/BG.mp4";
 import { NavLink } from "react-router-dom"; // Make sure to add a default avatar image
 import { Menu, MenuButton, MenuItems, MenuItem, Transition } from "@headlessui/react";
 function classNames(...classes) {
@@ -141,6 +141,7 @@ const Hero = () => {
                loop
                muted
                playsInline
+               poster=""
                className="absolute inset-0 w-full h-full object-cover filter blur-[5px] scale-105"
                src={background}></video>
          </div>
