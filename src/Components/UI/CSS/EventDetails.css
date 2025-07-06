@@ -13,9 +13,6 @@
     font-weight: 600;
     margin-bottom: 15px;
     text-transform: uppercase;
-    background: linear-gradient(90deg, #ff00ff, #00ffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 .event-title2 {
     font-size: 25px;
