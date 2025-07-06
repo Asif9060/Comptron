@@ -141,7 +141,6 @@ const Hero = () => {
                loop
                muted
                playsInline
-               poster=""
                className="absolute inset-0 w-full h-full object-cover filter blur-[5px] scale-105"
                src={background}></video>
          </div>
