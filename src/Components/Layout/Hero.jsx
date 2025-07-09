@@ -142,7 +142,7 @@ const Hero = () => {
                muted
                playsInline
                className="absolute inset-0 w-full h-full object-cover filter blur-[5px] scale-105"
-               src={background}></video>
+               src={"https://res.cloudinary.com/dkv9ksobc/video/upload/v1752083817/Bg_osge7c.mp4"}></video>
          </div>
          {/* Slight dark overlay to improve text visibility */}
          <div className="absolute inset-0 bg-black/30 z-[1]"></div>
