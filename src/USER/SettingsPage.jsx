@@ -173,26 +173,26 @@ const SettingsPage = () => {
       setToastMessage("Updating profile...");
 
       const formData = new FormData();
-      formData.append('name', user.name);
-      formData.append('skills', user.skills);
-      formData.append('email', user.email);
-      formData.append('phone', user.phone);
-      formData.append('linkedIn', user.linkedIn);
-      formData.append('github', user.github);
-      formData.append('portfolio', user.portfolio);
-      formData.append('cv', user.cv);
-      formData.append('bio', user.bio);
-      formData.append('studentId', user.studentId);
-      formData.append('bloodGroup', user.bloodGroup);
-      formData.append('department', user.department);
-      formData.append('dateOfBirth', user.dateOfBirth);
+      formData.append("name", user.name);
+      formData.append("skills", user.skills);
+      formData.append("email", user.email);
+      formData.append("phone", user.phone);
+      formData.append("linkedIn", user.linkedIn);
+      formData.append("github", user.github);
+      formData.append("portfolio", user.portfolio);
+      formData.append("cv", user.cv);
+      formData.append("bio", user.bio);
+      formData.append("studentId", user.studentId);
+      formData.append("bloodGroup", user.bloodGroup);
+      formData.append("department", user.department);
+      formData.append("dateOfBirth", user.dateOfBirth);
 
       // Convert base64 image to blob if it exists
       if (croppedImage || image) {
          const imageData = croppedImage || image;
          const base64Response = await fetch(imageData);
          const blob = await base64Response.blob();
-         formData.append('image', blob);
+         formData.append("image", blob);
       }
 
       try {
@@ -331,7 +331,7 @@ const SettingsPage = () => {
    }
 
    return (
-      <div className="min-h-screen bg-white p-4 lg:p-8">
+      <div className="min-h-screen bg-gray-50">
          {/* Custom Toast Components */}
          <CenteredToast
             visible={loadingToast}
@@ -352,18 +352,18 @@ const SettingsPage = () => {
             type="error"
          />
 
-         {/* Sidebar */}
+         {/* Sidebar - keeping existing structure as requested */}
          <div
             className={`fixed inset-y-0 left-0 w-64 bg-[#1c1c1e] text-white transform ${
                sidebarOpen ? "translate-x-0" : "-translate-x-full"
-            } md:translate-x-0 transition-transform duration-300 ease-in-out z-50`}>
+            } md:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-xl`}>
             <div className="p-4">
                <h2 className="text-2xl font-bold mb-6">Menu</h2>
                <nav className="space-y-2">
                   <NavLink
                      to={`/`}
                      className={({ isActive }) =>
-                        `block px-4 py-2 rounded-lg ${
+                        `block px-4 py-2 rounded-lg transition-colors duration-200 ${
                            isActive ? "bg-blue-600" : "hover:bg-gray-700"
                         }`
                      }
@@ -373,7 +373,7 @@ const SettingsPage = () => {
                   <NavLink
                      to={`/profile/${id}`}
                      className={({ isActive }) =>
-                        `block px-4 py-2 rounded-lg ${
+                        `block px-4 py-2 rounded-lg transition-colors duration-200 ${
                            isActive ? "bg-blue-600" : "hover:bg-gray-700"
                         }`
                      }
@@ -383,7 +383,7 @@ const SettingsPage = () => {
                   <NavLink
                      to={`/AllMembers`}
                      className={({ isActive }) =>
-                        `block px-4 py-2 rounded-lg ${
+                        `block px-4 py-2 rounded-lg transition-colors duration-200 ${
                            isActive ? "bg-blue-600" : "hover:bg-gray-700"
                         }`
                      }
@@ -393,7 +393,7 @@ const SettingsPage = () => {
                   <NavLink
                      to={`/settings/${id}`}
                      className={({ isActive }) =>
-                        `block px-4 py-2 rounded-lg ${
+                        `block px-4 py-2 rounded-lg transition-colors duration-200 ${
                            isActive ? "bg-blue-600" : "hover:bg-gray-700"
                         }`
                      }
@@ -406,292 +406,392 @@ const SettingsPage = () => {
 
          {/* Mobile Sidebar Toggle */}
          <button
-            className="md:hidden fixed top-4 left-4 z-50 text-white"
+            className="md:hidden fixed top-4 left-4 z-50 bg-gray-800 text-white p-2 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-200"
             onClick={() => setSidebarOpen(!sidebarOpen)}>
             {sidebarOpen ? "✕" : "☰"}
          </button>
 
          {/* Main Content */}
-         <div className="md:ml-64 transition-all duration-300">
-            <div className="bg-[#1c1c1e] p-4 sm:p-6 lg:p-8 rounded-2xl shadow-[0px_0px_66px_36px_rgba(0,_0,_0,_0.1)] w-full max-w-5xl mx-auto mt-4 text-white">
-               <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center">
-                  Settings
-               </h1>
+         <div className="md:ml-64 transition-all duration-300 p-4 lg:p-8">
+            {/* Header Section */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-8 p-6">
+               <div className="max-w-4xl mx-auto">
+                  <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                     Account Settings
+                  </h1>
+                  <p className="text-center text-gray-600">
+                     Manage your profile information and preferences
+                  </p>
+               </div>
+            </div>
 
-               <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium">Name</label>
-                        <input
-                           type="text"
-                           value={user.name}
-                           onChange={(e) => setUser({ ...user, name: e.target.value })}
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="Enter your name"
-                        />
-                     </div>
-
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">Bio</label>
-                        <RichTextEditor
-                           initialContent={user.bio}
-                           onContentChange={(newContent) => setUser({...user, bio: newContent})}
-                        />
-                     </div>
-
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">
-                           Student ID
-                        </label>
-                        <input
-                           type="text"
-                           value={user.studentId}
-                           onChange={(e) =>
-                              setUser({ ...user, studentId: e.target.value })
-                           }
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="Enter your student ID"
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">
-                           Blood Group
-                        </label>
-                        <select
-                           value={user.bloodGroup}
-                           onChange={(e) =>
-                              setUser({ ...user, bloodGroup: e.target.value })
-                           }
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                           <option value="">Select Blood Group</option>
-                           <option value="A+">A+</option>
-                           <option value="A-">A-</option>
-                           <option value="B+">B+</option>
-                           <option value="B-">B-</option>
-                           <option value="O+">O+</option>
-                           <option value="O-">O-</option>
-                           <option value="AB+">AB+</option>
-                           <option value="AB-">AB-</option>
-                        </select>
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">
-                           Department
-                        </label>
-                        <select
-                           value={user.department}
-                           onChange={(e) =>
-                              setUser({ ...user, department: e.target.value })
-                           }
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                           <option value="">Select Department</option>
-                           <option value="CSE">CSE</option>
-                           <option value="EEE">EEE</option>
-                           <option value="CIVIL">CIVIL</option>
-                           <option value="BBA">BBA</option>
-                           <option value="LAW">LAW</option>
-                           <option value="EEL">EEL</option>
-                        </select>
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">
-                           Date of Birth
-                        </label>
-                        <input
-                           type="date"
-                           value={user.dateOfBirth}
-                           onChange={(e) =>
-                              setUser({ ...user, dateOfBirth: e.target.value })
-                           }
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="YYYY-MM-DD"
-                        />
-                     </div>
-
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">Skills</label>
-                        <input
-                           type="text"
-                           value={user.skills}
-                           onChange={(e) => setUser({ ...user, skills: e.target.value })}
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="Enter your skills"
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">Email</label>
-                        <input
-                           type="email"
-                           value={user.email}
-                           onChange={(e) => setUser({ ...user, email: e.target.value })}
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="Enter your email"
-                           disabled
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">Phone</label>
-                        <input
-                           type="text"
-                           value={user.phone}
-                           onChange={(e) => setUser({ ...user, phone: e.target.value })}
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="Enter your phone"
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">
-                           LinkedIn URL
-                        </label>
-                        <input
-                           type="url"
-                           value={user.linkedIn || ""}
-                           onChange={(e) =>
-                              setUser({ ...user, linkedIn: e.target.value })
-                           }
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="https://linkedin.com/in/yourname"
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">
-                           GitHub URL
-                        </label>
-                        <input
-                           type="url"
-                           value={user.github || ""}
-                           onChange={(e) => setUser({ ...user, github: e.target.value })}
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="https://github.com/yourusername"
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">
-                           Portfolio URL
-                        </label>
-                        <input
-                           type="url"
-                           value={user.portfolio || ""}
-                           onChange={(e) =>
-                              setUser({ ...user, portfolio: e.target.value })
-                           }
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="https://yourportfolio.com"
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">CV URL</label>
-                        <input
-                           type="url"
-                           value={user.cv || ""}
-                           onChange={(e) => setUser({ ...user, cv: e.target.value })}
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="https://drive.google.com/..."
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium mb-1">
-                           Profile Image
-                        </label>
-                        <input
-                           type="file"
-                           accept="image/*"
-                           onChange={handleImageChange}
-                           className="w-full bg-gray-800 text-white rounded-lg px-4 py-2"
-                        />
-                        <div className="flex flex-col">
-                           {image && !cropperVisible && (
-                              <img
-                                 src={croppedImage || image}
-                                 alt="Preview"
-                                 className="mt-2 w-24 h-24 aspect-square rounded-full object-cover"
-                              />
-                           )}
-                        </div>
-                     </div>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
-                     <button
-                        type="submit"
-                        className="w-full sm:w-auto px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all duration-300">
-                        Save Changes
-                     </button>
-                     <button
-                        type="button"
-                        onClick={handleCancel}
-                        className="w-full sm:w-auto px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-lg transition-all duration-300">
-                        Cancel
-                     </button>
-                  </div>
-               </form>
-
-               {cropperVisible && image && (
-                  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                     <div className="relative bg-white p-4 rounded-lg w-full max-w-md sm:max-w-lg md:max-w-[50rem]">
-                        <div className="relative w-full h-64 sm:h-96">
-                           <Cropper
-                              image={image}
-                              crop={crop}
-                              zoom={zoom}
-                              aspect={1}
-                              cropShape="round"
-                              showGrid={false}
-                              onCropChange={setCrop}
-                              onZoomChange={setZoom}
-                              onCropComplete={onCropComplete}
-                           />
-                        </div>
-                        {/* Zoom Controls */}
-                        <div className="flex items-center justify-center gap-2 mt-4">
-                           <button
-                              type="button"
-                              className="bg-gray-300 text-black px-2 py-1 rounded-full text-lg font-bold hover:bg-gray-400"
-                              onClick={() => setZoom((z) => Math.max(1, z - 0.1))}>
-                              −
-                           </button>
+            {/* Settings Form */}
+            <div className="max-w-4xl mx-auto">
+               <form onSubmit={handleSubmit} className="space-y-8">
+                  {/* Personal Information Section */}
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                     <h2 className="text-xl font-semibold text-gray-900 mb-6 pb-3 border-b border-gray-200">
+                        Personal Information
+                     </h2>
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              Full Name <span className="text-red-500">*</span>
+                           </label>
                            <input
-                              type="range"
-                              min={1}
-                              max={3}
-                              step={0.01}
-                              value={zoom}
-                              onChange={(e) => setZoom(Number(e.target.value))}
-                              className="w-40 accent-blue-600"
+                              type="text"
+                              value={user.name}
+                              onChange={(e) => setUser({ ...user, name: e.target.value })}
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                              placeholder="Enter your full name"
+                              required
                            />
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              Student ID <span className="text-red-500">*</span>
+                           </label>
+                           <input
+                              type="text"
+                              value={user.studentId}
+                              onChange={(e) =>
+                                 setUser({ ...user, studentId: e.target.value })
+                              }
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                              placeholder="Enter your student ID"
+                              required
+                           />
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              Email Address
+                           </label>
+                           <input
+                              type="email"
+                              value={user.email}
+                              onChange={(e) =>
+                                 setUser({ ...user, email: e.target.value })
+                              }
+                              className="w-full bg-gray-50 border border-gray-300 text-gray-500 rounded-lg px-4 py-3 cursor-not-allowed"
+                              placeholder="Enter your email"
+                              disabled
+                           />
+                           <p className="text-xs text-gray-500">
+                              Email cannot be changed
+                           </p>
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              Phone Number
+                           </label>
+                           <input
+                              type="tel"
+                              value={user.phone}
+                              onChange={(e) =>
+                                 setUser({ ...user, phone: e.target.value })
+                              }
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                              placeholder="Enter your phone number"
+                           />
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              Date of Birth
+                           </label>
+                           <input
+                              type="date"
+                              value={user.dateOfBirth}
+                              onChange={(e) =>
+                                 setUser({ ...user, dateOfBirth: e.target.value })
+                              }
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                           />
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              Blood Group
+                           </label>
+                           <select
+                              value={user.bloodGroup}
+                              onChange={(e) =>
+                                 setUser({ ...user, bloodGroup: e.target.value })
+                              }
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400">
+                              <option value="">Select Blood Group</option>
+                              <option value="A+">A+</option>
+                              <option value="A-">A-</option>
+                              <option value="B+">B+</option>
+                              <option value="B-">B-</option>
+                              <option value="O+">O+</option>
+                              <option value="O-">O-</option>
+                              <option value="AB+">AB+</option>
+                              <option value="AB-">AB-</option>
+                           </select>
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              Department
+                           </label>
+                           <select
+                              value={user.department}
+                              onChange={(e) =>
+                                 setUser({ ...user, department: e.target.value })
+                              }
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400">
+                              <option value="">Select Department</option>
+                              <option value="CSE">Computer Science & Engineering</option>
+                              <option value="EEE">
+                                 Electrical & Electronic Engineering
+                              </option>
+                              <option value="CIVIL">Civil Engineering</option>
+                              <option value="BBA">Business Administration</option>
+                              <option value="LAW">Law</option>
+                              <option value="EEL">English Language & Literature</option>
+                           </select>
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              Skills & Expertise
+                           </label>
+                           <input
+                              type="text"
+                              value={user.skills}
+                              onChange={(e) =>
+                                 setUser({ ...user, skills: e.target.value })
+                              }
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                              placeholder="e.g., React, Python, Machine Learning"
+                           />
+                        </div>
+                     </div>
+                  </div>
+
+                  {/* Bio Section */}
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                     <h2 className="text-xl font-semibold text-gray-900 mb-6 pb-3 border-b border-gray-200">
+                        Biography
+                     </h2>
+                     <div className="space-y-2">
+                        <label className="block text-sm font-medium text-gray-700">
+                           About Yourself
+                        </label>
+                        <div className="border border-gray-300 rounded-lg overflow-hidden  focus-within:border-transparent transition-all duration-200">
+                           <RichTextEditor
+                              initialContent={user.bio}
+                              onContentChange={(newContent) =>
+                                 setUser({ ...user, bio: newContent })
+                              }
+                              contentClassName="bg-white text-gray-900 min-h-[120px]"
+                           />
+                        </div>
+                        <p className="text-xs text-gray-500">
+                           Tell others about yourself, your interests, and achievements
+                        </p>
+                     </div>
+                  </div>
+
+                  {/* Social Links Section */}
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                     <h2 className="text-xl font-semibold text-gray-900 mb-6 pb-3 border-b border-gray-200">
+                        Social Links & Portfolio
+                     </h2>
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              LinkedIn Profile
+                           </label>
+                           <input
+                              type="url"
+                              value={user.linkedIn || ""}
+                              onChange={(e) =>
+                                 setUser({ ...user, linkedIn: e.target.value })
+                              }
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                              placeholder="https://linkedin.com/in/yourname"
+                           />
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              GitHub Profile
+                           </label>
+                           <input
+                              type="url"
+                              value={user.github || ""}
+                              onChange={(e) =>
+                                 setUser({ ...user, github: e.target.value })
+                              }
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                              placeholder="https://github.com/yourusername"
+                           />
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              Portfolio Website
+                           </label>
+                           <input
+                              type="url"
+                              value={user.portfolio || ""}
+                              onChange={(e) =>
+                                 setUser({ ...user, portfolio: e.target.value })
+                              }
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                              placeholder="https://yourportfolio.com"
+                           />
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="block text-sm font-medium text-gray-700">
+                              CV/Resume Link
+                           </label>
+                           <input
+                              type="url"
+                              value={user.cv || ""}
+                              onChange={(e) => setUser({ ...user, cv: e.target.value })}
+                              className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                              placeholder="https://drive.google.com/..."
+                           />
+                        </div>
+                     </div>
+                  </div>
+
+                  {/* Profile Image Section */}
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                     <h2 className="text-xl font-semibold text-gray-900 mb-6 pb-3 border-b border-gray-200">
+                        Profile Picture
+                     </h2>
+                     <div className="space-y-4">
+                        <div className="flex items-center space-x-6">
+                           {image && !cropperVisible && (
+                              <div className="flex-shrink-0">
+                                 <img
+                                    src={croppedImage || image}
+                                    alt="Profile preview"
+                                    className="w-20 h-20 rounded-full object-cover border-4 border-gray-200 shadow-sm"
+                                 />
+                              </div>
+                           )}
+                           <div className="flex-1">
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                 Upload New Picture
+                              </label>
+                              <input
+                                 type="file"
+                                 accept="image/*"
+                                 onChange={handleImageChange}
+                                 className="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-3 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all duration-200"
+                              />
+                              <p className="text-xs text-gray-500 mt-1">
+                                 Recommended: Square image, at least 200x200 pixels
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                     <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
+                        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                           <button
+                              type="submit"
+                              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm">
+                              Save Changes
+                           </button>
                            <button
                               type="button"
-                              className="bg-gray-300 text-black px-2 py-1 rounded-full text-lg font-bold hover:bg-gray-400"
-                              onClick={() => setZoom((z) => Math.min(3, z + 0.1))}>
-                              +
-                           </button>
-                        </div>
-                        <div className="mt-4 flex justify-between">
-                           <button
-                              onClick={handleCroppedImage}
-                              className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">
-                              Crop Image
-                           </button>
-                           <button
-                              onClick={() => setCropperVisible(false)}
-                              className="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-lg">
+                              onClick={handleCancel}
+                              className="px-8 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 border border-gray-300">
                               Cancel
                            </button>
                         </div>
+
+                        <div className="w-full sm:w-auto pt-4 sm:pt-0">
+                           <button
+                              type="button"
+                              onClick={handleDelete}
+                              className="w-full sm:w-auto px-6 py-3 bg-red-50 hover:bg-red-100 text-red-700 font-semibold rounded-lg transition-all duration-200 border border-red-200 hover:border-red-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                              Delete Account
+                           </button>
+                        </div>
                      </div>
                   </div>
-               )}
-
-               {/* Delete Account Button */}
-               <div className="mt-6 text-center">
-                  <button
-                     onClick={handleDelete}
-                     className="w-full sm:w-auto px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all duration-300">
-                     Delete Account
-                  </button>
-               </div>
+               </form>
             </div>
          </div>
+
+         {/* Image Cropper Modal */}
+         {cropperVisible && image && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
+               <div className="relative bg-white rounded-xl shadow-xl w-full max-w-2xl">
+                  <div className="p-6">
+                     <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                        Crop Profile Picture
+                     </h3>
+                     <div className="relative w-full h-64 sm:h-96 bg-gray-100 rounded-lg overflow-hidden">
+                        <Cropper
+                           image={image}
+                           crop={crop}
+                           zoom={zoom}
+                           aspect={1}
+                           cropShape="round"
+                           showGrid={false}
+                           onCropChange={setCrop}
+                           onZoomChange={setZoom}
+                           onCropComplete={onCropComplete}
+                        />
+                     </div>
+
+                     {/* Zoom Controls */}
+                     <div className="flex items-center justify-center gap-4 mt-6 p-4 bg-gray-50 rounded-lg">
+                        <span className="text-sm font-medium text-gray-700">Zoom:</span>
+                        <button
+                           type="button"
+                           className="bg-white border border-gray-300 text-gray-700 w-8 h-8 rounded-full font-bold hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           onClick={() => setZoom((z) => Math.max(1, z - 0.1))}>
+                           −
+                        </button>
+                        <input
+                           type="range"
+                           min={1}
+                           max={3}
+                           step={0.01}
+                           value={zoom}
+                           onChange={(e) => setZoom(Number(e.target.value))}
+                           className="w-32 accent-blue-600"
+                        />
+                        <button
+                           type="button"
+                           className="bg-white border border-gray-300 text-gray-700 w-8 h-8 rounded-full font-bold hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           onClick={() => setZoom((z) => Math.min(3, z + 0.1))}>
+                           +
+                        </button>
+                     </div>
+
+                     <div className="flex justify-end gap-3 mt-6">
+                        <button
+                           onClick={() => setCropperVisible(false)}
+                           className="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-all duration-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                           Cancel
+                        </button>
+                        <button
+                           onClick={handleCroppedImage}
+                           className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           Apply Crop
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         )}
       </div>
    );
 };

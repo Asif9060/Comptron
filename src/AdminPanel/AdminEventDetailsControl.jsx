@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import AdminEventControl from "./AdminEventControl";
 import EventCountdown from "../Components/UI/EventCountdown";
 import FormBuilder from "../Components/Features/FormBuilder";
-import { defaultFields } from "../utils/defaultFormFields";
 import RichTextEditor from "../RichTextStyle/RichTextEditor";
 
 const AdminEventDetailsControl = () => {
@@ -421,7 +420,7 @@ const AdminEventDetailsControl = () => {
                   }}
                   encType="multipart/form-data">
                   {/* Title Input */}
-                  <div className="group ">
+                  <div className="group">
                      <label className="block text-sm font-medium text-gray-700 mb-1">
                         Event Title <span className="text-red-500">*</span>
                      </label>
