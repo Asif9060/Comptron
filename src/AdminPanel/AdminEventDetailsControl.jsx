@@ -428,6 +428,7 @@ const AdminEventDetailsControl = () => {
                         initialContent={title}
                         onContentChange={(newContent) => setTitle(newContent)}
                         contentClassName="bg-white text-gray-800"
+                        minHeight="150px"
                      />
                   </div>
 
@@ -440,6 +441,7 @@ const AdminEventDetailsControl = () => {
                         initialContent={description}
                         onContentChange={(newContent) => setDescription(newContent)}
                         contentClassName="bg-white text-gray-800"
+                        minHeight="250px"
                      />
                   </div>
 
@@ -481,6 +483,7 @@ const AdminEventDetailsControl = () => {
                                     handleBulletPointChange(index, "text", newContent)
                                  }
                                  contentClassName="bg-white text-gray-800"
+                                 minHeight="200px"
                               />
                            </div>
                            {bulletPoints.length > 1 && (
@@ -656,12 +659,12 @@ const AdminEventDetailsControl = () => {
                   className="relative group bg-white rounded-xl p-6 shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-xl">
                   <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-white/50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative">
-                     <h3 className="font-bold text-xl mb-3 text-gray-800"
-                        dangerouslySetInnerHTML={{ __html: event.title }}>
-                     </h3>
-                     <p className="text-gray-600 mb-4 line-clamp-2"
-                        dangerouslySetInnerHTML={{ __html: event.description }}>
-                     </p>
+                     <h3
+                        className="font-bold text-xl mb-3 text-gray-800"
+                        dangerouslySetInnerHTML={{ __html: event.title }}></h3>
+                     <p
+                        className="text-gray-600 mb-4 line-clamp-2"
+                        dangerouslySetInnerHTML={{ __html: event.description }}></p>
 
                      <div className="space-y-2 mb-6">
                         <p className="text-sm text-gray-600">

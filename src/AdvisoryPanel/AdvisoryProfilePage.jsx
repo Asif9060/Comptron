@@ -419,7 +419,7 @@ const AdvisoryProfilePage = () => {
                 </svg>
                 About Me
               </h2>
-              <div className="text-gray-300 leading-relaxed text-sm sm:text-base">
+              <div className="text-white leading-relaxed text-sm sm:text-base">
                 <div className="content-display" dangerouslySetInnerHTML={{ __html: user?.bio }} />
               </div>
             </motion.div>

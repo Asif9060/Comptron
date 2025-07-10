@@ -80,7 +80,7 @@ const AboutPage = () => {
             <Footer></Footer>
          </div>
 
-         <div className="-translate-y-[202rem] sidemenu fixed">
+         <div className="-translate-y-[192rem] sidemenu fixed">
             <SideMenu></SideMenu>
          </div>
       </div>

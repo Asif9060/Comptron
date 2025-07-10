@@ -253,6 +253,7 @@ const AdminNewsArticleControl = () => {
                               initialContent={title}
                               onContentChange={(newContent) => setTitle(newContent)}
                               contentClassName="bg-white text-gray-800"
+                              minHeight="150px"
                            />
                         </div>
 
@@ -275,6 +276,7 @@ const AdminNewsArticleControl = () => {
                               initialContent={author}
                               onContentChange={(newContent) => setAuthor(newContent)}
                               contentClassName="bg-white text-gray-800"
+                              minHeight="150px"
                            />
                         </div>
                      </div>

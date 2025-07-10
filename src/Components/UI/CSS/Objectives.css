@@ -75,14 +75,14 @@
     inset: 0;
     height: 100%;
     width: 100%;
-    background: linear-gradient(to top, #483D68, transparent);
+    /* background: linear-gradient(to top, #483D68, transparent); */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease;
   }
 
   .feature:nth-child(n+5)::after {
-    background: linear-gradient(to bottom, #483D68, transparent);
+    /* background: linear-gradient(to bottom, #483D68, transparent); */
   }
 
   .feature:hover::after {
@@ -145,8 +145,8 @@
     color:  #15A6E1;
   }
   .feature:hover .feature-description {
-    transform: translateX(0.5rem);
-    color:  white;
+    /* transform: translateX(0.5rem); */
+    color:  black;
   }
 
   /* Feature description */
