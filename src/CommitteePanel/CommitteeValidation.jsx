@@ -55,7 +55,7 @@ export default function CommitteeValidation() {
   };
 
   return (
-    <div className="p-6 w-1/2 flex flex-col items-center mx-auto bg-gray-900 rounded-2xl shadow-md">
+    <div className="p-6 w-full mt-5 text-white flex flex-col items-center mx-auto bg-gray-900 rounded-2xl shadow-md">
       <h1 className="text-2xl font-bold mb-4">Validate Committee Member</h1>
       <input
         type="text"

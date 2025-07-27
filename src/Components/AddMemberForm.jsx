@@ -185,6 +185,7 @@ const AddMemberForm = ({ onMemberAdded, selectedMember, setSelectedMember }) => 
 
          <div className="w-full max-w-[50rem] px-4 mb-4 mt-8">
             <MemberList refresh={refresh} setRefresh={setRefresh} />
+            <CommitteeValidation />
          </div>
       </div>
    );

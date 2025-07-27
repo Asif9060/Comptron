@@ -105,6 +105,7 @@ const MemberList = ({ onEdit, refresh }) => {
           </table>
         </div>
       </div>
+      
     </div>
   );
 };
