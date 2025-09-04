@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import moment from "moment-timezone";
 import { CSVLink } from "react-csv";
-import { useNavigate } from "react-router-dom";
 import AdminEventControl from "./AdminEventControl";
 import EventCountdown from "../Components/UI/EventCountdown";
 import FormBuilder from "../Components/Features/FormBuilder";
+import GoogleFormBuilder from "../Components/Features/GoogleFormBuilder";
 import RichTextEditor from "../RichTextStyle/RichTextEditor";
 
 const AdminEventDetailsControl = () => {
-   const navigate = useNavigate();
    const [title, setTitle] = useState("");
    const [description, setDescription] = useState("");
    const [mainImage, setMainImage] = useState(null);
@@ -211,6 +210,8 @@ const AdminEventDetailsControl = () => {
             JSON.stringify({
                enabled: formConfig.enabled,
                fields: formConfig.fields,
+               useGoogleForms: formConfig.useGoogleForms,
+               googleForms: formConfig.googleForms,
             })
          );
 
@@ -258,6 +259,13 @@ const AdminEventDetailsControl = () => {
       setEndDate("");
       setEndTime("");
       setError("");
+      // Reset form configuration
+      setFormConfig({
+         enabled: false,
+         fields: [],
+         useGoogleForms: false,
+         googleForms: [],
+      });
    };
 
    const prepareCSVData = (eventId) => {
@@ -324,6 +332,8 @@ const AdminEventDetailsControl = () => {
       setFormConfig({
          enabled: event.registrationForm?.enabled || false,
          fields: event.registrationForm?.fields || [],
+         useGoogleForms: event.registrationForm?.useGoogleForms || false,
+         googleForms: event.registrationForm?.googleForms || [],
       });
 
       // Fetch registrations when editing an event
@@ -606,17 +616,116 @@ const AdminEventDetailsControl = () => {
                      </div>
                   </div>
 
-                  {/* Form Builder Section */}
-                  <div className="mt-8 space-y-4">
+                  {/* Registration Options Section */}
+                  <div className="mt-8 space-y-6">
                      <h3 className="text-xl font-semibold text-gray-800">
-                        Registration Form Builder
+                        Registration Options
                      </h3>
-                     <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                        <FormBuilder
-                           onFormChange={setFormConfig}
-                           initialFields={formConfig.fields}
-                           enabled={formConfig.enabled}
-                        />
+
+                     <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 mb-8">
+                        <div className="mb-6">
+                           <p className="text-lg font-medium text-gray-700 mb-2">
+                              Choose Registration Method:
+                           </p>
+                           <div className="flex flex-col space-y-2">
+                              <label className="flex items-center cursor-pointer">
+                                 <input
+                                    type="radio"
+                                    name="formType"
+                                    checked={
+                                       !formConfig.useGoogleForms && formConfig.enabled
+                                    }
+                                    onChange={() =>
+                                       setFormConfig((prev) => ({
+                                          ...prev,
+                                          enabled: true,
+                                          useGoogleForms: false,
+                                       }))
+                                    }
+                                    className="form-radio h-5 w-5 text-blue-600"
+                                 />
+                                 <span className="ml-2 text-gray-700">
+                                    Custom Form Builder
+                                 </span>
+                              </label>
+                              <label className="flex items-center cursor-pointer">
+                                 <input
+                                    type="radio"
+                                    name="formType"
+                                    checked={
+                                       formConfig.useGoogleForms && formConfig.enabled
+                                    }
+                                    onChange={() =>
+                                       setFormConfig((prev) => ({
+                                          ...prev,
+                                          enabled: true,
+                                          useGoogleForms: true,
+                                       }))
+                                    }
+                                    className="form-radio h-5 w-5 text-blue-600"
+                                 />
+                                 <span className="ml-2 text-gray-700">Google Forms</span>
+                              </label>
+                              <label className="flex items-center cursor-pointer">
+                                 <input
+                                    type="radio"
+                                    name="formType"
+                                    checked={!formConfig.enabled}
+                                    onChange={() =>
+                                       setFormConfig((prev) => ({
+                                          ...prev,
+                                          enabled: false,
+                                       }))
+                                    }
+                                    className="form-radio h-5 w-5 text-blue-600"
+                                 />
+                                 <span className="ml-2 text-gray-700">
+                                    No Registration
+                                 </span>
+                              </label>
+                           </div>
+                        </div>
+
+                        {/* Show appropriate form builder based on selection */}
+                        {formConfig.enabled && !formConfig.useGoogleForms && (
+                           <div className="pt-4 border-t border-gray-200">
+                              <h4 className="text-lg font-medium text-gray-700 mb-4">
+                                 Custom Form Builder
+                              </h4>
+                              <FormBuilder
+                                 onFormChange={(formData) =>
+                                    setFormConfig((prev) => ({
+                                       ...prev,
+                                       fields: formData.fields,
+                                       enabled: formData.enabled,
+                                    }))
+                                 }
+                                 initialFields={formConfig.fields}
+                                 enabled={true}
+                              />
+                           </div>
+                        )}
+
+                        {formConfig.enabled && formConfig.useGoogleForms && (
+                           <div className="pt-4 border-t border-gray-200">
+                              <h4 className="text-lg font-medium text-gray-700 mb-4">
+                                 Google Forms
+                              </h4>
+                              <GoogleFormBuilder
+                                 onFormChange={(formData) =>
+                                    setFormConfig((prev) => ({
+                                       ...prev,
+                                       googleForms: formData.googleForms,
+                                       enabled: formData.enabled,
+                                       useGoogleForms: formData.useGoogleForms,
+                                    }))
+                                 }
+                                 initialForms={formConfig.googleForms}
+                                 enabled={true}
+                                 useGoogleForms={true}
+                              />
+                           </div>
+                        )}
                      </div>
                   </div>
 

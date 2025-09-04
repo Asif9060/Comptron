@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import MembersPage from "./pages/MembersPage";
 import AboutPage from "./pages/AboutPage";
 import EventPage from "./pages/EventPage";
+import Home from "../src/CSE FEST/pages/Home";
 // import AdminLogin from "./AdminPanel/AdminLogin";
 import AdminPage from "./AdminPanel/AdminPage";
 // import LoadingAnimation from "./Components/UI/LoadingAnimation";
@@ -43,6 +44,11 @@ import AdvisoryProfilePage from "./AdvisoryPanel/AdvisoryProfilePage";
 import AdvisorySettingsPage from "./AdvisoryPanel/AdvisorySettingsPage";
 import Preview from "./RichTextStyle/Preview";
 import RichTextEditor from "./RichTextStyle/RichTextEditor";
+import Event from "./CSE FEST/pages/Event";
+import Gallery from "./CSE FEST/pages/Gallery";
+import AllSponsors from "./CSE FEST/pages/AllSponsors";
+import ContactUs from "./CSE FEST/pages/ContactUs";
+import Gaming from "./CSE FEST/pages/Events/Gaming";
 
 // import Bio from "./USER/Bio";
 
@@ -71,7 +77,13 @@ const App = () => {
                <Route path="/advisory/settings/:id" element={<AdvisorySettingsPage></AdvisorySettingsPage>}></Route>
                <Route path="/preview/:id" element={<Preview></Preview>}></Route>
                <Route path="/textStyle" element={<RichTextEditor></RichTextEditor>}></Route>
-               
+               <Route path="/CseFest" element={<Home></Home>}></Route>
+               <Route path="/FestEvents" element={<Event></Event>}></Route>
+               <Route path="/FestGallery" element={<Gallery></Gallery>}></Route>
+               <Route path="/FestSponsors" element={<AllSponsors></AllSponsors>}></Route>
+               <Route path="/FestContact" element={<ContactUs></ContactUs>}></Route>
+               <Route path="/Gaming" element={<Gaming></Gaming>}></Route>
+
                <Route
                   path="/EventDetails"
                   element={<EventDetails></EventDetails>}></Route>
