@@ -37,7 +37,7 @@ const MainEventsRoadmap = () => {
             type: "Individual",
             image: "https://placehold.co/300x200/1c1535/F6A623?text=CTF+Bootcamp",
             online: true,
-            url: "/events/ctf-bootcamp-session-01",
+            url: "/Programming",
          },
          {
             id: 2,
