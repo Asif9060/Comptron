@@ -61,7 +61,7 @@ const MainEventsRoadmap = () => {
             type: "Individual",
             image: "https://placehold.co/300x200/1c1535/F6A623?text=CTF+Bootcamp",
             online: true,
-            url: "/events/ctf-bootcamp-session-03",
+            url: "/Project",
          },
          {
             id: 4,
@@ -73,7 +73,7 @@ const MainEventsRoadmap = () => {
             type: "Individual",
             image: "https://placehold.co/300x200/1c1535/F6A623?text=Hackathon",
             online: true,
-            url: "/events/hackathon-workshop",
+            url: "/Datathon",
          },
       ],
       []

@@ -50,6 +50,8 @@ import AllSponsors from "./CSE FEST/pages/AllSponsors";
 import ContactUs from "./CSE FEST/pages/ContactUs";
 import Gaming from "./CSE FEST/pages/Events/Gaming";
 import Programming from "./CSE FEST/pages/Events/Programming";
+import Datathon from "./CSE FEST/pages/Events/Datathon";
+import Project from "./CSE FEST/pages/Events/Project";
 
 // import Bio from "./USER/Bio";
 
@@ -85,6 +87,8 @@ const App = () => {
                <Route path="/FestContact" element={<ContactUs></ContactUs>}></Route>
                <Route path="/Gaming" element={<Gaming></Gaming>}></Route>
                <Route path="/Programming" element={<Programming></Programming>}></Route>
+               <Route path="/Datathon" element={<Datathon></Datathon>}></Route>
+               <Route path="/Project" element={<Project></Project>}></Route>
 
                <Route
                   path="/EventDetails"
