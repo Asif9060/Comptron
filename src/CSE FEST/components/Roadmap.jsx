@@ -29,7 +29,7 @@ const MainEventsRoadmap = () => {
       () => [
          {
             id: 1,
-            title: "Capture The Flag Bootcamp - Session 01",
+            title: "Programming Contest",
             date: "FRI, AUG 21",
             description:
                "Join our Capture The Flag bootcamp to learn the basics of cybersecurity and prepare for the CTF competition.",
@@ -53,7 +53,7 @@ const MainEventsRoadmap = () => {
          },
          {
             id: 3,
-            title: "Capture The Flag Bootcamp - Session 03",
+            title: "Project Showcase",
             date: "FRI, AUG 23",
             description:
                "Master advanced cybersecurity concepts and prepare for the final CTF competition with expert guidance.",
@@ -65,7 +65,19 @@ const MainEventsRoadmap = () => {
          },
          {
             id: 4,
-            title: "Hackathon Workshop",
+            title: "Ideathon",
+            date: "WED, AUG 27",
+            description:
+               "Build innovative solutions in this intensive preliminary hackathon with real-world challenges.",
+            category: "Development",
+            type: "Individual",
+            image: "https://placehold.co/300x200/1c1535/F6A623?text=Hackathon",
+            online: true,
+            url: "/Ideathon",
+         },
+         {
+            id: 5,
+            title: "Datathon",
             date: "WED, AUG 27",
             description:
                "Build innovative solutions in this intensive preliminary hackathon with real-world challenges.",

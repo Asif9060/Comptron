@@ -24,7 +24,7 @@ export default function Navbar() {
          <nav
             className={`fixed top-0 left-0 w-full z-50 px-8 py-4 transition-all duration-500 ${
                isScrolled
-                  ? "shadow-2xl shadow-[#F6A623]/20 bg-[#1c1535]/95"
+                  ? "shadow-lg shadow-[#F6A623]/10 bg-[#1c1535]/95"
                   : "shadow-none bg-[#1c1535]/80"
             }`}
             style={{
@@ -257,7 +257,7 @@ export default function Navbar() {
                            🎉 Welcome to CSE FEST 2025
                         </span>
                      </div>
-                     <h1 className="text-4xl md:text-6xl tle font-bold leading-tight mb-6 text-white">
+                     <h1 className="text-4xl md:text-6xl tle expe font-bold leading-tight mb-6 text-white">
                         Experience the
                         <br />
                         <span className="bg-gradient-to-r from-[#F6A623] via-[#ff8c00] to-[#F6A623] bg-clip-text text-transparent animate-gradient bg-300% relative">

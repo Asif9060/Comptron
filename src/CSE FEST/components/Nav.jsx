@@ -22,7 +22,7 @@ export default function Navbar() {
       <nav
          className={`fixed top-0 left-0 w-full z-50 px-8 py-4 transition-all duration-500 ${
             isScrolled
-               ? "shadow-2xl shadow-[#F6A623] bg-[#1c1535]"
+               ? "shadow-2xl shadow-[#F6A623]/10 bg-[#1c1535]"
                : "shadow-none bg-[#1c1535]"
          }`}
          style={{
