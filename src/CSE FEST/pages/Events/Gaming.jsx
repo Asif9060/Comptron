@@ -168,6 +168,23 @@ const Gaming = () => {
                         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                      </button>
 
+                     {/* Download Rules Button */}
+                     <button className="hidden md:flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full hover:bg-white/20 hover:border-[#F6A623]/50 transition-all duration-300">
+                        <svg
+                           className="w-4 h-4"
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24">
+                           <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                           />
+                        </svg>
+                        <span>Rules</span>
+                     </button>
+
                      {/* Enhanced Mobile Menu Button */}
                      <button className="lg:hidden relative w-10 h-10 bg-[#F6A623]/20 hover:bg-[#F6A623]/30 rounded-full flex items-center justify-center transition-all duration-300 group">
                         <div className="absolute inset-0 bg-gradient-to-br from-[#F6A623]/20 to-orange-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -313,7 +330,7 @@ const Gaming = () => {
                {/* 3D Carousel */}
                <div
                   ref={carouselRef}
-                  className="relative w-full max-w-6xl mx-auto"
+                  className="relative translate-y-[-4rem] w-full max-w-6xl mx-auto"
                   style={{ height: "600px" }}>
                   {/* Carousel Track */}
                   <div className="relative w-full h-full">

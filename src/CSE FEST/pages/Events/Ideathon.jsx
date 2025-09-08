@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-const Datathon = () => {
+const Ideathon = () => {
+   const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [timeLeft, setTimeLeft] = useState({
       days: 0,
       hours: 0,
@@ -8,7 +9,6 @@ const Datathon = () => {
       seconds: 0,
    });
 
-   const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [formData, setFormData] = useState({
       teamName: "",
       teamLeader: "",
@@ -16,15 +16,17 @@ const Datathon = () => {
       phone: "",
       university: "",
       members: "",
-      experience: "",
-      motivation: "",
+      posterTitle: "",
+      category: "",
+      abstract: "",
+      previousWork: "",
    });
 
    const [errors, setErrors] = useState({});
 
-   // Countdown timer for datathon
+   // Countdown timer for ideathon
    useEffect(() => {
-      const targetDate = new Date("2025-12-15T09:00:00").getTime();
+      const targetDate = new Date("2025-12-20T09:00:00").getTime();
 
       const timer = setInterval(() => {
          const now = new Date().getTime();
@@ -69,6 +71,10 @@ const Datathon = () => {
       if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
       if (!formData.university.trim()) newErrors.university = "University is required";
       if (!formData.members.trim()) newErrors.members = "Team members are required";
+      if (!formData.posterTitle.trim())
+         newErrors.posterTitle = "Poster title is required";
+      if (!formData.category.trim()) newErrors.category = "Category is required";
+      if (!formData.abstract.trim()) newErrors.abstract = "Abstract is required";
 
       if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
          newErrors.email = "Please enter a valid email address";
@@ -91,31 +97,66 @@ const Datathon = () => {
             phone: "",
             university: "",
             members: "",
-            experience: "",
-            motivation: "",
+            posterTitle: "",
+            category: "",
+            abstract: "",
+            previousWork: "",
          });
       }
    };
 
+   const categories = [
+      "Technology & Innovation",
+      "Healthcare & Medical",
+      "Environmental Solutions",
+      "Social Impact",
+      "Business & Entrepreneurship",
+      "Education & Learning",
+      "Smart Cities",
+      "Artificial Intelligence",
+   ];
+
    const prizes = [
-      { place: "1st Place", amount: "৳80,000", color: "from-yellow-400 to-yellow-600" },
-      { place: "2nd Place", amount: "৳50,000", color: "from-gray-300 to-gray-500" },
-      { place: "3rd Place", amount: "৳30,000", color: "from-amber-600 to-amber-800" },
+      { place: "1st Place", amount: "৳60,000", color: "from-yellow-400 to-yellow-600" },
+      { place: "2nd Place", amount: "৳40,000", color: "from-gray-300 to-gray-500" },
+      { place: "3rd Place", amount: "৳25,000", color: "from-amber-600 to-amber-800" },
    ];
 
-   const timeline = [
-      { phase: "Registration Opens", date: "Nov 1, 2025", status: "completed" },
-      { phase: "Registration Deadline", date: "Dec 10, 2025", status: "current" },
-      { phase: "Problem Statement Release", date: "Dec 12, 2025", status: "upcoming" },
-      { phase: "Competition Day", date: "Dec 15, 2025", status: "upcoming" },
-      { phase: "Result Announcement", date: "Dec 16, 2025", status: "upcoming" },
+   const schedule = [
+      { time: "9:00 AM", activity: "Registration & Setup", icon: "📝" },
+      { time: "10:00 AM", activity: "Opening Ceremony", icon: "🎉" },
+      { time: "10:30 AM", activity: "Poster Session Begins", icon: "🖼️" },
+      { time: "12:30 PM", activity: "Lunch Break", icon: "🍽️" },
+      { time: "1:30 PM", activity: "Judging Session", icon: "👨‍⚖️" },
+      { time: "3:30 PM", activity: "Awards Ceremony", icon: "🏆" },
+      { time: "4:00 PM", activity: "Closing Remarks", icon: "🎯" },
    ];
 
-   const sponsors = [
-      { name: "TechCorp", logo: "🏢", tier: "Platinum" },
-      { name: "DataFlow", logo: "📊", tier: "Gold" },
-      { name: "AI Solutions", logo: "🤖", tier: "Silver" },
-      { name: "CloudTech", logo: "☁️", tier: "Bronze" },
+   const judges = [
+      {
+         name: "Dr. Sarah Ahmed",
+         title: "Research Director, Innovation Lab",
+         expertise: "AI & Machine Learning",
+         image: "👩‍💼",
+      },
+      {
+         name: "Prof. Michael Chen",
+         title: "Head of Engineering, Tech Corp",
+         expertise: "Software Engineering",
+         image: "👨‍🏫",
+      },
+      {
+         name: "Dr. Fatima Khan",
+         title: "Startup Founder & Investor",
+         expertise: "Entrepreneurship",
+         image: "👩‍💻",
+      },
+      {
+         name: "Mr. David Wilson",
+         title: "Innovation Consultant",
+         expertise: "Product Development",
+         image: "👨‍💼",
+      },
    ];
 
    return (
@@ -131,12 +172,12 @@ const Datathon = () => {
                            className="w-6 h-6 text-[#1c1535] font-bold"
                            fill="currentColor"
                            viewBox="0 0 24 24">
-                           <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
+                           <path d="M9 11H7v3h2v-3zm4 0h-2v3h2v-3zm4 0h-2v3h2v-3zm2-7h-2V2a1 1 0 00-2 0v2H9V2a1 1 0 00-2 0v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V9h14v11z" />
                         </svg>
                      </div>
                      <div>
                         <div className="text-xl font-bold text-white">CSE FEST</div>
-                        <div className="text-xs text-[#F6A623]">Datathon 2025</div>
+                        <div className="text-xs text-[#F6A623]">Ideathon 2025</div>
                      </div>
                   </div>
 
@@ -153,7 +194,7 @@ const Datathon = () => {
                         Events
                      </a>
                      <a href="#" className="text-[#F6A623] font-semibold">
-                        Datathon
+                        Ideathon
                      </a>
                      <a
                         href="#"
@@ -196,7 +237,7 @@ const Datathon = () => {
                            Events
                         </a>
                         <a href="#" className="text-[#F6A623] font-semibold">
-                           Datathon
+                           Ideathon
                         </a>
                         <a
                            href="#"
@@ -224,30 +265,31 @@ const Datathon = () => {
                         className="w-5 h-5 text-[#F6A623] mr-2"
                         fill="currentColor"
                         viewBox="0 0 24 24">
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
+                        <path d="M9 11H7v3h2v-3zm4 0h-2v3h2v-3zm4 0h-2v3h2v-3zm2-7h-2V2a1 1 0 00-2 0v2H9V2a1 1 0 00-2 0v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V9h14v11z" />
                      </svg>
                      <span className="text-[#F6A623] font-semibold">CSE FEST 2025</span>
                   </div>
 
-                  <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 cnt leading-tight">
-                     DATA<span className="text-[#F6A623]">THON</span>
+                  <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                     IDEA<span className="text-[#F6A623]">THON</span>
                      <div className="text-2xl md:text-3xl text-purple-300 font-normal mt-2">
-                        The Ultimate Data Science Challenge
+                        Poster Presentation Challenge
                      </div>
                   </h1>
 
-                  <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-                     Join the most prestigious data science competition where brilliant
-                     minds compete to solve real-world problems using cutting-edge
-                     analytics, machine learning, and artificial intelligence.
+                  <p className="text-xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+                     Showcase your innovative ideas through compelling poster
+                     presentations. Present groundbreaking solutions, research findings,
+                     and creative concepts that can shape the future of technology and
+                     society.
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                      <button className="bg-gradient-to-r from-[#F6A623] to-orange-500 text-[#1c1535] px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-[#F6A623]/25 transition-all duration-300 transform hover:scale-105">
-                        Register Now
+                        Register Team
                      </button>
                      <button className="border-2 border-[#F6A623] text-[#F6A623] px-8 py-4 rounded-xl font-semibold hover:bg-[#F6A623] hover:text-[#1c1535] transition-all duration-300">
-                        View Leaderboard
+                        View Guidelines
                      </button>
                      <button className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 hover:border-[#F6A623]/50 transition-all duration-300 flex items-center gap-2">
                         <svg
@@ -269,22 +311,22 @@ const Datathon = () => {
                   {/* Event Stats */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                      <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                        <div className="text-3xl font-bold text-[#F6A623] mb-2">24</div>
-                        <div className="text-gray-300">Hours</div>
+                        <div className="text-3xl font-bold text-[#F6A623] mb-2">6</div>
+                        <div className="text-gray-300">Hours Event</div>
                      </div>
                      <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                         <div className="text-3xl font-bold text-[#F6A623] mb-2">
-                           ৳1.6L
+                           ৳1.25L
                         </div>
                         <div className="text-gray-300">Prize Pool</div>
                      </div>
                      <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                        <div className="text-3xl font-bold text-[#F6A623] mb-2">500+</div>
+                        <div className="text-3xl font-bold text-[#F6A623] mb-2">100+</div>
                         <div className="text-gray-300">Participants</div>
                      </div>
                      <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                        <div className="text-3xl font-bold text-[#F6A623] mb-2">4</div>
-                        <div className="text-gray-300">Members/Team</div>
+                        <div className="text-3xl font-bold text-[#F6A623] mb-2">8</div>
+                        <div className="text-gray-300">Categories</div>
                      </div>
                   </div>
                </div>
@@ -295,11 +337,9 @@ const Datathon = () => {
          <section className="py-16 bg-black/20 backdrop-blur-sm">
             <div className="mx-auto px-6">
                <div className="text-center mb-12">
-                  <h2 className="text-4xl font-bold text-white mb-4">
-                     Competition Starts In
-                  </h2>
+                  <h2 className="text-4xl font-bold text-white mb-4">Event Starts In</h2>
                   <p className="text-gray-300">
-                     Get ready for the ultimate data science challenge!
+                     Get ready to showcase your innovative ideas!
                   </p>
                </div>
 
@@ -325,57 +365,57 @@ const Datathon = () => {
             </div>
          </section>
 
-         {/* Event Details */}
+         {/* About Ideathon */}
          <section className="py-20">
-            <div className="container mx-auto px-6">
+            <div className="mx-auto px-6">
                <div className="text-center mb-16">
                   <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                     Event <span className="text-[#F6A623]">Details</span>
+                     About <span className="text-[#F6A623]">Ideathon</span>
                   </h2>
                   <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                     A comprehensive 24-hour data science marathon featuring real-world
-                     challenges, cutting-edge datasets, and industry-standard evaluation
-                     metrics.
+                     A poster presentation competition where participants showcase
+                     innovative ideas, research findings, and creative solutions through
+                     visually compelling presentations.
                   </p>
                </div>
 
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                   {[
                      {
+                        icon: "💡",
+                        title: "Innovation Focus",
+                        description:
+                           "Present breakthrough ideas that address real-world problems with innovative solutions and creative thinking.",
+                     },
+                     {
                         icon: "📊",
-                        title: "Data Analysis",
+                        title: "Visual Storytelling",
                         description:
-                           "Explore and analyze complex datasets to uncover hidden patterns and insights using statistical methods and visualization techniques.",
+                           "Create compelling poster presentations that effectively communicate complex ideas through visual design and clear messaging.",
                      },
                      {
-                        icon: "🤖",
-                        title: "Machine Learning",
+                        icon: "🎯",
+                        title: "Problem Solving",
                         description:
-                           "Build predictive models using various ML algorithms including regression, classification, clustering, and ensemble methods.",
+                           "Demonstrate how your ideas solve specific challenges in technology, society, environment, or business domains.",
                      },
                      {
-                        icon: "🧠",
-                        title: "Deep Learning",
+                        icon: "🏆",
+                        title: "Competition Format",
                         description:
-                           "Leverage neural networks and deep learning frameworks to solve complex problems in computer vision and NLP.",
+                           "Teams present their posters to expert judges who evaluate innovation, feasibility, presentation quality, and impact potential.",
+                     },
+                     {
+                        icon: "🤝",
+                        title: "Networking",
+                        description:
+                           "Connect with fellow innovators, industry experts, and potential mentors while showcasing your creative solutions.",
                      },
                      {
                         icon: "📈",
-                        title: "Business Intelligence",
+                        title: "Growth Opportunity",
                         description:
-                           "Transform raw data into actionable business insights through advanced analytics and strategic recommendations.",
-                     },
-                     {
-                        icon: "🔍",
-                        title: "Data Mining",
-                        description:
-                           "Extract valuable information from large datasets using sophisticated mining techniques and pattern recognition.",
-                     },
-                     {
-                        icon: "📋",
-                        title: "Presentation",
-                        description:
-                           "Present your findings through compelling visualizations, comprehensive reports, and persuasive storytelling.",
+                           "Receive valuable feedback from judges and peers to refine your ideas and potentially develop them further.",
                      },
                   ].map((item, index) => (
                      <div
@@ -394,15 +434,58 @@ const Datathon = () => {
             </div>
          </section>
 
-         {/* Timeline */}
+         {/* Categories */}
          <section className="py-20 bg-black/20 backdrop-blur-sm">
-            <div className="container mx-auto px-6">
+            <div className="mx-auto px-6">
                <div className="text-center mb-16">
                   <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                     Event <span className="text-[#F6A623]">Timeline</span>
+                     Competition <span className="text-[#F6A623]">Categories</span>
                   </h2>
                   <p className="text-xl text-gray-300">
-                     Stay updated with all important dates and milestones
+                     Choose your category and showcase your innovative ideas
+                  </p>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                  {categories.map((category, index) => (
+                     <div
+                        key={index}
+                        className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-[#F6A623]/50 transition-all duration-300 text-center group hover:scale-105 cursor-pointer">
+                        <div className="w-16 h-16 bg-gradient-to-br from-[#F6A623] to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl shadow-lg group-hover:shadow-[#F6A623]/25">
+                           {index === 0
+                              ? "💻"
+                              : index === 1
+                              ? "🏥"
+                              : index === 2
+                              ? "🌱"
+                              : index === 3
+                              ? "🤝"
+                              : index === 4
+                              ? "💼"
+                              : index === 5
+                              ? "📚"
+                              : index === 6
+                              ? "🏙️"
+                              : "🤖"}
+                        </div>
+                        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#F6A623] transition-colors">
+                           {category}
+                        </h3>
+                     </div>
+                  ))}
+               </div>
+            </div>
+         </section>
+
+         {/* Schedule */}
+         <section className="py-20">
+            <div className="mx-auto px-6">
+               <div className="text-center mb-16">
+                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                     Event <span className="text-[#F6A623]">Schedule</span>
+                  </h2>
+                  <p className="text-xl text-gray-300">
+                     Complete timeline for the Ideathon day
                   </p>
                </div>
 
@@ -411,23 +494,22 @@ const Datathon = () => {
                      {/* Timeline line */}
                      <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-[#F6A623] to-purple-500"></div>
 
-                     {timeline.map((item, index) => (
-                        <div key={index} className="relative flex items-center mb-12">
-                           <div
-                              className={`w-16 h-16 rounded-full flex items-center justify-center border-4 ${
-                                 item.status === "completed"
-                                    ? "bg-[#F6A623] border-[#F6A623] text-[#1c1535]"
-                                    : item.status === "current"
-                                    ? "bg-purple-500 border-purple-500 text-white"
-                                    : "bg-gray-600 border-gray-600 text-gray-300"
-                              } font-bold text-lg z-10`}>
-                              {index + 1}
+                     {schedule.map((item, index) => (
+                        <div key={index} className="relative flex items-center mb-8">
+                           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F6A623] to-orange-500 flex items-center justify-center border-4 border-[#1c1535] font-bold text-2xl z-10 shadow-lg">
+                              {item.icon}
                            </div>
                            <div className="ml-8 bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 flex-1">
-                              <h3 className="text-xl font-bold text-white mb-2">
-                                 {item.phase}
-                              </h3>
-                              <p className="text-[#F6A623] font-semibold">{item.date}</p>
+                              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                                 <div>
+                                    <h3 className="text-xl font-bold text-white mb-1">
+                                       {item.activity}
+                                    </h3>
+                                    <p className="text-[#F6A623] font-semibold">
+                                       {item.time}
+                                    </p>
+                                 </div>
+                              </div>
                            </div>
                         </div>
                      ))}
@@ -436,9 +518,38 @@ const Datathon = () => {
             </div>
          </section>
 
+         {/* Judges Panel */}
+         <section className="py-20 bg-black/20 backdrop-blur-sm">
+            <div className="mx-auto px-6">
+               <div className="text-center mb-16">
+                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                     Expert <span className="text-[#F6A623]">Judges</span>
+                  </h2>
+                  <p className="text-xl text-gray-300">
+                     Meet our distinguished panel of industry experts
+                  </p>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                  {judges.map((judge, index) => (
+                     <div
+                        key={index}
+                        className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-[#F6A623]/50 transition-all duration-300 text-center group hover:scale-105">
+                        <div className="text-6xl mb-4">{judge.image}</div>
+                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#F6A623] transition-colors">
+                           {judge.name}
+                        </h3>
+                        <p className="text-[#F6A623] font-semibold mb-2">{judge.title}</p>
+                        <p className="text-gray-300 text-sm">{judge.expertise}</p>
+                     </div>
+                  ))}
+               </div>
+            </div>
+         </section>
+
          {/* Prizes */}
          <section className="py-20">
-            <div className="container mx-auto px-6">
+            <div className="mx-auto px-6">
                <div className="text-center mb-16">
                   <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                      Prize <span className="text-[#F6A623]">Pool</span>
@@ -470,10 +581,10 @@ const Datathon = () => {
                            </div>
                            <p className="text-white/80 mt-4">
                               {index === 0
-                                 ? "Champion Team"
+                                 ? "Best Innovation"
                                  : index === 1
-                                 ? "Runner-up Team"
-                                 : "Third Place Team"}
+                                 ? "Outstanding Presentation"
+                                 : "Creative Solution"}
                            </p>
                         </div>
                      </div>
@@ -482,8 +593,8 @@ const Datathon = () => {
 
                <div className="text-center mt-12">
                   <p className="text-gray-300 text-lg">
-                     Plus certificates, goodies, and internship opportunities for all
-                     participants!
+                     Plus certificates, mentorship opportunities, and networking sessions
+                     for all participants!
                   </p>
                </div>
             </div>
@@ -491,14 +602,14 @@ const Datathon = () => {
 
          {/* Registration Form */}
          <section className="py-20 bg-black/20 backdrop-blur-sm">
-            <div className="container mx-auto px-6">
+            <div className="mx-auto px-6">
                <div className="max-w-4xl mx-auto">
                   <div className="text-center mb-12">
                      <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                         Register <span className="text-[#F6A623]">Now</span>
                      </h2>
                      <p className="text-xl text-gray-300">
-                        Join the ultimate data science challenge
+                        Join the ultimate poster presentation challenge
                      </p>
                   </div>
 
@@ -627,32 +738,88 @@ const Datathon = () => {
                               </p>
                            )}
                         </div>
+
+                        <div>
+                           <label className="block text-white font-semibold mb-2">
+                              Poster Title *
+                           </label>
+                           <input
+                              type="text"
+                              name="posterTitle"
+                              value={formData.posterTitle}
+                              onChange={handleInputChange}
+                              className={`w-full bg-white/20 border ${
+                                 errors.posterTitle ? "border-red-500" : "border-white/30"
+                              } rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:border-[#F6A623] transition-colors`}
+                              placeholder="Your poster presentation title"
+                           />
+                           {errors.posterTitle && (
+                              <p className="text-red-400 text-sm mt-1">
+                                 {errors.posterTitle}
+                              </p>
+                           )}
+                        </div>
+
+                        <div>
+                           <label className="block text-white font-semibold mb-2">
+                              Category *
+                           </label>
+                           <select
+                              name="category"
+                              value={formData.category}
+                              onChange={handleInputChange}
+                              className={`w-full bg-white/20 border ${
+                                 errors.category ? "border-red-500" : "border-white/30"
+                              } rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#F6A623] transition-colors`}>
+                              <option value="" className="bg-[#1c1535] text-gray-300">
+                                 Select a category
+                              </option>
+                              {categories.map((category, index) => (
+                                 <option
+                                    key={index}
+                                    value={category}
+                                    className="bg-[#1c1535] text-white">
+                                    {category}
+                                 </option>
+                              ))}
+                           </select>
+                           {errors.category && (
+                              <p className="text-red-400 text-sm mt-1">
+                                 {errors.category}
+                              </p>
+                           )}
+                        </div>
                      </div>
 
                      <div className="mt-6">
                         <label className="block text-white font-semibold mb-2">
-                           Previous Experience
+                           Abstract *
                         </label>
                         <textarea
-                           name="experience"
-                           value={formData.experience}
+                           name="abstract"
+                           value={formData.abstract}
                            onChange={handleInputChange}
-                           rows="3"
-                           className="w-full bg-white/20 border border-white/30 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:border-[#F6A623] transition-colors resize-none"
-                           placeholder="Describe your team's experience in data science competitions (optional)"></textarea>
+                           rows="4"
+                           className={`w-full bg-white/20 border ${
+                              errors.abstract ? "border-red-500" : "border-white/30"
+                           } rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:border-[#F6A623] transition-colors resize-none`}
+                           placeholder="Provide a brief abstract of your idea (max 300 words)"></textarea>
+                        {errors.abstract && (
+                           <p className="text-red-400 text-sm mt-1">{errors.abstract}</p>
+                        )}
                      </div>
 
                      <div className="mt-6">
                         <label className="block text-white font-semibold mb-2">
-                           Motivation
+                           Previous Work
                         </label>
                         <textarea
-                           name="motivation"
-                           value={formData.motivation}
+                           name="previousWork"
+                           value={formData.previousWork}
                            onChange={handleInputChange}
                            rows="3"
                            className="w-full bg-white/20 border border-white/30 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:border-[#F6A623] transition-colors resize-none"
-                           placeholder="Why do you want to participate in this datathon? (optional)"></textarea>
+                           placeholder="Any previous work or research related to your idea (optional)"></textarea>
                      </div>
 
                      <div className="mt-8 text-center">
@@ -667,42 +834,16 @@ const Datathon = () => {
             </div>
          </section>
 
-         {/* Sponsors */}
+         {/* Guidelines */}
          <section className="py-20">
             <div className="mx-auto px-6">
-               <div className="text-center mb-16">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                     Our <span className="text-[#F6A623]">Sponsors</span>
-                  </h2>
-                  <p className="text-xl text-gray-300">Powered by industry leaders</p>
-               </div>
-
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                  {sponsors.map((sponsor, index) => (
-                     <div
-                        key={index}
-                        className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-[#F6A623]/50 transition-all duration-300 text-center group hover:scale-105">
-                        <div className="text-4xl mb-4">{sponsor.logo}</div>
-                        <h3 className="text-white font-bold mb-2 group-hover:text-[#F6A623] transition-colors">
-                           {sponsor.name}
-                        </h3>
-                        <p className="text-[#F6A623] text-sm">{sponsor.tier}</p>
-                     </div>
-                  ))}
-               </div>
-            </div>
-         </section>
-
-         {/* Rules & Guidelines */}
-         <section className="py-20 bg-black/20 backdrop-blur-sm">
-            <div className="mx-auto px-6">
-               <div className="max-w-4xl mx-auto">
+               <div className="max-w-6xl mx-auto">
                   <div className="text-center mb-16">
                      <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                        Rules & <span className="text-[#F6A623]">Guidelines</span>
+                        Presentation <span className="text-[#F6A623]">Guidelines</span>
                      </h2>
                      <p className="text-xl text-gray-300">
-                        Please read carefully before participating
+                        Important guidelines for your poster presentation
                      </p>
                   </div>
 
@@ -715,28 +856,28 @@ const Datathon = () => {
                               viewBox="0 0 24 24">
                               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                            </svg>
-                           Competition Rules
+                           Poster Requirements
                         </h3>
                         <ul className="space-y-4 text-gray-300">
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
-                              Teams must consist of 3-4 members maximum
+                              Size: A1 (594 × 841 mm) or 24″ × 36″
                            </li>
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
-                              Competition duration is strictly 24 hours
+                              High-resolution images and clear text
                            </li>
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
-                              All external libraries and tools are allowed
+                              Include title, authors, and university
                            </li>
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
-                              Internet access will be provided
+                              Professional design and layout
                            </li>
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
-                              Final submission must include source code
+                              Maximum 3-4 team members per poster
                            </li>
                         </ul>
                      </div>
@@ -754,19 +895,19 @@ const Datathon = () => {
                         <ul className="space-y-4 text-gray-300">
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
-                              Model accuracy and performance (40%)
+                              Innovation and creativity (30%)
                            </li>
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
-                              Innovation and creativity (25%)
+                              Technical feasibility (25%)
                            </li>
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
-                              Code quality and documentation (20%)
+                              Presentation quality (25%)
                            </li>
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
-                              Presentation and visualization (15%)
+                              Impact and relevance (20%)
                            </li>
                            <li className="flex items-start">
                               <span className="text-[#F6A623] mr-2">•</span>
@@ -780,7 +921,7 @@ const Datathon = () => {
          </section>
 
          {/* Footer */}
-         <footer className="bg-[#1c1535] text-white border-t border-[#F6A623]/30">
+         <footer className="bg-[#1c1535] text-white border-t-4 border-[#F6A623]">
             <div className="mx-auto px-6 py-12">
                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                   {/* Logo and Description */}
@@ -791,19 +932,20 @@ const Datathon = () => {
                               className="w-6 h-6 text-[#1c1535] font-bold"
                               fill="currentColor"
                               viewBox="0 0 24 24">
-                              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
+                              <path d="M9 11H7v3h2v-3zm4 0h-2v3h2v-3zm4 0h-2v3h2v-3zm2-7h-2V2a1 1 0 00-2 0v2H9V2a1 1 0 00-2 0v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V9h14v11z" />
                            </svg>
                         </div>
                         <div>
                            <div className="text-2xl font-bold text-[#F6A623]">
                               CSE FEST
                            </div>
-                           <div className="text-sm text-[#F6A623]/70">Datathon 2025</div>
+                           <div className="text-sm text-[#F6A623]/70">Ideathon 2025</div>
                         </div>
                      </div>
                      <p className="text-gray-300 leading-relaxed">
-                        The ultimate data science experience. Join the most challenging
-                        datathon, compete with brilliant minds, and win amazing prizes.
+                        Showcase your innovative ideas through compelling poster
+                        presentations. Join the ultimate ideathon experience and compete
+                        with brilliant minds.
                      </p>
                      <div className="flex space-x-4">
                         {["facebook", "twitter", "instagram", "linkedin"].map(
@@ -841,7 +983,7 @@ const Datathon = () => {
                         Quick Links
                      </h3>
                      <ul className="space-y-3">
-                        {["Home", "Events", "Datathon", "Leaderboard", "Contact"].map(
+                        {["Home", "Events", "Ideathon", "Guidelines", "Contact"].map(
                            (link) => (
                               <li key={link}>
                                  <a
@@ -875,11 +1017,9 @@ const Datathon = () => {
                               />
                            </svg>
                            <div>
-                              <div className="text-white font-medium">
-                                 24 Hours Duration
-                              </div>
+                              <div className="text-white font-medium">6 Hours Event</div>
                               <div className="text-gray-400 text-sm">
-                                 Competition Time
+                                 Full Day Experience
                               </div>
                            </div>
                         </div>
@@ -898,11 +1038,9 @@ const Datathon = () => {
                            </svg>
                            <div>
                               <div className="text-white font-medium">
-                                 4 Members per Team
+                                 3-4 Members per Team
                               </div>
-                              <div className="text-gray-400 text-sm">
-                                 Maximum Team Size
-                              </div>
+                              <div className="text-gray-400 text-sm">Team Size</div>
                            </div>
                         </div>
                         <div className="flex items-start space-x-3">
@@ -920,7 +1058,7 @@ const Datathon = () => {
                            </svg>
                            <div>
                               <div className="text-white font-medium">
-                                 BDT 160K Prize Pool
+                                 BDT 125K Prize Pool
                               </div>
                               <div className="text-gray-400 text-sm">Total Rewards</div>
                            </div>
@@ -947,7 +1085,7 @@ const Datathon = () => {
                                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                               />
                            </svg>
-                           <span className="text-gray-300">datathon@csefest.com</span>
+                           <span className="text-gray-300">ideathon@csefest.com</span>
                         </div>
                         <div className="flex items-start space-x-3">
                            <svg
@@ -962,7 +1100,7 @@ const Datathon = () => {
                                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                               />
                            </svg>
-                           <span className="text-gray-300">+880 1890-430561</span>
+                           <span className="text-gray-300">+880 1890-430563</span>
                         </div>
                         <div className="flex items-start space-x-3">
                            <svg
@@ -992,7 +1130,7 @@ const Datathon = () => {
                {/* Bottom Section */}
                <div className="mt-12 pt-8 border-t border-[#F6A623]/30 flex flex-col md:flex-row justify-between items-center">
                   <p className="text-gray-400 text-sm">
-                     © 2025 CSE FEST Datathon. All rights reserved.
+                     © 2025 CSE FEST Ideathon. All rights reserved.
                   </p>
                   <div className="flex space-x-6 mt-4 md:mt-0">
                      <a
@@ -1008,7 +1146,7 @@ const Datathon = () => {
                      <a
                         href="#"
                         className="text-gray-400 hover:text-[#F6A623] text-sm transition-colors duration-300">
-                        Rules & Regulations
+                        Poster Guidelines
                      </a>
                   </div>
                </div>
@@ -1018,4 +1156,4 @@ const Datathon = () => {
    );
 };
 
-export default Datathon;
+export default Ideathon;

@@ -211,12 +211,12 @@ const Project = () => {
                   {/* Navigation Links - Desktop */}
                   <div className="hidden md:flex items-center space-x-8">
                      <a
-                        href="#"
+                        href="/CseFest"
                         className="text-gray-300 hover:text-[#F6A623] transition-colors duration-300">
                         Home
                      </a>
                      <a
-                        href="#"
+                        href="/FestEvents"
                         className="text-gray-300 hover:text-[#F6A623] transition-colors duration-300">
                         Events
                      </a>
@@ -316,6 +316,21 @@ const Project = () => {
                      </button>
                      <button className="border-2 border-[#F6A623] text-[#F6A623] px-8 py-4 rounded-xl font-semibold hover:bg-[#F6A623] hover:text-[#1c1535] transition-all duration-300">
                         View Winners
+                     </button>
+                     <button className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 hover:border-[#F6A623]/50 transition-all duration-300 flex items-center gap-2">
+                        <svg
+                           className="w-5 h-5"
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24">
+                           <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                           />
+                        </svg>
+                        Download Guidelines
                      </button>
                   </div>
 
