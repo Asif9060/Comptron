@@ -270,10 +270,10 @@ const Ideathon = () => {
                      <span className="text-[#F6A623] font-semibold">CSE FEST 2025</span>
                   </div>
 
-                  <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                  <h1 className="text-5xl md:text-7xl font-bold cnt text-white mb-6 leading-tight">
                      IDEA<span className="text-[#F6A623]">THON</span>
                      <div className="text-2xl md:text-3xl text-purple-300 font-normal mt-2">
-                        Poster Presentation Challenge
+                        Poster Presentation
                      </div>
                   </h1>
 
@@ -921,7 +921,7 @@ const Ideathon = () => {
          </section>
 
          {/* Footer */}
-         <footer className="bg-[#1c1535] text-white border-t-4 border-[#F6A623]">
+         <footer className="bg-[#1c1535] text-white border-t border-[#F6A623]/30">
             <div className="mx-auto px-6 py-12">
                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                   {/* Logo and Description */}
