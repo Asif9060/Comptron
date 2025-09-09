@@ -151,7 +151,7 @@ export default function Navbar() {
             <ul className="flex flex-col items-center py-8 space-y-6">
                <li>
                   <a
-                     href="#"
+                     href="/CseFest"
                      className="group relative text-white font-medium hover:text-[#F6A623] transition-all duration-300 px-6 py-2 rounded-lg hover:bg-[#F6A623]/10"
                      onClick={() => setIsMenuOpen(false)}>
                      <span className="relative z-10">Home</span>
@@ -160,7 +160,7 @@ export default function Navbar() {
                </li>
                <li>
                   <a
-                     href="#"
+                     href="/FestEvents"
                      className="group relative text-white font-medium hover:text-[#F6A623] transition-all duration-300 px-6 py-2 rounded-lg hover:bg-[#F6A623]/10"
                      onClick={() => setIsMenuOpen(false)}>
                      <span className="relative z-10">Event</span>
@@ -169,7 +169,7 @@ export default function Navbar() {
                </li>
                <li>
                   <a
-                     href="#"
+                     href="/FestGallery"
                      className="group relative text-white font-medium hover:text-[#F6A623] transition-all duration-300 px-6 py-2 rounded-lg hover:bg-[#F6A623]/10"
                      onClick={() => setIsMenuOpen(false)}>
                      <span className="relative z-10">Gallery</span>
@@ -178,7 +178,7 @@ export default function Navbar() {
                </li>
                <li>
                   <a
-                     href="#"
+                     href="/FestSponsors"
                      className="group relative text-white font-medium hover:text-[#F6A623] transition-all duration-300 px-6 py-2 rounded-lg hover:bg-[#F6A623]/10"
                      onClick={() => setIsMenuOpen(false)}>
                      <span className="relative z-10">Sponsor</span>
@@ -187,7 +187,7 @@ export default function Navbar() {
                </li>
                <li>
                   <a
-                     href="#"
+                     href="/FestContact"
                      className="group relative text-white font-medium hover:text-[#F6A623] transition-all duration-300 px-6 py-2 rounded-lg hover:bg-[#F6A623]/10"
                      onClick={() => setIsMenuOpen(false)}>
                      <span className="relative z-10">Contact</span>

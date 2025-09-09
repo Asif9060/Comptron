@@ -254,12 +254,12 @@ const Project = () => {
                   <div className="md:hidden mt-4 pb-4 border-t border-[#F6A623]/30 pt-4">
                      <div className="flex flex-col space-y-3">
                         <a
-                           href="#"
+                           href="/CseFest"
                            className="text-gray-300 hover:text-[#F6A623] transition-colors duration-300">
                            Home
                         </a>
                         <a
-                           href="#"
+                           href="/FestEvents"
                            className="text-gray-300 hover:text-[#F6A623] transition-colors duration-300">
                            Events
                         </a>

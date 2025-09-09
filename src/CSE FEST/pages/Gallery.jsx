@@ -402,7 +402,7 @@ const Footer = () => {
 const eventsData = [
    {
       id: 1,
-      name: "Capture The Flag Bootcamp",
+      name: "Programming Contest",
       date: "AUG 21-23, 2025",
       description:
          "Three-day intensive cybersecurity bootcamp preparing participants for the CTF competition.",
@@ -424,7 +424,7 @@ const eventsData = [
    },
    {
       id: 2,
-      name: "Hackathon Workshop",
+      name: "Gaming Contest",
       date: "AUG 27, 2025",
       description:
          "Intensive preliminary hackathon with real-world challenges and expert mentorship.",
@@ -446,7 +446,7 @@ const eventsData = [
    },
    {
       id: 3,
-      name: "Tech Talk Series",
+      name: "Ideathon",
       date: "AUG 25-26, 2025",
       description:
          "Inspiring talks from industry leaders and technology experts on emerging trends.",
@@ -468,7 +468,29 @@ const eventsData = [
    },
    {
       id: 4,
-      name: "Code Wars",
+      name: "Project Showcase",
+      date: "AUG 28, 2025",
+      description:
+         "Competitive programming challenge testing algorithmic skills and problem-solving abilities.",
+      mainImages: [
+         "https://placehold.co/1200x600/1c1535/F6A623?text=Code+Wars+Main+1",
+         "https://placehold.co/1200x600/1c1535/F6A623?text=Code+Wars+Main+2",
+         "https://placehold.co/1200x600/1c1535/F6A623?text=Code+Wars+Main+3",
+      ],
+      galleryImages: [
+         "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+         "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+         "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+         "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+         "https://images.unsplash.com/photo-1593642532871-8b12e02d091c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+         "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+         "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      ],
+   },
+   {
+      id: 5,
+      name: "Datathon",
       date: "AUG 28, 2025",
       description:
          "Competitive programming challenge testing algorithmic skills and problem-solving abilities.",
@@ -492,7 +514,7 @@ const eventsData = [
 
 // Main Gallery Component
 const Gallery = () => {
-   const events = eventsData; // Use the external events array
+   const events = eventsData;
 
    const [selectedEvent, setSelectedEvent] = useState(events[0]);
    const [mainImageIndex, setMainImageIndex] = useState(0);
