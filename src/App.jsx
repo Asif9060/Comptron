@@ -53,6 +53,7 @@ import Programming from "./CSE FEST/pages/Events/Programming";
 import Datathon from "./CSE FEST/pages/Events/Datathon";
 import Project from "./CSE FEST/pages/Events/Project";
 import Ideathon from "./CSE FEST/pages/Events/Ideathon";
+import Magazine from "./pages/Magazine";
 
 // import Bio from "./USER/Bio";
 
@@ -91,6 +92,7 @@ const App = () => {
                <Route path="/Datathon" element={<Datathon></Datathon>}></Route>
                <Route path="/Project" element={<Project></Project>}></Route>
                <Route path="/Ideathon" element={<Ideathon></Ideathon>}></Route>
+               <Route path="/Magazine" element={<Magazine></Magazine>}></Route>
 
                <Route
                   path="/EventDetails"

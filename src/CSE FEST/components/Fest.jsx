@@ -25,7 +25,7 @@ const Fest = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
-      <div className="container mx-auto px-4 py-16 md:py-24">
+      <div className=" mx-auto px-4 py-16 md:py-24">
         {/* Header Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl lg:text-6xl exp font-bold text-[#1C1535] mb-6 leading-tight">

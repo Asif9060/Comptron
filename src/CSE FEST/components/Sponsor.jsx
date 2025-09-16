@@ -7,8 +7,8 @@ const TitleSponsor = () => {
    const [isHovered, setIsHovered] = useState(false);
 
    return (
-      <div className="py-0 bg-[#1C1535]">
-         <div className="container mx-auto px-4">
+      <div className="py-10 bg-[#1C1535]">
+         <div className="mx-auto px-4">
             {/* Section Header */}
             <div className="text-center mb-0">
                <div className="flex items-center justify-center mb-4">
@@ -21,15 +21,15 @@ const TitleSponsor = () => {
                      Title Sponsor
                   </h2>
                </div>
-               <div className="w-16 h-1 bg-[#F6A623] mx-auto mb-0"></div>
-               <p className="text-gray-300 max-w-2xl mx-auto">
+               <div className="w-16 h-16 bg-[#F6A623] mx-auto mb-5"></div>
+               <p className="text-gray-300 max-w-2xl mx-auto mb-5">
                   Our premier partner who makes the NWU CSE FEST possible through their
                   generous support
                </p>
             </div>
 
             {/* Sponsor Card */}
-            <div className="max-w-4xl translate-y-[-8em] mx-auto">
+            <div className="max-w-4xl mx-auto">
                <div
                   className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-200 cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_40px_rgba(246,166,35,0.3)]"
                   onMouseEnter={() => setIsHovered(true)}
@@ -77,8 +77,8 @@ const EventOrganizer = () => {
    const [isHovered, setIsHovered] = useState(false);
 
    return (
-      <div className="py-0 translate-y-[-15em] h-[45rem] bg-[#1C1535]">
-         <div className="container mx-auto px-4">
+      <div className="py-6 h-[45rem] bg-[#1C1535]">
+         <div className="mx-auto px-4">
             {/* Section Header */}
             <div className="text-center mb-0">
                <div className="flex items-center justify-center mb-4">
@@ -92,14 +92,14 @@ const EventOrganizer = () => {
                   </h2>
                </div>
                <div className="w-16 h-1 bg-[#F6A623] mx-auto mb-0"></div>
-               <p className="text-gray-300 max-w-2xl mx-auto">
+               <p className="text-gray-300 max-w-2xl mb-7 mx-auto">
                   The dedicated team and organization responsible for bringing the NWU CSE
                   FEST to life
                </p>
             </div>
 
             {/* Organizer Cards */}
-            <div className="max-w-6xl translate-y-[-12em] mx-auto">
+            <div className="max-w-6xl mx-auto">
                <div className="grid md:grid-cols-2 gap-8">
                   {/* First Organizer Card */}
                   <div
