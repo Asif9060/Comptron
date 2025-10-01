@@ -54,6 +54,7 @@ import Datathon from "./CSE FEST/pages/Events/Datathon";
 import Project from "./CSE FEST/pages/Events/Project";
 import Ideathon from "./CSE FEST/pages/Events/Ideathon";
 import Magazine from "./pages/Magazine";
+import CseFestAdmin from "./AdminPanel/CseFestAdmin";
 
 // import Bio from "./USER/Bio";
 
@@ -78,10 +79,16 @@ const App = () => {
                <Route path="/GMembers" element={<Members></Members>}></Route>
                <Route path="/past-events" element={<PastEvents></PastEvents>}></Route>
                {/* <Route path="/advisoryRegistration" element={<AdvisoryRegistrationForm></AdvisoryRegistrationForm>}></Route> */}
-               <Route path="/advisory/profile/:id" element={<AdvisoryProfilePage></AdvisoryProfilePage>}></Route>
-               <Route path="/advisory/settings/:id" element={<AdvisorySettingsPage></AdvisorySettingsPage>}></Route>
+               <Route
+                  path="/advisory/profile/:id"
+                  element={<AdvisoryProfilePage></AdvisoryProfilePage>}></Route>
+               <Route
+                  path="/advisory/settings/:id"
+                  element={<AdvisorySettingsPage></AdvisorySettingsPage>}></Route>
                <Route path="/preview/:id" element={<Preview></Preview>}></Route>
-               <Route path="/textStyle" element={<RichTextEditor></RichTextEditor>}></Route>
+               <Route
+                  path="/textStyle"
+                  element={<RichTextEditor></RichTextEditor>}></Route>
                <Route path="/CseFest" element={<Home></Home>}></Route>
                <Route path="/FestEvents" element={<Event></Event>}></Route>
                <Route path="/FestGallery" element={<Gallery></Gallery>}></Route>
@@ -230,6 +237,14 @@ const App = () => {
                   element={
                      <AdminProtectedRoute>
                         <UserApprovalPage />
+                     </AdminProtectedRoute>
+                  }></Route>
+
+               <Route
+                  path="/CseFestAdmin"
+                  element={
+                     <AdminProtectedRoute>
+                        <CseFestAdmin />
                      </AdminProtectedRoute>
                   }></Route>
 

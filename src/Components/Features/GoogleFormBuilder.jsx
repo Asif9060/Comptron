@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -10,17 +10,45 @@ const GoogleFormBuilder = ({
    enabled = false,
    useGoogleForms = false,
 }) => {
-   const [forms, setForms] = useState(initialForms);
+   const normalizeForms = (formsList = []) =>
+      formsList.map((form) => ({
+         ...form,
+         customFields: (form.customFields || []).map((field) => ({
+            ...field,
+            mappedKey: field.mappedKey || "custom",
+            showInRegistration: field.showInRegistration ?? false,
+         })),
+      }));
+
+   const [forms, setForms] = useState(() => normalizeForms(initialForms));
    const [isEnabled, setIsEnabled] = useState(enabled);
    const [useGoogle, setUseGoogle] = useState(useGoogleForms);
 
+   // Build a stable payload and only notify parent when it actually changes
+   const payload = useMemo(
+      () => ({ enabled: isEnabled, useGoogleForms: useGoogle, googleForms: forms }),
+      [isEnabled, useGoogle, forms]
+   );
+
+   const lastSentRef = useRef(null);
+
    useEffect(() => {
-      onFormChange({
-         enabled: isEnabled,
-         useGoogleForms: useGoogle,
-         googleForms: forms,
-      });
-   }, [forms, isEnabled, useGoogle, onFormChange]);
+      try {
+         const serialized = JSON.stringify(payload);
+         if (serialized !== lastSentRef.current) {
+            lastSentRef.current = serialized;
+            if (typeof onFormChange === "function") {
+               onFormChange(payload);
+            }
+         }
+      } catch {
+         // Fallback: if serialization fails (shouldn't here), still call once
+         if (typeof onFormChange === "function") {
+            onFormChange(payload);
+         }
+      }
+      // Depend on payload; onFormChange identity changes won't re-trigger unless payload changes
+   }, [payload, onFormChange]);
 
    const addForm = () => {
       setForms([
@@ -38,12 +66,120 @@ const GoogleFormBuilder = ({
    const updateForm = (index, field, value) => {
       const updatedForms = [...forms];
       updatedForms[index] = { ...updatedForms[index], [field]: value };
-      setForms(updatedForms);
+      setForms(normalizeForms(updatedForms));
    };
 
    const removeForm = (index) => {
       const updatedForms = forms.filter((_, i) => i !== index);
-      setForms(updatedForms);
+      setForms(normalizeForms(updatedForms));
+   };
+
+   const extractFormId = (formUrl) => {
+      if (!formUrl) return null;
+      const match = formUrl.match(/\/forms\/d\/e\/([^/]+)\/?|\/forms\/d\/([^/]+)/);
+      return match ? match[1] || match[2] : null;
+   };
+
+   const buildSampleValue = (field) => {
+      const label = field?.label || "Field";
+      const type = (field?.type || "text").toLowerCase();
+      if (Array.isArray(field?.options) && field.options.length > 0) {
+         return field.options[0];
+      }
+      switch (type) {
+         case "email":
+            return "test@example.com";
+         case "tel":
+         case "phone":
+            return "01712345678";
+         case "number":
+            return "1";
+         case "date":
+            return new Date().toISOString().slice(0, 10);
+         case "time":
+            return "10:00";
+         default:
+            return `Test ${label}`;
+      }
+   };
+
+   const testGoogleForm = async (index) => {
+      try {
+         const form = forms[index];
+         const formId = extractFormId(form.formUrl);
+         if (!formId) {
+            toast.error("Please provide a valid Google Form URL first.");
+            return;
+         }
+
+         // Fetch actual structure to know true required fields
+         let structureFields = [];
+         try {
+            const r = await axios.get(`/api/google-forms/structure/${formId}`);
+            if (r?.data?.success && Array.isArray(r.data.fields)) {
+               structureFields = r.data.fields;
+            }
+         } catch {
+            // ignore structure fetch failure; we'll fall back to admin fields
+         }
+
+         // Prefer structure-based required list; fall back to admin-marked required; then to first 3
+         const structureRequired = structureFields.filter((f) => f.required && f.entryId);
+         const adminRequired = (form.customFields || []).filter(
+            (f) => f.required && f.entryId
+         );
+         const candidateList =
+            structureRequired.length > 0
+               ? structureRequired
+               : adminRequired.length > 0
+               ? adminRequired
+               : (form.customFields || []).slice(0, 3);
+         const sampleFields = candidateList.filter(Boolean);
+
+         if (sampleFields.length === 0) {
+            toast.error("No valid entry IDs found to submit.");
+            return;
+         }
+
+         const formData = {};
+         sampleFields.forEach((field) => {
+            formData[field.entryId] = buildSampleValue(field);
+         });
+
+         const loading = toast.loading("Testing Google Form submission...");
+         try {
+            const res = await axios.post("/api/google-forms/submit", {
+               formId,
+               formData,
+            });
+            if (res?.data?.success) {
+               const diag = res?.data?.diagnostic || {};
+               const info = [];
+               if (diag.successMarkerDetected) info.push("confirmation text found");
+               if (diag.redirected) info.push("redirected");
+               if (Array.isArray(diag.hiddenAdded) && diag.hiddenAdded.length > 0)
+                  info.push(`hidden: ${diag.hiddenAdded.length}`);
+               toast.success(
+                  `Test submitted${
+                     info.length ? ` (${info.join(", ")})` : ""
+                  }. Check Responses.`
+               );
+            } else {
+               toast(res?.data?.message || "Submission returned a non-success response", {
+                  icon: "⚠️",
+               });
+            }
+         } catch (err) {
+            const msg =
+               err?.response?.data?.message || err?.message || "Submission failed";
+            toast.error(`Google Form test failed: ${msg}`);
+         } finally {
+            toast.dismiss(loading);
+         }
+      } catch (e) {
+         console.error("Test Google Form error:", e);
+         toast.error("Unexpected error during test. Check console logs.");
+      }
    };
 
    const validateFormUrl = (url) => {
@@ -101,6 +237,12 @@ const GoogleFormBuilder = ({
                         type: field.type || "text",
                         required: field.required || false,
                         options: field.options || [],
+                        // extracted fields are hidden in registration by default
+                        showInRegistration: false,
+                        mappedKey: "custom",
+                        helpText: field.helpText || "",
+                        placeholder: field.placeholder || "",
+                        checkboxLabel: field.checkboxLabel || "",
                      })),
                   };
                   setForms(updatedForms);
@@ -273,6 +415,19 @@ const GoogleFormBuilder = ({
                                  className="form-checkbox h-5 w-5 text-blue-500"
                               />
                               <label className="text-gray-300 text-sm">Active</label>
+                           </div>
+
+                           <div className="flex items-center gap-3">
+                              <button
+                                 type="button"
+                                 onClick={() => testGoogleForm(index)}
+                                 className="px-3 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition">
+                                 Test Google Form
+                              </button>
+                              <span className="text-xs text-gray-400">
+                                 Sends a sample payload for required fields (or first 3
+                                 fields).
+                              </span>
                            </div>
 
                            <details className="bg-gray-600 p-4 rounded-lg mt-4">

@@ -1,26 +1,40 @@
-Create a React component for a digital magazine with realistic page-flip animations in Magazine.jsx. The component should:
+# Admin Panel - CSE FEST Management Integration Requirements
 
-1. Implement an interactive flipbook interface that simulates physical magazine page turns
-2. Support smooth left-to-right page transitions with 3D perspective
-3. Display magazine content across multiple pages with proper pagination
-4. Handle touch/click events for page navigation
-5. Include customizable parameters for:
-   - Page turn speed
-   - Page size and dimensions
-   - Turn animation curve
-   - Page flip sound effects (optional)
+## Overview
+Implement a dedicated CSE FEST management section in the Admin Panel with Google Forms integration for event registration.
 
-Requirements:
-- Use CSS transforms for 3D page flip animations
-- Ensure responsive layout across different screen sizes
-- Implement proper page preloading for smooth transitions
-- Support both forward and backward page navigation
-- Include visual feedback for page turning interactions
-- Handle edge cases (first/last page)
+## Navigation Structure
+- Admin Panel
+  - CSE FEST (new section)
+    - Events
+      - Programming Contest
 
-The implementation should use modern React practices and maintain high performance for smooth animations. Consider using libraries like react-pageflip or turn.js for the core page-turning functionality.
+## Programming Contest Registration
+1. Link the Form with the "Register" button in Programming.jsx
+2. Implement a modal dialog triggered by the button click
+3. Create a custom registration form within the modal
 
-References:
-- React Page Flip documentation
-- Turn.js API reference
-- CSS 3D Transforms specification
+## Google Forms Integration Requirements
+1. Create a custom UI form that mirrors the Google Form fields
+2. Implement background integration with Google Forms
+3. Style the form according to brand guidelines
+4. Use Server Folder For any backend logic
+
+## Technical Specifications
+- Use custom HTML form components instead of iframes
+- Maintain consistent styling with the rest of the admin panel
+- Implement proper form validation
+- Add loading states during submission
+- Handle success/error states appropriately
+
+## Design Guidelines
+- Follow existing brand colors and typography
+- Use consistent spacing and layout
+- Ensure responsive design for all screen sizes
+- Add clear success/error messages
+- Include a progress indicator during submission
+
+## Documentation References
+- Google Forms API documentation: https://developers.google.com/forms/api
+
+Please provide the Google Form template URL and branding guidelines to proceed with implementation.

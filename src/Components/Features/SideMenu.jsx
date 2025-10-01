@@ -168,6 +168,38 @@ const SideMenu = () => {
                         </Tooltip.Content>
                      </Tooltip.Portal>
                   </Tooltip.Root>
+                  {/* <Tooltip.Root>
+                     <Tooltip.Trigger asChild>
+                        <a
+                           href="/CseFestAdmin"
+                           htmlFor="csefest"
+                           className="has-[:checked]:shadow-lg relative w-full h-16 p-4 ease-in-out duration-300 border-solid border-black/10 has-[:checked]:border group flex flex-row gap-3 items-center justify-center text-black rounded-xl">
+                           <input
+                              className="hidden peer/expand"
+                              type="radio"
+                              name="path"
+                              id="csefest"
+                           />
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                              <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+                           </svg>
+                        </a>
+                     </Tooltip.Trigger>
+                     <Tooltip.Portal>
+                        <Tooltip.Content
+                           className="bg-gray-900 text-white px-2 py-1 rounded-md text-sm shadow-lg z-50 
+                          animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out 
+                          data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 
+                          data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 
+                          data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2
+                          duration-200"
+                           sideOffset={5}
+                           side="right">
+                           CSE FEST
+                           <Tooltip.Arrow className="fill-gray-900" />
+                        </Tooltip.Content>
+                     </Tooltip.Portal>
+                  </Tooltip.Root> */}
                   <Tooltip.Root>
                      <Tooltip.Trigger asChild>
                         <a

@@ -3,12 +3,27 @@ import PropTypes from "prop-types";
 import { toast } from "react-hot-toast";
 
 const GoogleFormFieldEditor = ({ form, onUpdate }) => {
-   const [fields, setFields] = useState(form.customFields || []);
+   const [fields, setFields] = useState(() =>
+      (form.customFields || []).map((field) => ({
+         entryId: field.entryId || "",
+         label: field.label || "",
+         type: field.type || "text",
+         required: field.required || false,
+         showInRegistration: field.showInRegistration ?? true,
+         mappedKey: field.mappedKey || "custom",
+         options: field.options || [],
+         helpText: field.helpText || "",
+         placeholder: field.placeholder || "",
+         checkboxLabel: field.checkboxLabel || "",
+      }))
+   );
    const [newField, setNewField] = useState({
       entryId: "",
       label: "",
       type: "text",
       required: false,
+      showInRegistration: true,
+      mappedKey: "custom",
       options: [],
       helpText: "",
       placeholder: "",
@@ -29,6 +44,17 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
       { value: "textarea", label: "Text Area" },
       { value: "date", label: "Date" },
       { value: "time", label: "Time" },
+   ];
+
+   const standardFieldOptions = [
+      { value: "custom", label: "-- Keep as additional field --" },
+      { value: "teamName", label: "Team Name" },
+      { value: "member1", label: "Team Captain / Member 1" },
+      { value: "member2", label: "Member 2" },
+      { value: "member3", label: "Member 3" },
+      { value: "university", label: "University / Institution" },
+      { value: "email", label: "Email Address" },
+      { value: "phone", label: "Phone Number" },
    ];
 
    const handleAddOption = () => {
@@ -107,6 +133,8 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
          label: "",
          type: "text",
          required: false,
+         showInRegistration: true,
+         mappedKey: "custom",
          options: [],
          helpText: "",
          placeholder: "",
@@ -118,7 +146,19 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
 
    const handleEditField = (index) => {
       setEditingIndex(index);
-      setNewField({ ...fields[index] });
+      const field = fields[index] || {};
+      setNewField({
+         entryId: field.entryId || "",
+         label: field.label || "",
+         type: field.type || "text",
+         required: field.required || false,
+         showInRegistration: field.showInRegistration ?? true,
+         mappedKey: field.mappedKey || "custom",
+         options: field.options || [],
+         helpText: field.helpText || "",
+         placeholder: field.placeholder || "",
+         checkboxLabel: field.checkboxLabel || "",
+      });
       setShowNewFieldForm(true);
    };
 
@@ -142,6 +182,8 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
          label: "",
          type: "text",
          required: false,
+         showInRegistration: true,
+         mappedKey: "custom",
          options: [],
          helpText: "",
          placeholder: "",
@@ -164,12 +206,22 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
                      key={index}
                      className="p-3 border border-gray-200 rounded-md flex justify-between items-center bg-gray-50">
                      <div>
-                        <p className="font-medium">
+                        <p className="font-medium text-black">
                            {field.label}{" "}
                            {field.required && <span className="text-red-500">*</span>}
                         </p>
                         <p className="text-sm text-gray-500">
                            ID: {field.entryId} | Type: {field.type}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                           Mapped as:{" "}
+                           {standardFieldOptions.find(
+                              (opt) => opt.value === (field.mappedKey || "custom")
+                           )?.label || "Custom/Additional"}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                           Visible in Registration:{" "}
+                           {field.showInRegistration ? "Yes" : "No"}
                         </p>
                         {(field.type === "select" || field.type === "radio") &&
                            field.options?.length > 0 && (
@@ -239,7 +291,7 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
                            setNewField((prev) => ({ ...prev, entryId: e.target.value }))
                         }
                         placeholder="e.g., entry.123456789"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                        className="w-full px-3 py-2 border text-black border-gray-300 rounded-md"
                      />
                      <p className="text-xs text-gray-500 mt-1">
                         The ID from Google Forms (e.g., entry.123456789)
@@ -258,7 +310,7 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
                            setNewField((prev) => ({ ...prev, label: e.target.value }))
                         }
                         placeholder="e.g., Full Name"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                        className="w-full px-3 py-2 text-black border border-gray-300 rounded-md"
                      />
                   </div>
 
@@ -272,10 +324,29 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
                         onChange={(e) =>
                            setNewField((prev) => ({ ...prev, type: e.target.value }))
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md">
+                        className="w-full px-3 py-2 border text-black border-gray-300 rounded-md">
                         {fieldTypes.map((type) => (
                            <option key={type.value} value={type.value}>
                               {type.label}
+                           </option>
+                        ))}
+                     </select>
+                  </div>
+
+                  {/* Mapped Field */}
+                  <div>
+                     <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Map to Required Field
+                     </label>
+                     <select
+                        value={newField.mappedKey || "custom"}
+                        onChange={(e) =>
+                           setNewField((prev) => ({ ...prev, mappedKey: e.target.value }))
+                        }
+                        className="w-full px-3 py-2 border text-black border-gray-300 rounded-md">
+                        {standardFieldOptions.map((option) => (
+                           <option key={option.value} value={option.value}>
+                              {option.label}
                            </option>
                         ))}
                      </select>
@@ -301,6 +372,27 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
                         Required field
                      </label>
                   </div>
+
+                  {/* Show in Registration */}
+                  <div className="flex items-center">
+                     <input
+                        type="checkbox"
+                        id="field-show"
+                        checked={newField.showInRegistration}
+                        onChange={(e) =>
+                           setNewField((prev) => ({
+                              ...prev,
+                              showInRegistration: e.target.checked,
+                           }))
+                        }
+                        className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                     />
+                     <label
+                        htmlFor="field-show"
+                        className="ml-2 block text-sm text-gray-700">
+                        Show in Registration modal
+                     </label>
+                  </div>
                </div>
 
                {/* Options for select and radio */}
@@ -315,7 +407,7 @@ const GoogleFormFieldEditor = ({ form, onUpdate }) => {
                            value={optionInput}
                            onChange={(e) => setOptionInput(e.target.value)}
                            placeholder="Add an option"
-                           className="flex-grow px-3 py-2 border border-gray-300 rounded-l-md"
+                           className="flex-grow px-3 py-2 text-black border border-gray-300 rounded-l-md"
                            onKeyPress={(e) => e.key === "Enter" && handleAddOption()}
                         />
                         <button

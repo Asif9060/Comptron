@@ -1,8 +1,47 @@
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
-import SimpleGoogleFormSubmit from "../../../Components/SimpleGoogleFormSubmit";
+import GoogleFormEmbed from "../../../Components/Features/GoogleFormEmbed";
 
 Modal.setAppElement("#root");
+
+const REQUIRED_KEY_LABELS = {
+   teamName: "Team Name",
+   member1: "Captain/Member 1",
+   member2: "Member 2",
+   member3: "Member 3",
+   university: "University/Institution",
+   email: "Email",
+   phone: "Phone",
+};
+
+// Lightweight label-based inference (client-side fallback)
+const inferMappedKeyFromLabel = (label = "") => {
+   const l = label.toLowerCase();
+   if (l.includes("team name") || (l.includes("team") && !l.includes("member")))
+      return "teamName";
+   if (l.includes("captain") || l.includes("leader") || l.includes("member 1"))
+      return "member1";
+   if (l.includes("member 2") || (l.includes("member") && l.includes("2")))
+      return "member2";
+   if (l.includes("member 3") || (l.includes("member") && l.includes("3")))
+      return "member3";
+   if (
+      l.includes("university") ||
+      l.includes("institution") ||
+      l.includes("college") ||
+      l.includes("school")
+   )
+      return "university";
+   if (l.includes("email") || l.includes("mail")) return "email";
+   if (
+      l.includes("phone") ||
+      l.includes("contact") ||
+      l.includes("mobile") ||
+      l.includes("number")
+   )
+      return "phone";
+   return null;
+};
 
 const Programming = () => {
    const [timeLeft, setTimeLeft] = useState({
@@ -13,27 +52,84 @@ const Programming = () => {
    });
    const [registrationOpen] = useState(true);
    const [isModalOpen, setIsModalOpen] = useState(false);
-   const [formConfig, setFormConfig] = useState(null);
-   const [loading, setLoading] = useState(true);
+   const [selectedForm, setSelectedForm] = useState(null);
+   const [registrationForm, setRegistrationForm] = useState(null);
 
-   // Load Google Form config on mount
+   // Load Google Form configuration
    useEffect(() => {
       const loadGoogleFormConfig = async () => {
-         setLoading(true);
          try {
             const response = await fetch(
                "https://comptron-server-2.onrender.com/api/csefest/programming/google-form-config"
             );
-
             if (response.ok) {
                const config = await response.json();
-               console.log("Loaded config:", config);
-               setFormConfig(config);
+               // setGoogleFormConfig(config);
+
+               // Load Google Forms fields that are marked to show in registration
+               if (
+                  config.enabled &&
+                  config.useGoogleForms &&
+                  Array.isArray(config.googleForms) &&
+                  config.googleForms.length > 0
+               ) {
+                  const mappedFields = [];
+                  const seenMappedKeys = new Set();
+                  const requiredKeys = new Set();
+
+                  config.googleForms
+                     .filter((f) => f && f.active !== false)
+                     .forEach((form) => {
+                        if (!Array.isArray(form.customFields)) return;
+
+                        form.customFields.forEach((field) => {
+                           if (!field || !field.entryId) return;
+
+                           const canonicalKey =
+                              field.mappedKey && field.mappedKey !== "custom"
+                                 ? field.mappedKey
+                                 : inferMappedKeyFromLabel(field.label) || null;
+                           const shouldInclude =
+                              field.showInRegistration === true ||
+                              (canonicalKey &&
+                                 REQUIRED_FIELD_KEYS.includes(canonicalKey));
+                           if (canonicalKey && seenMappedKeys.has(canonicalKey)) return;
+                           if (!shouldInclude) return;
+
+                           const normalizedField = {
+                              ...field,
+                              mappedKey: canonicalKey || "custom",
+                              value: "",
+                              required: field.required === true,
+                           };
+
+                           mappedFields.push(normalizedField);
+                           if (canonicalKey) {
+                              seenMappedKeys.add(canonicalKey);
+                              if (normalizedField.required)
+                                 requiredKeys.add(canonicalKey);
+                           }
+                        });
+                     });
+
+                  setDynamicFormFields(mappedFields);
+                  const missingKeys = REQUIRED_FIELD_KEYS.filter(
+                     (key) => !seenMappedKeys.has(key)
+                  );
+                  setMissingMappedKeys(missingKeys);
+                  setRequiredMappedKeys(Array.from(requiredKeys));
+               } else {
+                  setDynamicFormFields([]);
+                  setMissingMappedKeys([]);
+                  setRequiredMappedKeys([]);
+               }
             }
          } catch (error) {
-            console.error("Error loading config:", error);
-         } finally {
-            setLoading(false);
+            console.error("Error loading Google Form config:", error);
+            // Clear dynamic fields on error
+            setDynamicFormFields([]);
+            setMissingMappedKeys([]);
+            setRequiredMappedKeys([]);
          }
       };
 
@@ -66,17 +162,167 @@ const Programming = () => {
       return () => clearInterval(timer);
    }, []);
 
-   const handleOpenModal = () => {
-      console.log("Button clicked! Form config:", formConfig);
-      if (formConfig?.formUrl && formConfig?.fields?.length > 0) {
-         setIsModalOpen(true);
-      } else {
-         console.warn("Cannot open modal - form not configured properly");
-      }
+   const handleDynamicFieldChange = (fieldId, value) => {
+      setDynamicFormFields((prev) =>
+         prev.map((field) => (field.entryId === fieldId ? { ...field, value } : field))
+      );
    };
 
-   const handleCloseModal = () => {
-      setIsModalOpen(false);
+   const validateForm = () => {
+      const errors = {};
+
+      // Validate Google Forms fields
+      dynamicFormFields.forEach((field) => {
+         const rawValue = field.value ?? "";
+         const normalizedValue =
+            typeof rawValue === "string" ? rawValue.trim() : String(rawValue);
+
+         if (field.required && !normalizedValue) {
+            errors[field.entryId] = `${field.label} is required`;
+         }
+
+         // Email validation for email fields
+         if (field.type === "email" && normalizedValue) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(normalizedValue)) {
+               errors[field.entryId] = "Please enter a valid email address";
+            }
+         }
+
+         // Phone validation for tel fields
+         if (field.type === "tel" && normalizedValue) {
+            const phoneRegex = /^(\+8801|8801|01)[3-9]\d{8}$/;
+            if (!phoneRegex.test(normalizedValue.replace(/\s|-/g, ""))) {
+               errors[field.entryId] = "Please enter a valid Bangladeshi phone number";
+            }
+         }
+      });
+
+      return errors;
+   };
+
+   const handleRegistration = async (e) => {
+      e.preventDefault();
+
+      const trulyMissingRequired = requiredMappedKeys.filter((k) =>
+         missingMappedKeys.includes(k)
+      );
+      if (trulyMissingRequired.length > 0) {
+         setSubmitStatus("error");
+         const missingLabels = trulyMissingRequired.map(
+            (key) => REQUIRED_KEY_LABELS[key] || key
+         );
+         alert(
+            `Registration form is missing required fields: ${missingLabels.join(
+               ", "
+            )}. Please contact the organizers to update the form mapping before trying again.`
+         );
+         return;
+      }
+
+      const validationErrors = validateForm();
+      if (Object.keys(validationErrors).length > 0) {
+         // Show first validation error
+         const firstError = Object.values(validationErrors)[0];
+         setSubmitStatus("error");
+         alert(firstError); // You can replace this with a better notification system
+         return;
+      }
+
+      const mappedValues = dynamicFormFields.reduce((acc, field) => {
+         if (field.mappedKey && field.mappedKey !== "custom") {
+            const rawValue = field.value ?? "";
+            const normalizedValue =
+               typeof rawValue === "string" ? rawValue.trim() : rawValue;
+            acc[field.mappedKey] = normalizedValue;
+         }
+         return acc;
+      }, {});
+
+      const keysToEnforce = effectiveRequired;
+      const missingRequiredValues = keysToEnforce.filter((key) => {
+         const value = mappedValues[key];
+         if (typeof value === "string") {
+            return value.trim() === "";
+         }
+         return value === undefined || value === null || value === "";
+      });
+
+      if (missingRequiredValues.length > 0) {
+         setSubmitStatus("error");
+         const missingLabels = missingRequiredValues.map(
+            (key) => REQUIRED_KEY_LABELS[key] || key
+         );
+         alert(
+            `Please provide values for the following required fields: ${missingLabels.join(
+               ", "
+            )}.`
+         );
+         return;
+      }
+
+      setIsSubmitting(true);
+      setSubmitStatus(null);
+
+      try {
+         // Prepare submission data from Google Forms fields only
+         const dynamicFieldPayload = dynamicFormFields.reduce((acc, field) => {
+            const rawValue = field.value ?? "";
+            acc[field.entryId] =
+               typeof rawValue === "string" ? rawValue.trim() : rawValue;
+            return acc;
+         }, {});
+
+         const submissionData = {
+            dynamicFields: dynamicFieldPayload,
+            mappedValues,
+         };
+
+         const response = await fetch(
+            "https://comptron-server-2.onrender.com/api/csefest/programming/register",
+            {
+               method: "POST",
+               headers: {
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify(submissionData),
+            }
+         );
+
+         const result = await response.json();
+
+         if (response.ok) {
+            setSubmitStatus("success");
+            // Reset dynamic fields
+            setDynamicFormFields((prev) =>
+               prev.map((field) => ({ ...field, value: "" }))
+            );
+            // Close modal after 2 seconds
+            setTimeout(() => {
+               setShowRegistrationForm(false);
+               setSubmitStatus(null);
+            }, 2000);
+         } else {
+            setSubmitStatus("error");
+            console.error("Registration error:", result);
+            console.log("Debug info:", {
+               submissionData,
+               dynamicFields: dynamicFormFields,
+               serverResponse: result,
+            });
+            // Show detailed error to user temporarily for debugging
+            alert(
+               `Registration failed: ${result.message}\n\nDebug info:\nReceived fields: ${
+                  result.receivedFields?.join(", ") || "None"
+               }\nMissing: ${result.missingFields?.join(", ") || "Unknown"}`
+            );
+         }
+      } catch (error) {
+         setSubmitStatus("error");
+         console.error("Network error:", error);
+      } finally {
+         setIsSubmitting(false);
+      }
    };
 
    return (
@@ -392,36 +638,297 @@ const Programming = () => {
                   </p>
                </div>
 
-               <div className="max-w-md mx-auto text-center">
-                  {registrationOpen ? (
-                     <button
-                        onClick={handleOpenModal}
-                        disabled={
-                           loading || !formConfig?.formUrl || !formConfig?.fields?.length
-                        }
-                        className="w-full bg-gradient-to-r from-[#F6A623] to-orange-500 hover:from-[#e0951f] hover:to-[#d67a0d] text-[#1c1535] font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#F6A623]/30 relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
-                        <span className="relative z-10 flex items-center justify-center space-x-2">
-                           <svg
-                              className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
-                              fill="currentColor"
-                              viewBox="0 0 24 24">
-                              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                           </svg>
-                           <span>{loading ? "Loading..." : "Register Your Team"}</span>
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                     </button>
-                  ) : (
-                     <div className="bg-red-500/20 border border-red-500/30 rounded-xl p-6">
-                        <h3 className="text-red-400 font-semibold mb-2">
-                           Registration Closed
-                        </h3>
-                        <p className="text-gray-300">
-                           Registration period has ended. Stay tuned for next contest!
-                        </p>
+               {!showRegistrationForm ? (
+                  <div className="max-w-md mx-auto text-center">
+                     {registrationOpen ? (
+                        <button
+                           onClick={() => setShowRegistrationForm(true)}
+                           className="w-full bg-gradient-to-r from-[#F6A623] to-orange-500 hover:from-[#e0951f] hover:to-[#d67a0d] text-[#1c1535] font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#F6A623]/30 relative overflow-hidden group">
+                           <span className="relative z-10 flex items-center justify-center space-x-2">
+                              <svg
+                                 className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
+                                 fill="currentColor"
+                                 viewBox="0 0 24 24">
+                                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                              </svg>
+                              <span>Register Your Team</span>
+                           </span>
+                           <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                        </button>
+                     ) : (
+                        <div className="bg-red-500/20 border border-red-500/30 rounded-xl p-6">
+                           <h3 className="text-red-400 font-semibold mb-2">
+                              Registration Closed
+                           </h3>
+                           <p className="text-gray-300">
+                              Registration period has ended. Stay tuned for next contest!
+                           </p>
+                        </div>
+                     )}
+                  </div>
+               ) : (
+                  <div className="max-w-2xl mx-auto">
+                     {/* Modal Backdrop */}
+                     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                        <div className="bg-gradient-to-br from-slate-900/95 to-slate-800/95 backdrop-blur-sm border border-[#F6A623]/20 rounded-2xl p-8 shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                           {/* Modal Header */}
+                           <div className="flex justify-between items-center mb-6">
+                              <h3 className="text-2xl font-bold text-[#F6A623]">
+                                 Team Registration
+                              </h3>
+                              <button
+                                 onClick={() => setShowRegistrationForm(false)}
+                                 className="text-gray-400 hover:text-white transition-colors duration-200"
+                                 disabled={isSubmitting}>
+                                 <svg
+                                    className="w-6 h-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                       strokeLinecap="round"
+                                       strokeLinejoin="round"
+                                       strokeWidth={2}
+                                       d="M6 18L18 6M6 6l12 12"
+                                    />
+                                 </svg>
+                              </button>
+                           </div>
+
+                           {/* Success Message */}
+                           {submitStatus === "success" && (
+                              <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-xl">
+                                 <div className="flex items-center space-x-3">
+                                    <svg
+                                       className="w-6 h-6 text-green-400"
+                                       fill="none"
+                                       stroke="currentColor"
+                                       viewBox="0 0 24 24">
+                                       <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                       />
+                                    </svg>
+                                    <div>
+                                       <h4 className="text-green-400 font-semibold">
+                                          Registration Successful!
+                                       </h4>
+                                       <p className="text-green-300 text-sm">
+                                          Your team has been registered for the
+                                          programming contest.
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                           )}
+
+                           {/* Error Message */}
+                           {submitStatus === "error" && (
+                              <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-xl">
+                                 <div className="flex items-center space-x-3">
+                                    <svg
+                                       className="w-6 h-6 text-red-400"
+                                       fill="none"
+                                       stroke="currentColor"
+                                       viewBox="0 0 24 24">
+                                       <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                       />
+                                    </svg>
+                                    <div>
+                                       <h4 className="text-red-400 font-semibold">
+                                          Registration Failed
+                                       </h4>
+                                       <p className="text-red-300 text-sm">
+                                          Please check your information and try again.
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                           )}
+
+                           <form onSubmit={handleRegistration}>
+                              {/* Google Form Fields */}
+                              {dynamicFormFields.length > 0 ? (
+                                 <div>
+                                    <h4 className="text-[#F6A623] font-semibold mb-6">
+                                       Registration Information
+                                    </h4>
+                                    {trulyMissingRequired.length > 0 && (
+                                       <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-sm text-red-200">
+                                          <p className="font-semibold mb-1">
+                                             Form mapping incomplete
+                                          </p>
+                                          <p>
+                                             The registration form is missing required
+                                             fields:{" "}
+                                             {trulyMissingRequired
+                                                .map(
+                                                   (key) =>
+                                                      REQUIRED_KEY_LABELS[key] || key
+                                                )
+                                                .join(", ")}
+                                             . Please contact the organizers to update the
+                                             form before submitting.
+                                          </p>
+                                       </div>
+                                    )}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                       {dynamicFormFields.map((field) => (
+                                          <div
+                                             key={field.entryId}
+                                             className={
+                                                field.type === "paragraph" ||
+                                                field.type === "textarea"
+                                                   ? "md:col-span-2"
+                                                   : ""
+                                             }>
+                                             <label className="block text-[#F6A623] font-semibold mb-2">
+                                                {field.label}{" "}
+                                                {field.required && (
+                                                   <span className="text-red-400">*</span>
+                                                )}
+                                             </label>
+                                             {field.type === "select" ? (
+                                                <select
+                                                   value={field.value}
+                                                   onChange={(e) =>
+                                                      handleDynamicFieldChange(
+                                                         field.entryId,
+                                                         e.target.value
+                                                      )
+                                                   }
+                                                   required={field.required}
+                                                   disabled={isSubmitting}
+                                                   className="w-full bg-[#1c1535]/80 border border-[#F6A623]/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#F6A623]/50 focus:border-[#F6A623] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200">
+                                                   <option value="">
+                                                      Select an option...
+                                                   </option>
+                                                   {field.options?.map((option, idx) => (
+                                                      <option key={idx} value={option}>
+                                                         {option}
+                                                      </option>
+                                                   ))}
+                                                </select>
+                                             ) : field.type === "paragraph" ||
+                                               field.type === "textarea" ? (
+                                                <textarea
+                                                   value={field.value}
+                                                   onChange={(e) =>
+                                                      handleDynamicFieldChange(
+                                                         field.entryId,
+                                                         e.target.value
+                                                      )
+                                                   }
+                                                   required={field.required}
+                                                   disabled={isSubmitting}
+                                                   rows={4}
+                                                   className="w-full bg-[#1c1535]/80 border border-[#F6A623]/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#F6A623]/50 focus:border-[#F6A623] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                                                   placeholder={
+                                                      field.placeholder ||
+                                                      `Enter ${field.label.toLowerCase()}...`
+                                                   }
+                                                />
+                                             ) : (
+                                                <input
+                                                   type={
+                                                      field.type === "email"
+                                                         ? "email"
+                                                         : field.type === "tel"
+                                                         ? "tel"
+                                                         : field.type === "number"
+                                                         ? "number"
+                                                         : field.type === "date"
+                                                         ? "date"
+                                                         : field.type === "time"
+                                                         ? "time"
+                                                         : "text"
+                                                   }
+                                                   value={field.value}
+                                                   onChange={(e) =>
+                                                      handleDynamicFieldChange(
+                                                         field.entryId,
+                                                         e.target.value
+                                                      )
+                                                   }
+                                                   required={field.required}
+                                                   disabled={isSubmitting}
+                                                   className="w-full bg-[#1c1535]/80 border border-[#F6A623]/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#F6A623]/50 focus:border-[#F6A623] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                                                   placeholder={
+                                                      field.placeholder ||
+                                                      `Enter ${field.label.toLowerCase()}...`
+                                                   }
+                                                />
+                                             )}
+                                          </div>
+                                       ))}
+                                    </div>
+                                 </div>
+                              ) : (
+                                 <div className="text-center py-12">
+                                    <div className="text-6xl mb-4">📝</div>
+                                    <h3 className="text-xl font-semibold text-gray-300 mb-2">
+                                       Registration Form Not Configured
+                                    </h3>
+                                    <p className="text-gray-400">
+                                       Please contact the admin to configure the
+                                       registration form with Google Forms.
+                                    </p>
+                                 </div>
+                              )}
+
+                              <div className="flex space-x-4 mt-8">
+                                 <button
+                                    type="button"
+                                    onClick={() => setShowRegistrationForm(false)}
+                                    disabled={isSubmitting}
+                                    className="flex-1 border-2 border-gray-500 text-gray-300 hover:bg-gray-500 hover:text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    Cancel
+                                 </button>
+                                 <button
+                                    type="submit"
+                                    disabled={
+                                       isSubmitting ||
+                                       submitStatus === "success" ||
+                                       trulyMissingRequired.length > 0
+                                    }
+                                    className="flex-1 bg-gradient-to-r from-[#F6A623] to-orange-500 hover:from-[#e0951f] hover:to-[#d67a0d] text-[#1c1535] font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2">
+                                    {isSubmitting ? (
+                                       <>
+                                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1c1535]"></div>
+                                          <span>Submitting...</span>
+                                       </>
+                                    ) : submitStatus === "success" ? (
+                                       <>
+                                          <svg
+                                             className="w-4 h-4"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             viewBox="0 0 24 24">
+                                             <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M5 13l4 4L19 7"
+                                             />
+                                          </svg>
+                                          <span>Registered!</span>
+                                       </>
+                                    ) : (
+                                       <span>Submit Registration</span>
+                                    )}
+                                 </button>
+                              </div>
+                           </form>
+                        </div>
                      </div>
-                  )}
-               </div>
+                  </div>
+               )}
             </div>
          </section>
 
@@ -461,44 +968,6 @@ const Programming = () => {
                </div>
             </div>
          </section>
-
-         {/* Google Form Modal - Using GoogleFormEmbed component like EventDetails */}
-         <Modal
-            isOpen={isModalOpen}
-            onRequestClose={handleCloseModal}
-            className="modal-content"
-            overlayClassName="modal-overlay"
-            contentLabel="Registration Form">
-            <div className="max-w-4xl mx-auto bg-gradient-to-br from-slate-900/95 to-slate-800/95 backdrop-blur-sm border border-[#F6A623]/20 rounded-2xl p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
-               <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold text-[#F6A623]">Team Registration</h2>
-                  <button
-                     onClick={handleCloseModal}
-                     className="text-gray-400 hover:text-white transition-colors duration-200">
-                     <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path
-                           strokeLinecap="round"
-                           strokeLinejoin="round"
-                           strokeWidth={2}
-                           d="M6 18L18 6M6 6l12 12"
-                        />
-                     </svg>
-                  </button>
-               </div>
-
-               {formConfig?.formUrl && formConfig?.fields?.length > 0 && (
-                  <SimpleGoogleFormSubmit
-                     formUrl={formConfig.formUrl}
-                     fields={formConfig.fields}
-                     onClose={handleCloseModal}
-                  />
-               )}
-            </div>
-         </Modal>
 
          {/* Footer */}
          <footer className="bg-[#1c1535] text-white border-t border-[#F6A623]/30">
@@ -732,31 +1201,6 @@ const Programming = () => {
                </div>
             </div>
          </footer>
-
-         {/* Modal Styles */}
-         <style>{`
-            .modal-overlay {
-               position: fixed;
-               top: 0;
-               left: 0;
-               right: 0;
-               bottom: 0;
-               background-color: rgba(0, 0, 0, 0.75);
-               display: flex;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               padding: 20px;
-            }
-            .modal-content {
-               position: relative;
-               max-width: 900px;
-               width: 100%;
-               max-height: 90vh;
-               overflow: hidden;
-               outline: none;
-            }
-         `}</style>
       </div>
    );
 };
