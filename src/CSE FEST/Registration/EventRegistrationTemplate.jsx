@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -40,6 +41,63 @@ const formatDeadline = (deadline) => {
 const EventRegistrationTemplate = ({ event }) => {
    const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(event.deadline));
    const navigate = useNavigate();
+   const shouldReduceMotion = useReducedMotion();
+
+   const heroVariants = useMemo(
+      () => ({
+         hidden: {
+            opacity: 0,
+            y: shouldReduceMotion ? 0 : 40,
+         },
+         visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+               duration: 0.7,
+               ease: [0.16, 1, 0.3, 1],
+            },
+         },
+      }),
+      [shouldReduceMotion]
+   );
+
+   const countdownVariants = useMemo(
+      () => ({
+         hidden: {
+            opacity: 0,
+            y: shouldReduceMotion ? 0 : 16,
+         },
+         visible: (index = 0) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+               duration: 0.4,
+               ease: [0.16, 1, 0.3, 1],
+               delay: shouldReduceMotion ? 0 : index * 0.05,
+            },
+         }),
+      }),
+      [shouldReduceMotion]
+   );
+
+   const buttonVariants = useMemo(
+      () => ({
+         hover: shouldReduceMotion
+            ? {}
+            : {
+                 y: -6,
+                 boxShadow: "0 20px 40px rgba(246, 166, 35, 0.18)",
+                 transition: { type: "spring", stiffness: 240, damping: 18 },
+              },
+         tap: shouldReduceMotion
+            ? {}
+            : {
+                 scale: 0.97,
+                 transition: { type: "spring", stiffness: 500, damping: 35 },
+              },
+      }),
+      [shouldReduceMotion]
+   );
 
    useEffect(() => {
       setTimeLeft(getTimeLeft(event.deadline));
@@ -75,12 +133,26 @@ const EventRegistrationTemplate = ({ event }) => {
          <div className="pointer-events-none absolute -top-48 left-1/2 z-0 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl"></div>
          <div className="pointer-events-none absolute bottom-[-260px] right-[-120px] z-0 h-[520px] w-[520px] rounded-full bg-purple-500/20 blur-[220px]"></div>
 
-         <div className="relative z-10 mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center gap-12 px-6 py-20 text-center lg:px-10">
-            <div className="w-full">
-               <button
+         <motion.div
+            className="relative z-10 mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center gap-12 px-6 py-20 text-center lg:px-10"
+            variants={heroVariants}
+            initial="hidden"
+            animate="visible">
+            <motion.div
+               className="w-full"
+               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -12 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}>
+               <motion.button
                   type="button"
                   onClick={handleBack}
-                  className="group mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#F6A623]/40 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/60">
+                  className="group mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/40 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/60"
+                  whileHover={
+                     shouldReduceMotion
+                        ? undefined
+                        : { x: -4, boxShadow: "0 12px 30px rgba(15, 23, 42, 0.25)" }
+                  }
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}>
                   <svg
                      className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5"
                      fill="none"
@@ -100,15 +172,34 @@ const EventRegistrationTemplate = ({ event }) => {
                      />
                   </svg>
                   Back to registrations
-               </button>
-            </div>
-            <div className="space-y-6">
-               <span
+               </motion.button>
+            </motion.div>
+            <motion.div
+               className="space-y-6"
+               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 28 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{
+                  duration: 0.65,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: shouldReduceMotion ? 0 : 0.1,
+               }}>
+               <motion.span
                   className={`mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br ${event.gradient} text-4xl shadow-lg shadow-black/30`}
-                  aria-hidden="true">
+                  aria-hidden="true"
+                  initial={{ scale: shouldReduceMotion ? 1 : 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}>
                   {event.icon}
-               </span>
-               <div className="space-y-4">
+               </motion.span>
+               <motion.div
+                  className="space-y-4"
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                     duration: 0.6,
+                     ease: [0.16, 1, 0.3, 1],
+                     delay: shouldReduceMotion ? 0 : 0.12,
+                  }}>
                   <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
                      {event.title}
                   </h1>
@@ -125,27 +216,19 @@ const EventRegistrationTemplate = ({ event }) => {
                         <span className="ml-2 text-red-400">(Registration closed)</span>
                      )}
                   </p>
-               </div>
-            </div>
+               </motion.div>
+            </motion.div>
 
-            <div className="grid w-full gap-4 sm:grid-cols-4">
-               {["days", "hours", "minutes", "seconds"].map((unit) => (
-                  <div
-                     key={unit}
-                     className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-6 py-6 text-center backdrop-blur-xl transition-all duration-300 hover:border-[#F6A623]/40 hover:bg-white/10">
-                     <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
-                     <p className="text-4xl font-bold text-white">
-                        {String(timeLeft[unit] ?? 0).padStart(2, "0")}
-                     </p>
-                     <p className="mt-2 text-xs uppercase tracking-[0.4em] text-gray-400">
-                        {unit}
-                     </p>
-                  </div>
-               ))}
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-4">
-               <button
+            <motion.div
+               className="flex flex-wrap items-center justify-center gap-4"
+               initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95 }}
+               animate={{ opacity: 1, scale: 1 }}
+               transition={{
+                  duration: 0.6,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: shouldReduceMotion ? 0 : 0.16,
+               }}>
+               <motion.button
                   type="button"
                   onClick={() =>
                      window.open(event.registrationLink, "_blank", "noopener,noreferrer")
@@ -154,42 +237,92 @@ const EventRegistrationTemplate = ({ event }) => {
                   className={`group inline-flex items-center justify-center gap-2 rounded-2xl px-8 py-3 text-base font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 ${
                      isDeadlinePassed
                         ? "cursor-not-allowed border border-white/20 bg-white/10 text-gray-400"
-                        : `bg-gradient-to-r ${event.buttonGradient} text-black shadow-lg shadow-black/20 hover:-translate-y-1`
-                  }`}>
+                        : `bg-gradient-to-r ${event.buttonGradient} text-black shadow-lg shadow-black/20`
+                  }`}
+                  variants={buttonVariants}
+                  whileHover={isDeadlinePassed ? undefined : "hover"}
+                  whileTap={isDeadlinePassed ? undefined : "tap"}
+                  aria-disabled={isDeadlinePassed}>
                   {isDeadlinePassed ? "Registration closed" : "Register now"}
-                  <svg
-                     className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                  <motion.svg
+                     className="h-5 w-5"
                      fill="none"
                      stroke="currentColor"
-                     viewBox="0 0 24 24">
+                     viewBox="0 0 24 24"
+                     animate={{
+                        x: isDeadlinePassed || shouldReduceMotion ? 0 : [0, 4, 0],
+                     }}
+                     transition={{
+                        repeat: isDeadlinePassed || shouldReduceMotion ? 0 : Infinity,
+                        duration: 1.2,
+                        ease: "easeInOut",
+                        delay: 0.4,
+                     }}>
                      <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M13 7l5 5m0 0l-5 5m5-5H6"
                      />
-                  </svg>
-               </button>
-               <a
+                  </motion.svg>
+               </motion.button>
+               <motion.a
                   href={event.rulebookPath}
                   download
-                  className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70">
+                  className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  whileTap="tap">
                   Download rulebook
-                  <svg
-                     className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                  <motion.svg
+                     className="h-5 w-5"
                      fill="none"
                      stroke="currentColor"
-                     viewBox="0 0 24 24">
+                     viewBox="0 0 24 24"
+                     animate={{ y: shouldReduceMotion ? 0 : [0, -3, 0] }}
+                     transition={{
+                        repeat: shouldReduceMotion ? 0 : Infinity,
+                        duration: 1.6,
+                        ease: "easeInOut",
+                     }}>
                      <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
                      />
-                  </svg>
-               </a>
-            </div>
-         </div>
+                  </motion.svg>
+               </motion.a>
+            </motion.div>
+
+            <motion.div
+               className="grid w-full gap-4 sm:grid-cols-4"
+               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{
+                  duration: 0.7,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: shouldReduceMotion ? 0 : 0.26,
+               }}>
+               {["days", "hours", "minutes", "seconds"].map((unit, index) => (
+                  <motion.div
+                     key={unit}
+                     variants={countdownVariants}
+                     initial="hidden"
+                     animate="visible"
+                     custom={index}
+                     className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-6 py-6 text-center backdrop-blur-xl transition-all duration-300 hover:border-[#F6A623]/40 hover:bg-white/10">
+                     <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                     <p className="text-4xl font-bold text-white">
+                        {String(timeLeft[unit] ?? 0).padStart(2, "0")}
+                     </p>
+                     <p className="mt-2 text-xs uppercase tracking-[0.4em] text-gray-400">
+                        {unit}
+                     </p>
+                  </motion.div>
+               ))}
+            </motion.div>
+         </motion.div>
       </div>
    );
 };

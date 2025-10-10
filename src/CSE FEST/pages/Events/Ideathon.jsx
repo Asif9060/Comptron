@@ -218,7 +218,9 @@ const PosterPresentation = () => {
                      </div>
                      <div>
                         <div className="text-xl font-bold text-white">CSE FEST</div>
-                        <div className="text-xs text-[#F6A623]">Poster Presentation 2025</div>
+                        <div className="text-xs text-[#F6A623]">
+                           Poster Presentation 2025
+                        </div>
                      </div>
                   </div>
 
@@ -983,13 +985,15 @@ const PosterPresentation = () => {
                            <div className="text-2xl font-bold text-[#F6A623]">
                               CSE FEST
                            </div>
-                           <div className="text-sm text-[#F6A623]/70">Poster Presentation 2025</div>
+                           <div className="text-sm text-[#F6A623]/70">
+                              Poster Presentation 2025
+                           </div>
                         </div>
                      </div>
                      <p className="text-gray-300 leading-relaxed">
                         Showcase your innovative ideas through compelling poster
-                        presentations. Join the ultimate poster presentation experience and
-                        compete with brilliant minds.
+                        presentations. Join the ultimate poster presentation experience
+                        and compete with brilliant minds.
                      </p>
                      <div className="flex space-x-4">
                         {["facebook", "twitter", "instagram", "linkedin"].map(
@@ -1027,17 +1031,21 @@ const PosterPresentation = () => {
                         Quick Links
                      </h3>
                      <ul className="space-y-3">
-                        {["Home", "Events", "Poster Presentation", "Guidelines", "Contact"].map(
-                           (link) => (
-                              <li key={link}>
-                                 <a
-                                    href="#"
-                                    className="text-gray-300 hover:text-[#F6A623] transition-colors duration-300">
-                                    {link}
-                                 </a>
-                              </li>
-                           )
-                        )}
+                        {[
+                           "Home",
+                           "Events",
+                           "Poster Presentation",
+                           "Guidelines",
+                           "Contact",
+                        ].map((link) => (
+                           <li key={link}>
+                              <a
+                                 href="#"
+                                 className="text-gray-300 hover:text-[#F6A623] transition-colors duration-300">
+                                 {link}
+                              </a>
+                           </li>
+                        ))}
                      </ul>
                   </div>
 

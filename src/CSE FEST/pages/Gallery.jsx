@@ -480,7 +480,7 @@ const eventsData = [
    },
    {
       id: 3,
-   name: "Poster Presentation",
+      name: "Poster Presentation",
       date: "AUG 25-26, 2025",
       description:
          "Inspiring talks from industry leaders and technology experts on emerging trends.",

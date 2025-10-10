@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import "../../components/css/Fest.css"
+import LoadingScreen from "../LoadingScreen";
 
 const getTimeLeft = (deadline) => {
    const deadlineDate = new Date(deadline);
@@ -46,10 +49,25 @@ const GAME_DEFINITIONS = [
       description:
          "Assemble your five-stack, coordinate utility, and outsmart opponents across best-of series on Fracture, Bind, and more.",
       gradient: "from-purple-500/20 to-indigo-500/20",
-      buttonGradient: "from-purple-400 to-indigo-400",
+      buttonGradient: "from-rose-400 to-red-500",
       registrationLink: "https://forms.google.com/gaming-valorant",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
       deadline: "2025-11-07T11:59:00+06:00",
+      platform: "PC",
+   },
+   {
+      id: "fifa25",
+      iconSrc: "/logos/fifa.png",
+      title: "FIFA 25",
+      tagline: "Control the pitch, secure every decisive touch.",
+      description:
+         "Craft tactical lineups, read your opponent’s build-up play, and deliver ice-cold finishes in nail-biting extra-time thrillers.",
+      gradient: "from-blue-500/20 to-slate-500/20",
+      buttonGradient: "from-emerald-400 to-green-500",
+      registrationLink: "https://forms.google.com/gaming-fifa25",
+      rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
+      deadline: "2025-11-07T11:59:00+06:00",
+      platform: "PC",
    },
    {
       id: "pubg",
@@ -63,6 +81,7 @@ const GAME_DEFINITIONS = [
       registrationLink: "https://forms.google.com/gaming-pubg",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
       deadline: "2025-11-07T11:59:00+06:00",
+      platform: "Mobile",
    },
    {
       id: "efootball",
@@ -72,28 +91,71 @@ const GAME_DEFINITIONS = [
       description:
          "Showcase tactical formations and clutch penalty conversions in fast-paced fixtures that mirror the intensity of stadium play.",
       gradient: "from-green-500/20 to-emerald-500/20",
-      buttonGradient: "from-green-400 to-emerald-400",
+      buttonGradient: "from-sky-400 to-blue-500",
       registrationLink: "https://forms.google.com/gaming-efootball",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
       deadline: "2025-11-07T11:59:00+06:00",
-   },
-   {
-      id: "freefire",
-      iconSrc: "/logos/freefire.png",
-      title: "Free Fire",
-      tagline: "Race through Bermuda and ramp up the pressure.",
-      description:
-         "Coordinate rapid rotations, timed engagements, and ability synergy to dominate opponents in explosive, high-tempo skirmishes.",
-      gradient: "from-red-500/20 to-rose-500/20",
-      buttonGradient: "from-red-400 to-rose-400",
-      registrationLink: "https://forms.google.com/gaming-freefire",
-      rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
-      deadline: "2025-11-07T11:59:00+06:00",
+      platform: "Mobile",
    },
 ];
 
 const GameSection = ({ game }) => {
    const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(game.deadline));
+   const shouldReduceMotion = useReducedMotion();
+   const cardVariants = useMemo(
+      () => ({
+         hidden: {
+            opacity: 0,
+            y: shouldReduceMotion ? 0 : 32,
+         },
+         visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+               duration: 0.65,
+               ease: [0.16, 1, 0.3, 1],
+            },
+         },
+      }),
+      [shouldReduceMotion]
+   );
+
+   const blockVariants = useMemo(
+      () => ({
+         hidden: {
+            opacity: 0,
+            y: shouldReduceMotion ? 0 : 18,
+         },
+         visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+               duration: 0.5,
+               ease: [0.16, 1, 0.3, 1],
+            },
+         },
+      }),
+      [shouldReduceMotion]
+   );
+
+   const countdownItemVariants = useMemo(
+      () => ({
+         hidden: {
+            opacity: 0,
+            y: shouldReduceMotion ? 0 : 14,
+         },
+         visible: (index = 0) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+               duration: 0.35,
+               ease: [0.16, 1, 0.3, 1],
+               delay: shouldReduceMotion ? 0 : index * 0.04,
+            },
+         }),
+      }),
+      [shouldReduceMotion]
+   );
 
    useEffect(() => {
       setTimeLeft(getTimeLeft(game.deadline));
@@ -108,53 +170,99 @@ const GameSection = ({ game }) => {
    const isDeadlinePassed = timeLeft.total <= 0;
 
    return (
-      <section className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-xl shadow-lg shadow-black/20 transition-transform duration-300 hover:-translate-y-1">
-         <span
-            className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${game.gradient} opacity-0 transition-opacity duration-300 hover:opacity-40`}></span>
+      <motion.section
+         className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-xl shadow-lg shadow-black/20"
+         variants={cardVariants}
+         initial="hidden"
+         animate="visible"
+         whileHover={shouldReduceMotion ? undefined : { y: -8 }}
+         whileTap={shouldReduceMotion ? undefined : { scale: 0.99 }}>
+         <motion.span
+            className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${game.gradient}`}
+            initial={{ opacity: 0.2 }}
+            animate={{
+               opacity: shouldReduceMotion ? 0.2 : [0.2, 0.35, 0.2],
+            }}
+            transition={{
+               duration: 6,
+               ease: "easeInOut",
+               repeat: shouldReduceMotion ? 0 : Infinity,
+            }}></motion.span>
          <div className="relative flex flex-1 flex-col items-center gap-5">
-            <div
+            <motion.div
                className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${game.gradient} shadow-lg shadow-black/30`}
-               aria-hidden="true">
-               <img
+               aria-hidden="true"
+               variants={blockVariants}
+               initial="hidden"
+               animate="visible"
+               transition={{
+                  ...blockVariants.visible.transition,
+                  delay: shouldReduceMotion ? 0 : 0.05,
+               }}>
+               <motion.img
                   src={game.iconSrc}
                   alt={`${game.title} logo`}
                   className="h-10 w-10 object-contain"
+                  whileHover={
+                     shouldReduceMotion
+                        ? undefined
+                        : {
+                             rotate: [-2, 2, -2],
+                             transition: {
+                                duration: 2.4,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                             },
+                          }
+                  }
                />
-            </div>
-            <div className="space-y-2">
+            </motion.div>
+            <motion.div
+               className="space-y-2"
+               variants={blockVariants}
+               initial="hidden"
+               animate="visible"
+               transition={{
+                  ...blockVariants.visible.transition,
+                  delay: shouldReduceMotion ? 0 : 0.1,
+               }}>
                <h3 className="text-2xl font-bold text-white">{game.title}</h3>
                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#F6A623]">
                   {game.tagline}
                </p>
+               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-sky-200">
+                  <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                  Platform: {game.platform}
+               </span>
                <p className="text-sm leading-relaxed text-gray-300">{game.description}</p>
-            </div>
+            </motion.div>
 
-            <div className="grid w-full grid-cols-4 gap-3">
-               {["days", "hours", "minutes", "seconds"].map((unit) => (
-                  <div
-                     key={unit}
-                     className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-3 py-3 text-center transition-all duration-300 hover:border-[#F6A623]/40 hover:bg-white/10">
-                     <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
-                     <p className="text-2xl font-bold text-white">
-                        {String(timeLeft[unit] ?? 0).padStart(2, "0")}
-                     </p>
-                     <p className="mt-1 text-[0.65rem] uppercase tracking-[0.25em] text-gray-400">
-                        {unit}
-                     </p>
-                  </div>
-               ))}
-            </div>
-
-            <p className="text-xs text-gray-400">
+            <motion.p
+               className="text-xs text-gray-400"
+               variants={blockVariants}
+               initial="hidden"
+               animate="visible"
+               transition={{
+                  ...blockVariants.visible.transition,
+                  delay: shouldReduceMotion ? 0 : 0.22,
+               }}>
                <span className="font-semibold text-[#F6A623]">Deadline:</span>{" "}
                {deadlineLabel}
                {isDeadlinePassed && (
                   <span className="ml-1 text-red-400">(Registration closed)</span>
                )}
-            </p>
+            </motion.p>
 
-            <div className="mt-auto flex w-full flex-col gap-2">
-               <button
+            <motion.div
+               className="mt-auto flex w-full flex-col gap-2"
+               variants={blockVariants}
+               initial="hidden"
+               animate="visible"
+               transition={{
+                  ...blockVariants.visible.transition,
+                  delay: shouldReduceMotion ? 0 : 0.24,
+               }}>
+               <motion.button
                   type="button"
                   onClick={() =>
                      window.open(game.registrationLink, "_blank", "noopener,noreferrer")
@@ -163,43 +271,96 @@ const GameSection = ({ game }) => {
                   className={`group inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 ${
                      isDeadlinePassed
                         ? "cursor-not-allowed border border-white/20 bg-white/10 text-gray-400"
-                        : `bg-gradient-to-r ${game.buttonGradient} text-black shadow-lg shadow-black/20 hover:-translate-y-1`
-                  }`}>
+                        : `bg-gradient-to-r ${game.buttonGradient} text-black shadow-lg shadow-black/20`
+                  }`}
+                  whileHover={
+                     isDeadlinePassed || shouldReduceMotion
+                        ? undefined
+                        : { y: -6, boxShadow: "0 16px 30px rgba(15, 23, 42, 0.25)" }
+                  }
+                  whileTap={
+                     isDeadlinePassed || shouldReduceMotion ? undefined : { scale: 0.98 }
+                  }
+                  aria-disabled={isDeadlinePassed}>
                   {isDeadlinePassed ? "Registration closed" : "Register now"}
-                  <svg
-                     className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                  <motion.svg
+                     className="h-4 w-4"
                      fill="none"
                      stroke="currentColor"
-                     viewBox="0 0 24 24">
+                     viewBox="0 0 24 24"
+                     animate={{
+                        x: isDeadlinePassed || shouldReduceMotion ? 0 : [0, 4, 0],
+                     }}
+                     transition={{
+                        repeat: isDeadlinePassed || shouldReduceMotion ? 0 : Infinity,
+                        duration: 1.1,
+                        ease: "easeInOut",
+                     }}>
                      <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M13 7l5 5m0 0l-5 5m5-5H6"
                      />
-                  </svg>
-               </button>
-               <a
+                  </motion.svg>
+               </motion.button>
+               <motion.a
                   href={game.rulebookPath}
                   download
-                  className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70">
+                  className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
+                  whileHover={shouldReduceMotion ? undefined : { y: -6 }}
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}>
                   Download rulebook
-                  <svg
-                     className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                  <motion.svg
+                     className="h-4 w-4"
                      fill="none"
                      stroke="currentColor"
-                     viewBox="0 0 24 24">
+                     viewBox="0 0 24 24"
+                     animate={{ y: shouldReduceMotion ? 0 : [0, -3, 0] }}
+                     transition={{
+                        repeat: shouldReduceMotion ? 0 : Infinity,
+                        duration: 1.4,
+                        ease: "easeInOut",
+                     }}>
                      <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
                      />
-                  </svg>
-               </a>
-            </div>
+                  </motion.svg>
+               </motion.a>
+            </motion.div>
+
+            <motion.div
+               className="grid w-full grid-cols-4 gap-3"
+               variants={blockVariants}
+               initial="hidden"
+               animate="visible"
+               transition={{
+                  ...blockVariants.visible.transition,
+                  delay: shouldReduceMotion ? 0 : 0.3,
+               }}>
+               {["days", "hours", "minutes", "seconds"].map((unit, index) => (
+                  <motion.div
+                     key={unit}
+                     className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-3 py-3 text-center transition-all duration-300 hover:border-[#F6A623]/40 hover:bg-white/10"
+                     variants={countdownItemVariants}
+                     initial="hidden"
+                     animate="visible"
+                     custom={index}>
+                     <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                     <p className="text-2xl font-bold text-white">
+                        {String(timeLeft[unit] ?? 0).padStart(2, "0")}
+                     </p>
+                     <p className="mt-1 text-[0.65rem] uppercase tracking-[0.25em] text-gray-400">
+                        {unit}
+                     </p>
+                  </motion.div>
+               ))}
+            </motion.div>
          </div>
-      </section>
+      </motion.section>
    );
 };
 
@@ -215,19 +376,22 @@ GameSection.propTypes = {
       registrationLink: PropTypes.string.isRequired,
       rulebookPath: PropTypes.string.isRequired,
       deadline: PropTypes.string.isRequired,
+      platform: PropTypes.string.isRequired,
    }).isRequired,
 };
 
 const GamingEventPage = () => {
    const games = useMemo(() => GAME_DEFINITIONS, []);
    const navigate = useNavigate();
+   const shouldReduceMotion = useReducedMotion();
 
    const handleBack = () => {
       navigate("/CseFest/registration");
    };
 
    return (
-      <div className="relative min-h-screen overflow-hidden text-white">
+      <LoadingScreen>
+         <div className="relative min-h-screen overflow-hidden text-white">
          <div className="absolute inset-0 z-0">
             <div
                className="absolute inset-0"
@@ -245,11 +409,21 @@ const GamingEventPage = () => {
          <div className="pointer-events-none absolute bottom-[-200px] right-[-120px] z-0 h-[420px] w-[420px] rounded-full bg-purple-500/20 blur-[200px]"></div>
 
          <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 lg:px-10">
-            <div className="mb-6 flex justify-center">
-               <button
+            <motion.div
+               className="mb-6 flex justify-center"
+               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -12 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}>
+               <motion.button
                   type="button"
                   onClick={handleBack}
-                  className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#F6A623]/40 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/60">
+                  className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/40 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/60"
+                  whileHover={
+                     shouldReduceMotion
+                        ? undefined
+                        : { x: -4, boxShadow: "0 12px 30px rgba(15, 23, 42, 0.25)" }
+                  }
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}>
                   <svg
                      className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5"
                      fill="none"
@@ -269,28 +443,45 @@ const GamingEventPage = () => {
                      />
                   </svg>
                   Back to registrations
-               </button>
-            </div>
-            <header className="mb-10 text-center">
-               <p className="text-xs uppercase tracking-[0.35em] text-[#F6A623]/80">
+               </motion.button>
+            </motion.div>
+            <motion.header
+               className="mb-10 max-w-2xl text-center mx-auto"
+               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{
+                  duration: 0.6,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: shouldReduceMotion ? 0 : 0.08,
+               }}>
+               <p className="text-xs uppercase rp tracking-[0.35em] text-[#F6A623]/80">
                   Gaming Arena
                </p>
-               <h1 className="mt-3 text-4xl font-black text-white">
+               <h1 className="mt-3 text-4xl rp font-black text-white">
                   Choose your battleground
                </h1>
-               <p className="mt-3 text-sm leading-relaxed text-gray-300 sm:text-base">
+               <p className="mt-3 text-sm rp leading-relaxed text-gray-300 sm:text-base">
                   Four competitive brackets, one electrifying stage. Rally your squad,
                   lock your loadouts, and secure your place in the CSE Fest gaming arena.
                </p>
-            </header>
+            </motion.header>
 
-            <div className="grid gap-6 md:grid-cols-2">
+            <motion.div
+               className="grid gap-6 md:grid-cols-2"
+               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{
+                  duration: 0.6,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: shouldReduceMotion ? 0 : 0.14,
+               }}>
                {games.map((game) => (
                   <GameSection key={game.id} game={game} />
                ))}
-            </div>
+            </motion.div>
          </div>
       </div>
+      </LoadingScreen>
    );
 };
 

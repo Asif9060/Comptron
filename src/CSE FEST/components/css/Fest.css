@@ -18,3 +18,8 @@
     color: white;
 }
 
+@media (max-width: 768px) {
+    .rp{
+        transform: translateX(-24px);
+    }
+}

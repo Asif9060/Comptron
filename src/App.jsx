@@ -106,7 +106,9 @@ const App = () => {
                <Route path="/Programming" element={<Programming></Programming>}></Route>
                <Route path="/Datathon" element={<Datathon></Datathon>}></Route>
                <Route path="/Project" element={<Project></Project>}></Route>
-               <Route path="/PosterPresentation" element={<PosterPresentation></PosterPresentation>}></Route>
+               <Route
+                  path="/PosterPresentation"
+                  element={<PosterPresentation></PosterPresentation>}></Route>
                <Route path="/CseFest/registration" element={<RegistrationHub />}></Route>
                <Route
                   path="/CseFest/registration/workshops"
