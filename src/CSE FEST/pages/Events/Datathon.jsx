@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Modal from "react-modal";
+import SimpleGoogleFormSubmit from "../../../Components/SimpleGoogleFormSubmit";
 
 const Datathon = () => {
    const [timeLeft, setTimeLeft] = useState({
@@ -9,6 +11,10 @@ const Datathon = () => {
    });
 
    const [isMenuOpen, setIsMenuOpen] = useState(false);
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [formConfig, setFormConfig] = useState(null);
+   const [loading, setLoading] = useState(true);
+
    const [formData, setFormData] = useState({
       teamName: "",
       teamLeader: "",
@@ -21,6 +27,27 @@ const Datathon = () => {
    });
 
    const [errors, setErrors] = useState({});
+
+   // Load Google Form configuration
+   useEffect(() => {
+      const loadGoogleFormConfig = async () => {
+         try {
+            const response = await fetch(
+               "https://comptron-server-2.onrender.com/api/csefest/datathon/google-form-config"
+            );
+            if (response.ok) {
+               const config = await response.json();
+               setFormConfig(config);
+            }
+         } catch (error) {
+            console.error("Error loading Google Form config:", error);
+         } finally {
+            setLoading(false);
+         }
+      };
+
+      loadGoogleFormConfig();
+   }, []);
 
    // Countdown timer for datathon
    useEffect(() => {
@@ -76,6 +103,20 @@ const Datathon = () => {
 
       setErrors(newErrors);
       return Object.keys(newErrors).length === 0;
+   };
+
+   const handleOpenModal = () => {
+      if (formConfig?.formUrl && formConfig?.fields?.length > 0) {
+         setIsModalOpen(true);
+      } else {
+         alert(
+            "Registration form is not configured yet. Please contact the administrator."
+         );
+      }
+   };
+
+   const handleCloseModal = () => {
+      setIsModalOpen(false);
    };
 
    const handleSubmit = (e) => {
@@ -243,7 +284,9 @@ const Datathon = () => {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                     <button className="bg-gradient-to-r from-[#F6A623] to-orange-500 text-[#1c1535] px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-[#F6A623]/25 transition-all duration-300 transform hover:scale-105">
+                     <button
+                        onClick={handleOpenModal}
+                        className="bg-gradient-to-r from-[#F6A623] to-orange-500 text-[#1c1535] px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-[#F6A623]/25 transition-all duration-300 transform hover:scale-105">
                         Register Now
                      </button>
                      <button className="border-2 border-[#F6A623] text-[#F6A623] px-8 py-4 rounded-xl font-semibold hover:bg-[#F6A623] hover:text-[#1c1535] transition-all duration-300">
@@ -657,7 +700,8 @@ const Datathon = () => {
 
                      <div className="mt-8 text-center">
                         <button
-                           type="submit"
+                           onClick={handleOpenModal}
+                           type="button"
                            className="bg-gradient-to-r from-[#F6A623] to-orange-500 text-[#1c1535] px-12 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-[#F6A623]/25 transition-all duration-300 transform hover:scale-105">
                            Register Team
                         </button>
@@ -1014,6 +1058,58 @@ const Datathon = () => {
                </div>
             </div>
          </footer>
+
+         {/* Registration Modal */}
+         <Modal
+            isOpen={isModalOpen}
+            onRequestClose={handleCloseModal}
+            className="max-w-2xl mx-auto mt-20 bg-[#1c1535] rounded-xl shadow-2xl p-8 border border-[#F6A623]/30"
+            overlayClassName="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-start justify-center overflow-y-auto pt-10 pb-10"
+            style={{
+               content: {
+                  background:
+                     "radial-gradient(ellipse at top, rgba(30, 58, 138, 0.95) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(0, 0, 0, 0.95) 100%)",
+               },
+            }}>
+            <div className="flex justify-between items-center mb-6">
+               <h2 className="text-2xl font-bold text-[#F6A623]">
+                  Datathon Registration
+               </h2>
+               <button
+                  onClick={handleCloseModal}
+                  className="text-gray-400 hover:text-white transition-colors duration-200">
+                  <svg
+                     className="w-6 h-6"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                     <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                     />
+                  </svg>
+               </button>
+            </div>
+
+            {formConfig?.formUrl && formConfig?.fields?.length > 0 ? (
+               <SimpleGoogleFormSubmit
+                  formUrl={formConfig.formUrl}
+                  fields={formConfig.fields}
+                  onClose={handleCloseModal}
+               />
+            ) : (
+               <div className="text-center py-8">
+                  <p className="text-gray-400 mb-4">
+                     Registration form is not configured yet.
+                  </p>
+                  <p className="text-sm text-gray-500">
+                     Please contact the administrator to set up the registration form.
+                  </p>
+               </div>
+            )}
+         </Modal>
       </div>
    );
 };

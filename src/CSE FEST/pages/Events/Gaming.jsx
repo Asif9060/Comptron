@@ -1,8 +1,44 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import Modal from "react-modal";
+import SimpleGoogleFormSubmit from "../../../Components/SimpleGoogleFormSubmit";
+
+Modal.setAppElement("#root");
 
 const Gaming = () => {
    const [activeIndex, setActiveIndex] = useState(0);
    const carouselRef = useRef(null);
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [formConfig, setFormConfig] = useState(null);
+   const [loading, setLoading] = useState(true);
+
+   // Load Google Form config on mount
+   useEffect(() => {
+      const loadGoogleFormConfig = async () => {
+         setLoading(true);
+         try {
+            const response = await fetch(
+               "https://comptron-server-2.onrender.com/api/csefest/gaming/google-form-config"
+            );
+
+            console.log("API Response status:", response.status);
+            if (response.ok) {
+               const config = await response.json();
+               console.log("Loaded gaming config:", config);
+               setFormConfig(config);
+            } else {
+               console.log("API returned non-OK status:", response.status);
+               setFormConfig(null);
+            }
+         } catch (error) {
+            console.error("Error loading config:", error);
+            setFormConfig(null);
+         } finally {
+            setLoading(false);
+         }
+      };
+
+      loadGoogleFormConfig();
+   }, []);
 
    // Gaming segments data with online images
    const segments = [
@@ -46,6 +82,22 @@ const Gaming = () => {
 
    const goToSlide = (index) => {
       setActiveIndex(index);
+   };
+
+   const handleOpenModal = () => {
+      console.log("Button clicked! Form config:", formConfig);
+      if (formConfig?.formUrl && formConfig?.fields?.length > 0) {
+         setIsModalOpen(true);
+      } else {
+         console.warn("Cannot open modal - form not configured properly");
+         alert(
+            "Registration form is not configured yet. Please contact the administrator to set up the registration form."
+         );
+      }
+   };
+
+   const handleCloseModal = () => {
+      setIsModalOpen(false);
    };
 
    return (
@@ -155,7 +207,9 @@ const Gaming = () => {
                      </div>
 
                      {/* Register Button */}
-                     <button className="hidden md:block bg-gradient-to-r from-[#F6A623] to-orange-500 hover:from-[#e0951f] hover:to-[#d67a0d] text-[#1c1535] font-bold px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#F6A623]/30 relative overflow-hidden group">
+                     <button
+                        onClick={handleOpenModal}
+                        className="hidden md:block bg-gradient-to-r from-[#F6A623] to-orange-500 hover:from-[#e0951f] hover:to-[#d67a0d] text-[#1c1535] font-bold px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#F6A623]/30 relative overflow-hidden group">
                         <span className="relative z-10 flex items-center space-x-2">
                            <svg
                               className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300"
@@ -406,7 +460,7 @@ const Gaming = () => {
                                        className="w-full bg-gradient-to-r from-[#F6A623] to-orange-500 hover:from-[#e0951f] hover:to-[#d67a0d] text-[#1c1535] font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#F6A623]/30 flex items-center justify-center group"
                                        onClick={(e) => {
                                           e.stopPropagation();
-                                          // Handle registration
+                                          handleOpenModal();
                                        }}>
                                        <span className="relative z-10 flex items-center gap-2">
                                           <svg
@@ -694,6 +748,58 @@ const Gaming = () => {
                </div>
             </div>
          </footer>
+
+         {/* Registration Modal */}
+         <Modal
+            isOpen={isModalOpen}
+            onRequestClose={handleCloseModal}
+            className="max-w-2xl mx-auto mt-20 bg-[#1c1535] rounded-xl shadow-2xl p-8 border border-[#F6A623]/30"
+            overlayClassName="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-start justify-center overflow-y-auto pt-10 pb-10"
+            style={{
+               content: {
+                  background:
+                     "radial-gradient(ellipse at top, rgba(30, 58, 138, 0.95) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(0, 0, 0, 0.95) 100%)",
+               },
+            }}>
+            <div className="flex justify-between items-center mb-6">
+               <h2 className="text-2xl font-bold text-[#F6A623]">
+                  Gaming Tournament Registration
+               </h2>
+               <button
+                  onClick={handleCloseModal}
+                  className="text-gray-400 hover:text-white transition-colors duration-200">
+                  <svg
+                     className="w-6 h-6"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                     <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                     />
+                  </svg>
+               </button>
+            </div>
+
+            {formConfig?.formUrl && formConfig?.fields?.length > 0 ? (
+               <SimpleGoogleFormSubmit
+                  formUrl={formConfig.formUrl}
+                  fields={formConfig.fields}
+                  onClose={handleCloseModal}
+               />
+            ) : (
+               <div className="text-center py-8">
+                  <p className="text-gray-400 mb-4">
+                     Registration form is not configured yet.
+                  </p>
+                  <p className="text-sm text-gray-500">
+                     Please contact the administrator to set up the registration form.
+                  </p>
+               </div>
+            )}
+         </Modal>
       </div>
    );
 };

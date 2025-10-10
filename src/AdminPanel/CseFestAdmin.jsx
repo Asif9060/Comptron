@@ -24,7 +24,30 @@ const CseFestAdmin = () => {
          icon: "💻",
          description: "ICPC-style programming competition",
       },
-      // Future events can be added here
+      {
+         id: "gaming",
+         name: "Gaming Tournament",
+         icon: "🎮",
+         description: "Multi-game esports tournament",
+      },
+      {
+         id: "ideathon",
+         name: "Poster Presentation",
+         icon: "�️",
+         description: "Research poster showcase and judging",
+      },
+      {
+         id: "datathon",
+         name: "Datathon",
+         icon: "📊",
+         description: "Data science and analytics challenge",
+      },
+      {
+         id: "project",
+         name: "Project Showcase",
+         icon: "🚀",
+         description: "Student project exhibition",
+      },
    ];
 
    const fetchRegistrations = useCallback(async () => {

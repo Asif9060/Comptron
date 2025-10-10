@@ -52,9 +52,17 @@ import Gaming from "./CSE FEST/pages/Events/Gaming";
 import Programming from "./CSE FEST/pages/Events/Programming";
 import Datathon from "./CSE FEST/pages/Events/Datathon";
 import Project from "./CSE FEST/pages/Events/Project";
-import Ideathon from "./CSE FEST/pages/Events/Ideathon";
-import Magazine from "./pages/Magazine";
+import PosterPresentation from "./CSE FEST/pages/Events/Ideathon";
 import CseFestAdmin from "./AdminPanel/CseFestAdmin";
+import {
+   RegistrationHub,
+   WorkshopRegistration,
+   ProgrammingEventPage,
+   GamingEventPage,
+   ProjectShowcaseEventPage,
+   PosterPresentationEventPage,
+   DatathonEventPage,
+} from "./CSE FEST/Registration";
 
 // import Bio from "./USER/Bio";
 
@@ -98,8 +106,26 @@ const App = () => {
                <Route path="/Programming" element={<Programming></Programming>}></Route>
                <Route path="/Datathon" element={<Datathon></Datathon>}></Route>
                <Route path="/Project" element={<Project></Project>}></Route>
-               <Route path="/Ideathon" element={<Ideathon></Ideathon>}></Route>
-               <Route path="/Magazine" element={<Magazine></Magazine>}></Route>
+               <Route path="/PosterPresentation" element={<PosterPresentation></PosterPresentation>}></Route>
+               <Route path="/CseFest/registration" element={<RegistrationHub />}></Route>
+               <Route
+                  path="/CseFest/registration/workshops"
+                  element={<WorkshopRegistration />}></Route>
+               <Route
+                  path="/CseFest/registration/programming"
+                  element={<ProgrammingEventPage />}></Route>
+               <Route
+                  path="/CseFest/registration/gaming"
+                  element={<GamingEventPage />}></Route>
+               <Route
+                  path="/CseFest/registration/project"
+                  element={<ProjectShowcaseEventPage />}></Route>
+               <Route
+                  path="/CseFest/registration/poster-presentation"
+                  element={<PosterPresentationEventPage />}></Route>
+               <Route
+                  path="/CseFest/registration/datathon"
+                  element={<DatathonEventPage />}></Route>
 
                <Route
                   path="/EventDetails"

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <rect width="120" height="120" rx="20" fill="#1f1300"/>
+  <rect x="16" y="34" width="88" height="52" rx="10" fill="#ffb300" stroke="#f7931e" stroke-width="6"/>
+  <text x="60" y="72" text-anchor="middle" font-family="'Arial Black', sans-serif" font-size="32" fill="#1f1300">PUBG</text>
+</svg>

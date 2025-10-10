@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import Modal from "react-modal";
+import SimpleGoogleFormSubmit from "../../../Components/SimpleGoogleFormSubmit";
 
-const Ideathon = () => {
+const PosterPresentation = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [timeLeft, setTimeLeft] = useState({
       days: 0,
@@ -8,6 +10,10 @@ const Ideathon = () => {
       minutes: 0,
       seconds: 0,
    });
+
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [formConfig, setFormConfig] = useState(null);
+   const [loading, setLoading] = useState(true);
 
    const [formData, setFormData] = useState({
       teamName: "",
@@ -24,7 +30,28 @@ const Ideathon = () => {
 
    const [errors, setErrors] = useState({});
 
-   // Countdown timer for ideathon
+   // Load Google Form configuration
+   useEffect(() => {
+      const loadGoogleFormConfig = async () => {
+         try {
+            const response = await fetch(
+               "https://comptron-server-2.onrender.com/api/csefest/ideathon/google-form-config"
+            );
+            if (response.ok) {
+               const config = await response.json();
+               setFormConfig(config);
+            }
+         } catch (error) {
+            console.error("Error loading Google Form config:", error);
+         } finally {
+            setLoading(false);
+         }
+      };
+
+      loadGoogleFormConfig();
+   }, []);
+
+   // Countdown timer for poster presentation
    useEffect(() => {
       const targetDate = new Date("2025-12-20T09:00:00").getTime();
 
@@ -82,6 +109,20 @@ const Ideathon = () => {
 
       setErrors(newErrors);
       return Object.keys(newErrors).length === 0;
+   };
+
+   const handleOpenModal = () => {
+      if (formConfig?.formUrl && formConfig?.fields?.length > 0) {
+         setIsModalOpen(true);
+      } else {
+         alert(
+            "Registration form is not configured yet. Please contact the administrator."
+         );
+      }
+   };
+
+   const handleCloseModal = () => {
+      setIsModalOpen(false);
    };
 
    const handleSubmit = (e) => {
@@ -177,7 +218,7 @@ const Ideathon = () => {
                      </div>
                      <div>
                         <div className="text-xl font-bold text-white">CSE FEST</div>
-                        <div className="text-xs text-[#F6A623]">Ideathon 2025</div>
+                        <div className="text-xs text-[#F6A623]">Poster Presentation 2025</div>
                      </div>
                   </div>
 
@@ -194,7 +235,7 @@ const Ideathon = () => {
                         Events
                      </a>
                      <a href="#" className="text-[#F6A623] font-semibold">
-                        Ideathon
+                        Poster Presentation
                      </a>
                      <a
                         href="#"
@@ -237,7 +278,7 @@ const Ideathon = () => {
                            Events
                         </a>
                         <a href="#" className="text-[#F6A623] font-semibold">
-                           Ideathon
+                           Poster Presentation
                         </a>
                         <a
                            href="#"
@@ -271,9 +312,9 @@ const Ideathon = () => {
                   </div>
 
                   <h1 className="text-5xl md:text-7xl font-bold cnt text-white mb-6 leading-tight">
-                     IDEA<span className="text-[#F6A623]">THON</span>
+                     POSTER <span className="text-[#F6A623]">SHOWCASE</span>
                      <div className="text-2xl md:text-3xl text-purple-300 font-normal mt-2">
-                        Poster Presentation
+                        Present your ideas with impact
                      </div>
                   </h1>
 
@@ -285,7 +326,9 @@ const Ideathon = () => {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                     <button className="bg-gradient-to-r from-[#F6A623] to-orange-500 text-[#1c1535] px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-[#F6A623]/25 transition-all duration-300 transform hover:scale-105">
+                     <button
+                        onClick={handleOpenModal}
+                        className="bg-gradient-to-r from-[#F6A623] to-orange-500 text-[#1c1535] px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-[#F6A623]/25 transition-all duration-300 transform hover:scale-105">
                         Register Team
                      </button>
                      <button className="border-2 border-[#F6A623] text-[#F6A623] px-8 py-4 rounded-xl font-semibold hover:bg-[#F6A623] hover:text-[#1c1535] transition-all duration-300">
@@ -365,12 +408,12 @@ const Ideathon = () => {
             </div>
          </section>
 
-         {/* About Ideathon */}
+         {/* About Poster Presentation */}
          <section className="py-20">
             <div className="mx-auto px-6">
                <div className="text-center mb-16">
                   <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                     About <span className="text-[#F6A623]">Ideathon</span>
+                     About <span className="text-[#F6A623]">Poster Presentation</span>
                   </h2>
                   <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                      A poster presentation competition where participants showcase
@@ -485,7 +528,7 @@ const Ideathon = () => {
                      Event <span className="text-[#F6A623]">Schedule</span>
                   </h2>
                   <p className="text-xl text-gray-300">
-                     Complete timeline for the Ideathon day
+                     Complete timeline for the Poster Presentation day
                   </p>
                </div>
 
@@ -824,7 +867,8 @@ const Ideathon = () => {
 
                      <div className="mt-8 text-center">
                         <button
-                           type="submit"
+                           onClick={handleOpenModal}
+                           type="button"
                            className="bg-gradient-to-r from-[#F6A623] to-orange-500 text-[#1c1535] px-12 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-[#F6A623]/25 transition-all duration-300 transform hover:scale-105">
                            Register Team
                         </button>
@@ -939,13 +983,13 @@ const Ideathon = () => {
                            <div className="text-2xl font-bold text-[#F6A623]">
                               CSE FEST
                            </div>
-                           <div className="text-sm text-[#F6A623]/70">Ideathon 2025</div>
+                           <div className="text-sm text-[#F6A623]/70">Poster Presentation 2025</div>
                         </div>
                      </div>
                      <p className="text-gray-300 leading-relaxed">
                         Showcase your innovative ideas through compelling poster
-                        presentations. Join the ultimate ideathon experience and compete
-                        with brilliant minds.
+                        presentations. Join the ultimate poster presentation experience and
+                        compete with brilliant minds.
                      </p>
                      <div className="flex space-x-4">
                         {["facebook", "twitter", "instagram", "linkedin"].map(
@@ -983,7 +1027,7 @@ const Ideathon = () => {
                         Quick Links
                      </h3>
                      <ul className="space-y-3">
-                        {["Home", "Events", "Ideathon", "Guidelines", "Contact"].map(
+                        {["Home", "Events", "Poster Presentation", "Guidelines", "Contact"].map(
                            (link) => (
                               <li key={link}>
                                  <a
@@ -1152,8 +1196,60 @@ const Ideathon = () => {
                </div>
             </div>
          </footer>
+
+         {/* Registration Modal */}
+         <Modal
+            isOpen={isModalOpen}
+            onRequestClose={handleCloseModal}
+            className="max-w-2xl mx-auto mt-20 bg-[#1c1535] rounded-xl shadow-2xl p-8 border border-[#F6A623]/30"
+            overlayClassName="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-start justify-center overflow-y-auto pt-10 pb-10"
+            style={{
+               content: {
+                  background:
+                     "radial-gradient(ellipse at top, rgba(30, 58, 138, 0.95) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(0, 0, 0, 0.95) 100%)",
+               },
+            }}>
+            <div className="flex justify-between items-center mb-6">
+               <h2 className="text-2xl font-bold text-[#F6A623]">
+                  Ideathon Registration
+               </h2>
+               <button
+                  onClick={handleCloseModal}
+                  className="text-gray-400 hover:text-white transition-colors duration-200">
+                  <svg
+                     className="w-6 h-6"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                     <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                     />
+                  </svg>
+               </button>
+            </div>
+
+            {formConfig?.formUrl && formConfig?.fields?.length > 0 ? (
+               <SimpleGoogleFormSubmit
+                  formUrl={formConfig.formUrl}
+                  fields={formConfig.fields}
+                  onClose={handleCloseModal}
+               />
+            ) : (
+               <div className="text-center py-8">
+                  <p className="text-gray-400 mb-4">
+                     Registration form is not configured yet.
+                  </p>
+                  <p className="text-sm text-gray-500">
+                     Please contact the administrator to set up the registration form.
+                  </p>
+               </div>
+            )}
+         </Modal>
       </div>
    );
 };
 
-export default Ideathon;
+export default PosterPresentation;
