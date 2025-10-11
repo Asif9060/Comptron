@@ -146,7 +146,7 @@ const EventRegistrationTemplate = ({ event }) => {
                <motion.button
                   type="button"
                   onClick={handleBack}
-                  className="group mx-auto inline-flex items-center gap-2 rounded-full border border-transparent bg-gradient-to-r from-[#F6A623] via-[#fbbf24] to-[#f97316] px-5 py-2 text-sm font-semibold text-black shadow-lg shadow-[#F6A623]/30 transition-all duration-300 hover:from-[#fbbf24] hover:via-[#f97316] hover:to-[#fb7185] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#F6A623] cursor-pointer"
+                  className="group mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/40 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/60"
                   whileHover={
                      shouldReduceMotion
                         ? undefined
@@ -209,17 +209,13 @@ const EventRegistrationTemplate = ({ event }) => {
                   <p className="text-base leading-relaxed text-gray-300 sm:text-lg">
                      {event.description}
                   </p>
-                  <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-[#F6A623]/40 bg-[#F6A623]/10 px-4 py-2 text-sm font-semibold text-[#F6A623] shadow-inner shadow-[#F6A623]/10 sm:text-base">
-                     <span className="uppercase tracking-[0.3em] text-[#F6A623]">
-                        Deadline
-                     </span>
-                     <span className="text-white">{deadlineLabel}</span>
+                  <p className="text-sm text-gray-400">
+                     <span className="font-semibold text-[#F6A623]">Deadline:</span>{" "}
+                     {deadlineLabel}
                      {isDeadlinePassed && (
-                        <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-red-300">
-                           Registration closed
-                        </span>
+                        <span className="ml-2 text-red-400">(Registration closed)</span>
                      )}
-                  </div>
+                  </p>
                </motion.div>
             </motion.div>
 
@@ -238,7 +234,7 @@ const EventRegistrationTemplate = ({ event }) => {
                      window.open(event.registrationLink, "_blank", "noopener,noreferrer")
                   }
                   disabled={isDeadlinePassed}
-                  className={`group inline-flex items-center justify-center gap-2 rounded-2xl px-8 py-3 text-base font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 cursor-pointer ${
+                  className={`group inline-flex items-center justify-center gap-2 rounded-2xl px-8 py-3 text-base font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 ${
                      isDeadlinePassed
                         ? "cursor-not-allowed border border-white/20 bg-white/10 text-gray-400"
                         : `bg-gradient-to-r ${event.buttonGradient} text-black shadow-lg shadow-black/20`
@@ -273,7 +269,7 @@ const EventRegistrationTemplate = ({ event }) => {
                <motion.a
                   href={event.rulebookPath}
                   download
-                  className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 cursor-pointer"
+                  className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
                   variants={buttonVariants}
                   whileHover="hover"
                   whileTap="tap">

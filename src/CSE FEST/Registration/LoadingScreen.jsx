@@ -3,61 +3,62 @@ import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 
 const LoadingScreen = ({
-   children,
-   duration = 3000,
-   logoSrc = "/logos/fest.png",
-   containerClassName = "",
+  children,
+  duration = 3000,
+  logoSrc = "/logos/fest.png",
+  containerClassName = "",
 }) => {
-   const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-   useEffect(() => {
-      const timer = setTimeout(() => {
-         setIsLoading(false);
-      }, duration);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, duration);
 
-      return () => clearTimeout(timer);
-   }, [duration]);
+    return () => clearTimeout(timer);
+  }, [duration]);
 
-   return (
-      <div
-         className={`min-h-screen overflow-hidden bg-transparent ${containerClassName}`}>
-         <AnimatePresence mode="wait">
-            {isLoading && (
-               <motion.div
-                  initial={{ opacity: 1 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-blue-900 via-slate-900 to-black">
-                  <div className="loader-wrapper">
-                     <div className="loader-logo">
-                        <img
-                           src={logoSrc}
-                           alt="Loading"
-                           className="w-35 h-35 rounded-2xl shadow-xl object-contain"
-                        />
-                     </div>
-                     <div className="loader-circle"></div>
-                  </div>
-               </motion.div>
-            )}
-         </AnimatePresence>
+  return (
+    <div className={`min-h-screen overflow-hidden bg-transparent ${containerClassName}`}>
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-blue-900 via-slate-900 to-black"
+          >
+            <div className="loader-wrapper">
+              <div className="loader-logo">
+                <img
+                  src={logoSrc}
+                  alt="Loading"
+                  className="w-20 h-20 rounded-2xl shadow-xl object-contain"
+                />
+              </div>
+              <div className="loader-circle"></div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-         <div className="relative z-10">
-            <AnimatePresence mode="wait">
-               {!isLoading && children ? (
-                  <motion.div
-                     key="content"
-                     initial={{ opacity: 0, y: 50 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     transition={{ duration: 0.8, ease: "easeOut" }}>
-                     {children}
-                  </motion.div>
-               ) : null}
-            </AnimatePresence>
-         </div>
+      <div className="relative z-10">
+        <AnimatePresence mode="wait">
+          {!isLoading && children ? (
+            <motion.div
+              key="content"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              {children}
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+      </div>
 
-         <style>{`
+      <style>{`
         :global(body) {
           border-top: none !important;
           margin: 0;
@@ -144,15 +145,15 @@ const LoadingScreen = ({
           }
         }
       `}</style>
-      </div>
-   );
+    </div>
+  );
 };
 
 LoadingScreen.propTypes = {
-   children: PropTypes.node,
-   duration: PropTypes.number,
-   logoSrc: PropTypes.string,
-   containerClassName: PropTypes.string,
+  children: PropTypes.node,
+  duration: PropTypes.number,
+  logoSrc: PropTypes.string,
+  containerClassName: PropTypes.string,
 };
 
 export default LoadingScreen;
