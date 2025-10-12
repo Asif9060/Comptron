@@ -56,6 +56,7 @@ const RegistrationHub = () => {
             gradient: event.gradient,
             buttonGradient: event.buttonGradient,
             pagePath: event.pagePath,
+            startDate: event.startDate,
          })),
       []
    );
@@ -177,11 +178,11 @@ const RegistrationHub = () => {
                            twist—select the arena that fits your skillset.
                         </motion.p>
                      </motion.div>
-                     {/* <motion.div
-                        className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-gray-300 backdrop-blur"
+                     <motion.div
+                        className="flex flex-col items-start gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm text-[#FFE7C2] backdrop-blur"
                         initial={
                            enableScrollAnimation
-                              ? { opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 }
+                              ? { opacity: 0, scale: shouldReduceMotion ? 1 : 0.94 }
                               : false
                         }
                         whileInView={
@@ -193,11 +194,18 @@ const RegistrationHub = () => {
                            ease: [0.16, 1, 0.3, 1],
                            delay: shouldReduceMotion ? 0 : 0.15,
                         }}>
-                        <span
-                           className="h-3 w-3 rounded-full bg-green-400 animate-pulse"
-                           aria-hidden="true"></span>
-                        Slots update in real time
-                     </motion.div> */}
+                        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-[#F6A623]">
+                           <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
+                           Starting date
+                        </span>
+                        <p className="text-base font-semibold leading-relaxed text-[#FFE7C2]">
+                           Mark your calendars! ⚡ CSE FEST 2025 begins November 10–11!
+                        </p>
+                        <p className="text-xs text-gray-300/80">
+                           Gaming matches open 10 November, while the Datathon kicks off 3
+                           November for the overnight analytics sprint.
+                        </p>
+                     </motion.div>
                   </motion.div>
 
                   <motion.div
@@ -265,6 +273,27 @@ const RegistrationHub = () => {
                                  <p className="text-sm leading-relaxed text-gray-300">
                                     {event.description}
                                  </p>
+                                 {event.startDate && (
+                                    <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-[#FFE7C2]">
+                                       <span className="uppercase tracking-[0.35em] text-[#F6A623]/90">
+                                          Starts
+                                       </span>
+                                       <span className="inline-flex items-center gap-2 rounded-full bg-[#F6A623]/10 px-3 py-1 text-xs text-[#FFE7C2] ring-1 ring-[#F6A623]/40">
+                                          <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
+                                          {event.startDate}
+                                       </span>
+                                       {event.id === 2 && (
+                                          <span className="text-[0.7rem] font-medium text-gray-300/90">
+                                             Opening showcases run across LAN pods.
+                                          </span>
+                                       )}
+                                       {event.id === 5 && (
+                                          <span className="text-[0.7rem] font-medium text-gray-300/90">
+                                             Dedicated analytics sprint begins next day.
+                                          </span>
+                                       )}
+                                    </div>
+                                 )}
                               </div>
                            </div>
                            <div className="relative mt-6 flex items-center justify-end text-sm font-semibold">

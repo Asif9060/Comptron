@@ -52,8 +52,9 @@ const GAME_DEFINITIONS = [
       buttonGradient: "from-rose-400 to-red-500",
       registrationLink: "https://forms.gle/MvhPkygNe41DzE1Q8",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
-      deadline: "2025-10-30T11:59:00+06:00",
+      deadline: "2025-10-31T11:59:00+06:00",
       platform: "PC",
+      segment: "LAN Tournament",
    },
    {
       id: "fifa25",
@@ -66,8 +67,9 @@ const GAME_DEFINITIONS = [
       buttonGradient: "from-emerald-400 to-green-500",
       registrationLink: "https://forms.gle/4y2Gf2hiRYWppPHH6",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
-      deadline: "2025-10-30T11:59:00+06:00",
+      deadline: "2025-10-31T11:59:00+06:00",
       platform: "PC",
+      segment: "LAN Tournament",
    },
    {
       id: "pubg",
@@ -80,8 +82,9 @@ const GAME_DEFINITIONS = [
       buttonGradient: "from-orange-400 to-amber-400",
       registrationLink: "https://forms.gle/HCfGPoqVkFooQHTg6",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
-      deadline: "2025-10-30T11:59:00+06:00",
+      deadline: "2025-10-31T11:59:00+06:00",
       platform: "Mobile",
+      segment: "Online Segment",
    },
    {
       id: "efootball",
@@ -94,8 +97,9 @@ const GAME_DEFINITIONS = [
       buttonGradient: "from-sky-400 to-blue-500",
       registrationLink: "https://forms.gle/6FoEWdsnDfZfJiqc9",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
-      deadline: "2025-10-30T11:59:00+06:00",
+      deadline: "2025-10-31T11:59:00+06:00",
       platform: "Mobile",
+      segment: "Online Segment",
    },
 ];
 
@@ -385,6 +389,27 @@ GameSection.propTypes = {
 
 const GamingEventPage = () => {
    const games = useMemo(() => GAME_DEFINITIONS, []);
+   const segments = useMemo(
+      () => [
+         {
+            id: "lan",
+            title: "LAN Tournament",
+            description:
+               "Play shoulder-to-shoulder on calibrated rigs, react to the crowd, and own the arena energy.",
+            games: games.filter((game) => game.segment === "LAN Tournament"),
+            startDate: "10 November 2025",
+         },
+         {
+            id: "online",
+            title: "Online Segment",
+            description:
+               "Compete remotely with mobile mastery and cross-campus coordination across open lobbies.",
+            games: games.filter((game) => game.segment === "Online Segment"),
+            startDate: "7 November 2025",
+         },
+      ],
+      [games]
+   );
    const navigate = useNavigate();
    const shouldReduceMotion = useReducedMotion();
 
@@ -474,19 +499,92 @@ const GamingEventPage = () => {
                   </p>
                </motion.header>
 
-               <motion.div
-                  className="grid gap-6 md:grid-cols-2"
-                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                     duration: 0.6,
-                     ease: [0.16, 1, 0.3, 1],
-                     delay: shouldReduceMotion ? 0 : 0.14,
-                  }}>
-                  {games.map((game) => (
-                     <GameSection key={game.id} game={game} />
-                  ))}
-               </motion.div>
+               {segments.map((segment, index) => {
+                  const accentGradient =
+                     segment.id === "lan"
+                        ? "from-[#F6A623] via-[#facc15] to-[#fb923c]"
+                        : "from-sky-400 via-blue-500 to-indigo-500";
+                  const accentGlow =
+                     segment.id === "lan" ? "bg-[#F6A623]/18" : "bg-sky-500/18";
+
+                  return (
+                     <motion.section
+                        key={segment.id}
+                        className={`relative ${
+                           index === 0 ? "mt-10" : "mt-16"
+                        } space-y-8 overflow-hidden rounded-3xl border border-white/10 bg-white/5 px-6 py-10 shadow-[0_30px_60px_rgba(15,23,42,0.45)]`}
+                        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                           duration: 0.6,
+                           ease: [0.16, 1, 0.3, 1],
+                           delay: shouldReduceMotion ? 0 : 0.14 + index * 0.08,
+                        }}>
+                        <span
+                           className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${
+                              segment.id === "lan"
+                                 ? "from-[#F6A623]/10 via-transparent to-transparent"
+                                 : "from-sky-500/10 via-transparent to-transparent"
+                           }`}></span>
+                        <span
+                           className={`pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl ${accentGlow}`}></span>
+
+                        <motion.div
+                           className="relative space-y-3 text-center"
+                           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 18 }}
+                           animate={{ opacity: 1, y: 0 }}
+                           transition={{
+                              duration: 0.5,
+                              ease: [0.16, 1, 0.3, 1],
+                              delay: shouldReduceMotion ? 0 : 0.02,
+                           }}>
+                           <span
+                              className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-r ${accentGradient} px-5 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.4em] text-slate-950 shadow-[0_16px_40px_rgba(15,23,42,0.35)]`}
+                              aria-label={`${segment.title} highlight`}>
+                              <span className="h-1.5 w-1.5 rounded-full bg-slate-900/70"></span>
+                              {segment.title}
+                           </span>
+                           <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-[#FFE7C2]">
+                              <span
+                                 className={`relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r ${accentGradient} p-[1px] shadow-[0_20px_50px_rgba(15,23,42,0.45)]`}
+                                 aria-label={`${segment.title} start date`}>
+                                 <span className="absolute inset-0 -z-10 rounded-full bg-white/10 blur-xl opacity-70"></span>
+                                 <span className="relative inline-flex items-center gap-3 rounded-full bg-[#050b16]/90 px-6 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#FFE7C2]">
+                                    <span
+                                       className={`flex h-2 w-2 items-center justify-center rounded-full ${
+                                          segment.id === "lan"
+                                             ? "bg-[#F6A623]"
+                                             : "bg-sky-400"
+                                       }`}></span>
+                                    {segment.startDate}
+                                    {/* <span className="inline-flex h-1 w-6 rounded-full bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-70"></span> */}
+                                 </span>
+                              </span>
+                           </div>
+                           <h2 className="text-2xl font-bold text-white sm:text-3xl">
+                              {index === 0 ? "On-stage firefights" : "Remote domination"}
+                           </h2>
+                           <p className="text-sm text-gray-300 sm:text-base">
+                              {segment.description}
+                           </p>
+                        </motion.div>
+
+                        <motion.div
+                           className="relative grid gap-6 md:grid-cols-2"
+                           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+                           animate={{ opacity: 1, y: 0 }}
+                           transition={{
+                              duration: 0.55,
+                              ease: [0.16, 1, 0.3, 1],
+                              delay: shouldReduceMotion ? 0 : 0.1,
+                           }}>
+                           {segment.games.map((game) => (
+                              <GameSection key={game.id} game={game} />
+                           ))}
+                        </motion.div>
+                     </motion.section>
+                  );
+               })}
             </div>
          </div>
       </LoadingScreen>
