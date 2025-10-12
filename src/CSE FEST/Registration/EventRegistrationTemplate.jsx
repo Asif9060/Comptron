@@ -146,32 +146,36 @@ const EventRegistrationTemplate = ({ event }) => {
                <motion.button
                   type="button"
                   onClick={handleBack}
-                  className="group mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/40 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/60"
+                  className="group relative mx-auto inline-flex items-center justify-center overflow-hidden rounded-full px-0.5 py-0.5 text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                   whileHover={
                      shouldReduceMotion
                         ? undefined
-                        : { x: -4, boxShadow: "0 12px 30px rgba(15, 23, 42, 0.25)" }
+                        : { x: -4, boxShadow: "0 16px 36px rgba(246, 166, 35, 0.28)" }
                   }
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}>
-                  <svg
-                     className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5"
-                     fill="none"
-                     stroke="currentColor"
-                     viewBox="0 0 24 24">
-                     <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 19l-7-7 7-7"
-                     />
-                     <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 12h18"
-                     />
-                  </svg>
-                  Back to registrations
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6A623] via-[#facc15] to-[#fb923c] transition-transform duration-500 group-hover:scale-105"></span>
+                  <span className="absolute inset-0 rounded-full bg-[#F6A623]/40 opacity-0 blur-md transition-opacity duration-400 group-hover:opacity-60"></span>
+                  <span className="relative inline-flex items-center gap-2 rounded-full bg-[#0B1220]/90 px-6 py-2 text-[0.95rem] text-[#FFE7C2] shadow-[0_18px_40px_rgba(246,166,35,0.32)] transition-colors duration-300 group-hover:bg-[#121f34]/90">
+                     <svg
+                        className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                           strokeLinecap="round"
+                           strokeLinejoin="round"
+                           strokeWidth={2}
+                           d="M10 19l-7-7 7-7"
+                        />
+                        <path
+                           strokeLinecap="round"
+                           strokeLinejoin="round"
+                           strokeWidth={2}
+                           d="M3 12h18"
+                        />
+                     </svg>
+                     Back to registrations
+                  </span>
                </motion.button>
             </motion.div>
             <motion.div
@@ -209,9 +213,12 @@ const EventRegistrationTemplate = ({ event }) => {
                   <p className="text-base leading-relaxed text-gray-300 sm:text-lg">
                      {event.description}
                   </p>
-                  <p className="text-sm text-gray-400">
-                     <span className="font-semibold text-[#F6A623]">Deadline:</span>{" "}
-                     {deadlineLabel}
+                  <p className="text-base text-gray-300 sm:text-lg">
+                     <span className="font-semibold text-[#F6A623]">Deadline:</span>
+                     <span className="ml-2 inline-flex items-center gap-2 rounded-full bg-[#F6A623]/10 px-3 py-1 text-[#FFE7C2] ring-1 ring-[#F6A623]/40">
+                        <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
+                        {deadlineLabel}
+                     </span>
                      {isDeadlinePassed && (
                         <span className="ml-2 text-red-400">(Registration closed)</span>
                      )}

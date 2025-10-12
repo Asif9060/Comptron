@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import "../../components/css/Fest.css"
+import "../../components/css/Fest.css";
 import LoadingScreen from "../LoadingScreen";
 
 const getTimeLeft = (deadline) => {
@@ -44,15 +44,15 @@ const GAME_DEFINITIONS = [
    {
       id: "valorant",
       iconSrc: "/logos/valorant.png",
-      title: "Valorant Showdown",
+      title: "Valorant",
       tagline: "Execute perfect strats in every round.",
       description:
          "Assemble your five-stack, coordinate utility, and outsmart opponents across best-of series on Fracture, Bind, and more.",
       gradient: "from-purple-500/20 to-indigo-500/20",
       buttonGradient: "from-rose-400 to-red-500",
-      registrationLink: "https://forms.google.com/gaming-valorant",
+      registrationLink: "https://forms.gle/MvhPkygNe41DzE1Q8",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
-      deadline: "2025-11-07T11:59:00+06:00",
+      deadline: "2025-10-30T11:59:00+06:00",
       platform: "PC",
    },
    {
@@ -64,9 +64,9 @@ const GAME_DEFINITIONS = [
          "Craft tactical lineups, read your opponent’s build-up play, and deliver ice-cold finishes in nail-biting extra-time thrillers.",
       gradient: "from-blue-500/20 to-slate-500/20",
       buttonGradient: "from-emerald-400 to-green-500",
-      registrationLink: "https://forms.google.com/gaming-fifa25",
+      registrationLink: "https://forms.gle/4y2Gf2hiRYWppPHH6",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
-      deadline: "2025-11-07T11:59:00+06:00",
+      deadline: "2025-10-30T11:59:00+06:00",
       platform: "PC",
    },
    {
@@ -78,9 +78,9 @@ const GAME_DEFINITIONS = [
          "Battle across Erangel and Miramar with squad rotations, precision engagements, and last-zone survivability deciding the champions.",
       gradient: "from-orange-500/20 to-amber-500/20",
       buttonGradient: "from-orange-400 to-amber-400",
-      registrationLink: "https://forms.google.com/gaming-pubg",
+      registrationLink: "https://forms.gle/HCfGPoqVkFooQHTg6",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
-      deadline: "2025-11-07T11:59:00+06:00",
+      deadline: "2025-10-30T11:59:00+06:00",
       platform: "Mobile",
    },
    {
@@ -92,9 +92,9 @@ const GAME_DEFINITIONS = [
          "Showcase tactical formations and clutch penalty conversions in fast-paced fixtures that mirror the intensity of stadium play.",
       gradient: "from-green-500/20 to-emerald-500/20",
       buttonGradient: "from-sky-400 to-blue-500",
-      registrationLink: "https://forms.google.com/gaming-efootball",
+      registrationLink: "https://forms.gle/6FoEWdsnDfZfJiqc9",
       rulebookPath: "/rulebooks/gaming-tournament-rulebook.pdf",
-      deadline: "2025-11-07T11:59:00+06:00",
+      deadline: "2025-10-30T11:59:00+06:00",
       platform: "Mobile",
    },
 ];
@@ -238,7 +238,7 @@ const GameSection = ({ game }) => {
             </motion.div>
 
             <motion.p
-               className="text-xs text-gray-400"
+               className="text-sm text-gray-300 sm:text-base"
                variants={blockVariants}
                initial="hidden"
                animate="visible"
@@ -246,8 +246,11 @@ const GameSection = ({ game }) => {
                   ...blockVariants.visible.transition,
                   delay: shouldReduceMotion ? 0 : 0.22,
                }}>
-               <span className="font-semibold text-[#F6A623]">Deadline:</span>{" "}
-               {deadlineLabel}
+               <span className="font-semibold text-[#F6A623]">Deadline:</span>
+               <span className="ml-2 inline-flex items-center gap-2 rounded-full bg-[#F6A623]/10 px-3 py-1 text-[#FFE7C2] ring-1 ring-[#F6A623]/40">
+                  <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
+                  {deadlineLabel}
+               </span>
                {isDeadlinePassed && (
                   <span className="ml-1 text-red-400">(Registration closed)</span>
                )}
@@ -392,95 +395,100 @@ const GamingEventPage = () => {
    return (
       <LoadingScreen>
          <div className="relative min-h-screen overflow-hidden text-white">
-         <div className="absolute inset-0 z-0">
-            <div
-               className="absolute inset-0"
-               style={{
-                  background:
-                     "radial-gradient(ellipse at top, #1e3a8a 0%, #1e3a5f 20%, #0f172a 40%, #020617 60%, #000000 100%)",
-                  backgroundSize: "100% 100%",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-               }}></div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1c1535]/30 to-[#0f172a]/80"></div>
+            <div className="absolute inset-0 z-0">
+               <div
+                  className="absolute inset-0"
+                  style={{
+                     background:
+                        "radial-gradient(ellipse at top, #1e3a8a 0%, #1e3a5f 20%, #0f172a 40%, #020617 60%, #000000 100%)",
+                     backgroundSize: "100% 100%",
+                     backgroundPosition: "center",
+                     backgroundRepeat: "no-repeat",
+                  }}></div>
+               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1c1535]/30 to-[#0f172a]/80"></div>
+            </div>
+
+            <div className="pointer-events-none absolute -top-48 left-1/2 z-0 h-[460px] w-[460px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl"></div>
+            <div className="pointer-events-none absolute bottom-[-200px] right-[-120px] z-0 h-[420px] w-[420px] rounded-full bg-purple-500/20 blur-[200px]"></div>
+
+            <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 lg:px-10">
+               <motion.div
+                  className="mb-6 flex justify-center"
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}>
+                  <motion.button
+                     type="button"
+                     onClick={handleBack}
+                     className="group relative inline-flex items-center justify-center overflow-hidden rounded-full px-0.5 py-0.5 text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                     whileHover={
+                        shouldReduceMotion
+                           ? undefined
+                           : { x: -4, boxShadow: "0 16px 36px rgba(246, 166, 35, 0.28)" }
+                     }
+                     whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}>
+                     <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6A623] via-[#facc15] to-[#fb923c] transition-transform duration-500 group-hover:scale-105"></span>
+                     <span className="absolute inset-0 rounded-full bg-[#F6A623]/40 opacity-0 blur-md transition-opacity duration-400 group-hover:opacity-60"></span>
+                     <span className="relative inline-flex items-center gap-2 rounded-full bg-[#0B1220]/90 px-6 py-2 text-[0.95rem] text-[#FFE7C2] shadow-[0_18px_40px_rgba(246,166,35,0.32)] transition-colors duration-300 group-hover:bg-[#121f34]/90">
+                        <svg
+                           className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5"
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24">
+                           <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 19l-7-7 7-7"
+                           />
+                           <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M3 12h18"
+                           />
+                        </svg>
+                        Back to registrations
+                     </span>
+                  </motion.button>
+               </motion.div>
+               <motion.header
+                  className="mb-10 max-w-2xl text-center mx-auto"
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                     duration: 0.6,
+                     ease: [0.16, 1, 0.3, 1],
+                     delay: shouldReduceMotion ? 0 : 0.08,
+                  }}>
+                  <p className="text-xs uppercase rp tracking-[0.35em] text-[#F6A623]/80">
+                     Gaming Arena
+                  </p>
+                  <h1 className="mt-3 text-4xl rp font-black text-white">
+                     Choose your battleground
+                  </h1>
+                  <p className="mt-3 text-sm rp leading-relaxed text-gray-300 sm:text-base">
+                     Four competitive brackets, one electrifying stage. Rally your squad,
+                     lock your loadouts, and secure your place in the CSE Fest gaming
+                     arena.
+                  </p>
+               </motion.header>
+
+               <motion.div
+                  className="grid gap-6 md:grid-cols-2"
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                     duration: 0.6,
+                     ease: [0.16, 1, 0.3, 1],
+                     delay: shouldReduceMotion ? 0 : 0.14,
+                  }}>
+                  {games.map((game) => (
+                     <GameSection key={game.id} game={game} />
+                  ))}
+               </motion.div>
+            </div>
          </div>
-
-         <div className="pointer-events-none absolute -top-48 left-1/2 z-0 h-[460px] w-[460px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl"></div>
-         <div className="pointer-events-none absolute bottom-[-200px] right-[-120px] z-0 h-[420px] w-[420px] rounded-full bg-purple-500/20 blur-[200px]"></div>
-
-         <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 lg:px-10">
-            <motion.div
-               className="mb-6 flex justify-center"
-               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -12 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}>
-               <motion.button
-                  type="button"
-                  onClick={handleBack}
-                  className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/40 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/60"
-                  whileHover={
-                     shouldReduceMotion
-                        ? undefined
-                        : { x: -4, boxShadow: "0 12px 30px rgba(15, 23, 42, 0.25)" }
-                  }
-                  whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}>
-                  <svg
-                     className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5"
-                     fill="none"
-                     stroke="currentColor"
-                     viewBox="0 0 24 24">
-                     <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 19l-7-7 7-7"
-                     />
-                     <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 12h18"
-                     />
-                  </svg>
-                  Back to registrations
-               </motion.button>
-            </motion.div>
-            <motion.header
-               className="mb-10 max-w-2xl text-center mx-auto"
-               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{
-                  duration: 0.6,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: shouldReduceMotion ? 0 : 0.08,
-               }}>
-               <p className="text-xs uppercase rp tracking-[0.35em] text-[#F6A623]/80">
-                  Gaming Arena
-               </p>
-               <h1 className="mt-3 text-4xl rp font-black text-white">
-                  Choose your battleground
-               </h1>
-               <p className="mt-3 text-sm rp leading-relaxed text-gray-300 sm:text-base">
-                  Four competitive brackets, one electrifying stage. Rally your squad,
-                  lock your loadouts, and secure your place in the CSE Fest gaming arena.
-               </p>
-            </motion.header>
-
-            <motion.div
-               className="grid gap-6 md:grid-cols-2"
-               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{
-                  duration: 0.6,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: shouldReduceMotion ? 0 : 0.14,
-               }}>
-               {games.map((game) => (
-                  <GameSection key={game.id} game={game} />
-               ))}
-            </motion.div>
-         </div>
-      </div>
       </LoadingScreen>
    );
 };
