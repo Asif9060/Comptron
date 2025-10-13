@@ -34,7 +34,9 @@ const LoadingScreen = ({
                         <img
                            src={logoSrc}
                            alt="Loading"
-                           className="w-35 h-35 rounded-2xl shadow-xl object-contain"
+                           className="w-35 h-35 object-contain"
+                           style={{ mixBlendMode: "screen" }}
+                           draggable={false}
                         />
                      </div>
                      <div className="loader-circle"></div>
@@ -85,7 +87,18 @@ const LoadingScreen = ({
           display: flex;
           align-items: center;
           justify-content: center;
+               overflow: visible;
         }
+
+            .loader-logo-glow {
+               position: absolute;
+               inset: 0;
+               z-index: -1;
+               border-radius: 32px;
+               background: radial-gradient(circle at center, rgba(56, 189, 248, 0.55), rgba(15, 23, 42, 0));
+               filter: blur(18px);
+               pointer-events: none;
+            }
 
         .loader-circle {
           position: absolute;

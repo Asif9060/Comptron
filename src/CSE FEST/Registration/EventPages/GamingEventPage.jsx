@@ -275,7 +275,7 @@ const GameSection = ({ game }) => {
                      window.open(game.registrationLink, "_blank", "noopener,noreferrer")
                   }
                   disabled={isDeadlinePassed}
-                     className={`group inline-flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 ${
+                  className={`group inline-flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 ${
                      isDeadlinePassed
                         ? "cursor-not-allowed border border-white/20 bg-white/10 text-gray-400"
                         : `bg-gradient-to-r ${game.buttonGradient} text-black shadow-lg shadow-black/20`
@@ -314,7 +314,7 @@ const GameSection = ({ game }) => {
                <motion.a
                   href={game.rulebookPath}
                   download
-                 className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
+                  className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
                   whileHover={shouldReduceMotion ? undefined : { y: -6 }}
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}>
                   Download rulebook
