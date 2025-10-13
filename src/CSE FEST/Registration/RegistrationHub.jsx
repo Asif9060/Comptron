@@ -223,7 +223,7 @@ const RegistrationHub = () => {
                            onClick={() => handleRegistration(event)}
                            onMouseEnter={() => setHoveredCard(event.id)}
                            onMouseLeave={() => setHoveredCard(null)}
-                           className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-7 text-left transition-all duration-500 hover:-translate-y-2 hover:border-white/30 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 ${
+                           className={`group relative cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-7 text-left transition-all duration-500 hover:-translate-y-2 hover:border-white/30 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 ${
                               hoveredCard === event.id
                                  ? "shadow-2xl shadow-[#F6A623]/10"
                                  : "shadow-lg shadow-black/20"

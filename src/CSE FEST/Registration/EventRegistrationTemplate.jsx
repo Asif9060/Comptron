@@ -146,7 +146,7 @@ const EventRegistrationTemplate = ({ event }) => {
                <motion.button
                   type="button"
                   onClick={handleBack}
-                  className="group relative mx-auto inline-flex items-center justify-center overflow-hidden rounded-full px-0.5 py-0.5 text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                  className="group relative mx-auto inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-full px-0.5 py-0.5 text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                   whileHover={
                      shouldReduceMotion
                         ? undefined
@@ -241,7 +241,7 @@ const EventRegistrationTemplate = ({ event }) => {
                      window.open(event.registrationLink, "_blank", "noopener,noreferrer")
                   }
                   disabled={isDeadlinePassed}
-                  className={`group inline-flex items-center justify-center gap-2 rounded-2xl px-8 py-3 text-base font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 ${
+                  className={`group inline-flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-8 py-3 text-base font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 ${
                      isDeadlinePassed
                         ? "cursor-not-allowed border border-white/20 bg-white/10 text-gray-400"
                         : `bg-gradient-to-r ${event.buttonGradient} text-black shadow-lg shadow-black/20`
@@ -276,7 +276,7 @@ const EventRegistrationTemplate = ({ event }) => {
                <motion.a
                   href={event.rulebookPath}
                   download
-                  className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
+                  className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
                   variants={buttonVariants}
                   whileHover="hover"
                   whileTap="tap">
