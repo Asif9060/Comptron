@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../../components/css/Fest.css";
 import LoadingScreen from "../LoadingScreen";
+import RegistrationFooter from "../RegistrationFooter";
 
 const getTimeLeft = (deadline) => {
    const deadlineDate = new Date(deadline);
@@ -250,10 +251,31 @@ const GameSection = ({ game }) => {
                   ...blockVariants.visible.transition,
                   delay: shouldReduceMotion ? 0 : 0.22,
                }}>
-               <span className="font-semibold text-[#F6A623]">Deadline:</span>
-               <span className="ml-2 inline-flex items-center gap-2 rounded-full bg-[#F6A623]/10 px-3 py-1 text-[#FFE7C2] ring-1 ring-[#F6A623]/40">
-                  <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
-                  {deadlineLabel}
+               <span className="font-semibold uppercase tracking-[0.3em] text-[#F6A623]/90">
+                  Deadline
+               </span>
+               <span className="relative ml-3 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs text-white shadow-[0_16px_32px_rgba(15,23,42,0.45)] backdrop-blur">
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6A623]/20 via-transparent to-[#fb923c]/25"></span>
+                  <span className="relative inline-flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-[#F6A623] to-[#fb923c] text-slate-950 shadow-[0_10px_20px_rgba(246,166,35,0.35)]">
+                     <svg
+                        aria-hidden="true"
+                        className="h-3.5 w-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        viewBox="0 0 24 24">
+                        <path d="M7 3v3" strokeLinecap="round" />
+                        <path d="M17 3v3" strokeLinecap="round" />
+                        <rect height="14" rx="2" width="18" x="3" y="5"></rect>
+                        <path d="M8 11h2" strokeLinecap="round" />
+                        <path d="M14 11h2" strokeLinecap="round" />
+                        <path d="M8 15h2" strokeLinecap="round" />
+                        <path d="M14 15h2" strokeLinecap="round" />
+                     </svg>
+                  </span>
+                  <span className="relative text-xs font-semibold tracking-tight text-[#FFEED8]">
+                     {deadlineLabel}
+                  </span>
                </span>
                {isDeadlinePassed && (
                   <span className="ml-1 text-red-400">(Registration closed)</span>
@@ -445,7 +467,7 @@ const GamingEventPage = () => {
                   <motion.button
                      type="button"
                      onClick={handleBack}
-                     className="group relative inline-flex items-center justify-center overflow-hidden rounded-full px-0.5 py-0.5 text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                     className="group relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-full px-0.5 py-0.5 text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                      whileHover={
                         shouldReduceMotion
                            ? undefined
@@ -587,6 +609,7 @@ const GamingEventPage = () => {
                })}
             </div>
          </div>
+         <RegistrationFooter />
       </LoadingScreen>
    );
 };
