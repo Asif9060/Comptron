@@ -149,17 +149,6 @@ const RegistrationHub = () => {
                <p className="text-sm leading-relaxed text-gray-300">
                   {event.description}
                </p>
-               {event.startDate && (
-                  <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-[#FFE7C2]">
-                     <span className="uppercase tracking-[0.35em] text-[#F6A623]/90">
-                        Starts
-                     </span>
-                     <span className="inline-flex items-center gap-2 rounded-full bg-[#F6A623]/10 px-3 py-1 text-xs text-[#FFE7C2] ring-1 ring-[#F6A623]/40">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
-                        {event.startDate}
-                     </span>
-                  </div>
-               )}
             </div>
          </div>
          <div className="relative mt-6 flex items-center justify-end text-sm font-semibold">
@@ -208,6 +197,39 @@ const RegistrationHub = () => {
             <div className="pointer-events-none absolute bottom-[-280px] right-[-120px] z-0 h-[520px] w-[520px] rounded-full bg-purple-500/20 blur-[220px]"></div>
 
             <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-24 lg:px-10">
+               <header className="headres mb-14 flex flex-col items-center gap-4 text-center">
+                  <motion.img
+                     src="/logos/feest.png"
+                     alt="CSE Fest logo"
+                     className="h-24 w-48 max-w-full rounded-3xl border border-white/10 bg-white/10 p-4 shadow-xl shadow-[#F6A623]/20 backdrop-blur"
+                     initial={
+                        enableScrollAnimation
+                           ? { opacity: 0, scale: shouldReduceMotion ? 1 : 0.92 }
+                           : false
+                     }
+                     whileInView={
+                        enableScrollAnimation ? { opacity: 1, scale: 1 } : undefined
+                     }
+                     viewport={enableScrollAnimation ? { once: true } : undefined}
+                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                  <motion.p
+                     className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.4em] text-[#FFE7C2] backdrop-blur"
+                     initial={
+                        enableScrollAnimation
+                           ? { opacity: 0, y: shouldReduceMotion ? 0 : 18 }
+                           : false
+                     }
+                     whileInView={
+                        enableScrollAnimation ? { opacity: 1, y: 0 } : undefined
+                     }
+                     viewport={enableScrollAnimation ? { once: true } : undefined}
+                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: shouldReduceMotion ? 0 : 0.05 }}>
+                     <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
+                     10 & 11 November
+                     <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
+                  </motion.p>
+               </header>
                <section>
                   <motion.div
                      variants={enableScrollAnimation ? containerVariants : undefined}
@@ -218,10 +240,10 @@ const RegistrationHub = () => {
                            ? { once: true, margin: "-100px" }
                            : undefined
                      }
-                     className="flex flex-wrap items-end justify-between gap-6">
+                     className="flex flex-col items-center gap-10 text-center">
                      <motion.div
                         variants={enableScrollAnimation ? containerVariants : undefined}
-                        className="space-y-3"
+                        className="space-y-3 max-w-2xl text-center"
                         transition={{ delay: 0.05 }}>
                         <motion.p
                            className="text-sm uppercase tracking-[0.3em] text-[#F6A623]/80"
@@ -238,7 +260,7 @@ const RegistrationHub = () => {
                            Event lineup
                         </motion.p>
                         <motion.h2
-                           className="text-4xl font-bold tracking-tight text-white sm:text-5xl"
+                           className="text-4xl font-bold tracking-tight text-white sm:text-5xl text-center"
                            initial={
                               enableScrollAnimation
                                  ? { opacity: 0, y: shouldReduceMotion ? 0 : 20 }
@@ -256,7 +278,7 @@ const RegistrationHub = () => {
                            Choose your challenge
                         </motion.h2>
                         <motion.p
-                           className="max-w-3xl text-base leading-relaxed text-gray-300"
+                           className="mx-auto max-w-2xl text-base leading-relaxed text-gray-300 text-center"
                            initial={
                               enableScrollAnimation
                                  ? { opacity: 0, y: shouldReduceMotion ? 0 : 24 }
@@ -277,7 +299,7 @@ const RegistrationHub = () => {
                         </motion.p>
                      </motion.div>
                      <motion.div
-                        className="flex flex-col items-start gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-sm text-[#FFE7C2] backdrop-blur"
+                        className="flex max-w- flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-8 py-6 text-sm text-[#FFE7C2] backdrop-blur"
                         initial={
                            enableScrollAnimation
                               ? { opacity: 0, scale: shouldReduceMotion ? 1 : 0.94 }
@@ -296,10 +318,10 @@ const RegistrationHub = () => {
                            <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
                            Festival Timeline
                         </span>
-                        <p className="text-base font-semibold leading-relaxed text-transparent bg-gradient-to-r from-[#FFE7C2] via-[#F6A623] to-[#FF8A3D] bg-clip-text drop-shadow-[0_2px_12px_rgba(246,166,35,0.35)]">
+                        <p className="text-base font-semibold leading-relaxed text-transparent bg-gradient-to-r from-[#FFE7C2] via-[#F6A623] to-[#FF8A3D] bg-clip-text drop-shadow-[0_2px_12px_rgba(246,166,35,0.35)] text-center">
                            Mark your calendars! ⚡ CSE FEST 2025 begins November 10–11!
                         </p>
-                        <div className="flex flex-wrap gap-2 text-[0.7rem] text-gray-300/80">
+                        <div className="flex flex-wrap justify-center gap-2 text-[0.7rem] text-gray-300/80">
                            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-gray-200">
                               <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
                               Warm-up challenges ignite the week before

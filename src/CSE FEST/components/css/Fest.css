@@ -23,3 +23,8 @@
         transform: translateX(-24px);
     }
 }
+@media (max-width: 768px) {
+    .headres{
+        transform: translateX(-24px);
+    }
+}
