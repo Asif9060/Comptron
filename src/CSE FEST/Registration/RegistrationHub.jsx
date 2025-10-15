@@ -447,7 +447,7 @@ const RegistrationHub = () => {
                                    </span>
                                 )} */}
                                  <p className="text-lg font-semibold leading-relaxed text-[#FFE7C2]">
-                                    Closes{" "}
+                                    
                                     {upcomingDeadline.date.toLocaleString("en-US", {
                                        month: "long",
                                        day: "numeric",

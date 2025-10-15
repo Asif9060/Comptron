@@ -61,7 +61,7 @@ const GAME_DEFINITIONS = [
    {
       id: "fifa25",
       iconSrc: "/logos/fifa.png",
-      title: "FIFA 25",
+      title: "FIFA 23",
       tagline: "Control the pitch, secure every decisive touch.",
       description:
          "Craft tactical lineups, read your opponent’s build-up play, and deliver ice-cold finishes in nail-biting extra-time thrillers.",
