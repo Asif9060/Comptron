@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import "../../components/css/Fest.css";
 import LoadingScreen from "../LoadingScreen";
 import RegistrationFooter from "../RegistrationFooter";
+import { useGamingSubEvents } from "../useEventDates";
 
 const getTimeLeft = (deadline) => {
    const deadlineDate = new Date(deadline);
@@ -35,8 +36,8 @@ const formatDeadline = (deadline) => {
       day: "numeric",
       month: "long",
       year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
+      // hour: "numeric",
+      // minute: "2-digit",
       hour12: true,
    }).format(deadlineDate);
 };
@@ -256,22 +257,11 @@ const GameSection = ({ game }) => {
                </span>
                <span className="relative ml-3 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs text-white shadow-[0_16px_32px_rgba(15,23,42,0.45)] backdrop-blur">
                   <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6A623]/20 via-transparent to-[#fb923c]/25"></span>
-                  <span className="relative inline-flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-[#F6A623] to-[#fb923c] text-slate-950 shadow-[0_10px_20px_rgba(246,166,35,0.35)]">
-                     <svg
-                        aria-hidden="true"
-                        className="h-3.5 w-3.5"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.7"
-                        viewBox="0 0 24 24">
-                        <path d="M7 3v3" strokeLinecap="round" />
-                        <path d="M17 3v3" strokeLinecap="round" />
-                        <rect height="14" rx="2" width="18" x="3" y="5"></rect>
-                        <path d="M8 11h2" strokeLinecap="round" />
-                        <path d="M14 11h2" strokeLinecap="round" />
-                        <path d="M8 15h2" strokeLinecap="round" />
-                        <path d="M14 15h2" strokeLinecap="round" />
-                     </svg>
+                  <span
+                     className="relative inline-flex h-6 w-6 items-center justify-center"
+                     aria-hidden="true">
+                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500/50"></span>
+                     <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500 shadow-[0_0_12px_rgba(248,113,113,0.9)]"></span>
                   </span>
                   <span className="relative text-xs font-semibold tracking-tight text-[#FFEED8]">
                      {deadlineLabel}
@@ -361,6 +351,17 @@ const GameSection = ({ game }) => {
                </motion.a>
             </motion.div>
 
+            <motion.p
+               className="text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-[#FFE7C2]/70"
+               variants={blockVariants}
+               initial="hidden"
+               animate="visible"
+               transition={{
+                  ...blockVariants.visible.transition,
+                  delay: shouldReduceMotion ? 0 : 0.28,
+               }}>
+               Days Left
+            </motion.p>
             <motion.div
                className="grid w-full grid-cols-4 gap-3"
                variants={blockVariants}
@@ -368,7 +369,7 @@ const GameSection = ({ game }) => {
                animate="visible"
                transition={{
                   ...blockVariants.visible.transition,
-                  delay: shouldReduceMotion ? 0 : 0.3,
+                  delay: shouldReduceMotion ? 0 : 0.32,
                }}>
                {["days", "hours", "minutes", "seconds"].map((unit, index) => (
                   <motion.div
@@ -410,7 +411,9 @@ GameSection.propTypes = {
 };
 
 const GamingEventPage = () => {
-   const games = useMemo(() => GAME_DEFINITIONS, []);
+   const { games: dynamicGames, loading } = useGamingSubEvents(GAME_DEFINITIONS);
+   const games = useMemo(() => dynamicGames, [dynamicGames]);
+
    const segments = useMemo(
       () => [
          {
@@ -434,6 +437,14 @@ const GamingEventPage = () => {
    );
    const navigate = useNavigate();
    const shouldReduceMotion = useReducedMotion();
+
+   if (loading) {
+      return (
+         <LoadingScreen>
+            <div className="text-center text-white">Loading gaming events...</div>
+         </LoadingScreen>
+      );
+   }
 
    const handleBack = () => {
       navigate("/CseFest/registration");

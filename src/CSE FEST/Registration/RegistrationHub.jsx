@@ -1,15 +1,49 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { EVENT_ARRAY } from "./eventDetails";
+import { EVENT_DETAILS } from "./eventDetails";
+import { useEventDates } from "./useEventDates";
 import LoadingScreen from "./LoadingScreen";
 import RegistrationFooter from "./RegistrationFooter";
+
+const getTimeRemaining = (deadlineDate) => {
+   if (!deadlineDate) {
+      return null;
+   }
+
+   const timestamp = deadlineDate.getTime?.();
+   if (typeof timestamp !== "number" || Number.isNaN(timestamp)) {
+      return null;
+   }
+
+   const totalMs = timestamp - Date.now();
+   const clampedMs = Math.max(totalMs, 0);
+   const secondMs = 1000;
+   const minuteMs = secondMs * 60;
+   const hourMs = minuteMs * 60;
+   const dayMs = hourMs * 24;
+
+   const days = Math.floor(clampedMs / dayMs);
+   const hours = Math.floor((clampedMs % dayMs) / hourMs);
+   const minutes = Math.floor((clampedMs % hourMs) / minuteMs);
+   const seconds = Math.floor((clampedMs % minuteMs) / secondMs);
+
+   return {
+      totalMs,
+      days,
+      hours,
+      minutes,
+      seconds,
+      isExpired: totalMs <= 0,
+   };
+};
 
 const RegistrationHub = () => {
    const navigate = useNavigate();
    const [hoveredCard, setHoveredCard] = useState(null);
    const [isMobileViewport, setIsMobileViewport] = useState(false);
    const shouldReduceMotion = useReducedMotion();
+   const { eventDetails } = useEventDates(EVENT_DETAILS);
    const containerVariants = useMemo(
       () => ({
          hidden: {
@@ -47,10 +81,16 @@ const RegistrationHub = () => {
       }),
       [shouldReduceMotion]
    );
+   const normalizedEvents = useMemo(
+      () => Object.values(eventDetails || EVENT_DETAILS),
+      [eventDetails]
+   );
+
    const eventRegistrations = useMemo(
       () =>
-         EVENT_ARRAY.map((event) => ({
+         normalizedEvents.map((event) => ({
             id: event.id,
+            slug: event.slug,
             title: event.title,
             description: event.tagline,
             icon: event.icon,
@@ -58,18 +98,88 @@ const RegistrationHub = () => {
             buttonGradient: event.buttonGradient,
             pagePath: event.pagePath,
             startDate: event.startDate,
+            deadline: event.deadline,
          })),
-      []
+      [normalizedEvents]
    );
 
+   const orderedRegistrations = useMemo(() => {
+      const gamingEvent = eventRegistrations.find((event) => event.slug === "gaming");
+      const remainingEvents = eventRegistrations.filter(
+         (event) => event.slug !== "gaming"
+      );
+      if (!gamingEvent) {
+         return eventRegistrations;
+      }
+      return [...remainingEvents, gamingEvent];
+   }, [eventRegistrations]);
+
    const primaryEvents = useMemo(
-      () => eventRegistrations.slice(0, 3),
-      [eventRegistrations]
+      () => orderedRegistrations.slice(0, 3),
+      [orderedRegistrations]
    );
    const secondaryEvents = useMemo(
-      () => eventRegistrations.slice(3),
-      [eventRegistrations]
+      () => orderedRegistrations.slice(3),
+      [orderedRegistrations]
    );
+
+   const upcomingDeadline = useMemo(() => {
+      const now = Date.now();
+      const datedEvents = orderedRegistrations
+         .filter(
+            (event) =>
+               Boolean(event.deadline) &&
+               event.slug !== "programming" &&
+               event.slug !== "project"
+         )
+         .map((event) => {
+            const date = new Date(event.deadline);
+            if (Number.isNaN(date.getTime())) {
+               return null;
+            }
+            return { event, date, timestamp: date.getTime() };
+         })
+         .filter(Boolean);
+
+      if (datedEvents.length === 0) {
+         return null;
+      }
+
+      const upcoming = datedEvents.filter((item) => item.timestamp > now);
+      if (upcoming.length > 0) {
+         return upcoming.reduce((earliest, current) =>
+            current.timestamp < earliest.timestamp ? current : earliest
+         );
+      }
+
+      return datedEvents.reduce((earliest, current) =>
+         current.timestamp < earliest.timestamp ? current : earliest
+      );
+   }, [orderedRegistrations]);
+
+   const [countdown, setCountdown] = useState(() =>
+      getTimeRemaining(upcomingDeadline?.date)
+   );
+
+   useEffect(() => {
+      const deadlineDate = upcomingDeadline?.date;
+      if (!deadlineDate) {
+         setCountdown(null);
+         return undefined;
+      }
+
+      setCountdown(getTimeRemaining(deadlineDate));
+
+      if (typeof window === "undefined") {
+         return undefined;
+      }
+
+      const interval = window.setInterval(() => {
+         setCountdown(getTimeRemaining(deadlineDate));
+      }, 1000);
+
+      return () => window.clearInterval(interval);
+   }, [upcomingDeadline]);
 
    useEffect(() => {
       if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
@@ -224,7 +334,11 @@ const RegistrationHub = () => {
                         enableScrollAnimation ? { opacity: 1, y: 0 } : undefined
                      }
                      viewport={enableScrollAnimation ? { once: true } : undefined}
-                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: shouldReduceMotion ? 0 : 0.05 }}>
+                     transition={{
+                        duration: 0.6,
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: shouldReduceMotion ? 0 : 0.05,
+                     }}>
                      <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
                      10 & 11 November
                      <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
@@ -299,7 +413,7 @@ const RegistrationHub = () => {
                         </motion.p>
                      </motion.div>
                      <motion.div
-                        className="flex max-w- flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-8 py-6 text-sm text-[#FFE7C2] backdrop-blur"
+                        className="flex w-full max-w-3xl flex-col items-center gap-6 rounded-3xl border border-white/12 bg-white/8 px-10 py-8 text-base text-[#FFE7C2] shadow-[0_30px_80px_rgba(8,8,35,0.45)] backdrop-blur"
                         initial={
                            enableScrollAnimation
                               ? { opacity: 0, scale: shouldReduceMotion ? 1 : 0.94 }
@@ -314,23 +428,74 @@ const RegistrationHub = () => {
                            ease: [0.16, 1, 0.3, 1],
                            delay: shouldReduceMotion ? 0 : 0.15,
                         }}>
-                        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-[#F6A623]">
+                        <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.45em] text-[#F6A623]">
                            <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
-                           Festival Timeline
+                           Registration Deadline
                         </span>
-                        <p className="text-base font-semibold leading-relaxed text-transparent bg-gradient-to-r from-[#FFE7C2] via-[#F6A623] to-[#FF8A3D] bg-clip-text drop-shadow-[0_2px_12px_rgba(246,166,35,0.35)] text-center">
-                           Mark your calendars! ⚡ CSE FEST 2025 begins November 10–11!
-                        </p>
-                        <div className="flex flex-wrap justify-center gap-2 text-[0.7rem] text-gray-300/80">
-                           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-gray-200">
-                              <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
-                              Warm-up challenges ignite the week before
-                           </span>
-                           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-gray-200">
-                              <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
-                              Secure your spot ahead of the rush
-                           </span>
-                        </div>
+                        {upcomingDeadline ? (
+                           <>
+                              <div className="flex flex-col items-center gap-3 text-center">
+                                 {/* {upcomingDeadline.event?.title && (
+                                   <span className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#FFE7C2]/80">
+                                      <span
+                                         className="relative inline-flex h-3 w-3 items-center justify-center"
+                                         aria-hidden="true">
+                                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400/40"></span>
+                                         <span className="relative inline-flex h-2 w-2 rounded-full bg-red-400 shadow-[0_0_10px_rgba(248,113,113,0.7)]"></span>
+                                      </span>
+                                      {upcomingDeadline.event.title}
+                                   </span>
+                                )} */}
+                                 <p className="text-lg font-semibold leading-relaxed text-[#FFE7C2]">
+                                    Closes{" "}
+                                    {upcomingDeadline.date.toLocaleString("en-US", {
+                                       month: "long",
+                                       day: "numeric",
+                                       year: "numeric",
+                                    })}
+                                 </p>
+                              </div>
+                              {countdown ? (
+                                 <>
+                                    <p className="text-sm font-semibold uppercase tracking-[0.42em] text-[#FFE7C2]/80">
+                                       Days Left
+                                    </p>
+                                    <div className="flex flex-wrap items-center justify-center gap-5">
+                                       {["days", "hours", "minutes", "seconds"].map(
+                                          (unit) => (
+                                             <div
+                                                key={unit}
+                                                className="flex min-w-[88px] flex-col items-center rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-[#FFE7C2] shadow-[0_16px_38px_rgba(8,8,35,0.45)]">
+                                                <span className="text-3xl font-black text-white">
+                                                   {String(countdown[unit]).padStart(
+                                                      2,
+                                                      "0"
+                                                   )}
+                                                </span>
+                                                <span className="text-[0.7rem] uppercase tracking-[0.32em] text-[#F6A623]/85">
+                                                   {unit}
+                                                </span>
+                                             </div>
+                                          )
+                                       )}
+                                    </div>
+                                 </>
+                              ) : (
+                                 <p className="text-sm text-gray-300/80">
+                                    Countdown unavailable at the moment.
+                                 </p>
+                              )}
+                              {countdown?.isExpired && (
+                                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-400">
+                                    Registration closed — stay tuned for next updates
+                                 </p>
+                              )}
+                           </>
+                        ) : (
+                           <p className="text-sm text-gray-300/80">
+                              No deadlines published yet. Check back soon!
+                           </p>
+                        )}
                      </motion.div>
                   </motion.div>
 

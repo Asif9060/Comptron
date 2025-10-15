@@ -67,7 +67,7 @@ const contactItems = [
    },
    {
       label: "Phone",
-      value: "+880 1xxx-xxxxxx",
+      value: "+880 1400-874851",
       icon: (
          <svg
             aria-hidden="true"
@@ -101,7 +101,7 @@ const contactItems = [
 const eventHighlights = [
    { label: "Date", value: "10-11 November" },
    { label: "Venue", value: "NWU Building 2 Campus" },
-   { label: "Duration", value: "Full Day Event" },
+   { label: "Duration", value: "2 Day Event" },
 ];
 
 const PRIMARY_ACCENT = "#FFB860";
@@ -271,6 +271,9 @@ const RegistrationFooter = () => (
                <p>© 2025 NWU CSE Fest. All rights reserved.</p>
                <p className="text-[0.7rem] text-[#E5BA7A]">
                   Organized by Department of CSE, North Western University, Khulna
+               </p>
+               <p className="text-[0.7rem] text-[#E5BA7A]">
+                  Supported by <a href="https://comptron.nwu.ac.bd/">Comptron-Creativity Assembled</a>, North Western University, Khulna
                </p>
             </div>
             <div className="flex flex-wrap items-center gap-4 text-xs">

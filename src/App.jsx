@@ -54,6 +54,7 @@ import Datathon from "./CSE FEST/pages/Events/Datathon";
 import Project from "./CSE FEST/pages/Events/Project";
 import PosterPresentation from "./CSE FEST/pages/Events/Ideathon";
 import CseFestAdmin from "./AdminPanel/CseFestAdmin";
+import Control from "./CSE FEST/pages/Control";
 import {
    RegistrationHub,
    WorkshopRegistration,
@@ -273,6 +274,14 @@ const App = () => {
                   element={
                      <AdminProtectedRoute>
                         <CseFestAdmin />
+                     </AdminProtectedRoute>
+                  }></Route>
+
+               <Route
+                  path="/CseFestControl"
+                  element={
+                     <AdminProtectedRoute>
+                        <Control />
                      </AdminProtectedRoute>
                   }></Route>
 

@@ -152,6 +152,14 @@ const AdminDashboardPage = () => {
          bgTo: "to-yellow-400",
          delay: 0.7,
       },
+      {
+         to: "/CseFestControl",
+         label: "CSE FEST Date Control",
+         icon: "📅",
+         bgFrom: "from-red-500",
+         bgTo: "to-pink-400",
+         delay: 0.8,
+      },
    ];
 
    return (

@@ -33,8 +33,8 @@ const formatDeadline = (deadline) => {
       day: "numeric",
       month: "long",
       year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
+      // hour: "numeric",
+      // minute: "2-digit",
       hour12: true,
    }).format(deadlineDate);
 };
@@ -221,22 +221,11 @@ const EventRegistrationTemplate = ({ event }) => {
                         </span>
                         <span className="relative ml-3 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm text-white shadow-[0_16px_40px_rgba(15,23,42,0.45)] backdrop-blur">
                            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6A623]/25 via-transparent to-[#fb923c]/25 opacity-80"></span>
-                           <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#F6A623] to-[#fb923c] text-slate-950 shadow-[0_10px_20px_rgba(246,166,35,0.35)]">
-                              <svg
-                                 aria-hidden="true"
-                                 className="h-4 w-4"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 strokeWidth="1.8"
-                                 viewBox="0 0 24 24">
-                                 <path d="M7 3v3" strokeLinecap="round" />
-                                 <path d="M17 3v3" strokeLinecap="round" />
-                                 <rect height="14" rx="2" width="18" x="3" y="5"></rect>
-                                 <path d="M8 11h2" strokeLinecap="round" />
-                                 <path d="M14 11h2" strokeLinecap="round" />
-                                 <path d="M8 15h2" strokeLinecap="round" />
-                                 <path d="M14 15h2" strokeLinecap="round" />
-                              </svg>
+                           <span
+                              className="relative inline-flex h-7 w-7 items-center justify-center"
+                              aria-hidden="true">
+                              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500/50"></span>
+                              <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500 shadow-[0_0_12px_rgba(248,113,113,0.9)]"></span>
                            </span>
                            <span className="relative text-sm font-semibold tracking-tight text-[#FFEED8]">
                               {deadlineLabel}
@@ -331,6 +320,17 @@ const EventRegistrationTemplate = ({ event }) => {
                   </motion.a>
                </motion.div>
 
+               <motion.p
+                  className="text-[1.3rem] font-semibold uppercase tracking-[0.38em] text-[#FFE7C2]/70"
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                     duration: 0.5,
+                     ease: [0.16, 1, 0.3, 1],
+                     delay: shouldReduceMotion ? 0 : 0.22,
+                  }}>
+                  Days Left
+               </motion.p>
                <motion.div
                   className="grid w-full gap-4 sm:grid-cols-4"
                   initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
