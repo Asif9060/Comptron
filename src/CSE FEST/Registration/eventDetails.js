@@ -7,7 +7,7 @@ export const EVENT_DETAILS = {
       description:
          "Tackle algorithmic challenges designed for competitive programmers. Team up or go solo and prove your mastery over logic and speed.",
       registrationLink: "https://forms.gle/ZNiikAKbz74cBCr47",
-      rulebookPath: "/rulebooks/programming-contest-rulebook.pdf",
+      rulebookPath: "https://drive.google.com/file/d/1adYlZWovbMSmQPz6ItEwXxgjYpayrTfn/view",
       deadline: "2025-10-31T11:59:00+06:00",
       icon: "💻",
       gradient: "from-blue-500/20 to-cyan-500/20",
@@ -49,7 +49,7 @@ export const EVENT_DETAILS = {
       description:
          "Present your cutting-edge software, hardware, or research project to industry experts. Inspire the crowd and compete for grant opportunities.",
       registrationLink: "https://forms.gle/XzJNuroGxsdwutZG6",
-      rulebookPath: "/rulebooks/project-showcase-rulebook.pdf",
+      rulebookPath: "https://drive.google.com/file/d/1kXioErBlvHGz5mx9-3aClQ1S47Ecvrau/view",
       deadline: "2025-10-31T23:59:00+06:00",
       icon: "🚀",
       gradient: "from-purple-500/20 to-pink-500/20",
@@ -70,7 +70,7 @@ export const EVENT_DETAILS = {
       description:
          "Design a compelling academic or industry poster, communicate your findings with clarity, and engage judges in a vibrant exhibition floor.",
       registrationLink: "https://forms.gle/xtT4DjfCiwUH87iu6",
-      rulebookPath: "/rulebooks/ideathon-rulebook.pdf",
+      rulebookPath: "https://drive.google.com/file/d/1ClP4wlN5yOwmN_iaMoHvdgeuDMLymjTq/view",
       deadline: "2025-10-31T23:59:00+06:00",
       icon: "💡",
       gradient: "from-yellow-500/20 to-orange-500/20",
@@ -91,7 +91,7 @@ export const EVENT_DETAILS = {
       description:
          "Analyze large datasets, uncover patterns, and deliver actionable dashboards that impress data scientists and business leaders alike.",
       registrationLink: "https://forms.gle/ZCFv7KBhmV3KGnAJA",
-      rulebookPath: "/rulebooks/datathon-rulebook.pdf",
+      rulebookPath: "https://drive.google.com/file/d/1jN9zEm-qTpvwe6dAwTSU2lES0MA8JaN8/view",
       deadline: "2025-10-31T23:59:00+06:00",
       icon: "📊",
       gradient: "from-green-500/20 to-emerald-500/20",

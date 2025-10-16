@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 import "../../components/css/Fest.css";
 import LoadingScreen from "../LoadingScreen";
 import RegistrationFooter from "../RegistrationFooter";
-import { useGamingSubEvents } from "../useEventDates";
+import { useEventDates, useGamingSubEvents } from "../useEventDates";
+import { EVENT_DETAILS } from "../eventDetails";
 
 const getTimeLeft = (deadline) => {
    const deadlineDate = new Date(deadline);
@@ -103,7 +104,46 @@ const GAME_DEFINITIONS = [
       platform: "Mobile",
       segment: "Online Segment",
    },
+   {
+      id: "indoor",
+      iconEmoji: "🏟️",
+      title: "Indoor Games",
+      tagline: "Precision, focus, and crowd-pleasing clutch plays.",
+      description:
+         "Face off in the Indoor Games under bright lights, with cheers all around and officials keeping the fun rolling!",
+      gradient: "from-emerald-500/20 to-lime-500/20",
+      buttonGradient: "from-emerald-400 to-lime-500",
+      registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLScpmRQfiYGA0HHYQ1RaJE8Umr44bo9JwoZQ7FPJyQbOy1tYuQ/viewform?usp=dialog",
+      rulebookPath: "https://drive.google.com/file/d/18wFGbfTp_PL2j9f-PaWytk45Xvnhpg6V/view?usp=drive_link",
+      deadline: "2025-11-05T23:59:00+06:00",
+      platform: "Indoor Arena",
+      segment: "Indoor Games",
+   },
 ];
+
+const SEGMENT_VISUALS = {
+   "LAN Tournament": {
+      gradient: "from-[#F6A623] via-[#facc15] to-[#fb923c]",
+      glow: "bg-[#F6A623]/18",
+      headline: "On-stage firefights",
+      indicator: "bg-[#F6A623]",
+      overlay: "from-[#F6A623]/10 via-transparent to-transparent",
+   },
+   "Online Segment": {
+      gradient: "from-sky-400 via-blue-500 to-indigo-500",
+      glow: "bg-sky-500/18",
+      headline: "Remote domination",
+      indicator: "bg-sky-400",
+      overlay: "from-sky-500/10 via-transparent to-transparent",
+   },
+   "Indoor Games": {
+      gradient: "from-emerald-400 via-green-500 to-lime-400",
+      glow: "bg-emerald-500/18",
+      headline: "Indoor mastery",
+      indicator: "bg-emerald-400",
+      overlay: "from-emerald-500/10 via-transparent to-transparent",
+   },
+};
 
 const GameSection = ({ game }) => {
    const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(game.deadline));
@@ -205,23 +245,43 @@ const GameSection = ({ game }) => {
                   ...blockVariants.visible.transition,
                   delay: shouldReduceMotion ? 0 : 0.05,
                }}>
-               <motion.img
-                  src={game.iconSrc}
-                  alt={`${game.title} logo`}
-                  className="h-10 w-10 object-contain"
-                  whileHover={
-                     shouldReduceMotion
-                        ? undefined
-                        : {
-                             rotate: [-2, 2, -2],
-                             transition: {
-                                duration: 2.4,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                             },
-                          }
-                  }
-               />
+               {game.iconSrc ? (
+                  <motion.img
+                     src={game.iconSrc}
+                     alt={`${game.title} logo`}
+                     className="h-10 w-10 object-contain"
+                     whileHover={
+                        shouldReduceMotion
+                           ? undefined
+                           : {
+                                rotate: [-2, 2, -2],
+                                transition: {
+                                   duration: 2.4,
+                                   repeat: Infinity,
+                                   ease: "easeInOut",
+                                },
+                             }
+                     }
+                  />
+               ) : (
+                  <motion.span
+                     className="text-3xl"
+                     aria-hidden="true"
+                     whileHover={
+                        shouldReduceMotion
+                           ? undefined
+                           : {
+                                rotate: [-6, 6, -6],
+                                transition: {
+                                   duration: 2.4,
+                                   repeat: Infinity,
+                                   ease: "easeInOut",
+                                },
+                             }
+                     }>
+                     {game.iconEmoji}
+                  </motion.span>
+               )}
             </motion.div>
             <motion.div
                className="space-y-2"
@@ -241,6 +301,12 @@ const GameSection = ({ game }) => {
                   Platform: {game.platform}
                </span>
                <p className="text-sm leading-relaxed text-gray-300">{game.description}</p>
+               {game.id === "indoor" && (
+                  <span className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-400 via-lime-300 to-emerald-500 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.22em] text-emerald-950 shadow-[0_12px_24px_rgba(34,197,94,0.35)]">
+                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-700"></span>
+                     Only for NWU students
+                  </span>
+               )}
             </motion.div>
 
             <motion.p
@@ -255,7 +321,7 @@ const GameSection = ({ game }) => {
                <span className="font-semibold uppercase tracking-[0.3em] text-[#F6A623]/90">
                   Deadline
                </span>
-               <span className="relative ml-3 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs text-white shadow-[0_16px_32px_rgba(15,23,42,0.45)] backdrop-blur">
+               <span className="relative inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs text-white shadow-[0_16px_32px_rgba(15,23,42,0.45)] backdrop-blur sm:ml-3">
                   <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6A623]/20 via-transparent to-[#fb923c]/25"></span>
                   <span
                      className="relative inline-flex h-6 w-6 items-center justify-center"
@@ -363,7 +429,7 @@ const GameSection = ({ game }) => {
                Days Left
             </motion.p>
             <motion.div
-               className="grid w-full grid-cols-4 gap-3"
+               className="grid w-full grid-cols-2 gap-3 sm:grid-cols-4"
                variants={blockVariants}
                initial="hidden"
                animate="visible"
@@ -396,8 +462,9 @@ const GameSection = ({ game }) => {
 
 GameSection.propTypes = {
    game: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      iconSrc: PropTypes.string.isRequired,
+   id: PropTypes.string.isRequired,
+   iconSrc: PropTypes.string,
+   iconEmoji: PropTypes.string,
       title: PropTypes.string.isRequired,
       tagline: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
@@ -411,14 +478,43 @@ GameSection.propTypes = {
 };
 
 const GamingEventPage = () => {
+   const { eventDetails, loading: eventsLoading } = useEventDates(EVENT_DETAILS);
    const { games: dynamicGames, loading } = useGamingSubEvents(GAME_DEFINITIONS);
-   const games = useMemo(() => dynamicGames, [dynamicGames]);
+
+   const programmingDetails = eventDetails?.programming;
+
+   const games = useMemo(() => {
+      if (!Array.isArray(dynamicGames)) {
+         return [];
+      }
+
+      if (!programmingDetails) {
+         return dynamicGames;
+      }
+
+      return dynamicGames.map((game) => {
+         if (game.id !== "indoor") {
+            return game;
+         }
+
+         return {
+            ...game,
+            deadline: programmingDetails.deadline ?? game.deadline,
+            isRegistrationOpen:
+               typeof programmingDetails.isRegistrationOpen === "boolean"
+                  ? programmingDetails.isRegistrationOpen
+                  : game.isRegistrationOpen,
+            timeRemaining: programmingDetails.timeRemaining ?? game.timeRemaining,
+         };
+      });
+   }, [dynamicGames, programmingDetails]);
 
    const segments = useMemo(
       () => [
          {
             id: "lan",
             title: "LAN Tournament",
+            accentKey: "LAN Tournament",
             description:
                "Play shoulder-to-shoulder on calibrated rigs, react to the crowd, and own the arena energy.",
             games: games.filter((game) => game.segment === "LAN Tournament"),
@@ -427,10 +523,20 @@ const GamingEventPage = () => {
          {
             id: "online",
             title: "Online Segment",
+            accentKey: "Online Segment",
             description:
                "Compete remotely with mobile mastery and cross-campus coordination across open lobbies.",
             games: games.filter((game) => game.segment === "Online Segment"),
             startDate: "7 November 2025",
+         },
+         {
+            id: "indoor",
+            title: "Indoor Games",
+            accentKey: "Indoor Games",
+            description:
+               "Battle for campus glory in  Indoor Games inside the festival's indoor arena.",
+            games: games.filter((game) => game.segment === "Indoor Games"),
+            startDate: "10 November 2025",
          },
       ],
       [games]
@@ -438,7 +544,7 @@ const GamingEventPage = () => {
    const navigate = useNavigate();
    const shouldReduceMotion = useReducedMotion();
 
-   if (loading) {
+   if (loading || eventsLoading) {
       return (
          <LoadingScreen>
             <div className="text-center text-white">Loading gaming events...</div>
@@ -532,20 +638,31 @@ const GamingEventPage = () => {
                   </p>
                </motion.header>
 
-               {segments.map((segment, index) => {
-                  const accentGradient =
-                     segment.id === "lan"
-                        ? "from-[#F6A623] via-[#facc15] to-[#fb923c]"
-                        : "from-sky-400 via-blue-500 to-indigo-500";
-                  const accentGlow =
-                     segment.id === "lan" ? "bg-[#F6A623]/18" : "bg-sky-500/18";
+               {segments
+                  .filter((segment) => segment.games.length > 0)
+                  .map((segment, index) => {
+                     const isSingleGame = segment.games.length === 1;
+                     const visuals = SEGMENT_VISUALS[segment.accentKey] || {
+                        gradient: "from-[#F6A623] via-[#facc15] to-[#fb923c]",
+                        glow: "bg-[#F6A623]/18",
+                        overlay: "from-[#F6A623]/10 via-transparent to-transparent",
+                        indicator: "bg-[#F6A623]",
+                        headline: segment.title,
+                     };
+                     const accentGradient = visuals.gradient;
+                     const accentGlow = visuals.glow;
+                     const accentOverlay = visuals.overlay;
+                     const accentIndicator = visuals.indicator;
+                     const sectionHeadline = visuals.headline || segment.title;
 
-                  return (
+                     return (
                      <motion.section
                         key={segment.id}
                         className={`relative ${
                            index === 0 ? "mt-10" : "mt-16"
-                        } space-y-8 overflow-hidden rounded-3xl border border-white/10 bg-white/5 px-6 py-10 shadow-[0_30px_60px_rgba(15,23,42,0.45)]`}
+                        } space-y-8 overflow-hidden rounded-3xl border border-white/10 bg-white/5 px-6 py-10 shadow-[0_30px_60px_rgba(15,23,42,0.45)] ${
+                           isSingleGame ? "mx-auto max-w-3xl" : ""
+                        }`}
                         initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{
@@ -554,11 +671,7 @@ const GamingEventPage = () => {
                            delay: shouldReduceMotion ? 0 : 0.14 + index * 0.08,
                         }}>
                         <span
-                           className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${
-                              segment.id === "lan"
-                                 ? "from-[#F6A623]/10 via-transparent to-transparent"
-                                 : "from-sky-500/10 via-transparent to-transparent"
-                           }`}></span>
+                           className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${accentOverlay}`}></span>
                         <span
                            className={`pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl ${accentGlow}`}></span>
 
@@ -584,18 +697,14 @@ const GamingEventPage = () => {
                                  <span className="absolute inset-0 -z-10 rounded-full bg-white/10 blur-xl opacity-70"></span>
                                  <span className="relative inline-flex items-center gap-3 rounded-full bg-[#050b16]/90 px-6 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#FFE7C2]">
                                     <span
-                                       className={`flex h-2 w-2 items-center justify-center rounded-full ${
-                                          segment.id === "lan"
-                                             ? "bg-[#F6A623]"
-                                             : "bg-sky-400"
-                                       }`}></span>
+                                       className={`flex h-2 w-2 items-center justify-center rounded-full ${accentIndicator}`}></span>
                                     {segment.startDate}
                                     {/* <span className="inline-flex h-1 w-6 rounded-full bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-70"></span> */}
                                  </span>
                               </span>
                            </div>
                            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-                              {index === 0 ? "On-stage firefights" : "Remote domination"}
+                              {sectionHeadline}
                            </h2>
                            <p className="text-sm text-gray-300 sm:text-base">
                               {segment.description}
@@ -603,7 +712,11 @@ const GamingEventPage = () => {
                         </motion.div>
 
                         <motion.div
-                           className="relative grid gap-6 md:grid-cols-2"
+                           className={`relative grid grid-cols-1 gap-6 ${
+                              isSingleGame
+                                 ? "mx-auto max-w-md place-items-center sm:max-w-lg md:max-w-xl"
+                                 : "md:grid-cols-2"
+                           }`}
                            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
                            animate={{ opacity: 1, y: 0 }}
                            transition={{
@@ -616,8 +729,8 @@ const GamingEventPage = () => {
                            ))}
                         </motion.div>
                      </motion.section>
-                  );
-               })}
+                     );
+                  })}
             </div>
          </div>
          <RegistrationFooter />

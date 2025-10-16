@@ -2,79 +2,62 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { EVENT_DETAILS } from "../Registration/eventDetails";
 
-const formatDateForInput = (value) => {
-   const date = new Date(value);
-   if (Number.isNaN(date.getTime())) {
-      return "";
-   }
-   return date.toISOString().split("T")[0];
-};
-
-const formatDateTimeForInput = (value) => {
-   const date = value instanceof Date ? value : new Date(value);
-   if (Number.isNaN(date.getTime())) {
-      return "";
-   }
-
-   const year = date.getFullYear();
-   const month = String(date.getMonth() + 1).padStart(2, "0");
-   const day = String(date.getDate()).padStart(2, "0");
-   const hours = String(date.getHours()).padStart(2, "0");
-   const minutes = String(date.getMinutes()).padStart(2, "0");
-
-   return `${year}-${month}-${day}T${hours}:${minutes}`;
-};
-
-const buildDefaultEventDates = () => {
-   const defaults = {};
-   Object.values(EVENT_DETAILS).forEach((event) => {
-      defaults[event.slug] = {
-         startDate: formatDateForInput(event.startDate),
-         deadline: formatDateTimeForInput(event.deadline),
-      };
-   });
-   return defaults;
-};
-
-const buildDefaultGamingSubEvents = () => ({
-   valorant: {
-      title: "Valorant",
-      deadline: formatDateTimeForInput("2025-10-31T11:59:00+06:00"),
-      platform: "PC",
-      segment: "LAN Tournament",
-   },
-   fifa25: {
-      title: "FIFA 25",
-      deadline: formatDateTimeForInput("2025-10-31T11:59:00+06:00"),
-      platform: "PC",
-      segment: "LAN Tournament",
-   },
-   pubg: {
-      title: "PUBG Mobile",
-      deadline: formatDateTimeForInput("2025-10-31T11:59:00+06:00"),
-      platform: "Mobile",
-      segment: "Online Segment",
-   },
-   efootball: {
-      title: "E-Football",
-      deadline: formatDateTimeForInput("2025-10-31T11:59:00+06:00"),
-      platform: "Mobile",
-      segment: "Online Segment",
-   },
-});
-
 const Control = () => {
    const [selectedEvent, setSelectedEvent] = useState("programming");
    const [loading, setLoading] = useState(false);
    const [saveSuccess, setSaveSuccess] = useState(false);
 
    // Main Events State
-   const [eventDates, setEventDates] = useState(() => buildDefaultEventDates());
+   const [eventDates, setEventDates] = useState({
+      programming: {
+         startDate: "2025-11-10",
+         deadline: "2025-10-31T11:59",
+      },
+      gaming: {
+         startDate: "2025-11-10",
+         deadline: "2025-11-10T23:59",
+      },
+      project: {
+         startDate: "2025-11-10",
+         deadline: "2025-10-31T23:59",
+      },
+      "poster-presentation": {
+         startDate: "2025-11-10",
+         deadline: "2025-10-31T23:59",
+      },
+      datathon: {
+         startDate: "2025-11-03",
+         deadline: "2025-10-31T23:59",
+      },
+   });
 
    // Gaming Sub-Events State
-   const [gamingSubEvents, setGamingSubEvents] = useState(() =>
-      buildDefaultGamingSubEvents()
-   );
+   const [gamingSubEvents, setGamingSubEvents] = useState({
+      valorant: {
+         title: "Valorant",
+         deadline: "2025-10-31T11:59",
+         platform: "PC",
+         segment: "LAN Tournament",
+      },
+      fifa25: {
+         title: "FIFA 25",
+         deadline: "2025-10-31T11:59",
+         platform: "PC",
+         segment: "LAN Tournament",
+      },
+      pubg: {
+         title: "PUBG Mobile",
+         deadline: "2025-10-31T11:59",
+         platform: "Mobile",
+         segment: "Online Segment",
+      },
+      efootball: {
+         title: "E-Football",
+         deadline: "2025-10-31T11:59",
+         platform: "Mobile",
+         segment: "Online Segment",
+      },
+   });
 
    const events = [
       {
@@ -109,95 +92,36 @@ const Control = () => {
       },
    ];
 
-   // Load current dates from backend on mount
+   // Load current dates from EVENT_DETAILS on mount
    useEffect(() => {
-      const loadEventDates = async () => {
-         try {
-            // Load main events from backend
-            const eventsRes = await fetch(
-               "https://comptron-server-2.onrender.com/api/event-control/events"
-            );
-            const eventsData = await eventsRes.json();
-
-            if (eventsData.success && eventsData.count > 0 && eventsData.events) {
-               const formattedDates = buildDefaultEventDates();
-
-               Object.entries(eventsData.events).forEach(([slug, event]) => {
-                  if (!formattedDates[slug]) {
-                     formattedDates[slug] = {
-                        startDate: "",
-                        deadline: "",
-                     };
-                  }
-
-                  if (event.startDate) {
-                     formattedDates[slug].startDate = formatDateForInput(event.startDate);
-                  }
-
-                  if (event.deadline) {
-                     formattedDates[slug].deadline = formatDateTimeForInput(
-                        event.deadline
-                     );
-                  }
-               });
-
-               setEventDates(formattedDates);
-            } else {
-               setEventDates(buildDefaultEventDates());
-            }
-
-            // Load gaming sub-events from backend
-            const gamesRes = await fetch(
-               "https://comptron-server-2.onrender.com/api/event-control/gaming-sub-events"
-            );
-            const gamesData = await gamesRes.json();
-
-            if (gamesData.success && gamesData.count > 0 && gamesData.games) {
-               const formattedGames = buildDefaultGamingSubEvents();
-
-               Object.entries(gamesData.games).forEach(([gameId, game]) => {
-                  if (!formattedGames[gameId]) {
-                     formattedGames[gameId] = {
-                        title: "",
-                        deadline: "",
-                        platform: "",
-                        segment: "",
-                     };
-                  }
-
-                  if (game.title) {
-                     formattedGames[gameId].title = game.title;
-                  }
-
-                  if (game.deadline) {
-                     formattedGames[gameId].deadline = formatDateTimeForInput(
-                        game.deadline
-                     );
-                  }
-
-                  if (game.platform) {
-                     formattedGames[gameId].platform = game.platform;
-                  }
-
-                  if (game.segment) {
-                     formattedGames[gameId].segment = game.segment;
-                  }
-               });
-
-               setGamingSubEvents(formattedGames);
-            } else {
-               setGamingSubEvents(buildDefaultGamingSubEvents());
-            }
-         } catch (error) {
-            console.error("Error loading dates from backend:", error);
-            // Fallback to static defaults if backend fails
-            setEventDates(buildDefaultEventDates());
-            setGamingSubEvents(buildDefaultGamingSubEvents());
-         }
-      };
-
-      loadEventDates();
+      const initialDates = {};
+      Object.keys(EVENT_DETAILS).forEach((key) => {
+         const event = EVENT_DETAILS[key];
+         const deadlineDate = new Date(event.deadline);
+         initialDates[event.slug] = {
+            startDate: formatDateForInput(event.startDate),
+            deadline: formatDateTimeForInput(deadlineDate),
+         };
+      });
+      setEventDates(initialDates);
    }, []);
+
+   const formatDateForInput = (dateString) => {
+      // Convert "10 November 2025" to "2025-11-10"
+      const date = new Date(dateString);
+      if (isNaN(date)) return "2025-11-10";
+      return date.toISOString().split("T")[0];
+   };
+
+   const formatDateTimeForInput = (date) => {
+      // Convert Date to "2025-10-31T11:59" format
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+   };
 
    const handleEventDateChange = (eventId, field, value) => {
       setEventDates((prev) => ({
@@ -226,52 +150,25 @@ const Control = () => {
       setSaveSuccess(false);
 
       try {
+         // Simulate API call - In production, send to backend
+         await new Promise((resolve) => setTimeout(resolve, 1000));
+
          console.log("Saving event dates:", eventDates);
          console.log("Saving gaming sub-events:", gamingSubEvents);
 
-         const response = await fetch(
-            "https://comptron-server-2.onrender.com/api/event-control/save-all",
-            {
-               method: "POST",
-               headers: {
-                  "Content-Type": "application/json",
-               },
-               body: JSON.stringify({
-                  eventDates,
-                  gamingSubEvents,
-                  updatedBy: "admin", // Replace with actual admin username from auth context
-               }),
-            }
-         );
+         // TODO: Implement actual API calls to update backend
+         // Example:
+         // await fetch('https://comptron-server-2.onrender.com/api/csefest/events/update', {
+         //    method: 'POST',
+         //    headers: { 'Content-Type': 'application/json' },
+         //    body: JSON.stringify({ eventDates, gamingSubEvents })
+         // });
 
-         const data = await response.json();
-
-         if (data.success) {
-            setSaveSuccess(true);
-            console.log("Update results:", data.results);
-
-            // Show detailed success message
-            const eventsUpdated = data.results.events.updated.length;
-            const gamesUpdated = data.results.games.updated.length;
-            const totalFailed =
-               data.results.events.failed.length + data.results.games.failed.length;
-
-            let message = `✅ Successfully updated ${eventsUpdated} event(s) and ${gamesUpdated} gaming sub-event(s)!`;
-            if (totalFailed > 0) {
-               message += `\n⚠️ ${totalFailed} item(s) failed to update.`;
-            }
-
-            alert(message);
-         } else {
-            throw new Error(data.message || "Failed to save changes");
-         }
+         setSaveSuccess(true);
+         alert("Event dates updated successfully!");
       } catch (error) {
          console.error("Error saving dates:", error);
-         alert(
-            "❌ Error saving dates: " +
-               error.message +
-               "\n\nPlease check console for details."
-         );
+         alert("Error saving dates. Please try again.");
       } finally {
          setLoading(false);
       }
@@ -376,7 +273,9 @@ const Control = () => {
                         </p>
                      </div>
                      <div className="bg-green-500/20 p-3 rounded-lg">
-                        <span className="text-2xl">{saveSuccess ? "✅" : "📝"}</span>
+                        <span className="text-2xl">
+                           {saveSuccess ? "✅" : "📝"}
+                        </span>
                      </div>
                   </div>
                </motion.div>
@@ -449,24 +348,22 @@ const Control = () => {
                         type="datetime-local"
                         value={eventDates[selectedEvent]?.deadline || ""}
                         onChange={(e) =>
-                           handleEventDateChange(
-                              selectedEvent,
-                              "deadline",
-                              e.target.value
-                           )
+                           handleEventDateChange(selectedEvent, "deadline", e.target.value)
                         }
                         className="w-full bg-gray-700 border border-gray-600 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                      />
                      <p className="text-gray-400 text-sm mt-2">
                         Display:{" "}
                         {formatDisplayDateTime(
-                           eventDates[selectedEvent]?.deadline || "2025-10-31T23:59"
+                           eventDates[selectedEvent]?.deadline ||
+                              "2025-10-31T23:59"
                         )}
                      </p>
                      <p className="text-orange-400 text-sm mt-1">
                         ⏱️ Time remaining:{" "}
                         {getTimeRemaining(
-                           eventDates[selectedEvent]?.deadline || "2025-10-31T23:59"
+                           eventDates[selectedEvent]?.deadline ||
+                              "2025-10-31T23:59"
                         )}
                      </p>
                   </div>
@@ -474,7 +371,9 @@ const Control = () => {
 
                {/* Current Values Display */}
                <div className="mt-6 p-4 bg-gray-700 rounded-lg">
-                  <h3 className="text-white font-semibold mb-3">Current Configuration</h3>
+                  <h3 className="text-white font-semibold mb-3">
+                     Current Configuration
+                  </h3>
                   <div className="space-y-2 text-sm">
                      <div className="flex justify-between">
                         <span className="text-gray-400">Start Date:</span>
@@ -488,7 +387,8 @@ const Control = () => {
                         <span className="text-gray-400">Deadline:</span>
                         <span className="text-white font-medium">
                            {formatDisplayDateTime(
-                              eventDates[selectedEvent]?.deadline || "2025-10-31T23:59"
+                              eventDates[selectedEvent]?.deadline ||
+                                 "2025-10-31T23:59"
                            )}
                         </span>
                      </div>
@@ -632,24 +532,24 @@ const Control = () => {
                </h3>
                <ul className="text-blue-200 text-sm space-y-2 list-disc list-inside">
                   <li>
-                     Select an event from the grid to manage its start date and
-                     registration deadline
+                     Select an event from the grid to manage its start date and registration
+                     deadline
                   </li>
                   <li>
                      For the Gaming Tournament, you can also manage individual game
                      deadlines
                   </li>
                   <li>
-                     All times are in GMT+6 (Bangladesh Time) - adjust accordingly for
-                     your timezone
+                     All times are in GMT+6 (Bangladesh Time) - adjust accordingly for your
+                     timezone
                   </li>
                   <li>
-                     Changes are NOT saved automatically - click &quot;Save All
-                     Changes&quot; button to apply
+                     Changes are NOT saved automatically - click &quot;Save All Changes&quot; button
+                     to apply
                   </li>
                   <li>
-                     The &quot;Time remaining&quot; indicator shows how long until the
-                     deadline expires
+                     The &quot;Time remaining&quot; indicator shows how long until the deadline
+                     expires
                   </li>
                   <li>
                      After saving, these dates will be reflected across all registration
