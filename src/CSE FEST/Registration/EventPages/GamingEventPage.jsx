@@ -106,7 +106,7 @@ const GAME_DEFINITIONS = [
    },
    {
       id: "indoor",
-      iconEmoji: "🏟️",
+   iconEmoji: "🎲",
       title: "Indoor Games",
       tagline: "Precision, focus, and crowd-pleasing clutch plays.",
       description:
@@ -116,7 +116,6 @@ const GAME_DEFINITIONS = [
       registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLScpmRQfiYGA0HHYQ1RaJE8Umr44bo9JwoZQ7FPJyQbOy1tYuQ/viewform?usp=dialog",
       rulebookPath: "https://drive.google.com/file/d/18wFGbfTp_PL2j9f-PaWytk45Xvnhpg6V/view?usp=drive_link",
       deadline: "2025-11-05T23:59:00+06:00",
-      platform: "Indoor Arena",
       segment: "Indoor Games",
    },
 ];
@@ -296,10 +295,12 @@ const GameSection = ({ game }) => {
                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#F6A623]">
                   {game.tagline}
                </p>
-               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-sky-200">
-                  <span className="h-2 w-2 rounded-full bg-sky-400"></span>
-                  Platform: {game.platform}
-               </span>
+               {game.id !== "indoor" && (
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-sky-200">
+                     <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                     Platform: {game.platform}
+                  </span>
+               )}
                <p className="text-sm leading-relaxed text-gray-300">{game.description}</p>
                {game.id === "indoor" && (
                   <span className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-400 via-lime-300 to-emerald-500 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.22em] text-emerald-950 shadow-[0_12px_24px_rgba(34,197,94,0.35)]">
