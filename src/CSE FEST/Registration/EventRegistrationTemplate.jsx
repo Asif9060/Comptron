@@ -291,33 +291,35 @@ const EventRegistrationTemplate = ({ event }) => {
                         />
                      </motion.svg>
                   </motion.button>
-                  <motion.a
-                     href={event.rulebookPath}
-                     download
-                     className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
-                     variants={buttonVariants}
-                     whileHover="hover"
-                     whileTap="tap">
-                     Download rulebook
-                     <motion.svg
-                        className="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        animate={{ y: shouldReduceMotion ? 0 : [0, -3, 0] }}
-                        transition={{
-                           repeat: shouldReduceMotion ? 0 : Infinity,
-                           duration: 1.6,
-                           ease: "easeInOut",
-                        }}>
-                        <path
-                           strokeLinecap="round"
-                           strokeLinejoin="round"
-                           strokeWidth={2}
-                           d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
-                        />
-                     </motion.svg>
-                  </motion.a>
+                  {event.rulebookPath && (
+                     <motion.a
+                        href={event.rulebookPath}
+                        download
+                        className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#F6A623]/50 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
+                        variants={buttonVariants}
+                        whileHover="hover"
+                        whileTap="tap">
+                        Download rulebook
+                        <motion.svg
+                           className="h-5 w-5"
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                           animate={{ y: shouldReduceMotion ? 0 : [0, -3, 0] }}
+                           transition={{
+                              repeat: shouldReduceMotion ? 0 : Infinity,
+                              duration: 1.6,
+                              ease: "easeInOut",
+                           }}>
+                           <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
+                           />
+                        </motion.svg>
+                     </motion.a>
+                  )}
                </motion.div>
 
                <motion.p
@@ -371,7 +373,7 @@ EventRegistrationTemplate.propTypes = {
       tagline: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       registrationLink: PropTypes.string.isRequired,
-      rulebookPath: PropTypes.string.isRequired,
+      rulebookPath: PropTypes.string,
       deadline: PropTypes.string.isRequired,
       icon: PropTypes.string.isRequired,
       highlights: PropTypes.arrayOf(PropTypes.string).isRequired,

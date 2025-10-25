@@ -124,9 +124,17 @@ export const useGamingSubEvents = (staticGames) => {
                            deadline: dynamicGame.deadline,
                            isRegistrationOpen: dynamicGame.isRegistrationOpen,
                            timeRemaining: dynamicGame.timeRemaining,
+                           schedule: dynamicGame.schedule
+                              ? {
+                                   ...(game.schedule || {}),
+                                   ...dynamicGame.schedule,
+                                }
+                              : game.schedule,
                         };
+
                         console.log(`   ✅ Updated ${game.id}:`, {
                            deadline: dynamicGame.deadline,
+                           schedule: dynamicGame.schedule,
                         });
                         return updated;
                      }

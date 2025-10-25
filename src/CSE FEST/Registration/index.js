@@ -5,3 +5,4 @@ export { default as GamingEventPage } from "./EventPages/GamingEventPage";
 export { default as ProjectShowcaseEventPage } from "./EventPages/ProjectShowcaseEventPage";
 export { default as PosterPresentationEventPage } from "./EventPages/PosterPresentationEventPage";
 export { default as DatathonEventPage } from "./EventPages/DatathonEventPage";
+export { default as QuizEventPage } from "./EventPages/QuizEventPage";

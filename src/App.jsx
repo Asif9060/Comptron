@@ -63,6 +63,7 @@ import {
    ProjectShowcaseEventPage,
    PosterPresentationEventPage,
    DatathonEventPage,
+   QuizEventPage,
 } from "./CSE FEST/Registration";
 
 // import Bio from "./USER/Bio";
@@ -129,6 +130,9 @@ const App = () => {
                <Route
                   path="/CseFest/registration/datathon"
                   element={<DatathonEventPage />}></Route>
+               <Route
+                  path="/CseFest/registration/quiz"
+                  element={<QuizEventPage />}></Route>
 
                <Route
                   path="/EventDetails"

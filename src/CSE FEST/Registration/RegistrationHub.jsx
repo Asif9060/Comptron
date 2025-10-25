@@ -6,6 +6,9 @@ import { useEventDates } from "./useEventDates";
 import LoadingScreen from "./LoadingScreen";
 import RegistrationFooter from "./RegistrationFooter";
 
+const FACEBOOK_EVENT_URL =
+   "https://www.facebook.com/events/1702663273676047?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22home%22%7D%2C%7B%22mechanism%22%3A%22attachment%22%2C%22surface%22%3A%22newsfeed%22%7D]%2C%22ref_notif_type%22%3Anull%7D";
+
 const getTimeRemaining = (deadlineDate) => {
    if (!deadlineDate) {
       return null;
@@ -447,7 +450,6 @@ const RegistrationHub = () => {
                                    </span>
                                 )} */}
                                  <p className="text-lg font-semibold leading-relaxed text-[#FFE7C2]">
-                                    
                                     {upcomingDeadline.date.toLocaleString("en-US", {
                                        month: "long",
                                        day: "numeric",
@@ -524,6 +526,30 @@ const RegistrationHub = () => {
                         )}
                      </motion.div>
                   )}
+                  <motion.div
+                     className="mt-12 flex justify-center"
+                     initial={enableScrollAnimation ? "hidden" : false}
+                     whileInView={enableScrollAnimation ? "visible" : undefined}
+                     viewport={
+                        enableScrollAnimation ? { once: true, amount: 0.2 } : undefined
+                     }
+                     variants={enableScrollAnimation ? containerVariants : undefined}
+                     transition={{ delay: shouldReduceMotion ? 0 : 0.1 }}>
+                     <motion.a
+                        href={FACEBOOK_EVENT_URL}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-white/15 bg-white/10 px-7 py-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#FFE7C2] shadow-[0_24px_48px_rgba(8,8,35,0.45)] transition duration-500 hover:border-white/30 hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6A623]/70"
+                        whileHover={{ scale: shouldReduceMotion ? 1 : 1.02 }}
+                        whileTap={{ scale: shouldReduceMotion ? 1 : 0.97 }}>
+                        <span className="absolute inset-0 bg-gradient-to-r from-[#F6A623]/25 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                        <span className="relative inline-flex items-center gap-2">
+                           <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
+                           CSE FEST 2025 Facebook Event
+                           <span className="h-1.5 w-1.5 rounded-full bg-[#F6A623]"></span>
+                        </span>
+                     </motion.a>
+                  </motion.div>
                </section>
             </div>
          </div>
