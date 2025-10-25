@@ -115,7 +115,7 @@ export const EVENT_DETAILS = {
       tagline: "Think fast, buzz faster.",
       description:
          "Test your knowledge across tech, trivia, and pop culture in a rapid-fire arena. Team up and outsmart rival quizzers for festival bragging rights.",
-      registrationLink: "https://forms.gle/TqQG7jCHh7GUqQuiz",
+      registrationLink: "https://forms.gle/szrE2TtswjshtMrV9",
       rulebookPath: "https://drive.google.com/file/d/1quizRulebookSample/view",
       deadline: "2025-10-31T05:59:00+06:00",
       icon: "🧠",
