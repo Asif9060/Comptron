@@ -491,7 +491,7 @@ const ContactUs = () => {
                                  <h3 className="text-lg font-bold text-white mb-1">
                                     Event Dates
                                  </h3>
-                                 <p className="text-gray-300">August 21-29, 2025</p>
+                                 <p className="text-gray-300">November 10-11, 2025</p>
                                  <p className="text-sm text-[#F6A623] mt-1">
                                     Mark your calendar!
                                  </p>
@@ -785,7 +785,7 @@ const Footer = () => {
                   <div className="space-y-4">
                      <div className="border-l-4 border-[#F6A623] pl-4">
                         <div className="text-sm text-[#F6A623]">Date:</div>
-                        <div className="font-medium text-white">21-29 August</div>
+                        <div className="font-medium text-white">10-11 November</div>
                      </div>
                      <div className="border-l-4 border-[#F6A623] pl-4">
                         <div className="text-sm text-[#F6A623]">Venue:</div>

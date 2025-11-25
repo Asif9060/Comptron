@@ -547,14 +547,14 @@ const Hero = () => {
                         Comptron News
                      </a>
                   </li>
-                  {/* <li>
+                  <li>
                      <a
                         href="/CseFest"
                         className="group flex items-center hover:text-blue-400 transition-colors">
                         <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                         CSE FEST 2025
                      </a>
-                  </li> */}
+                  </li>
                </ul>
             </nav>
             <div className="absolute bottom-8 left-8 right-8">

@@ -43,6 +43,8 @@ const EventRegistrationTemplate = ({ event }) => {
    const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(event.deadline));
    const navigate = useNavigate();
    const shouldReduceMotion = useReducedMotion();
+   const showDeadlineIndicator = event.showDeadlineIndicator !== false;
+   const postDeadlineNote = event.postDeadlineNote;
 
    const heroVariants = useMemo(
       () => ({
@@ -221,12 +223,14 @@ const EventRegistrationTemplate = ({ event }) => {
                         </span>
                         <span className="relative ml-3 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm text-white shadow-[0_16px_40px_rgba(15,23,42,0.45)] backdrop-blur">
                            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#F6A623]/25 via-transparent to-[#fb923c]/25 opacity-80"></span>
-                           <span
-                              className="relative inline-flex h-7 w-7 items-center justify-center"
-                              aria-hidden="true">
-                              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500/50"></span>
-                              <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500 shadow-[0_0_12px_rgba(248,113,113,0.9)]"></span>
-                           </span>
+                           {showDeadlineIndicator && (
+                              <span
+                                 className="relative inline-flex h-7 w-7 items-center justify-center"
+                                 aria-hidden="true">
+                                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500/50"></span>
+                                 <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500 shadow-[0_0_12px_rgba(248,113,113,0.9)]"></span>
+                              </span>
+                           )}
                            <span className="relative text-sm font-semibold tracking-tight text-[#FFEED8]">
                               {deadlineLabel}
                            </span>
@@ -234,6 +238,11 @@ const EventRegistrationTemplate = ({ event }) => {
                         {isDeadlinePassed && (
                            <span className="ml-2 text-red-400">
                               (Registration closed)
+                           </span>
+                        )}
+                        {isDeadlinePassed && postDeadlineNote && (
+                           <span className="ml-2 mt-1 block text-sm font-semibold text-[#FFE7C2]">
+                              {postDeadlineNote}
                            </span>
                         )}
                      </p>
@@ -379,6 +388,8 @@ EventRegistrationTemplate.propTypes = {
       highlights: PropTypes.arrayOf(PropTypes.string).isRequired,
       gradient: PropTypes.string.isRequired,
       buttonGradient: PropTypes.string.isRequired,
+      showDeadlineIndicator: PropTypes.bool,
+      postDeadlineNote: PropTypes.string,
    }).isRequired,
 };
 

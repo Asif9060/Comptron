@@ -28,3 +28,8 @@
         transform: translateX(-24px);
     }
 }
+@media (max-width: 768px) {
+    .re{
+        transform: translateY(24rem);
+    }
+}

@@ -15,6 +15,8 @@ export const EVENT_DETAILS = {
       buttonGradient: "from-blue-500 to-cyan-500",
       pagePath: "/CseFest/registration/programming",
       startDate: "10 November 2025",
+      showDeadlineIndicator: false,
+      postDeadlineNote: "Thank you for participating.",
       highlights: [
          "Preliminary online qualifier followed by on-site finals",
          "ICPC-style scoring with live leaderboard",
@@ -117,7 +119,7 @@ export const EVENT_DETAILS = {
          "Test your knowledge across tech, trivia, and pop culture in a rapid-fire arena. Team up and outsmart rival quizzers for festival bragging rights.",
       registrationLink: "https://forms.gle/szrE2TtswjshtMrV9",
       rulebookPath: "https://drive.google.com/file/d/1quizRulebookSample/view",
-      deadline: "2025-10-31T05:59:00+06:00",
+      deadline: "2025-10-31T17:59:00.000+00:00",
       icon: "🧠",
       gradient: "from-indigo-500/20 to-violet-500/20",
       buttonGradient: "from-indigo-500 to-violet-500",

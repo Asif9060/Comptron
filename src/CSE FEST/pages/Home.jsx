@@ -3,6 +3,7 @@ import Fest from "../components/Fest";
 import Navbar from "../components/FestNav";
 import Footer from "../components/Footer";
 import Sponsor from "../components/Sponsor";
+import logo from "../assets/images/2ef33f78-05f4-451c-aa98-ccc84e9c4979.jpeg";
 
 const Home = () => {
    const [isLoading, setIsLoading] = useState(true);
@@ -26,111 +27,75 @@ const Home = () => {
          {/* Loading Screen */}
          {isLoading && (
             <div
-               className={`fixed inset-0 z-50 bg-gradient-to-br from-[#1c1535] via-[#2a1f4a] to-[#1a0f2e] flex items-center justify-center transition-transform duration-1000 ease-in-out ${
-                  isSliding ? "-translate-y-full" : "translate-y-0"
-               }`}
-               style={{
-                  clipPath: isSliding
-                     ? "ellipse(150% 100% at 50% 100%)"
-                     : "ellipse(150% 100% at 50% 0%)",
-               }}>
-               {/* Animated Background Elements */}
-               <div className="absolute inset-0 overflow-hidden">
-                  <div className="absolute -top-4 -left-4 w-72 h-72 bg-gradient-to-r from-[#F6A623]/20 to-purple-500/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+               className={`fixed inset-0 z-50 bg-[#1c1535] flex items-center justify-center transition-all duration-1000 ease-in-out ${
+                  isSliding ? "translate-y-[-100vh]" : "translate-y-0"
+               }`}>
+               {/* Subtle Background Elements - Hidden on mobile */}
+               <div className="absolute inset-0 overflow-hidden hidden md:block">
+                  <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F6A623]/5 rounded-full filter blur-3xl animate-pulse"></div>
                   <div
-                     className="absolute -bottom-8 -right-4 w-72 h-72 bg-gradient-to-r from-blue-500/20 to-[#F6A623]/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
-                     style={{ animationDelay: "1s" }}></div>
-                  <div
-                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full mix-blend-multiply filter blur-2xl animate-pulse"
-                     style={{ animationDelay: "2s" }}></div>
+                     className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#F6A623]/5 rounded-full filter blur-3xl animate-pulse"
+                     style={{ animationDelay: "1.5s" }}></div>
                </div>
 
                <div className="relative z-10 text-center">
-                  {/* Logo or Brand */}
+                  {/* CSE FEST Logo */}
                   <div className="mb-8">
-                     <div className="relative">
-                        <h1 className="text-5xl md:text-7xl font-black text-transparent bg-gradient-to-r from-[#F6A623] via-yellow-400 to-orange-500 bg-clip-text mb-4 animate-pulse">
-                           CSE FEST
-                        </h1>
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 text-5xl md:text-7xl font-black text-[#F6A623] opacity-20 blur-sm animate-pulse">
-                           CSE FEST
-                        </div>
-                     </div>
-                     <p className="text-white/90 text-lg md:text-xl font-medium tracking-wide">
-                        <span className="text-[#F6A623]">NWU</span> CSE FEST{" "}
-                        <span className="text-purple-400">2025</span>
-                     </p>
-                  </div>
-
-                  {/* Modern Loading Animation */}
-                  <div className="flex items-center justify-center space-x-3 mb-8">
-                     <div className="w-4 h-4 bg-gradient-to-r from-[#F6A623] to-yellow-400 rounded-full animate-bounce shadow-lg shadow-[#F6A623]/50"></div>
-                     <div
-                        className="w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-bounce shadow-lg shadow-purple-500/50"
-                        style={{ animationDelay: "0.1s" }}></div>
-                     <div
-                        className="w-4 h-4 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full animate-bounce shadow-lg shadow-blue-500/50"
-                        style={{ animationDelay: "0.2s" }}></div>
-                  </div>
-
-                  {/* Loading Text with Typing Effect */}
-                  <div className="mb-8">
-                     <p className="text-gray-300 text-sm md:text-base font-medium tracking-wider">
-                        <span className="inline-block animate-pulse">Preparing</span>
-                        <span
-                           className="inline-block animate-pulse mx-2"
-                           style={{ animationDelay: "0.3s" }}>
-                           amazing
-                        </span>
-                        <span
-                           className="inline-block animate-pulse"
-                           style={{ animationDelay: "0.6s" }}>
-                           experiences
-                        </span>
-                        <span
-                           className="inline-block animate-pulse ml-1 text-[#F6A623]"
-                           style={{ animationDelay: "0.9s" }}>
-                           ...
-                        </span>
-                     </p>
-                  </div>
-
-                  {/* Modern Progress Bar */}
-                  <div className="w-80 h-3 bg-white/10 backdrop-blur-sm rounded-full mx-auto overflow-hidden border border-white/20">
-                     <div className="h-full bg-gradient-to-r from-[#F6A623] via-yellow-400 to-orange-500 rounded-full animate-pulse shadow-lg shadow-[#F6A623]/30 relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-ping"></div>
+                     <div className="relative inline-block">
+                        <img
+                           src={logo}
+                           alt="CSE FEST Logo"
+                           className="w-40 h-40 md:w-48 md:h-48 object-cover rounded-2xl shadow-2xl shadow-[#F6A623]/20 animate-pulse"
+                        />
                      </div>
                   </div>
 
-                  {/* Version/Event Info */}
-                  <div className="mt-8 text-xs text-gray-400 font-mono tracking-widest">
-                     <span className="text-[#F6A623]">v2.0</span> • August 20-28, 2025
+                  {/* Logo Title */}
+                  <div className="mb-12">
+                     <h1 className="text-4xl md:text-6xl font-black text-transparent bg-gradient-to-r from-[#F6A623] to-[#ff8c00] bg-clip-text mb-2">
+                        CSE FEST
+                     </h1>
+                     <p className="text-white/70 text-lg md:text-xl font-light tracking-widest">
+                        NWU CSE FEST 2025
+                     </p>
+                  </div>
+
+                  {/* Modern Loading Animation - Single Color */}
+                  <div className="flex items-center justify-center space-x-2 mb-8">
+                     <div className="w-3 h-3 bg-[#F6A623] rounded-full animate-bounce"></div>
+                     <div
+                        className="w-3 h-3 bg-[#F6A623] rounded-full animate-bounce"
+                        style={{ animationDelay: "0.15s" }}></div>
+                     <div
+                        className="w-3 h-3 bg-[#F6A623] rounded-full animate-bounce"
+                        style={{ animationDelay: "0.3s" }}></div>
+                  </div>
+
+                  {/* Loading Text */}
+                  <div className="mb-10">
+                     <p className="text-gray-400 text-sm md:text-base font-light tracking-wider">
+                        Loading experience
+                     </p>
+                  </div>
+
+                  {/* Minimal Progress Bar */}
+                  <div className="w-64 h-1 bg-white/5 rounded-full mx-auto overflow-hidden">
+                     <div className="h-full w-full bg-[#F6A623] rounded-full animate-pulse"></div>
+                  </div>
+
+                  {/* Version Info */}
+                  <div className="mt-12 text-xs text-gray-500 font-mono tracking-widest">
+                     v2.0 • November 10-11, 2025
                   </div>
                </div>
 
-               {/* Enhanced Decorative Elements */}
-               <div className="absolute top-10 left-10 w-20 h-20 border-2 border-[#F6A623]/30 rounded-full animate-spin opacity-40"></div>
-               <div className="absolute top-20 right-16 w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-ping opacity-60"></div>
-               <div className="absolute bottom-20 right-10 w-16 h-16 bg-gradient-to-br from-[#F6A623]/20 to-purple-500/20 rounded-full animate-pulse opacity-50"></div>
-               <div className="absolute top-1/3 right-1/4 w-8 h-8 border-2 border-purple-400/40 rotate-45 animate-bounce opacity-30"></div>
-               <div className="absolute bottom-1/3 left-1/4 w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full animate-pulse opacity-50"></div>
-
-               {/* Particle Effect */}
-               <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(6)].map((_, i) => (
-                     <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white/30 rounded-full animate-ping"
-                        style={{
-                           top: `${Math.random() * 100}%`,
-                           left: `${Math.random() * 100}%`,
-                           animationDelay: `${Math.random() * 2}s`,
-                           animationDuration: `${2 + Math.random() * 2}s`,
-                        }}
-                     />
-                  ))}
-               </div>
+               {/* Minimal Decorative Elements - Hidden on mobile */}
+               <div
+                  className="hidden md:block absolute top-10 left-10 w-16 h-16 border border-[#F6A623]/10 rounded-full animate-spin opacity-40"
+                  style={{ animationDuration: "8s" }}></div>
+               <div
+                  className="hidden md:block absolute bottom-10 right-10 w-12 h-12 border border-[#F6A623]/10 rounded-full animate-spin opacity-40"
+                  style={{ animationDuration: "10s" }}></div>
             </div>
          )}
 

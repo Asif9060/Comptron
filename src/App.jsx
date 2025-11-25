@@ -52,7 +52,7 @@ import Gaming from "./CSE FEST/pages/Events/Gaming";
 import Programming from "./CSE FEST/pages/Events/Programming";
 import Datathon from "./CSE FEST/pages/Events/Datathon";
 import Project from "./CSE FEST/pages/Events/Project";
-import PosterPresentation from "./CSE FEST/pages/Events/Ideathon";
+import PosterPresentation from "./CSE FEST/pages/Events/PosterPresentation";
 import CseFestAdmin from "./AdminPanel/CseFestAdmin";
 import Control from "./CSE FEST/pages/Control";
 import {
@@ -63,7 +63,6 @@ import {
    ProjectShowcaseEventPage,
    PosterPresentationEventPage,
    DatathonEventPage,
-   QuizEventPage,
 } from "./CSE FEST/Registration";
 
 // import Bio from "./USER/Bio";
@@ -130,9 +129,6 @@ const App = () => {
                <Route
                   path="/CseFest/registration/datathon"
                   element={<DatathonEventPage />}></Route>
-               <Route
-                  path="/CseFest/registration/quiz"
-                  element={<QuizEventPage />}></Route>
 
                <Route
                   path="/EventDetails"

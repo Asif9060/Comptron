@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Star, Award, Handshake, Building, Sparkles } from "lucide-react";
-
+import { Star, Award, Handshake, Sparkles } from "lucide-react";
 
 // Title Sponsor Component
 const TitleSponsor = () => {
@@ -8,8 +7,8 @@ const TitleSponsor = () => {
 
    return (
       <div className="py-10 bg-[#1C1535]">
-         <div className="mx-auto px-4">
-            {/* Section Header */}
+         {/* <div className="mx-auto px-4">
+            
             <div className="text-center mb-0">
                <div className="flex items-center justify-center mb-4">
                   <Star
@@ -28,14 +27,14 @@ const TitleSponsor = () => {
                </p>
             </div>
 
-            {/* Sponsor Card */}
+           
             <div className="max-w-4xl mx-auto">
                <div
                   className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-200 cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_40px_rgba(246,166,35,0.3)]"
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}>
                   <div className="flex flex-col md:flex-row items-center gap-8">
-                     {/* Sponsor Logo Placeholder */}
+                     
                      <div className="relative w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-[#F6A623] to-orange-500 rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-500 hover:rotate-12 hover:scale-110">
                         <Building className="w-12 h-12 text-white" />
                         {isHovered && (
@@ -43,7 +42,7 @@ const TitleSponsor = () => {
                         )}
                      </div>
 
-                     {/* Sponsor Details */}
+                    
                      <div className="text-center md:text-left flex-1">
                         <h3 className="text-2xl font-bold text-gray-900 mb-3 transition-colors duration-300 hover:text-[#F6A623]">
                            TechVision Inc.
@@ -61,13 +60,13 @@ const TitleSponsor = () => {
                      </div>
                   </div>
 
-                  {/* Decorative Element */}
+                  
                   {isHovered && (
                      <div className="absolute -top-2 -right-2 w-8 h-8 bg-[#F6A623] rounded-full animate-bounce"></div>
                   )}
                </div>
             </div>
-         </div>
+         </div> */}
       </div>
    );
 };
@@ -107,11 +106,15 @@ const EventOrganizer = () => {
                      onMouseEnter={() => setIsHovered(true)}
                      onMouseLeave={() => setIsHovered(false)}>
                      <div className="flex flex-col items-center gap-6">
-                        {/* Organizer Logo Placeholder */}
-                        <div className="relative w-20 h-20 bg-gradient-to-br from-[#F6A623] to-orange-500 rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-500 hover:rotate-[-12deg] hover:scale-110">
-                           <Building className="w-10 h-10 text-white" />
+                        {/* Organizer Logo */}
+                        <div className="relative w-32 h-32 rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 hover:rotate-[-12deg] hover:scale-110">
+                           <img
+                              src="/NWU-Logo.png"
+                              alt="NWU CSE Department"
+                              className="w-full h-full object-cover"
+                           />
                            {isHovered && (
-                              <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-white animate-pulse" />
+                              <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-[#F6A623] animate-pulse" />
                            )}
                         </div>
 
@@ -137,25 +140,32 @@ const EventOrganizer = () => {
                   {/* Second Organizer Card */}
                   <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 border border-gray-200 cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_40px_rgba(246,166,35,0.3)]">
                      <div className="flex flex-col items-center gap-6">
-                        {/* Student Committee Logo */}
-                        <div className="relative w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-500 hover:rotate-12 hover:scale-110">
-                           <Handshake className="w-10 h-10 text-white" />
+                        {/* Comptron Logo */}
+                        <div className="relative w-32 h-32 rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 hover:rotate-12 hover:scale-110">
+                           <img
+                              src="/comptron.png"
+                              alt="Comptron"
+                              className="w-full h-full object-cover"
+                           />
                         </div>
 
-                        {/* Student Committee Details */}
+                        {/* Comptron Details */}
                         <div className="text-center">
                            <h3 className="text-xl font-bold text-gray-900 mb-3 transition-colors duration-300 hover:text-[#F6A623]">
-                              CSE Student Committee
+                              Comptron
                            </h3>
                            <p className="text-gray-600 mb-4 leading-relaxed transition-all duration-300 hover:text-gray-800 text-sm">
-                              Our dedicated student organizing committee consists of
-                              passionate computer science students who volunteer their
-                              time and skills to coordinate events, manage logistics, and
-                              ensure a memorable experience for all participants.
+                              Comptron is powered by dedicated committee members from the
+                              CSE department. Our team works collaboratively to plan,
+                              execute, and deliver an exceptional fest experience. From
+                              event coordination to technical support, our volunteers
+                              bring diverse skills and unwavering commitment to make NWU
+                              CSE FEST a memorable celebration of technology and
+                              innovation.
                            </p>
                            <div className="flex items-center justify-center text-[#F6A623] font-semibold text-sm">
                               <Award className="w-4 h-4 mr-2" />
-                              <span>Student Organizers</span>
+                              <span>Committee & Volunteers</span>
                            </div>
                         </div>
                      </div>

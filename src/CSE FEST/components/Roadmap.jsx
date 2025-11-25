@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { motion } from "framer-motion";
 
 const MainEventsRoadmap = () => {
    const [activeTab, setActiveTab] = useState("Main Events");
@@ -30,7 +31,7 @@ const MainEventsRoadmap = () => {
          {
             id: 1,
             title: "Programming Contest",
-            date: "FRI, AUG 21",
+            date: "SUN, NOV 10",
             description:
                "Join our Capture The Flag bootcamp to learn the basics of cybersecurity and prepare for the CTF competition.",
             category: "Security",
@@ -42,7 +43,7 @@ const MainEventsRoadmap = () => {
          {
             id: 2,
             title: "Gaming Contest",
-            date: "FRI, AUG 22",
+            date: "SUN, NOV 10",
             description:
                "Compete in an exciting multiplayer gaming tournament featuring popular titles and amazing prizes for top performers.",
             category: "Gaming",
@@ -54,7 +55,7 @@ const MainEventsRoadmap = () => {
          {
             id: 3,
             title: "Project Showcase",
-            date: "FRI, AUG 23",
+            date: "MON, NOV 11",
             description:
                "Master advanced cybersecurity concepts and prepare for the final CTF competition with expert guidance.",
             category: "Security",
@@ -65,20 +66,20 @@ const MainEventsRoadmap = () => {
          },
          {
             id: 4,
-            title: "Ideathon",
-            date: "WED, AUG 27",
+            title: "Proster Presentation",
+            date: "MON, NOV 11",
             description:
                "Build innovative solutions in this intensive preliminary hackathon with real-world challenges.",
             category: "Development",
             type: "Individual",
-            image: "https://placehold.co/300x200/1c1535/F6A623?text=Ideathon",
+            image: "https://placehold.co/300x200/1c1535/F6A623?text=Proster+Presentation",
             online: true,
-            url: "/Ideathon",
+            url: "/PosterPresentation",
          },
          {
             id: 5,
             title: "Datathon",
-            date: "WED, AUG 27",
+            date: "MON, NOV 11",
             description:
                "Build innovative solutions in this intensive preliminary hackathon with real-world challenges.",
             category: "Development",
@@ -96,16 +97,28 @@ const MainEventsRoadmap = () => {
          {/* Header */}
          <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
             <div className="text-center mb-8 sm:mb-12">
-               <h1 className="text-3xl sm:text-4xl md:text-5xl rdtxt font-bold text-[#F6A623] mb-4">
+               <motion.h1
+                  initial={{ opacity: 0, y: -50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className="text-3xl sm:text-4xl md:text-5xl rdtxt font-bold text-[#F6A623] mb-4">
                   Event Roadmap
-               </h1>
-               <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto px-4">
-                  Follow the journey through NWU CSE FEST 2025 - August 20-28, 2025
-               </p>
+               </motion.h1>
+               <motion.p
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                  className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto px-4">
+                  Follow the journey through NWU CSE FEST 2025 - November 10-11, 2025
+               </motion.p>
             </div>
 
             {/* Tabs */}
-            <div className="flex justify-center mb-8 sm:mb-12">
+            <motion.div
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.6, delay: 0.4 }}
+               className="flex justify-center mb-8 sm:mb-12">
                <div className="bg-[#1c1535]/80 backdrop-blur-sm border border-[#F6A623]/20 rounded-full p-1 inline-flex">
                   {/* <button
                      onClick={() => setActiveTab("Workshops")}
@@ -135,7 +148,7 @@ const MainEventsRoadmap = () => {
                      Main Events
                   </button>
                </div>
-            </div>
+            </motion.div>
 
             {/* Timeline */}
             <div className="relative max-w-6xl mx-auto">
@@ -144,8 +157,25 @@ const MainEventsRoadmap = () => {
 
                {/* Timeline points */}
                {mainEvents.map((event, index) => (
-                  <div
+                  <motion.div
                      key={event.id}
+                     initial={{
+                        opacity: 0,
+                        x: index % 2 === 0 ? -100 : 100,
+                        rotate: index % 2 === 0 ? -5 : 5,
+                     }}
+                     whileInView={{
+                        opacity: 1,
+                        x: 0,
+                        rotate: 0,
+                     }}
+                     viewport={{ once: true, amount: 0.3 }}
+                     transition={{
+                        duration: 0.7,
+                        delay: index * 0.15,
+                        type: "spring",
+                        stiffness: 80,
+                     }}
                      className={`relative flex items-center mb-12 sm:mb-20 ${
                         index % 2 === 0
                            ? "sm:justify-start justify-center"
@@ -267,7 +297,7 @@ const MainEventsRoadmap = () => {
                            </div>
                         </div>
                      </div>
-                  </div>
+                  </motion.div>
                ))}
             </div>
          </div>

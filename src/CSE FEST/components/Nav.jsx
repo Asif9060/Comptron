@@ -95,17 +95,6 @@ export default function Navbar() {
                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#F6A623] to-[#ff8c00] group-hover:w-3/4 transition-all duration-300"></div>
                   </a>
                </li>
-               <li>
-                  <a
-                     href="/FestContact"
-                     className="relative group px-4 py-2 rounded-lg text-white font-medium transition-all duration-300 hover:bg-[#F6A623]/10">
-                     <span className="relative z-10 group-hover:text-[#F6A623] transition-colors duration-300">
-                        Contact
-                     </span>
-                     <div className="absolute inset-0 bg-gradient-to-r from-[#F6A623]/0 to-[#F6A623]/0 group-hover:from-[#F6A623]/10 group-hover:to-[#ff8c00]/10 rounded-lg transition-all duration-300"></div>
-                     <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#F6A623] to-[#ff8c00] group-hover:w-3/4 transition-all duration-300"></div>
-                  </a>
-               </li>
             </ul>
 
             {/* CTA Button */}
@@ -182,15 +171,6 @@ export default function Navbar() {
                      className="group relative text-white font-medium hover:text-[#F6A623] transition-all duration-300 px-6 py-2 rounded-lg hover:bg-[#F6A623]/10"
                      onClick={() => setIsMenuOpen(false)}>
                      <span className="relative z-10">Sponsor</span>
-                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F6A623]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-                  </a>
-               </li>
-               <li>
-                  <a
-                     href="/FestContact"
-                     className="group relative text-white font-medium hover:text-[#F6A623] transition-all duration-300 px-6 py-2 rounded-lg hover:bg-[#F6A623]/10"
-                     onClick={() => setIsMenuOpen(false)}>
-                     <span className="relative z-10">Contact</span>
                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F6A623]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
                   </a>
                </li>

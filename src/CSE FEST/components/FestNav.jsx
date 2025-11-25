@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import logo from "../assets/images/2ef33f78-05f4-451c-aa98-ccc84e9c4979.jpeg";
 import "./css/FestNav.css";
 export default function Navbar() {
@@ -19,7 +20,7 @@ export default function Navbar() {
    };
 
    return (
-      <div className="min-h-screen bg-[#1c1535] text-white">
+      <div className="min-h-screen  bg-[#1c1535] text-white">
          {/* Navigation Bar */}
          <nav
             className={`fixed top-0 left-0 w-full z-50 px-8 py-4 transition-all duration-500 ${
@@ -97,7 +98,7 @@ export default function Navbar() {
                         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#F6A623] to-[#ff8c00] group-hover:w-3/4 transition-all duration-300"></div>
                      </a>
                   </li>
-                  <li>
+                  {/* <li>
                      <a
                         href="/FestContact"
                         className="relative group px-4 py-2 rounded-lg text-white font-medium transition-all duration-300 hover:bg-[#F6A623]/10">
@@ -107,22 +108,28 @@ export default function Navbar() {
                         <div className="absolute inset-0 bg-gradient-to-r from-[#F6A623]/0 to-[#F6A623]/0 group-hover:from-[#F6A623]/10 group-hover:to-[#ff8c00]/10 rounded-lg transition-all duration-300"></div>
                         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#F6A623] to-[#ff8c00] group-hover:w-3/4 transition-all duration-300"></div>
                      </a>
-                  </li>
+                  </li> */}
                </ul>
 
                {/* CTA Button */}
-               <button className="hidden md:block relative group bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden">
-                  <span className="relative z-10 flex items-center gap-2">
-                     <svg
-                        className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300"
-                        fill="currentColor"
-                        viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                     </svg>
-                     Watch Promo Video
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-               </button>
+               <a
+                  href="https://comptron.nwu.ac.bd/CseFest/registration"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden md:block">
+                  <button className="relative group bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden">
+                     <span className="relative z-10 flex items-center gap-2">
+                        <svg
+                           className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300"
+                           fill="currentColor"
+                           viewBox="0 0 24 24">
+                           <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                        </svg>
+                        Register Now
+                     </span>
+                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                  </button>
+               </a>
 
                {/* Mobile Hamburger Menu */}
                <div
@@ -187,7 +194,7 @@ export default function Navbar() {
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F6A623]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
                      </a>
                   </li>
-                  <li>
+                  {/* <li>
                      <a
                         href="/FestContact"
                         className="group relative text-white font-medium hover:text-[#F6A623] transition-all duration-300 px-6 py-2 rounded-lg hover:bg-[#F6A623]/10"
@@ -195,22 +202,28 @@ export default function Navbar() {
                         <span className="relative z-10">Contact</span>
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F6A623]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
                      </a>
-                  </li>
+                  </li> */}
                   <li className="w-4/5 mt-4">
-                     <button
-                        className="w-full relative group bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-semibold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden"
-                        onClick={() => setIsMenuOpen(false)}>
-                        <span className="relative z-10 flex items-center justify-center gap-2">
-                           <svg
-                              className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300"
-                              fill="currentColor"
-                              viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z" />
-                           </svg>
-                           Watch Promo Video
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                     </button>
+                     <a
+                        href="https://comptron.nwu.ac.bd/CseFest/registration"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block">
+                        <button
+                           className="w-full relative group bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-semibold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden"
+                           onClick={() => setIsMenuOpen(false)}>
+                           <span className="relative z-10 flex items-center justify-center gap-2">
+                              <svg
+                                 className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300"
+                                 fill="currentColor"
+                                 viewBox="0 0 24 24">
+                                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                              </svg>
+                              Register Now
+                           </span>
+                           <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                        </button>
+                     </a>
                   </li>
                </ul>
             </div>
@@ -223,55 +236,77 @@ export default function Navbar() {
                {/* Animated gradient background */}
                <div className="absolute inset-0 bg-gradient-to-br from-[#1c1535] via-[#2a1f4f] to-[#1c1535] animate-pulse"></div>
 
-               {/* Floating particles */}
-               {[...Array(30)].map((_, i) => (
-                  <div
-                     key={i}
-                     className={`absolute rounded-full animate-float ${
-                        i % 3 === 0
-                           ? "w-2 h-2 bg-[#F6A623]/60"
-                           : i % 3 === 1
-                           ? "w-1 h-1 bg-[#ff8c00]/40"
-                           : "w-1.5 h-1.5 bg-white/30"
-                     }`}
-                     style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 6}s`,
-                        animationDuration: `${4 + Math.random() * 4}s`,
-                     }}></div>
-               ))}
+               {/* Floating particles - Hidden on mobile */}
+               <div className="hidden md:block">
+                  {[...Array(30)].map((_, i) => (
+                     <div
+                        key={i}
+                        className={`absolute rounded-full animate-float ${
+                           i % 3 === 0
+                              ? "w-2 h-2 bg-[#F6A623]/60"
+                              : i % 3 === 1
+                              ? "w-1 h-1 bg-[#ff8c00]/40"
+                              : "w-1.5 h-1.5 bg-white/30"
+                        }`}
+                        style={{
+                           left: `${Math.random() * 100}%`,
+                           top: `${Math.random() * 100}%`,
+                           animationDelay: `${Math.random() * 6}s`,
+                           animationDuration: `${4 + Math.random() * 4}s`,
+                        }}></div>
+                  ))}
+               </div>
 
-               {/* Geometric shapes */}
-               <div className="absolute top-20 left-10 w-20 h-20 border border-[#F6A623]/20 rotate-45 animate-spin-slow"></div>
-               <div className="absolute bottom-32 right-16 w-16 h-16 bg-gradient-to-br from-[#F6A623]/10 to-transparent rounded-full animate-pulse"></div>
-               <div className="absolute top-1/3 right-20 w-12 h-12 border-2 border-[#ff8c00]/30 rotate-12 animate-bounce-slow"></div>
+               {/* Geometric shapes - Hidden on mobile */}
+               <div className="hidden md:block absolute top-20 left-10 w-20 h-20 border border-[#F6A623]/20 rotate-45 animate-spin-slow"></div>
+               <div className="hidden md:block absolute bottom-32 right-16 w-16 h-16 bg-gradient-to-br from-[#F6A623]/10 to-transparent rounded-full animate-pulse"></div>
+               <div className="hidden md:block absolute top-1/3 right-20 w-12 h-12 border-2 border-[#ff8c00]/30 rotate-12 animate-bounce-slow"></div>
             </div>
 
             <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                {/* Left Content */}
-               <div className="space-y-8 animate-fade-in-up">
+               <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="space-y-8">
                   <div>
-                     <div className="mb-4 flex justify-center">
+                     <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="mb-4 flex justify-center">
                         <span className="inline-block px-4 py-2 bg-gradient-to-r from-[#F6A623]/20 to-[#ff8c00]/20 border border-[#F6A623]/30 rounded-full text-[#F6A623] text-sm font-medium backdrop-blur-sm">
                            🎉 Welcome to CSE FEST 2025
                         </span>
-                     </div>
-                     <h1 className="text-4xl md:text-6xl tle expe font-bold leading-tight mb-6 text-white">
+                     </motion.div>
+                     <motion.h1
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl tle expe font-bold leading-tight mb-6 text-white">
                         Experience the
                         <br />
                         <span className="bg-gradient-to-r from-[#F6A623] via-[#ff8c00] to-[#F6A623] bg-clip-text text-transparent animate-gradient bg-300% relative">
                            Thrilling NWU CSE FEST
                            {/* <div className="absolute -inset-1 bg-gradient-to-r from-[#F6A623]/20 to-[#ff8c00]/20 blur-xl -z-10 animate-pulse"></div> */}
                         </span>
-                     </h1>
-                     <p className="text-[#F6A623]/80 text-lg text-center md:text-xl mb-8 animate-fade-in">
+                     </motion.h1>
+                     <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.6 }}
+                        className="text-[#F6A623]/80 text-base sm:text-lg text-center md:text-xl mb-8 px-4">
                         Join us for a week of innovation, competition, and fun! 🚀
-                     </p>
+                     </motion.p>
                   </div>
 
-                  <div className="flex justify-center sm:flex-row gap-4 animate-fade-in-up">
-                     <button className="group relative bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-medium px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden">
+                  <motion.div
+                     initial={{ opacity: 0, y: 30 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     transition={{ duration: 0.7, delay: 0.8 }}
+                     className="flex sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 px-4">
+                     <button className="group relative bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden w-full sm:w-auto">
                         <span className="relative z-10 flex items-center justify-center gap-2">
                            <svg
                               className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
@@ -283,80 +318,123 @@ export default function Navbar() {
                         </span>
                         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                      </button>
-                     <button className="group relative border-2 border-[#F6A623] hover:border-[#e0951f] text-[#F6A623] hover:text-white font-medium px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:bg-[#F6A623] overflow-hidden">
-                        <span className="relative z-10 flex items-center justify-center gap-2">
-                           <svg
-                              className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
-                              fill="currentColor"
-                              viewBox="0 0 24 24">
-                              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                           </svg>
-                           Register Now
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#F6A623] to-[#ff8c00] transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></div>
-                     </button>
-                  </div>
-               </div>
+                     <a
+                        href="https://comptron.nwu.ac.bd/CseFest/registration"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        <button className="group relative border-2 border-[#F6A623] hover:border-[#e0951f] text-[#F6A623] hover:text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:bg-[#F6A623] overflow-hidden w-full sm:w-auto">
+                           <span className="relative z-10 flex items-center justify-center gap-2">
+                              <svg
+                                 className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
+                                 fill="currentColor"
+                                 viewBox="0 0 24 24">
+                                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                              </svg>
+                              Register Now
+                           </span>
+                           <div className="absolute inset-0 bg-gradient-to-r from-[#F6A623] to-[#ff8c00] transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></div>
+                        </button>
+                     </a>
+                  </motion.div>
+               </motion.div>
 
                {/* Right Content - Enhanced Stats Cards */}
-               <div className="grid grid-cols-2 gap-6 animate-fade-in-right">
-                  <div className="group relative bg-gradient-to-br from-slate-900/60 to-slate-800/60 backdrop-blur-lg border border-[#F6A623]/30 rounded-2xl p-6 text-center hover:border-[#F6A623]/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#F6A623]/20">
+               <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mt-8 lg:mt-0">
+                  <motion.div
+                     initial={{ opacity: 0, y: 50, rotate: -5 }}
+                     animate={{ opacity: 1, y: 0, rotate: 0 }}
+                     transition={{
+                        duration: 0.6,
+                        delay: 0.4,
+                        type: "spring",
+                        stiffness: 100,
+                     }}
+                     className="group relative bg-gradient-to-br from-slate-900/60 to-slate-800/60 backdrop-blur-lg border border-[#F6A623]/30 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center hover:border-[#F6A623]/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#F6A623]/20">
                      <div className="absolute inset-0 bg-gradient-to-br from-[#F6A623]/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                      <div className="relative z-10">
-                        <div className="text-xs uppercase tracking-wider text-[#F6A623]/70 mb-2 font-semibold">
+                        <div className="text-xs uppercase tracking-wider text-[#F6A623]/70 mb-1 sm:mb-2 font-semibold">
                            💰 Prizepool
                         </div>
-                        <div className="text-4xl font-bold text-[#F6A623] mb-1 group-hover:scale-110 transition-transform duration-300">
-                           60K+
+                        <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F6A623] mb-1 group-hover:scale-110 transition-transform duration-300">
+                           151K+
                         </div>
-                        <div className="text-sm text-[#F6A623]/60 font-medium">BDT</div>
+                        <div className="text-xs sm:text-sm text-[#F6A623]/60 font-medium">
+                           BDT
+                        </div>
                      </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="group relative bg-gradient-to-br from-slate-900/60 to-slate-800/60 backdrop-blur-lg border border-[#F6A623]/30 rounded-2xl p-6 text-center hover:border-[#F6A623]/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#F6A623]/20">
+                  <motion.div
+                     initial={{ opacity: 0, y: 50, rotate: 5 }}
+                     animate={{ opacity: 1, y: 0, rotate: 0 }}
+                     transition={{
+                        duration: 0.6,
+                        delay: 0.5,
+                        type: "spring",
+                        stiffness: 100,
+                     }}
+                     className="group relative bg-gradient-to-br from-slate-900/60 to-slate-800/60 backdrop-blur-lg border border-[#F6A623]/30 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center hover:border-[#F6A623]/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#F6A623]/20">
                      <div className="absolute inset-0 bg-gradient-to-br from-[#F6A623]/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                      <div className="relative z-10">
-                        <div className="text-xs uppercase tracking-wider text-[#F6A623]/70 mb-2 font-semibold">
+                        <div className="text-xs uppercase tracking-wider text-[#F6A623]/70 mb-1 sm:mb-2 font-semibold">
                            📅 Timeline
                         </div>
-                        <div className="text-4xl font-bold text-[#F6A623] mb-1 group-hover:scale-110 transition-transform duration-300">
-                           21 - 29
+                        <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F6A623] mb-1 group-hover:scale-110 transition-transform duration-300">
+                           10 - 11
                         </div>
-                        <div className="text-sm text-[#F6A623]/60 font-medium">
-                           August
+                        <div className="text-xs sm:text-sm text-[#F6A623]/60 font-medium">
+                           November
                         </div>
                      </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="group relative bg-gradient-to-br from-slate-900/60 to-slate-800/60 backdrop-blur-lg border border-[#F6A623]/30 rounded-2xl p-6 text-center hover:border-[#F6A623]/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#F6A623]/20">
+                  <motion.div
+                     initial={{ opacity: 0, y: 50, rotate: -5 }}
+                     animate={{ opacity: 1, y: 0, rotate: 0 }}
+                     transition={{
+                        duration: 0.6,
+                        delay: 0.6,
+                        type: "spring",
+                        stiffness: 100,
+                     }}
+                     className="group relative bg-gradient-to-br from-slate-900/60 to-slate-800/60 backdrop-blur-lg border border-[#F6A623]/30 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center hover:border-[#F6A623]/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#F6A623]/20">
                      <div className="absolute inset-0 bg-gradient-to-br from-[#F6A623]/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                      <div className="relative z-10">
-                        <div className="text-xs uppercase tracking-wider text-[#F6A623]/70 mb-2 font-semibold">
+                        <div className="text-xs uppercase tracking-wider text-[#F6A623]/70 mb-1 sm:mb-2 font-semibold">
                            🎯 Exciting
                         </div>
-                        <div className="text-4xl font-bold text-[#F6A623] mb-1 group-hover:scale-110 transition-transform duration-300">
-                           08
+                        <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F6A623] mb-1 group-hover:scale-110 transition-transform duration-300">
+                           05
                         </div>
-                        <div className="text-sm text-[#F6A623]/60 font-medium">
+                        <div className="text-xs sm:text-sm text-[#F6A623]/60 font-medium">
                            Segments
                         </div>
                      </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="group relative bg-gradient-to-br from-slate-900/60 to-slate-800/60 backdrop-blur-lg border border-[#F6A623]/30 rounded-2xl p-6 text-center hover:border-[#F6A623]/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#F6A623]/20">
+                  <motion.div
+                     initial={{ opacity: 0, y: 50, rotate: 5 }}
+                     animate={{ opacity: 1, y: 0, rotate: 0 }}
+                     transition={{
+                        duration: 0.6,
+                        delay: 0.7,
+                        type: "spring",
+                        stiffness: 100,
+                     }}
+                     className="group relative bg-gradient-to-br from-slate-900/60 to-slate-800/60 backdrop-blur-lg border border-[#F6A623]/30 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center hover:border-[#F6A623]/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#F6A623]/20">
                      <div className="absolute inset-0 bg-gradient-to-br from-[#F6A623]/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                      <div className="relative z-10">
-                        <div className="text-xs uppercase tracking-wider text-[#F6A623]/70 mb-2 font-semibold">
+                        <div className="text-xs uppercase tracking-wider text-[#F6A623]/70 mb-1 sm:mb-2 font-semibold">
                            👥 Participants
                         </div>
-                        <div className="text-4xl font-bold text-[#F6A623] mb-1 group-hover:scale-110 transition-transform duration-300">
-                           500+
+                        <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F6A623] mb-1 group-hover:scale-110 transition-transform duration-300">
+                           900+
                         </div>
-                        <div className="text-sm text-[#F6A623]/60 font-medium">
+                        <div className="text-xs sm:text-sm text-[#F6A623]/60 font-medium">
                            Individuals
                         </div>
                      </div>
-                  </div>
+                  </motion.div>
                </div>
             </div>
          </section>
