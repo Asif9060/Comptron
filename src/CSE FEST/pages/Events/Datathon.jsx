@@ -25,17 +25,17 @@ const Datathon = () => {
    // Winners
    const winners = {
       champion: {
-         teamName: "Data Wizards",
+         teamName: "MLicious",
          position: "Champion",
          prize: "৳57,000",
       },
       firstRunnerUp: {
-         teamName: "Analytics Pro",
+         teamName: "Azkaban_Prinsoners_101",
          position: "1st Runner Up",
          prize: "৳5,000",
       },
       secondRunnerUp: {
-         teamName: "Code Crushers",
+         teamName: "HeartchAln",
          position: "2nd Runner Up",
          prize: "৳3,000",
       },

@@ -25,17 +25,17 @@ const Project = () => {
    // Winners
    const winners = {
       champion: {
-         teamName: "Innovators Hub",
+         teamName: "BUET Bitwiz",
          position: "Champion",
          prize: "৳10,000",
       },
       firstRunnerUp: {
-         teamName: "Tech Builders",
+         teamName: "Alone_Turing",
          position: "1st Runner Up",
          prize: "৳6,000",
       },
       secondRunnerUp: {
-         teamName: "Creative Coders",
+         teamName: "Absolute Zero",
          position: "2nd Runner Up",
          prize: "৳4,000",
       },

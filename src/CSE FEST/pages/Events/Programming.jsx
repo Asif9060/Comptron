@@ -25,17 +25,17 @@ const Programming = () => {
    // Winners
    const winners = {
       champion: {
-         teamName: "Code Warriors",
+         teamName: "KUET_Potol",
          position: "Champion",
          prize: "৳20,000",
       },
       firstRunnerUp: {
-         teamName: "Algorithm Masters",
+         teamName: "JUST_ORIONS",
          position: "1st Runner Up",
          prize: "৳12,000",
       },
       secondRunnerUp: {
-         teamName: "Binary Coders",
+         teamName: "DIU_MilesPerHour",
          position: "2nd Runner Up",
          prize: "৳8,000",
       },

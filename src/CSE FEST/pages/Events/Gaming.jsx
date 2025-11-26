@@ -27,15 +27,15 @@ const Gaming = () => {
       {
          name: "VALORANT",
          winners: {
-            champion: { teamName: "Phantom Squad", prize: "৳15,000" },
-            firstRunnerUp: { teamName: "Radiant Kings", prize: "৳10,000" },
+            champion: { teamName: "No Non-Sense", prize: "৳15,000" },
+            firstRunnerUp: { teamName: "Crimson Wraith", prize: "৳10,000" },
          },
       },
       {
          name: "FIFA 23",
          winners: {
-            champion: { teamName: "Goal Masters", prize: "৳6,500" },
-            firstRunnerUp: { teamName: "Strike Force", prize: "৳3,500" },
+            champion: { teamName: "Emon", prize: "৳6,500" },
+            firstRunnerUp: { teamName: "Saiduddin Mahbun", prize: "৳3,500" },
          },
       },
       {

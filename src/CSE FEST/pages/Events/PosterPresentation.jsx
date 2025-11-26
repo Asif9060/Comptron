@@ -25,17 +25,17 @@ const PosterPresentation = () => {
    // Winners
    const winners = {
       champion: {
-         teamName: "Visual Thinkers",
+         teamName: "TrueSight",
          position: "Champion",
          prize: "৳10,000",
       },
       firstRunnerUp: {
-         teamName: "Idea Presenters",
+         teamName: "Ecocomfort",
          position: "1st Runner Up",
          prize: "৳6,000",
       },
       secondRunnerUp: {
-         teamName: "Design Experts",
+         teamName: "AI_Venges",
          position: "2nd Runner Up",
          prize: "৳4,000",
       },
