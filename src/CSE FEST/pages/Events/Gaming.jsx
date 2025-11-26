@@ -55,6 +55,7 @@ const Gaming = () => {
          },
       },
    ];
+   
 
    const handleGalleryClick = () => {
       navigate("/FestGallery");
