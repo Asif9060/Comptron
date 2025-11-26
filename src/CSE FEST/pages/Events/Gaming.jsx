@@ -41,17 +41,17 @@ const Gaming = () => {
       {
          name: "PUBG MOBILE",
          winners: {
-            champion: { teamName: "Battle Royale Elite", prize: "৳10,000" },
-            firstRunnerUp: { teamName: "Chicken Dinner", prize: "৳6,000" },
-            secondRunnerUp: { teamName: "Pan Squad", prize: "৳4,000" },
+            champion: { teamName: "KH ESPORTS", prize: "৳10,000" },
+            firstRunnerUp: { teamName: "FLAME MECH ESPORTS", prize: "৳6,000" },
+            secondRunnerUp: { teamName: "CLOUDY PREDATORS", prize: "৳4,000" },
          },
       },
       {
          name: "E-FOOTBALL MOBILE",
          winners: {
-            champion: { teamName: "Digital Strikers", prize: "৳3,000" },
-            firstRunnerUp: { teamName: "Virtual Champions", prize: "৳2,000" },
-            secondRunnerUp: { teamName: "Cyber Kickers", prize: "৳1,000" },
+            champion: { teamName: "Salman Farsi", prize: "৳3,000" },
+            firstRunnerUp: { teamName: "Mubassir Gaffar Tashfi", prize: "৳2,000" },
+            secondRunnerUp: { teamName: "Imon Das", prize: "৳1,000" },
          },
       },
    ];
