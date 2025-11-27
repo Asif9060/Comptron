@@ -140,18 +140,20 @@ const Navbar = () => {
             </ul>
 
             {/* CTA Button */}
-            <button className="hidden md:block relative group bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden">
-               <span className="relative z-10 flex items-center gap-2">
-                  <svg
-                     className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300"
-                     fill="currentColor"
-                     viewBox="0 0 24 24">
-                     <path d="M8 5v14l11-7z" />
-                  </svg>
-                  Watch Promo Video
-               </span>
-               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-            </button>
+            <a href="https://comptron.nwu.ac.bd/CseFest/registration" target="_blank" rel="noopener noreferrer" className="hidden md:block">
+               <button className="relative group bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden">
+                  <span className="relative z-10 flex items-center gap-2">
+                     <svg
+                        className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300"
+                        fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                     </svg>
+                     Register Now
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+               </button>
+            </a>
 
             {/* Mobile Hamburger Menu */}
             <div
@@ -217,20 +219,22 @@ const Navbar = () => {
                   </a>
                </li>
                <li className="w-4/5 mt-4">
-                  <button
-                     className="w-full relative group bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-semibold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden"
-                     onClick={() => setIsMenuOpen(false)}>
-                     <span className="relative z-10 flex items-center justify-center gap-2">
-                        <svg
-                           className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300"
-                           fill="currentColor"
-                           viewBox="0 0 24 24">
-                           <path d="M8 5v14l11-7z" />
-                        </svg>
-                        Watch Promo Video
-                     </span>
-                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                  </button>
+                  <a href="https://comptron.nwu.ac.bd/CseFest/registration" target="_blank" rel="noopener noreferrer" className="block">
+                     <button
+                        className="w-full relative group bg-gradient-to-r from-[#F6A623] to-[#ff8c00] hover:from-[#e0951f] hover:to-[#e6780d] text-white font-semibold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-[#F6A623]/30 overflow-hidden"
+                        onClick={() => setIsMenuOpen(false)}>
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                           <svg
+                              className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300"
+                              fill="currentColor"
+                              viewBox="0 0 24 24">
+                              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                           </svg>
+                           Register Now
+                        </span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                     </button>
+                  </a>
                </li>
             </ul>
          </div>

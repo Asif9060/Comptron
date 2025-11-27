@@ -125,7 +125,7 @@ const EventOrganizer = () => {
                            </h3>
                            <p className="text-gray-600 mb-4 leading-relaxed transition-all duration-300 hover:text-gray-800 text-sm">
                               The Department of Computer Science and Engineering at
-                              Northwest University is the driving force behind this annual
+                              North Western University is the driving force behind this annual
                               carnival. Our faculty and student organizers work tirelessly
                               to create an exceptional experience.
                            </p>
