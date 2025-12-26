@@ -34,8 +34,8 @@ import { Link } from "react-router-dom";
 import SuccessCSE from "/CSEFEST25.jpg";
 import SuccessTechSpark from "/TeckSpark25.png";
 import SuccessFest23 from "/CSEFEST23.jpg";
-import SuccessWorkshop from "/BDAPPS.jpg"
-import SuccessWorkshop1 from "/PHITRON.jpg"
+import SuccessWorkshop from "/BDAPPS.jpg";
+import SuccessWorkshop1 from "/PHITRON.jpg";
 
 const HomePage = () => {
    // Remove unused className state
@@ -175,7 +175,7 @@ const HomePage = () => {
          stats: ["36 projects", "18 mentors", "City-wide outreach"],
          badge: "Community",
          image: SuccessWorkshop1,
-         link: "https://comptron.nwu.ac.bd/news/68cfd4db9bb8a2745be9398f",
+         link: "https://comptron.nwu.ac.bd/news/68a23131b80d3f8243573964",
       },
       {
          title: "CSE FEST 2023",
@@ -208,16 +208,17 @@ const HomePage = () => {
             {/* <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-sky-50 via-white to-emerald-50 blur-[1px] opacity-90 pointer-events-none"></div> */}
             <div className="relative flex flex-col gap-6 sm:gap-8 md:gap-10 border border-slate-100 rounded-[28px] bg-white/80 backdrop-blur-sm p-5 sm:p-7 md:p-8 shadow-[0_22px_70px_-40px_rgba(15,23,42,0.35)]">
                <div className="flex items-center justify-center flex-wrap gap-3">
-         <div className="text-center flex flex-col justify-center">
-            <p className="text-sm sm:text-lg uppercase tracking-[0.28em] text-sky-600 font-semibold">
-               Our Success
-            </p>
+                  <div className="text-center flex flex-col justify-center">
+                     <p className="text-sm sm:text-lg uppercase tracking-[0.28em] text-sky-600 font-semibold">
+                        Our Success
+                     </p>
                      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-cyan-500 to-emerald-500 drop-shadow-sm">
                         Moments that define us
                      </h2>
                      <div className="h-[3px] w-28 sm:w-32 mt-3 bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 rounded-full shadow-[0_12px_28px_-16px_rgba(14,165,233,0.9)] mx-auto"></div>
                      <p className="text-slate-700 mt-4 max-w-2xl text-base sm:text-lg mx-auto">
-                        Signature events and workshops that grew our community, sharpened skills, and showcased what Comptron can build together.
+                        Signature events and workshops that grew our community, sharpened
+                        skills, and showcased what Comptron can build together.
                      </p>
                   </div>
                </div>
@@ -228,15 +229,18 @@ const HomePage = () => {
                         key={`${event.title}-${idx}`}
                         to={event.link}
                         className="group block w-full max-w-[440px] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-3xl">
-                        <div
-                           className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/90 w-full h-full shadow-[0_18px_70px_-32px_rgba(14,165,233,0.55)] transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_24px_90px_-34px_rgba(14,165,233,0.75)] ring-1 ring-white/70 group-hover:ring-sky-200/90">
+                        <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/90 w-full h-full shadow-[0_18px_70px_-32px_rgba(14,165,233,0.55)] transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_24px_90px_-34px_rgba(14,165,233,0.75)] ring-1 ring-white/70 group-hover:ring-sky-200/90">
                            <div className="absolute inset-0 pointer-events-none">
                               <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-sky-50/30"></div>
                               <div className="absolute -top-24 -right-24 h-52 w-52 rounded-full bg-sky-200/35 blur-3xl"></div>
                               <div className="absolute -bottom-24 -left-24 h-52 w-52 rounded-full bg-emerald-200/35 blur-3xl"></div>
                            </div>
                            <div className="relative aspect-[16/9] overflow-hidden">
-                              <img src={event.image} alt={event.title} className="h-full w-full object-cover" />
+                              <img
+                                 src={event.image}
+                                 alt={event.title}
+                                 className="h-full w-full object-cover"
+                              />
                               <div
                                  className={`absolute inset-0 bg-gradient-to-br ${event.tone} opacity-65 mix-blend-multiply pointer-events-none`}></div>
                               <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/20 to-transparent"></div>
