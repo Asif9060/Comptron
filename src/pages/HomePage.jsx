@@ -30,6 +30,12 @@ import CoreMembers from "../Components/Features/CoreMembers";
 import Recent from "../Components/Features/Recent";
 import Hero from "../Components/Layout/Hero";
 import AboutClub from "../Components/Layout/AboutClub";
+import { Link } from "react-router-dom";
+import SuccessCSE from "/CSEFEST25.jpg";
+import SuccessTechSpark from "/TeckSpark25.png";
+import SuccessFest23 from "/CSEFEST23.jpg";
+import SuccessWorkshop from "/BDAPPS.jpg"
+import SuccessWorkshop1 from "/PHITRON.jpg"
 
 const HomePage = () => {
    // Remove unused className state
@@ -138,6 +144,49 @@ const HomePage = () => {
       },
    ];
 
+   const successEvents = [
+      {
+         title: "CSE FEST 2025",
+         descriptor: "National inter-university tech carnival",
+         stats: ["5K+ visitors", "72 teams", "48 hours of hacks"],
+         badge: "Flagship",
+         image: SuccessCSE,
+         link: "https://comptron.nwu.ac.bd/CseFest",
+      },
+      {
+         title: "TechSpark 2025",
+         descriptor: "Intra-University Tech Carnival",
+         stats: ["14 workshops", "1.2K registrations", "9 partner companies"],
+         badge: "Skills",
+         image: SuccessTechSpark,
+         link: "https://comptron.nwu.ac.bd/news/688e4d240fd2695795211999",
+      },
+      {
+         title: "BDapps Powered by Robi Axiata Limited",
+         descriptor: "Workshop",
+         stats: ["36 projects", "18 mentors", "City-wide outreach"],
+         badge: "Community",
+         image: SuccessWorkshop,
+         link: "https://comptron.nwu.ac.bd/news/68cfd4db9bb8a2745be9398f",
+      },
+      {
+         title: "Collab With Phitron",
+         descriptor: "Workshop",
+         stats: ["36 projects", "18 mentors", "City-wide outreach"],
+         badge: "Community",
+         image: SuccessWorkshop1,
+         link: "https://comptron.nwu.ac.bd/news/68cfd4db9bb8a2745be9398f",
+      },
+      {
+         title: "CSE FEST 2023",
+         descriptor: "National inter-university tech fest",
+         stats: ["36 projects", "18 mentors", "City-wide outreach"],
+         badge: "Community",
+         image: SuccessFest23,
+         link: "https://comptron.nwu.ac.bd/news/68415f0d684d2d7d76efc374",
+      },
+   ];
+
    return (
       <div className="bg-[#FFFFFF]">
          <Hero></Hero>
@@ -150,11 +199,62 @@ const HomePage = () => {
          {/* <Menu></Menu> */}
          <TextEffect></TextEffect>
          {/* <Welcomemsg></Welcomemsg> */}
-         <h1 className="recent font-bold py-3 sm:py-4 md:py-5 text-3xl sm:text-4xl md:text-5xl text-[#15A6E1] text-center">
+         <h1 className="recent font-bold py-8 sm:py-4 md:py-5 text-3xl sm:text-4xl md:text-5xl text-[#15A6E1] text-center">
             Recent Activity
          </h1>
          {/* <EventSlider></EventSlider> */}
          <Recent></Recent>
+         <section className="mt-24 sm:mt-16 md:mt-20 px-4 sm:px-8 md:px-12 lg:px-16 relative">
+            {/* <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-sky-50 via-white to-emerald-50 blur-[1px] opacity-90 pointer-events-none"></div> */}
+            <div className="relative flex flex-col gap-6 sm:gap-8 md:gap-10 border border-slate-100 rounded-[28px] bg-white/80 backdrop-blur-sm p-5 sm:p-7 md:p-8 shadow-[0_22px_70px_-40px_rgba(15,23,42,0.35)]">
+               <div className="flex items-center justify-center flex-wrap gap-3">
+         <div className="text-center flex flex-col justify-center">
+            <p className="text-sm sm:text-lg uppercase tracking-[0.28em] text-sky-600 font-semibold">
+               Our Success
+            </p>
+                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-cyan-500 to-emerald-500 drop-shadow-sm">
+                        Moments that define us
+                     </h2>
+                     <div className="h-[3px] w-28 sm:w-32 mt-3 bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 rounded-full shadow-[0_12px_28px_-16px_rgba(14,165,233,0.9)] mx-auto"></div>
+                     <p className="text-slate-700 mt-4 max-w-2xl text-base sm:text-lg mx-auto">
+                        Signature events and workshops that grew our community, sharpened skills, and showcased what Comptron can build together.
+                     </p>
+                  </div>
+               </div>
+
+               <div className="flex flex-wrap justify-center gap-6 sm:gap-7">
+                  {successEvents.map((event, idx) => (
+                     <Link
+                        key={`${event.title}-${idx}`}
+                        to={event.link}
+                        className="group block w-full max-w-[440px] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-3xl">
+                        <div
+                           className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/90 w-full h-full shadow-[0_18px_70px_-32px_rgba(14,165,233,0.55)] transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_24px_90px_-34px_rgba(14,165,233,0.75)] ring-1 ring-white/70 group-hover:ring-sky-200/90">
+                           <div className="absolute inset-0 pointer-events-none">
+                              <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-sky-50/30"></div>
+                              <div className="absolute -top-24 -right-24 h-52 w-52 rounded-full bg-sky-200/35 blur-3xl"></div>
+                              <div className="absolute -bottom-24 -left-24 h-52 w-52 rounded-full bg-emerald-200/35 blur-3xl"></div>
+                           </div>
+                           <div className="relative aspect-[16/9] overflow-hidden">
+                              <img src={event.image} alt={event.title} className="h-full w-full object-cover" />
+                              <div
+                                 className={`absolute inset-0 bg-gradient-to-br ${event.tone} opacity-65 mix-blend-multiply pointer-events-none`}></div>
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/20 to-transparent"></div>
+                           </div>
+                           <div className="relative flex h-full flex-col items-center text-center px-5 sm:px-6 py-6 sm:py-7 gap-3">
+                              <h3 className="text-2xl sm:text-2xl font-extrabold text-slate-900 leading-tight drop-shadow-sm">
+                                 {event.title}
+                              </h3>
+                              <p className="text-slate-700 text-sm sm:text-base leading-relaxed max-w-xl">
+                                 {event.descriptor}
+                              </p>
+                           </div>
+                        </div>
+                     </Link>
+                  ))}
+               </div>
+            </div>
+         </section>
          <ImageSlide></ImageSlide>
          {/* <div className="flex justify-center">
           <hr className="my-12 w-[1525px] h-[0.3px] border-t-0 bg-gray-800 opacity-100 dark:opacity-50" />
