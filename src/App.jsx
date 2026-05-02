@@ -32,6 +32,10 @@ import AdminUsersPage from "./AdminPanel/AdminUsersPage";
 import UserApprovalPage from "./AdminPanel/UserApprovalPage";
 import UsersByYear from "./AdminPanel/UsersByYear";
 import CommitteeByYear from "./CommitteePanel/CommitteeByYear";
+import CommitteeYearAdmin from "./AdminPanel/CommitteeYearAdmin";
+import PastCommittee from "./CommitteePanel/PastCommittee";
+import PastMembers from "./pages/PastMembers";
+import PastMembersAdmin from "./AdminPanel/PastMembersAdmin";
 import AboutImage from "./AdminPanel/AboutImage";
 import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
@@ -83,6 +87,8 @@ const App = () => {
                <Route path="/Dorja" element={<Dorja></Dorja>}></Route>
                <Route path="/" element={<HomePage></HomePage>}></Route>
                <Route path="/Committee" element={<MembersPage></MembersPage>}></Route>
+               <Route path="/PastCommittee" element={<PastCommittee></PastCommittee>}></Route>
+               <Route path="/past-members" element={<PastMembers></PastMembers>}></Route>
                <Route path="/About" element={<AboutPage></AboutPage>}></Route>
                <Route path="/Events" element={<EventPage></EventPage>}></Route>
                <Route path="/GMembers" element={<Members></Members>}></Route>
@@ -175,6 +181,22 @@ const App = () => {
                            selectedMember={selectedMember}
                            setSelectedMember={setSelectedMember}
                         />
+                     </AdminProtectedRoute>
+                  }></Route>
+
+               <Route
+                  path="/CommitteeYearAdmin"
+                  element={
+                     <AdminProtectedRoute>
+                        <CommitteeYearAdmin />
+                     </AdminProtectedRoute>
+                  }></Route>
+
+               <Route
+                  path="/admin/past-members"
+                  element={
+                     <AdminProtectedRoute>
+                        <PastMembersAdmin />
                      </AdminProtectedRoute>
                   }></Route>
 

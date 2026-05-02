@@ -19,6 +19,8 @@ import female from "../../assets/images/female.jpg";
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "Committee", href: "/Committee", current: true },
+  { name: "Past Committee", href: "/PastCommittee", current: false },
+  { name: "Past Members", href: "/past-members", current: false },
   { name: "Events", href: "/Events", current: false },
   { name: "Members", href: "/GMembers", current: false },
   { name: "About Us", href: "/About", current: false },

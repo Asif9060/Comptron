@@ -160,6 +160,22 @@ const AdminDashboardPage = () => {
          bgTo: "to-pink-400",
          delay: 0.8,
       },
+      {
+         to: "/CommitteeYearAdmin",
+         label: "Committee Years",
+         icon: "📆",
+         bgFrom: "from-teal-500",
+         bgTo: "to-cyan-400",
+         delay: 0.9,
+      },
+      {
+         to: "/admin/past-members",
+         label: "Past Members",
+         icon: "👥",
+         bgFrom: "from-blue-500",
+         bgTo: "to-indigo-500",
+         delay: 1,
+      },
    ];
 
    return (

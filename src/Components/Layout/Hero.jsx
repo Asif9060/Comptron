@@ -533,6 +533,14 @@ const Hero = () => {
                   </li>
                   <li>
                      <a
+                        href="/PastCommittee"
+                        className="group flex items-center hover:text-blue-400 transition-colors">
+                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                        Past Committee
+                     </a>
+                  </li>
+                  <li>
+                     <a
                         href="/GMembers"
                         className="group flex items-center hover:text-blue-400 transition-colors">
                         <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
